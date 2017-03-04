@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-wrapper" style="min-height: 626px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Systems Settings
+        <small>...</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li>System</li>
+        <li class="active">Add Account Type</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content-header">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4"></div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                  <p style="position: relative;">{{ message }}</p>
+                {% endfor %}
+                </ul>
+               {% endif %}
+            {% endwith %}
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-warning">
+                        <div class="box-header">Add Account Type</div>
+                        <form method="POST" action="{{ url_for('settings.add_acc_type') }}">
+                            <div class="box-body">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3">Account Type</span>
+                                <input class="form-control" id="acc_type" name="acc_type" type="text" aria-describedby="sizing-addon3" autofocus required>
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3">Minimum Balance</span>
+                                <input class="form-control" id="min_balance" name="min_balance" type="number" aria-describedby="sizing-addon3" required>
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <button class="btn btn-primary form-control"  type="submit">Submit</button>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+</div>
+{%  endblock %}

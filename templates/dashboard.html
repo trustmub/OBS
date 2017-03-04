@@ -1,0 +1,166 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-wrapper" style="min-height: 626px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Dashboard
+        <small>...</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Dashboard</a></li>
+
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- Apply any bg-* class to to the info-box to color it -->
+                    <div class="info-box bg-red">
+                      <span class="info-box-icon"><i class="fa fa-folder-open-o"></i></span>
+                      <div class="info-box-content">
+                        <span class="info-box-text">Till OB</span>
+                        <span class="info-box-number">{{ teller.o_balance }}</span>
+                        <!-- The progress section is optional -->
+                        <div class="progress">
+                          <div class="progress-bar" style="width: 70%"></div>
+                        </div>
+                        <span class="progress-description">
+                          70% Increase in 30 Days
+                        </span>
+                      </div><!-- /.info-box-content -->
+                    </div><!-- /.info-box -->
+                </div>
+                <div class="col-md-3">
+                    <!-- Apply any bg-* class to to the info-box to color it -->
+                    <div class="info-box bg-blue">
+                      <span class="info-box-icon"><i class="fa fa-dollar"></i></span>
+                      <div class="info-box-content">
+                        <span class="info-box-text">Withdrawal</span>
+                          {% if withd != None %}
+                        <span class="info-box-number">{{ withd }}</span>
+                          {% endif %}
+                        <!-- The progress section is optional -->
+                        <div class="progress">
+                          <div class="progress-bar" style="width: 70%"></div>
+                        </div>
+                        <span class="progress-description">
+                          70% Increase in 30 Days
+                        </span>
+                      </div><!-- /.info-box-content -->
+                    </div><!-- /.info-box -->
+                </div>
+                <div class="col-md-3">
+                    <!-- Apply any bg-* class to to the info-box to color it -->
+                    <div class="info-box bg-purple">
+                      <span class="info-box-icon"><i class="fa fa-dollar"></i></span>
+                      <div class="info-box-content">
+                        <span class="info-box-text">Deposits</span>
+                          {% if deposits != None %}
+                        <span class="info-box-number">{{ deposits }}</span>
+                          {% endif %}
+                        <!-- The progress section is optional -->
+                        <div class="progress">
+                          <div class="progress-bar" style="width: 70%"></div>
+                        </div>
+                        <span class="progress-description">
+                          70% Increase in 30 Days
+                        </span>
+                      </div><!-- /.info-box-content -->
+                    </div><!-- /.info-box -->
+                </div>
+                <div class="col-md-3">
+                    <!-- Apply any bg-* class to to the info-box to color it -->
+                    <div class="info-box bg-green">
+                      <span class="info-box-icon"><i class="fa fa-folder-o"></i></span>
+                      <div class="info-box-content">
+                        <span class="info-box-text">Closing Balance</span>
+                        <span class="info-box-number">{{ teller.c_balance }}</span>
+                        <!-- The progress section is optional -->
+                        <div class="progress">
+                          <div class="progress-bar" style="width: 70%"></div>
+                        </div>
+                        <span class="progress-description">
+                          70% Increase in 30 Days
+                        </span>
+                      </div><!-- /.info-box-content -->
+                    </div><!-- /.info-box -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header">Warning</div>
+                        <li>Your Linked Till Account number is: {{ teller.till_account }}</li>
+                        <li>Systems Date is currently : <b>{{ sys_date }}</b></li>
+                        <li>Ensure the till opening balance tallies with the cash in hand</li>
+                        <li></li>
+
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header">User Table</div>
+                        <table class="table">
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>JT</th>
+                                <th>Dpt</th>
+                                <th>Access L</th>
+                                <th>email</th>
+                                <th>Lock Status</th>
+
+                            </tr>
+                            {% for i in usr %}
+                            <tr>
+                                <td class="empty">{{ i.uid }}</td>
+                                <td class="empty">{{ i.full_name }}</td>
+                                <td class="empty">{{ i.job_title }}</td>
+                                <td class="empty">{{ i.department }}</td>
+                                <td class="empty">{{ i.access_level }}</td>
+                                <td class="empty">{{ i.email }}</td>
+                                <td class="empty">{{ i.lock }}</td>
+
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header">Interest Table</div>
+                    <table class="table">
+                        <tr>
+                            <th>#</th>
+                            <th>Date</th>
+                            <th>Account</th>
+                            <th>EOD Balance</th>
+                            <th>Interest Earned</th>
+                        </tr>
+                        {% for i in interest %}
+                        <tr>
+                            <td class="empty">{{ i.id }}</td>
+                            <td class="empty">{{ i.date }}</td>
+                            <td class="empty">{{ i.account }}</td>
+                            <td class="empty">{{ i.eod_bal }}</td>
+                            <td class="empty">{{ i.interest_earned }}</td>
+                        </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+<div class="clearfix"></div>
+  </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-wrapper" style="min-height: 626px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Amend Customer
+        <small>...</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Edit User</li>
+      </ol>
+    </section>
+    <section class="content">
+        <form class="form-group" enctype="multipart/form-data" method="POST" action="{{ url_for('user.edit_profile') }}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">New Customer</div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Full Name:</span>
+                            <input class="form-control" id="full_name" name="full_name" type="text" value="{{ user.full_name }}" placeholder="{{ user.full_name }}" aria-describedby="sizing-addon3" autofocus>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Job Title:</span>
+                            <input class="form-control" id="job_title" name="job_title" type="text" value="{{ user.job_title }}" placeholder="{{ user.job_title }}" aria-describedby="sizing-addon3" >
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Department:</span>
+                            <input class="form-control" id="department" name="department" type="text" value="{{ user.department }}" placeholder="{{ user.department }}" aria-describedby="sizing-addon3" >
+                        </div><br>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">...</div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Branch Code:</span>
+                            <select class="form-control" name="branch_code">
+                                <option>{{ user.branch_code }}</option>
+                                {% for i in branch %}
+                                <option>{{ i.description }}</option>
+                                {% endfor %}
+                            </select>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Access Level:</span>
+                            <input class="form-control" id="access_level" name="access_level" type="text" value="{{ user.access_level }}" placeholder="{{ user.access_level }}" aria-describedby="sizing-addon3" >
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Image :</span>
+                            <input class="form-control" id="image_string" name="image_string" value="{{ user.image_string }}" type="file" aria-describedby="sizing-addon3">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <button class="btn btn-primary form-control"  type="submit">Submit</button>
+                        </div><br>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+{% endblock %}

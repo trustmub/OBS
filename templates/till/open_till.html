@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-wrapper" style="min-height: 626px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Open Till
+        <small>...</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Open Till</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content-header">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header">Open Till</div>
+                    {% if ts != 1 %}
+                        <form method="POST" ACTION="{{ url_for('till.open_till') }}">
+                        <div class="col-md-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Teller Num:</span>
+
+                            <select class="form-control" name="teller_num" autofocus required>
+                                <option></option>
+                                {% for i in teller %}
+                                <option>{{ i.id }}</option>
+                                {% endfor %}
+                            </select>
+                        </div><br>
+                        </div>
+                        <div class="col-md-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Branch:</span>
+                            <select class="form-control" name="branch_code" required>
+                            <option></option>
+                            {% for i in branch %}
+                                <option>{{ i.code }}</option>
+                            {% endfor %}
+                        </select>
+                        </div><br>
+                        </div>
+                        <div class="col-md-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Opening Balance:</span>
+                            <input class="form-control" id="o_balance" name="o_balance" type="text" aria-describedby="sizing-addon3" required>
+                        </div><br>
+                        </div>
+                        <div class="col-md-3">
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">User ID:</span>
+                            <input class="form-control" id="user_id" name="user_id" type="text" value="{{ user.uid }}" aria-describedby="sizing-addon3" required>
+                        </div><br>
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <button class="btn btn-primary form-control"  type="submit">Submit</button>
+                        </div>
+                        </form>
+                    {% else %}
+                        <div class="box-footer">User Already Linked</div>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header">Linked Tellers</div>
+                        <table class="table">
+                            <tr>
+                                <th>Till ID</th>
+                                <th>Till Account</th>
+                                <th>Currency</th>
+                                <th>User</th>
+                                <th>User ID</th>
+                                <th>Department</th>
+
+                            </tr>
+                            {% for i in teller2 %}
+                            <tr>
+                                <td class="empty">{{ i.id }}</td>
+                                <td class="empty">{{ i.till_account }}</td>
+                                <td class="empty">{{ i.currency }}</td>
+                                <td class="empty">{{ i.user.full_name }}</td>
+                                <td class="empty">{{ i.user.uid }}</td>
+                                <td class="empty">{{ i.user.department }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-wrapper" style="min-height: 626px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Close Till
+        <small>...</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Close Till</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="col-md-12">
+        <div>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <ul class="alert alert-warning" role="alert">
+                {% for message in messages %}
+                  <p style="position: relative;">{{ message }}</p>
+                {% endfor %}
+                </ul>
+               {% endif %}
+            {% endwith %}
+        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header">Close Till</div>
+                        {% if ts == 1 %}
+                        <form method="post" action="{{ url_for('till.close_till') }}">
+                            <div class="col-md-4">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3">Total Deposits:</span>
+                                <input class="form-control" id="total_deposits" name="total_deposits" type="text" aria-describedby="sizing-addon3" required autofocus>
+                            </div><br>
+                            </div>
+
+                            <div class="col-md-4">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3">Total Withdrawals:</span>
+                                <input class="form-control" id="total_withdrawals" name="total_withdrawals" type="text" aria-describedby="sizing-addon3" required>
+                            </div><br>
+                            </div>
+
+                            <div class="col-md-4">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3">Cash On Hand:</span>
+                                <input class="form-control" id="hoh" name="coh" type="text" aria-describedby="sizing-addon3" required>
+                            </div><br>
+                            </div>
+
+                            <div class="input-group input-group-sm">
+                                <button class="btn btn-primary form-control"  type="submit">Submit</button>
+                            </div>
+                        </form>
+                        {% else %}
+                            <div class="box-footer JustifyCenter"><b>You Need To Link Till</b></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-warning">
+                    {% if ts == 1 %}
+                        <table class="table">
+                            <tr>
+                                <th>Type</th>
+                                <th>amount</th>
+                                <th>date</th>
+                            </tr>
+                            {% for i in my_tt %}
+                            <tr>
+                                <td>{{ i.tran_type }}</td>
+                                <td>{{ i.amount }}</td>
+                                <td>{{ i.date }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box box-danger">
+                        {%  if ts == 1 %}
+                        <div class="box-body">
+                            <dl class="dl-horizontal">
+                                <dt>Branch</dt>
+                                <dd>{{ my_till.branch_code }}</dd>
+                                <dt>Opening Balance</dt>
+                                <dd>{{ my_till.o_balance }}</dd>
+                                <dt>Closing Balance</dt>
+                                <dd>{{ my_till.c_balance }}</dd>
+                                <dt>Till Account</dt>
+                                <dd>{{ my_till.till_account }}</dd>
+                                <dt>Currency</dt>
+                                <dd>{{ my_till.currency }}</dd>
+                                <dt>Remark</dt>
+                                <dd>{{ my_till.remark }}</dd>
+                                <dt>Linked User</dt>
+                                <dd>{{ my_till.user.full_name }}</dd>
+
+                                <dt>------------------</dt>
+                                <dd>------------------</dd>
+                                <dt>Account</dt>
+                                <dd></dd>
+                                <dt>Account Type</dt>
+                                <dd></dd>
+                            </dl>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+
+    </section>
+    <!-- /.content -->
+  </div>
+    <div class="clearfix"></div>
+{% endblock %}

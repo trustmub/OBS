@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-wrapper" style="min-height: 626px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Add Customer
+        <small>...</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Add Customer </li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <form class="form-group" method="post" action="{{ url_for('customer.add_cus') }}">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">New Customer</div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Name:</span>
+                            <input class="form-control" id="first_name" name="first_name" type="text" aria-describedby="sizing-addon3" autofocus required>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Surname:</span>
+                            <input class="form-control" id="last_name" name="last_name" type="text" aria-describedby="sizing-addon3" required>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">D.O.B</span>
+                            <input class="form-control" id="dob" name="dob" type="date" aria-describedby="sizing-addon3" required>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Gender</span>
+                            <input class="form-control" id="gender" name="gender" type="text" aria-describedby="sizing-addon3" required>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Phone:</span>
+                            <input class="form-control" id="contact_number" name="contact_number" type="text" aria-describedby="sizing-addon3" >
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">E-mail:</span>
+                            <input class="form-control" id="email" name="email" type="email" aria-describedby="sizing-addon3" >
+                        </div><br>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="box box-primary">
+                        <div class="box-header with-border">...</div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Address:</span>
+                            <input class="form-control" id="address" name="address" type="text" aria-describedby="sizing-addon3" required>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Country:</span>
+                            <input class="form-control" id="country" name="country" type="text" aria-describedby="sizing-addon3" required>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Account Number:</span>
+                            <input class="form-control" id="acc_number" name="acc_number" type="number" aria-describedby="sizing-addon3">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Balance:</span>
+                            <input class="form-control" id="working_bal" name="working_bal" type="text" aria-describedby="sizing-addon3" >
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Acc Type:</span>
+
+                            <select class="form-control" name="account_type" required>
+                                <option></option>
+                                {% for i in account %}
+                                <option>{{ i.acc_type }}</option>
+                                {% endfor %}
+                            </select>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <button class="btn btn-primary form-control"  type="submit">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </section>
+    <!-- /.content -->
+</div>
+{% endblock %}
+
+

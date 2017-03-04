@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="content-wrapper" style="min-height: 626px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Deposits
+        <small>...</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Deposits</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content-header">
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <form method="post" action="{{ url_for('banking.account_search') }}">
+                    <div class="box box-info">
+                        <div class="box-header">Search Account</div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Account:</span>
+                            <input class="form-control" id="account_number" name="account_number" type="number" aria-describedby="sizing-addon3" autofocus required>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <button class="btn btn-primary form-control"  type="submit">Submit</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div>
+                        {% with messages = get_flashed_messages() %}
+                          {% if messages %}
+                            <ul class="alert alert-danger" role="alert">
+                            {% for message in messages %}
+                              <p style="position: relative;">{{ message }}</p>
+                            {% endfor %}
+                            </ul>
+                           {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content">
+        <div class="col-md-12">
+            <div class="row">
+
+                <div class="col-md-6">
+                    <form method="post" action="{{ url_for('banking.deposits') }}">
+
+                    <div class="box box-danger">
+                        <div class="box-header">Deposit</div>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Depositor Ref</span>
+                            <input class="form-control" id="deposit_ref" name="deposit_ref" type="text" aria-describedby="sizing-addon3" autofocus>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Amount</span>
+                            <input class="form-control" id="deposit_amount" name="deposit_amount" type="text" aria-describedby="sizing-addon3">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <span class="input-group-addon" id="sizing-addon3">Client Account</span>
+                            <input class="form-control" id="client_account" name="client_account" value="{{ record.acc_number }}" type="number" aria-describedby="sizing-addon3">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <button class="btn btn-primary form-control"  type="submit">Submit</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="col-md-6">
+                    <div class="box box-danger">
+                        <div class="box-header">Client Account Details</div>
+                        <div class="box-body">
+                            <dl class="dl-horizontal">
+                                <dt>Name</dt>
+                                <dd>{{ record.first_name }} {{ record.last_name }}</dd>
+                                <dt>Date of Birth</dt>
+                                <dd>{{ record.dob }}</dd>
+                                <dt>Address</dt>
+                                <dd>{{ record.address }}</dd>
+                                <dt>Country</dt>
+                                <dd>{{ record.country }}</dd>
+                                <dt>Email</dt>
+                                <dd>{{ record.email }}</dd>
+                                <dt>Gender</dt>
+                                <dd>{{ record.gender }}</dd>
+                                <dt>Phone</dt>
+                                <dd>{{ record.contact_number }}</dd>
+                                <dt>Balance</dt>
+                                <dd>{{ record.working_bal }}</dd>
+                                <dt>------------------</dt>
+                                <dd>------------------</dd>
+                                <dt>Account</dt>
+                                <dd>{{ record.acc_number }}</dd>
+                                <dt>Account Type</dt>
+                                <dd>{{ record.account_type }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+  </div>
+{% endblock %}

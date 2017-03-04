@@ -1,0 +1,5 @@
+obs.egg-info/PKG-INFO
+obs.egg-info/SOURCES.txt
+obs.egg-info/dependency_links.txt
+obs.egg-info/requires.txt
+obs.egg-info/top_level.txt
