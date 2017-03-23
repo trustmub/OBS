@@ -235,7 +235,7 @@ def withdrawal():
                 date = Getters.getSysDate().date  # time.strftime('%Y-%m-%d')
                 dep_ref = request.form['withdrawal_ref']
                 trantype = 'DR'
-                ref = 'DR' + Auto.referenceStringGen()
+                ref = Auto.referenceStringGen()
                 amount = float(request.form['withdrawal_amount'])
 
                 TransactionUpdate.withdrawalTransactionUpdate(date, acc_num, amount, ref)

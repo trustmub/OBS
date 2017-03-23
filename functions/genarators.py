@@ -227,7 +227,7 @@ class TransactionUpdate:
         till_detail = session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
         cb = float(customer.working_bal) - float(amount)
         trans = Transactions(trantype='DR',
-                             tranref=Auto.referenceStringGen(),
+                             tranref=tranref,
                              tranmethod='Cash',
                              tran_date=tran_date,
                              cheque_num='None',
@@ -437,7 +437,7 @@ class TransactionUpdate:
         trans2 = Transactions(trantype='CR',
                               tranref=Auto.referenceStringGen(),
                               tranmethod='Interest',
-                              tran_date=time.strftime('%Y-%m-%d'),
+                              tran_date=Getters.getSysDate().date,
                               cheque_num='None',
                               acc_number=int(dr_acc_record.acc_number),  # interest account
                               cr_acc_number=int(cr_acc),  # Client account
@@ -477,7 +477,7 @@ class TransactionUpdate:
         session.commit()
 
         # update customer working balance
-        charged_customer.working_bal = current_balance
+        charged_customer.working_bal = round(current_balance, 2)
         session.add(charged_customer)
         session.commit()
         # -------------------------------
@@ -626,17 +626,34 @@ class Auto:
         acc_number = str(random.randint(111111, 999999))
         str_acc_num = branch + acc_number
         account_number = int(str_acc_num)
-        return account_number
+        mylist = []
+        all_account = session.query(Customer).all()
+        for i in all_account:
+            mylist =mylist + [i.acc_number]
+        if account_number in mylist:
+            Auto.accountNumGen()
+        else:
+            return account_number
+
 
     @staticmethod
     def referenceStringGen():
+        sys_date = datetime.datetime.strptime(Getters.getSysDate().date, '%Y-%m-%d')
+        time_component = sys_date.strftime("%y%m%d")
         alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
                     'u', 'v', 'w', 'x', 'y', 'z']
         random.shuffle(alphabet)
-        rand_string = random.sample(alphabet, 8)
+        rand_string = random.sample(alphabet, 5)
         alp = "".join(rand_string)
-        ref_str = alp.upper() + str(random.randint(1111, 9999))
-        return ref_str
+        ref_str = "FT" + str(time_component) + alp.upper()
+        mylist = []
+        tr = session.query(Transactions).all()
+        for i in tr:
+            mylist = mylist + [i.tranref]
+        if ref_str in mylist:
+            Auto.referenceStringGen()
+        else:
+            return ref_str
 
     @staticmethod
     def systemAccNumberGen():
@@ -644,7 +661,14 @@ class Auto:
         currency = 'USD'
         acc = str(random.randint(11111111, 99999999))
         str_acc_number = branch + acc
-        return str_acc_number
+        mylist = []
+        all_account = session.query(Customer).all()
+        for i in all_account:
+            mylist =mylist + [i.acc_number]
+        if int(str_acc_number) in mylist:
+            Auto.systemAccNumberGen()
+        else:
+            return int(str_acc_number)
 
 
 class Nav:
@@ -697,3 +721,24 @@ class Checker:
             till_list = till_list + [i.user_id]
         if user.uid in till_list:
             return True
+
+    @staticmethod
+    def eom_process_day():
+        change_date = session.query(SysDate).first()
+        today_date = datetime.datetime.strptime(Getters.getSysDate().date, '%Y-%m-%d')
+        add_day = datetime.timedelta(days=1)
+        next_day = today_date + add_day
+        if next_day.strftime('%m') == today_date.strftime('%m'):
+            return False
+        else:
+            return True
+
+    @staticmethod
+    def is_weekday(day):
+        if day.weekday() == 5 or day.weekday() == 6:
+            return False
+        return True
+
+    @staticmethod
+    def is_holiday():
+        pass

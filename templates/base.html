@@ -276,19 +276,26 @@
                 <li><a href="{{ url_for('banking.external_transfer') }}"><i class="fa fa-circle-o"></i> External</a></li>
             </ul>
 
+
             </li>
-            <li><a href="{{ url_for('banking.statement') }}"><i class="fa fa-circle-o"></i> Statements</a></li>
+            <!--<li><a href="{{ url_for('banking.statement') }}"><i class="fa fa-circle-o"></i> Statements</a></li> -->
           </ul>
         </li>
 
-        <li>
-          <a href="">
-            <i class="fa fa-calendar"></i> <span>Calendar</span>
+        <li class="treeview">
+          <a href="#">
+            <i class="fa fa-calendar"></i> <span>Enquiries</span>
             <span class="pull-right-container">
               <!--<small class="label pull-right bg-red">3</small>
               <small class="label pull-right bg-blue">17</small>-->
+                <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
+            <ul class="treeview-menu">
+                <li><a href="{{ url_for('banking.statement') }}"><i class="fa fa-circle-o"></i>Statement</a></li>
+                <li><a href="{{ url_for('enquiry.account_reset') }}"><i class="fa fa-circle-o"></i>Account Reset</a></li>
+                <!-- <li><a href="{{ url_for('banking.statement') }}"><i class="fa fa-circle-o"></i>Statement</a></li> -->
+            </ul>
         </li>
         <li>
           <a href="">
@@ -300,7 +307,18 @@
             </span>
           </a>
         </li>
+        <li class="treeview">
+            <a href="">
+                <i class="fa fa-trello"></i><span>Bulk Transactions</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{ url_for('bulk.bulk_salaries') }}"><i class="fa fa-circle-o"></i> Bulk Salaries</a></li>
+            </ul>
 
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-share"></i> <span>Reconciliation</span>

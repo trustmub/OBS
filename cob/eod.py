@@ -10,6 +10,7 @@ from sqlalchemy import extract
 
 from models import *
 from functions.genarators import *
+from cob.eom import AccountsEom
 
 engine = create_engine('sqlite:///bnk.db')
 Base.metadata.bind = engine
@@ -70,7 +71,7 @@ class Accounts:
             print("Interest Charges: " + str(interest))
             table_update = Interest(date=date,
                                     account=acc,
-                                    eod_bal=eod_bal,
+                                    eod_bal=round(eod_bal, 2),
                                     interest_earned=round(interest, 4),
                                     create_date=datetime.datetime.now())
             session.add(table_update)
@@ -156,7 +157,7 @@ class Reporting:
         pass
 
 
-def main():
+def eod_process():
     print("Accouts : Accounts Opening Balancing")
     Accounts.accOpeningBalancing()
     print("Account : Account Interest End Of Day")
@@ -169,7 +170,38 @@ def main():
     Reporting.accountClosingBalances()
     print("Reporting : Teller Transaction Reports")
     Reporting.tellerTransactionReport()
-    print("System : Date change")
-    Reporting.dbsysdate()
-    pass
-main()
+
+
+def eom_process():
+    eod_process()
+    print("Updating interest to Client accounts")
+    AccountsEom.accountInterestEom()
+    print("Service Fee charges")
+    AccountsEom.serviceFeesEom()
+    Reporting.creditTransactions()
+    print("Reporting : Debit Transaction Reports")
+    Reporting.debitTransactions()
+    print("Reports : Account Closing Balance")
+    Reporting.accountClosingBalances()
+
+
+def main():
+    mydate = datetime.datetime.strptime(Getters.getSysDate().date, '%Y-%m-%d')
+    d_year = mydate.year
+    d_month = mydate.month
+    d_day = mydate.day
+    md = datetime.date(int(d_year), int(d_month), int(d_day))
+    if Checker.is_weekday(md) == True:
+        if Checker.eom_process_day() == False:
+            eod_process()
+        elif Checker.eom_process_day() == True:
+            eom_process()
+        print(Checker.is_weekday(md))
+        print("System : Date change")
+        Reporting.dbsysdate()
+    else:
+        print("System : Date change")
+        Reporting.dbsysdate()
+        Reporting.dbsysdate()
+
+# main()
