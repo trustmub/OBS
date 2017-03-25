@@ -15,3 +15,7 @@ session = DBSession()
 def bulk_salaries():
     record = []
     return render_template('bulk/bulk_salaries.html', record=record, user=Nav.userDetails())
+@bulk.route('/bulk_transfers')
+def bulk_transfers():
+    record = []
+    return render_template('bulk/bulk_transfers.html', record=record, user=Nav.userDetails())
