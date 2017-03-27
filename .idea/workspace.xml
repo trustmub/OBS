@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2aa55e2-e756-4fd8-95af-88fd76e0ab89" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bnk.db" afterPath="$PROJECT_DIR$/bnk.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/customer_create.py" afterPath="$PROJECT_DIR$/customer_create.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/bulk/bulk_salaries.html" afterPath="$PROJECT_DIR$/templates/bulk/bulk_salaries.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/bulk/bulk_transfers.html" afterPath="$PROJECT_DIR$/templates/bulk/bulk_transfers.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/customer/authorise.html" afterPath="$PROJECT_DIR$/templates/customer/authorise.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/banking.py" afterPath="$PROJECT_DIR$/views/banking.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/bulk.py" afterPath="$PROJECT_DIR$/views/bulk.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/user.py" afterPath="$PROJECT_DIR$/views/user.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,72 +35,7 @@
     <favorites_list name="OBS" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="obs_app.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/obs_app.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="14" column="48" lean-forward="false" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/base.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="20">
-              <caret line="317" column="49" lean-forward="false" selection-start-line="317" selection-start-column="49" selection-end-line="317" selection-end-column="49" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bulk.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/views/bulk.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="20" column="51" lean-forward="true" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
-              <folding>
-                <element signature="e#0#79#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bulk_transfers.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/bulk/bulk_transfers.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="bulk_salaries.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/templates/bulk/bulk_salaries.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="8" column="14" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="customer_create.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/customer_create.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -110,15 +52,18 @@
       <list>
         <option value="$PROJECT_DIR$/cob/eod.py" />
         <option value="$PROJECT_DIR$/create_entries.py" />
-        <option value="$PROJECT_DIR$/views/banking.py" />
         <option value="$PROJECT_DIR$/functions/genarators.py" />
         <option value="$PROJECT_DIR$/views/enquiry.py" />
         <option value="$PROJECT_DIR$/templates/enquiry/account_reset.html" />
         <option value="$PROJECT_DIR$/templates/base.html" />
-        <option value="$PROJECT_DIR$/templates/bulk/bulk_salaries.html" />
         <option value="$PROJECT_DIR$/obs_app.py" />
-        <option value="$PROJECT_DIR$/views/bulk.py" />
+        <option value="$PROJECT_DIR$/templates/customer/authorise.html" />
+        <option value="$PROJECT_DIR$/customer_create.py" />
+        <option value="$PROJECT_DIR$/views/user.py" />
         <option value="$PROJECT_DIR$/templates/bulk/bulk_transfers.html" />
+        <option value="$PROJECT_DIR$/views/banking.py" />
+        <option value="$PROJECT_DIR$/templates/bulk/bulk_salaries.html" />
+        <option value="$PROJECT_DIR$/views/bulk.py" />
       </list>
     </option>
   </component>
@@ -149,7 +94,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -162,9 +107,73 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="user" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="OBS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="banking" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -429,7 +438,14 @@
       <option name="project" value="LOCAL" />
       <updated>1490427020422</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="included the bulk entries routes  version 2">
+      <created>1490427258727</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1490427258727</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -443,12 +459,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1" y="1" width="1364" height="726" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25222552" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17714724" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297546" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.329653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -473,19 +489,55 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="included the bulk entries routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="included the bulk entries routes" />
+    <MESSAGE value="included the bulk entries routes  version 2" />
+    <MESSAGE value="Bulk payments included and functioning well, only accepts txt files and" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bulk payments included and functioning well, only accepts txt files and" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/views/bulk.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="51" lean-forward="true" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bulk/bulk_transfers.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="140">
+          <caret line="7" column="14" lean-forward="false" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bulk/bulk_salaries.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="8" column="14" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/customer_create.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/functions/genarators.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -569,7 +621,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -653,7 +705,7 @@
         <state relative-caret-position="7308">
           <caret line="406" column="8" lean-forward="false" selection-start-line="406" selection-start-column="8" selection-end-line="406" selection-end-column="8" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#15#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -760,14 +812,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/customer_create.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/settings/add_acc_type.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -779,24 +823,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="8" column="14" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/views/bulk.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="20" column="51" lean-forward="true" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#79#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="317" column="49" lean-forward="false" selection-start-line="317" selection-start-column="49" selection-end-line="317" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -820,49 +846,107 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/banking.py">
+    <entry file="file://$PROJECT_DIR$/customer_create.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="254">
-          <caret line="246" column="41" lean-forward="false" selection-start-line="246" selection-start-column="41" selection-end-line="246" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="300">
+          <caret line="15" column="49" lean-forward="true" selection-start-line="15" selection-start-column="49" selection-end-line="15" selection-end-column="49" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/functions/genarators.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
+        <state relative-caret-position="240">
           <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#15#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/obs_app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="14" column="48" lean-forward="false" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bulk/bulk_salaries.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="8" column="14" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/bulk/bulk_transfers.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        <state relative-caret-position="725">
+          <caret line="41" column="14" lean-forward="false" selection-start-line="41" selection-start-column="14" selection-end-line="41" selection-end-column="14" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/user/edit_user.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="16" column="8" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/banking.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="153" column="12" lean-forward="true" selection-start-line="153" selection-start-column="12" selection-end-line="153" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/customer/authorise.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1380">
+          <caret line="69" column="31" lean-forward="true" selection-start-line="69" selection-start-column="31" selection-end-line="69" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-366">
+          <caret line="127" column="0" lean-forward="true" selection-start-line="125" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bulk/bulk_salaries.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="499">
+          <caret line="33" column="43" lean-forward="true" selection-start-line="33" selection-start-column="43" selection-end-line="33" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/bulk.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="38" column="38" lean-forward="false" selection-start-line="38" selection-start-column="38" selection-end-line="38" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/banking/deposits.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="41" column="31" lean-forward="true" selection-start-line="41" selection-start-column="31" selection-end-line="41" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="317" column="49" lean-forward="false" selection-start-line="317" selection-start-column="49" selection-end-line="317" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/obs_app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="14" column="48" lean-forward="false" selection-start-line="14" selection-start-column="48" selection-end-line="14" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -8,7 +8,7 @@ from flask import session as login_session
 
 from functions.genarators import *
 
-UPLOAD_FOLDER = "C:\\Documents and Settings\Administrator\\PycharmProject\\OBS\\static\\img\\user"
+UPLOAD_FOLDER = "C:\\Documents and Settings\\Administrator\\PycharmProject\\OBS\\static\\img\\user"
 
 user = Blueprint('user', __name__)
 

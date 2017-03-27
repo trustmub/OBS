@@ -161,7 +161,7 @@ def transfer():
         return render_template('banking/transfer.html', user=Nav.userDetails(), record=record, fad=fad, tad=tad)
 
 
-@banking.route('/externale_transfer_search/', methods=['post', 'get'])
+@banking.route('/external_transfer_search/', methods=['post', 'get'])
 def external_transfer_search():
     if request.method == 'POST':
         acc_num = int(request.form['from_account'])

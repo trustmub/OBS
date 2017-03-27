@@ -1,9 +1,65 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="content-wrapper" style="min-height: 626px;">
-        This is for Bulk Salaries
-
-
-    </div>
+ <div class="content-wrapper" style="min-height: 626px;">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Bulk Payments
+        <small>...</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Bulk Payments</li>
+      </ol>
+    </section>
+    <!-- Main content -->
+    <section class="content">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header">Requirements</div>
+                        <li>Please ensure the file is in the right format and tables</li>
+                        <li>please ensure the file is in the correct extension which is txt or csv</li>
+                        <li>file format: <b>from account, To account, amount, narration</b></li>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+                    <div>
+                        {% with messages = get_flashed_messages() %}
+                          {% if messages %}
+                            <ul class="alert alert-danger" role="alert">
+                            {% for message in messages %}
+                              <p style="position: relative;">{{ message }}</p>
+                            {% endfor %}
+                            </ul>
+                           {% endif %}
+                        {% endwith %}
+                    </div>
+                </div>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box box-info">
+                        <div class="box-header">Salaries Upload</div>
+                        <form class="form-group" enctype="multipart/form-data" method="POST" action="{{ url_for('bulk.bulk_salaries') }}">
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3">file :</span>
+                                <input class="form-control" id="salary_file" name="salary_file" type="file" aria-describedby="sizing-addon3">
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <button class="btn btn-primary form-control"  type="submit">Submit</button>
+                            </div><br>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+  </div>
+<div class="clearfix"></div>
 {% endblock %}
