@@ -155,6 +155,11 @@ class Getters:
         cob_process = session.query(CobDates).all()
         return cob_process
 
+    @staticmethod
+    def getTransactionDetails(ref):
+        record = session.query(Transactions).filter_by(tranref=ref).first()
+        return record
+
 
 class TransactionUpdate:
     @staticmethod

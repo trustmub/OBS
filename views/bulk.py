@@ -5,7 +5,7 @@ from models import Base, Customer, Transactions
 
 bulk = Blueprint('bulk', __name__)
 
-UPLOAD_FOLDER = "C:\\projects\\"
+UPLOAD_FOLDER = "Uploads\\"
 ALLOWED_EXTENSIONS = {'txt', 'csv'}
 
 engine = create_engine('sqlite:///bnk.db')
@@ -32,7 +32,7 @@ def bulk_salaries():
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             location_and_name = os.path.join(UPLOAD_FOLDER, filename)
 
-            with open('C:\\Projects\\' + filename, 'r') as f:
+            with open('Uploads\\' + filename, 'r') as f:
                 f_contents = f.readline()
                 for line in f:
                     record_line = line.split(',')
@@ -40,6 +40,7 @@ def bulk_salaries():
                     to_acc = int(record_line[1])
                     amount = float(record_line[2])
                     remark = record_line[3]
+
                     print(record_line)
 
                     TransactionUpdate.transferTransactionUpdate(from_acc, to_acc, amount, remark,
@@ -47,6 +48,7 @@ def bulk_salaries():
                     TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
 
                     # print(line, end='')
+                flash("uploaded and posted")
         else:
             flash("Please Check file extension")
             return redirect(url_for('bulk.bulk_salaries'))

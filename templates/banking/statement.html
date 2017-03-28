@@ -1,174 +1,181 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="content-wrapper" style="min-height: 626px;">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Statement
-        <small>...</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Statement</li>
-      </ol>
-    </section>
-    <section class="content-header">
-        <div class="col-md-12">
+    <div class="content-wrapper" style="min-height: 626px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Statement
+                <small>...</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Statement</li>
+            </ol>
+        </section>
+        <section class="content-header">
+            <div class="col-md-12">
 
-            <div class="row">
-                <div class="col-md-4">
-                    <form method="post" action="{{ url_for('banking.stmt_search') }}">
-                    <div class="box box-info">
-                        <div class="box-header">Search Account</div>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon" id="sizing-addon3">Account:</span>
-                            <input class="form-control" id="account_number" name="account_number" type="number" aria-describedby="sizing-addon3" autofocus required>
-                        </div><br>
-                        <div class="input-group input-group-sm">
-                            <button class="btn btn-primary form-control"  type="submit">Submit</button>
-                        </div>
-                    </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <form method="post" action="{{ url_for('banking.stmt_search') }}">
+                            <div class="box box-info">
+                                <div class="box-header">Search Account</div>
+                                <div class="input-group input-group-sm">
+                                    <span class="input-group-addon" id="sizing-addon3">Account:</span>
+                                    <input class="form-control" id="account_number" name="account_number" type="number"
+                                           aria-describedby="sizing-addon3" autofocus required>
+                                </div>
+                                <br>
+                                <div class="input-group input-group-sm">
+                                    <button class="btn btn-primary form-control" type="submit">Submit</button>
+                                </div>
+                            </div>
 
-                </div>
-                <div class="col-md-4">
-                    <div class="box box-info">
-                        <div class="box-header">Date Range</div>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon" id="sizing-addon3">from :</span>
-                            <input class="form-control" id="start_date" name="start_date" type="date" aria-describedby="sizing-addon3" required>
-                        </div>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon" id="sizing-addon3">To :</span>
-                            <input class="form-control" id="end_date" name="end_date" type="date" aria-describedby="sizing-addon3" required>
-                        </div><br>
                     </div>
-                    </form>
-                </div>
-                <div class="col-md-4">
-                    <div>
-                        {% with messages = get_flashed_messages() %}
-                          {% if messages %}
-                            <ul class="alert alert-danger" role="alert">
-                            {% for message in messages %}
-                              <p style="position: relative;">{{ message }}</p>
-                            {% endfor %}
-                            </ul>
-                           {% endif %}
-                        {% endwith %}
+                    <div class="col-md-4">
+                        <div class="box box-info">
+                            <div class="box-header">Date Range</div>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3">from :</span>
+                                <input class="form-control" id="start_date" name="start_date" type="date"
+                                       aria-describedby="sizing-addon3" required>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <span class="input-group-addon" id="sizing-addon3">To :</span>
+                                <input class="form-control" id="end_date" name="end_date" type="date"
+                                       aria-describedby="sizing-addon3" required>
+                            </div>
+                            <br>
+                        </div>
+                        </form>
+                    </div>
+                    <div class="col-md-4">
+                        <div>
+                            {% with messages = get_flashed_messages() %}
+                                {% if messages %}
+                                    <ul class="alert alert-danger" role="alert">
+                                        {% for message in messages %}
+                                            <p style="position: relative;">{{ message }}</p>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-    </section>
-<div class="clearfix" style="width: 100%;height: 120px; color: midnightblue"></div>
-    <!-- Main content -->
-    <section class="invoice">
-      <!-- title row -->
-      <div class="row">
-        <div class="col-xs-12">
-          <h2 class="page-header">
-            <i class="fa fa-globe"></i> Open Banking System, Inc.
-            <small class="pull-right">Date: {{ dt }}</small>
-          </h2>
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- info row -->
-      <div class="row invoice-info">
-        <div class="col-sm-4 invoice-col">
-          <address>
-            <strong>Open Banking System, Inc.</strong><br>
-            1237 Falcon Street<br>
-            Suite 23 Samlevies Village<br>
-            Borrowdale<br>
-            Email: info@obs.co.zw
-          </address>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
-          <address>
-            <strong>{{ record.first_name }} {{ record.last_name }}</strong><br>
-            {{ record.address }}<br>
-            {{ record.country }}<br>
-            Phone: {{ record.contact_number }}<br>
-            Email: {{ record.email }}
-          </address>
-        </div>
-        <!-- /.col -->
-        <div class="col-sm-4 invoice-col">
+        </section>
+        <div class="clearfix" style="width: 100%;height: 120px; color: midnightblue"></div>
+        <!-- Main content -->
+        <section class="invoice">
+            <!-- title row -->
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="page-header">
+                        <i class="fa fa-globe"></i> Open Banking System, Inc.
+                        <small class="pull-right">Date: {{ dt }}</small>
+                    </h2>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- info row -->
+            <div class="row invoice-info">
+                <div class="col-sm-4 invoice-col">
+                    <address>
+                        <strong>Open Banking System, Inc.</strong><br>
+                        1237 Falcon Street<br>
+                        Suite 23 Samlevies Village<br>
+                        Borrowdale<br>
+                        Email: info@obs.co.zw
+                    </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
+                    <address>
+                        <strong>{{ record.first_name }} {{ record.last_name }}</strong><br>
+                        {{ record.address }}<br>
+                        {{ record.country }}<br>
+                        Phone: {{ record.contact_number }}<br>
+                        Email: {{ record.email }}
+                    </address>
+                </div>
+                <!-- /.col -->
+                <div class="col-sm-4 invoice-col">
 
-          <br>
-          <b>from Date:</b>{{ sd }}<br>
-          <b>To Date:</b> {{ ed }}<br>
-          <b>Account:</b> {{ record.acc_number }}
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
+                    <br>
+                    <b>from Date:</b>{{ sd }}<br>
+                    <b>To Date:</b> {{ ed }}<br>
+                    <b>Account:</b> {{ record.acc_number }}
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
 
-      <!-- Table row -->
-      <div class="row">
-        <div class="col-xs-12 table-responsive">
-          <table class="table table-striped">
-            <thead>
-            <tr>
-              <th>Date</th>
-              <th>Tran Type</th>
-              <th>Amount</th>
-              <th>Ref</th>
-              <th>Remark</th>
-              <th>Current Balance</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for i in stmt %}
-            <tr>
-              <td>{{ i.tran_date }}</td>
-              <td>{{ i.trantype }}</td>
-              <td>${{ i.amount }}</td>
-              <td><a href="#">{{ i.tranref }}</a></td>
-              <td>{{ i.remark }}</td>
-              <td>${{ i.current_balance }}</td>
-            </tr>
-            {% endfor %}
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
+            <!-- Table row -->
+            <div class="row">
+                <div class="col-xs-12 table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Tran Type</th>
+                            <th>Amount</th>
+                            <th>Ref</th>
+                            <th>Remark</th>
+                            <th>Current Balance</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in stmt %}
+                            <tr>
+                                <td>{{ i.tran_date }}</td>
+                                <td>{{ i.trantype }}</td>
+                                <td>${{ i.amount }}</td>
+                                <td>
+                                    <a href="{{ url_for('enquiry.stmt_drill_down', ft_reference=i.tranref) }}">{{ i.tranref }}</a>
+                                </td>
+                                <td>{{ i.remark }}</td>
+                                <td>${{ i.current_balance }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
 
-              <td><b>Balance as at: </b></td>
-              <td><b>{{ ed }}</b></td>
-              <td><b>${{ record.working_bal }}</b></td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-        <!-- /.col -->
-      </div>
-      <!-- /.row -->
+                            <td><b>Balance as at: </b></td>
+                            <td><b>{{ ed }}</b></td>
+                            <td><b>${{ record.working_bal }}</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
 
-      <!-- /.row -->
+            <!-- /.row -->
 
-      <!-- this row will not appear when printing -->
-      <div class="row no-print">
-        <div class="col-xs-12">
-            {% if record == None %}
-          <a href="#" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-            {% else %}
-          <a href="{{ url_for('banking.stmt_print', acc=record.acc_number,sd=sd,ed=ed) }}" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
-            {% endif %}
-          <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
-            <i class="fa fa-download"></i> Generate PDF
-          </button>
-        </div>
-      </div>
-    </section>
-    <div class="clearfix"></div>
+            <!-- this row will not appear when printing -->
+            <div class="row no-print">
+                <div class="col-xs-12">
+                    {% if record == None %}
+                        <a href="#" target="_blank" class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                    {% else %}
+                        <a href="{{ url_for('banking.stmt_print', acc=record.acc_number,sd=sd,ed=ed) }}" target="_blank"
+                           class="btn btn-default"><i class="fa fa-print"></i> Print</a>
+                    {% endif %}
+                    <button type="button" class="btn btn-primary pull-right" style="margin-right: 5px;">
+                        <i class="fa fa-download"></i> Generate PDF
+                    </button>
+                </div>
+            </div>
+        </section>
+        <div class="clearfix"></div>
 
 
-
-    <!-- /.content -->
-  </div>
+        <!-- /.content -->
+    </div>
 {% endblock %}
