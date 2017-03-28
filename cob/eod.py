@@ -191,10 +191,10 @@ def main():
     d_month = mydate.month
     d_day = mydate.day
     md = datetime.date(int(d_year), int(d_month), int(d_day))
-    if Checker.is_weekday(md) == True:
-        if Checker.eom_process_day() == False:
+    if Checker.is_weekday(md) is True:
+        if Checker.eom_process_day() is False:
             eod_process()
-        elif Checker.eom_process_day() == True:
+        elif Checker.eom_process_day() is True:
             eom_process()
         print(Checker.is_weekday(md))
         print("System : Date change")
