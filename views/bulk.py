@@ -18,7 +18,7 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@bulk.route('/bulk_salaries', methods=['POST', 'GET'])
+@bulk.route('/bulk_salaries/', methods=['POST', 'GET'])
 def bulk_salaries():
     record = []
     if request.method == 'POST':
@@ -57,7 +57,7 @@ def bulk_salaries():
         return render_template('bulk/bulk_salaries.html', record=record, user=Nav.userDetails())
 
 
-@bulk.route('/bulk_transfers')
+@bulk.route('/bulk_transfers/')
 def bulk_transfers():
     record = []
     return render_template('bulk/bulk_transfers.html', record=record, user=Nav.userDetails())
