@@ -2,7 +2,12 @@
 # and outgoing messages from external applications
 # first Phase in from a Web client receiving json files from the banking system
 
+
 import json
+import glob2
+import shutil
+import time
+import random
 from functions.genarators import *
 
 
@@ -28,10 +33,62 @@ class Process:
     def sent(self):
         pass
 
+    @staticmethod
+    def transfer(from_acc, to_acc, amount):
+        # from account, to account, amount
+        remark = "Mobile Transfer"
+        TransactionUpdate.transferTransactionUpdate(from_acc, to_acc, amount, remark, Getters.getSysDate().date)
+        TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
+        details = {'response': 210, 'description': 'Trasnfer Done'}
+        details_to_json = json.dumps(details)
+        variable = random.randint(1111, 9999)
+        with open("api/out/" + str(variable) + "_" + str(from_acc) + "_0210.txt", mode="w",
+                  encoding="utf-8") as trnFile:
+            trnFile.write(details_to_json)
+        pass
+
 
 class Receive:
-    def inwards(self):
-        pass
+    @staticmethod
+    def inwards():
+        nm = 0
+        while nm < 1:
+            for name in glob2.glob('api/in/*'):
+                print(name)
+                variable = random.randint(1111, 9999)
+                with open(name, mode='r') as json_file:
+                    try:
+                        json_data = json.load(json_file)
+                        if json_data['response'] == 200:
+                            print("Transaction Successful! -- Response side")
+                            # print("{} {} {} ---".format(json_data['name'], json_data['account'], json_data['balance']))
+                            try:
+                                if json_data['request'] == 100:  # Balance Enquiry
+                                    ac_num = json_data['account']
+                                    print("this is acc number {}".format(ac_num))
+                                    Enquiries.balance_enq(ac_num)
+                                    print("-------Account Sent ---------")
+                                elif json_data['request'] == 101:  # Transfer
+                                    Process.transfer(json_data['from_account'], json_data['to_account'],
+                                                     json_data['amount'])
+                                    print("transfer Done")
+                            except Exception as e:
+                                print("no field----- {}".format(e))
+                        elif json_data['response'] == 401:
+                            print(json_data['description'])
+                        else:
+                            print("Transaction for account {} failed".format(json_data['Account']))
+                    except Exception as e:
+                        print("The Json file is not formatted well! {}".format(e))
+                        variable = random.randint(1111, 9999)
+                        shutil.move(name, 'api/rejects/' + str(variable))
+                try:
+                    shutil.move(name, 'api/processed/' + str(variable))
+                except Exception as ee:
+                    print("---------------     File Exists: {}    -----------------".format(ee))
+            print("-------------------------Waiting stage here-----------------------")
+            time.sleep(1)
+            Receive.inwards()
 
     def outwards(self):
         pass
@@ -39,23 +96,24 @@ class Receive:
 
 class Enquiries:
     @staticmethod
-    def balance_enq(acc_number):
+    def balance_enq(ac_number):
         # takes in account number
-        acc_number = int(acc_number)
-
+        acc_number = int(ac_number)
+        variable = random.randint(1111, 9999)
         if session.query(Customer).filter_by(acc_number=acc_number).first():
             bal = session.query(Customer).filter_by(acc_number=acc_number).first()
             # json file with the account balance
             full_name = bal.first_name + " " + bal.last_name
-            details = {'Response': 200, 'Name': full_name, 'Account': bal.acc_number, 'Balance': bal.working_bal}
+            details = {'response': 210, 'name': full_name, 'account': bal.acc_number, 'balance': bal.working_bal}
             details_to_json = json.dumps(details)
-            with open("api/enquiry/" + str(acc_number) + "_200.txt", mode="w", encoding="utf-8") as enqFile:
+            with open("api/out/" + str(variable) + "_" + str(acc_number) + "_0210.txt", mode="w",
+                      encoding="utf-8") as enqFile:
                 enqFile.write(details_to_json)
             return details_to_json
         else:
             # json response for no account found
-            details = {'Response': 401, 'Description': 'account number failed'}
+            details = {'response': 401, 'description': 'account number failed'}
             details_to_json = json.dumps(details)
-            with open("api/enquiry/" + str(acc_number) + "_401.txt", mode="w", encoding="utf-8") as enqFile:
+            with open("api/out/" + str(acc_number) + "_401.txt", mode="w", encoding="utf-8") as enqFile:
                 enqFile.write(details_to_json)
             return details_to_json
