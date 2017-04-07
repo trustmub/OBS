@@ -33,7 +33,7 @@ def bulk_salaries():
             location_and_name = os.path.join(UPLOAD_FOLDER, filename)
 
             with open('Uploads\\' + filename, 'r') as f:
-                f_contents = f.readline()
+                # f_contents = f.readline()
                 for line in f:
                     record_line = line.split(',')
                     from_acc = int(record_line[0])
