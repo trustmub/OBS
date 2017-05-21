@@ -117,3 +117,12 @@ class Enquiries:
             with open("api/out/" + str(acc_number) + "_401.txt", mode="w", encoding="utf-8") as enqFile:
                 enqFile.write(details_to_json)
             return details_to_json
+
+
+class PaymentConfirmation:
+    @staticmethod
+    def data_validator():
+        pass
+
+    def pdfgen(self, file):
+        pass
