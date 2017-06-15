@@ -626,7 +626,14 @@
       <option name="project" value="LOCAL" />
       <updated>1497444885920</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Bulk payments included and functioning well, only accepts txt files and&#10;&#10;addition of Drilldown on the STMT&#10;&#10;Service.service.py for services that run to monitor folder contents&#10;Service.service added the balance enquiry json files creation&#10;Service.service transfer of files and balance enquiry perfected well&#10;&#10;adding an api to the system">
+      <created>1497541785921</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1497541785921</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView">
