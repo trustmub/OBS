@@ -1,18 +1,13 @@
-import time
-
-from flask import Blueprint, render_template, redirect, request, flash, url_for
+from flask import Blueprint, render_template, redirect, request, url_for
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
-from flask import session as login_session
-
+from path import Path
 
 from functions.genarators import *
 
-UPLOAD_FOLDER = "C:\\Documents and Settings\\Administrator\\PycharmProject\\OBS\\static\\img\\user"
+UPLOAD_FOLDER = os.path.abspath("static//img//user")
 
 user = Blueprint('user', __name__)
-
-
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -160,6 +155,7 @@ def edit_profile():
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
+                print(UPLOAD_FOLDER)
         session.add(usr)
         session.commit()
         return redirect(url_for('user.profile', user=Nav.userDetails()))

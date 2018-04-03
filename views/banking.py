@@ -86,12 +86,12 @@ def stmt_search():
         return redirect(url_for('banking.statement', dt=dt, sd=start_date, ed=end_date, user=Nav.userDetails()))
 
 
-@banking.route('/stmt_print/<acc>/<sd>/<ed>')
-def stmt_print(acc, sd, ed):
+@banking.route('/stmt_print/<account>/<start_date>/<end_date>')
+def stmt_print(account, start_date, end_date):
     dt = Getters.getSysDate().date  # time.strftime('%Y-%m-%d')
-    acc_num = int(acc)
-    start_date = sd
-    end_date = ed
+    acc_num = int(account)
+    start_date = start_date
+    end_date = end_date
     record = session.query(Customer).filter_by(acc_number=acc_num).first()
     # stmt = session.query(Transactions).filter_by(acc_number=acc_num).order_by(Transactions.tranid).all()
     stmt = session.query(Transactions).filter(Transactions.custid == record.custid).filter(

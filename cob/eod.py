@@ -1,16 +1,7 @@
 # This is where End  Of Day procedures are done
-import random
-import time
-import datetime
-import os
 
-from flask import flash, session as login_session
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy import extract
-
-from models import *
-from functions.genarators import *
 from cob.eom import AccountsEom
+from functions.genarators import *
 
 engine = create_engine('sqlite:///bnk.db')
 Base.metadata.bind = engine
