@@ -20,6 +20,9 @@ class Transaction(object):
 
 
 class CommitTransaction:
+    """This class handles the commition of transaction in the database. all parameters have to be supplies inorder
+    for the record to be commited to the Transaction table."""
+
     def __init__(self, trans_type, trans_ref, trans_method, trans_date, cheque_number, dr_account_number,
                  cr_account_number, amount, current_balance, remark, customer_id):
         self.trans_type = trans_type
@@ -52,17 +55,22 @@ class CommitTransaction:
 
 
 class AccountTransaction(Transaction):
+    """This class handles customer account transaction of diferent types which include account creation, WithDrawals,
+    Deposits, Transfers"""
 
     def __init__(self, date, amount, cr_account):
         Transaction.__init__(self, date, amount, cr_account)
+
+    """this method does not take any parameter. it create a new account and associates it to the customer ID for the 
+    new customer created """
 
     def create_account(self):
         suspense_account = session.query(Customer).filter_by(account_type='acccreate').first()
         customer = session.query(Customer).filter_by(acc_number=self.cr_account).one()
         # Update transactions Table
-        CommitTransaction(TransactionType.CREDIT,
+        CommitTransaction(TransactionType.CREDIT.value,
                           Auto.referenceStringGen(),
-                          TransactionMethod.CASH,
+                          TransactionMethod.CASH.value,
                           self.date,
                           'None',
                           suspense_account.acc_number,
@@ -79,23 +87,27 @@ class AccountTransaction(Transaction):
         session.commit()
         # ---------------------------------------------
 
+    """This method takes an additional parameter @transaction_reference for a deposit transaction to be saved in the 
+    database. 
+    - A deposit affects the Teller Till account, this means theTeller Account is debited and Customer account 
+    credited """
+
     def deposit(self, transaction_reference):
-        """This method takes an additional parameter @transaction_reference for a deposit transaction to be saved in
-        the database """
         customer = session.query(Customer).filter_by(acc_number=self.cr_account).one()
         current_balance = float(self.amount) + float(customer.working_bal)
 
         till_detail = session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
-        CommitTransaction(TransactionType.CREDIT,
-                          Auto.referenceStringGen(),
-                          TransactionMethod.CASH,
-                          self.date,
-                          'None',
-                          int(till_detail.till_account),
-                          self.amount,
-                          round(current_balance, 2),
-                          'Deposit_' + transaction_reference,
-                          customer.custid,
+        CommitTransaction(trans_type=TransactionType.CREDIT.value,
+                          trans_ref=Auto.referenceStringGen(),
+                          trans_method=TransactionMethod.CASH.value,
+                          trans_date=self.date,
+                          cheque_number='None',
+                          dr_account_number=(till_detail.till_account),
+                          cr_account_number=self.cr_account,
+                          amount=self.amount,
+                          current_balance=round(current_balance, 2),
+                          remark='Deposit_' + transaction_reference,
+                          customer_id=customer.custid,
                           ).commit_to_database()
 
         # Update customer working balance
@@ -109,6 +121,13 @@ class AccountTransaction(Transaction):
         session.add(till_detail)
         session.commit()
 
+    """this methods takes in transaction reference generated at the point of withdrawal and save the record in the 
+    Transaction table. in a withdrawal, two transaction record are created, one for the debited account and the other 
+    for the credited account. 
+    
+    - A withdrawal affects the Tellers till balance, this means the Teller account will be 
+    credited and customer account debited """
+
     def withdrawal(self, transaction_reference):
         customer = session.query(Customer).filter_by(acc_number=self.cr_account).one()
         till_detail = session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
@@ -120,7 +139,7 @@ class AccountTransaction(Transaction):
                              cheque_num='None',
                              acc_number=int(self.cr_account),
                              cr_acc_number=int(till_detail.till_account),
-                             amount=amount,
+                             amount=self.amount,
                              current_balance=round(cb, 2),
                              remark='Withdrawal ' + transaction_reference,
                              custid=customer.custid,
@@ -165,13 +184,21 @@ class AccountTransaction(Transaction):
 
 
 class ChargeTransaction:
+    """ Charge Transaction Class handles all the charge logic for Withdrawals, internal transfers, external transfers
+    methods:
+            charges(transaction_type)
+    initialising instance:
+            ChargeTransaction(date, dr_account).charges(TransactionType.DEBIT)
+
+    Transaction charges are charges according to the charges tables and each transactio type has a charge associated
+    with it """
 
     def __init__(self, date, dr_account):
         self.date = date
         self.dr_account = dr_account
 
     def charges(self, transaction_type):
-        get_charge = session.query(TransactionCharge).filter_by(tran_type=transaction_type).first()
+        get_charge = session.query(TransactionCharge).filter_by(tran_type=transaction_type.value).first()
 
         charge_account = session.query(Customer).filter_by(account_type='charges').first()
         servfee = session.query(Customer).filter_by(account_type='servfee').first()
@@ -180,7 +207,7 @@ class ChargeTransaction:
 
         if transaction_type in charge_category:
             charge_transaction = ChargeTransactionTable(
-                tran_type=transaction_type,
+                tran_type=transaction_type.value,
                 dr_account=self.dr_account,
                 cr_account=charge_account.acc_number,
                 charge=get_charge.tran_charge,
@@ -196,7 +223,7 @@ class ChargeTransaction:
 
         elif transaction_type == TransactionType.SERVICE_FEE:
             new = ChargeTransactionTable(
-                tran_type=transaction_type,
+                tran_type=transaction_type.value,
                 dr_account=self.dr_account,
                 cr_account=servfee.acc_number,
                 charge=get_charge.tran_charge,

@@ -157,7 +157,7 @@ def transfer():
         else:
             TransactionUpdate.transferTransactionUpdate(from_acc, to_acc, amount, remark, Getters.getSysDate().date)
             # TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
-            ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.TRANSFER)
+            ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.TRANSFER.value)
 
             flash('Transfer Successful')
             return redirect(url_for('banking.transfer'))
@@ -205,7 +205,7 @@ def external_transfer():
                                                                 Getters.getSysDate().date)
 
             # TransactionUpdate.accChargeUpdate('RTGS', from_acc, Getters.getSysDate().date)
-            ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.RTGS)
+            ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.RTGS.value)
             flash('RTGS Successful')
             return redirect(url_for('banking.external_transfer'))
     else:
@@ -250,7 +250,7 @@ def withdrawal():
                 AccountTransaction(date, amount, acc_num).withdrawal(ref)
 
                 # TransactionUpdate.accChargeUpdate(TransactionType.CREDIT, acc_num, date)
-                ChargeTransaction(date, acc_num).charges(TransactionType.CREDIT)
+                ChargeTransaction(date, acc_num).charges(TransactionType.CREDIT.value)
 
                 TransactionUpdate.ttUpdate(TransactionType.CREDIT, amount, date, dep_ref, acc_num)
                 flash('Account Debited')
