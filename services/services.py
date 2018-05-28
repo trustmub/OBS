@@ -8,7 +8,10 @@ import glob2
 import shutil
 import time
 import random
+
+from functions.Enums import TransactionType
 from functions.genarators import *
+from functions.transactions import ChargeTransaction
 
 
 class Process:
@@ -38,7 +41,8 @@ class Process:
         # from account, to account, amount
         remark = "Mobile Transfer"
         TransactionUpdate.transferTransactionUpdate(from_acc, to_acc, amount, remark, Getters.getSysDate().date)
-        TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
+        # TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
+        ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.TRANSFER)
         details = {'response': 210, 'description': 'Trasnfer Done'}
         details_to_json = json.dumps(details)
         variable = random.randint(1111, 9999)

@@ -538,79 +538,6 @@ class TransactionUpdate:
         return tt
 
     @staticmethod
-    def accChargeUpdate(tran_type, acc_num, date):
-
-        get_charge = session.query(TransactionCharge).filter_by(tran_type=tran_type).first()
-
-        charge_account = session.query(Customer).filter_by(account_type='charges').first()
-        servfee = session.query(Customer).filter_by(account_type='servfee').first()
-
-        if tran_type == 'DR':
-            new = ChargeTransactionTable(
-                tran_type=tran_type,
-                dr_account=acc_num,
-                cr_account=charge_account.acc_number,
-                charge=get_charge.tran_charge,
-                date=date,
-                create_date=datetime.datetime.now()
-            )
-            session.add(new)
-            session.commit()
-            # Update charge account working balance
-            charge_account.working_bal += get_charge.tran_charge
-            session.add(charge_account)
-            session.commit()
-
-        elif tran_type == 'SF':
-            new = ChargeTransactionTable(
-                tran_type=tran_type,
-                dr_account=acc_num,
-                cr_account=servfee.acc_number,
-                charge=get_charge.tran_charge,
-                date=date,
-                create_date=datetime.datetime.now()
-            )
-            session.add(new)
-            session.commit()
-            # Update charge account working balance
-            servfee.working_bal += get_charge.tran_charge
-            session.add(servfee)
-            session.commit()
-
-        elif tran_type == 'TR':
-            new = ChargeTransactionTable(
-                tran_type=tran_type,
-                dr_account=acc_num,
-                cr_account=charge_account.acc_number,
-                charge=get_charge.tran_charge,
-                date=date,
-                create_date=datetime.datetime.now()
-            )
-            session.add(new)
-            session.commit()
-            # Update charge account working balance
-            charge_account.working_bal += get_charge.tran_charge
-            session.add(charge_account)
-            session.commit()
-        elif tran_type == 'RTGS':
-            new = ChargeTransactionTable(
-                tran_type=tran_type,
-                dr_account=acc_num,
-                cr_account=charge_account.acc_number,
-                charge=get_charge.tran_charge,
-                date=date,
-                create_date=datetime.datetime.now()
-            )
-            session.add(new)
-            session.commit()
-            # Update charge account working balance
-            charge_account.working_bal += get_charge.tran_charge
-            session.add(charge_account)
-            session.commit()
-        else:
-            pass
-
-    @staticmethod
     def smartUpdate():
         # update the transaction table with
         # 1. withdrawal detail between customer and till
@@ -634,12 +561,11 @@ class Auto:
         mylist = []
         all_account = session.query(Customer).all()
         for i in all_account:
-            mylist =mylist + [i.acc_number]
+            mylist = mylist + [i.acc_number]
         if account_number in mylist:
             Auto.accountNumGen()
         else:
             return account_number
-
 
     @staticmethod
     def referenceStringGen():
@@ -669,7 +595,7 @@ class Auto:
         mylist = []
         all_account = session.query(Customer).all()
         for i in all_account:
-            mylist =mylist + [i.acc_number]
+            mylist = mylist + [i.acc_number]
         if int(str_acc_number) in mylist:
             Auto.systemAccNumberGen()
         else:

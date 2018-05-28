@@ -6,7 +6,9 @@ from flask import Blueprint, render_template, redirect, request, url_for, flash
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from functions.Enums import TransactionType
 from functions.genarators import *
+from functions.transactions import AccountTransaction, ChargeTransaction
 from models import Base, Customer, Transactions
 
 banking = Blueprint('banking', __name__)
@@ -37,15 +39,18 @@ def deposits():
     record = None
     if request.method == 'POST':
         if Checker.userTillLink(login_session['username']):
-            acc_num = int(request.form['client_account'])
-            if Checker.accNumberChecker(acc_num):
+            cr_account_number = int(request.form['client_account'])
+            if Checker.accNumberChecker(cr_account_number):
                 # t_date = time.strftime('%Y-%m-%d')
                 t_date = Getters.getSysDate().date  # use system date for transactions
                 dep_ref = request.form['deposit_ref']
                 amount = float(request.form['deposit_amount'])
 
-                TransactionUpdate.depositTransactionUpdate(t_date, acc_num, amount, dep_ref)
-                TransactionUpdate.ttUpdate('DR', amount, t_date, dep_ref, acc_num)
+                # TransactionUpdate.depositTransactionUpdate(t_date, acc_num, amount, dep_ref)
+
+                AccountTransaction(date=t_date, amount=amount, cr_account=cr_account_number).deposit(dep_ref)
+
+                TransactionUpdate.ttUpdate('DR', amount, t_date, dep_ref, cr_account_number)
                 flash('Account Credited')
                 return redirect(url_for('banking.deposits', user=Nav.userDetails()))
             else:
@@ -151,7 +156,9 @@ def transfer():
             return redirect(url_for('banking.transfer'))
         else:
             TransactionUpdate.transferTransactionUpdate(from_acc, to_acc, amount, remark, Getters.getSysDate().date)
-            TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
+            # TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
+            ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.TRANSFER)
+
             flash('Transfer Successful')
             return redirect(url_for('banking.transfer'))
     else:
@@ -196,7 +203,9 @@ def external_transfer():
         else:
             TransactionUpdate.externalTransferTransactionUpdate(from_acc, to_ext_acc, amount, remark,
                                                                 Getters.getSysDate().date)
-            TransactionUpdate.accChargeUpdate('RTGS', from_acc, Getters.getSysDate().date)
+
+            # TransactionUpdate.accChargeUpdate('RTGS', from_acc, Getters.getSysDate().date)
+            ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.RTGS)
             flash('RTGS Successful')
             return redirect(url_for('banking.external_transfer'))
     else:
@@ -234,13 +243,16 @@ def withdrawal():
             if Checker.accNumberChecker(acc_num):
                 date = Getters.getSysDate().date  # time.strftime('%Y-%m-%d')
                 dep_ref = request.form['withdrawal_ref']
-                trantype = 'DR'
                 ref = Auto.referenceStringGen()
                 amount = float(request.form['withdrawal_amount'])
 
-                TransactionUpdate.withdrawalTransactionUpdate(date, acc_num, amount, ref)
-                TransactionUpdate.accChargeUpdate(trantype, acc_num, date)
-                TransactionUpdate.ttUpdate('CR', amount, date, dep_ref, acc_num)
+                # TransactionUpdate.withdrawalTransactionUpdate(date, acc_num, amount, ref)
+                AccountTransaction(date, amount, acc_num).withdrawal(ref)
+
+                # TransactionUpdate.accChargeUpdate(TransactionType.CREDIT, acc_num, date)
+                ChargeTransaction(date, acc_num).charges(TransactionType.CREDIT)
+
+                TransactionUpdate.ttUpdate(TransactionType.CREDIT, amount, date, dep_ref, acc_num)
                 flash('Account Debited')
                 return redirect(url_for('banking.withdrawal', user=Nav.userDetails()))
             else:
@@ -251,6 +263,5 @@ def withdrawal():
             return redirect(url_for('banking.withdrawal', user=Nav.userDetails()))
     else:
         return render_template('banking/withdrawal.html', record=record, user=Nav.userDetails())
-
 
         # End of banking views

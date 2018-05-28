@@ -1,6 +1,9 @@
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from werkzeug.utils import secure_filename
+
+from functions.Enums import TransactionType
 from functions.genarators import *
+from functions.transactions import ChargeTransaction
 from models import Base, Customer, Transactions
 
 bulk = Blueprint('bulk', __name__)
@@ -45,7 +48,8 @@ def bulk_salaries():
 
                     TransactionUpdate.transferTransactionUpdate(from_acc, to_acc, amount, remark,
                                                                 Getters.getSysDate().date)
-                    TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
+                    # TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
+                    ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.TRANSFER)
 
                     # print(line, end='')
                 flash("uploaded and posted")

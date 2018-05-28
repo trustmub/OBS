@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, redirect, request, url_for
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
-from path import Path
 
 from functions.genarators import *
 
@@ -19,9 +18,9 @@ def lockscreen():
     if request.method == 'POST':
         password = request.form['password']
         email = login_session['username']
-        user = session.query(User).filter_by(email=email).first()
+        user_record = session.query(User).filter_by(email=email).first()
         if bcrypt.check_password_hash(user.password, password):
-            user.lock = 1
+            user_record.lock = 1
             session.add(user)
             session.commit()
             return redirect(url_for('home'))
@@ -29,10 +28,10 @@ def lockscreen():
             return redirect(url_for('user.lockscreen'))
     else:
         usr = login_session['username']
-        user = session.query(User).filter_by(email=usr).first()
-        user.lock = 0
+        user_record = session.query(User).filter_by(email=usr).first()
+        user_record.lock = 0
 
-        return render_template('user/lockscreen.html', user=user)
+        return render_template('user/lockscreen.html', user=user_record)
 
 
 @user.route('/', methods=['POST', 'GET'])
@@ -161,6 +160,11 @@ def edit_profile():
         return redirect(url_for('user.profile', user=Nav.userDetails()))
     else:
         return render_template('user/edit_user.html', user=Nav.userDetails(), branch=Getters.getBranch())
+
+
+@user.route('/admin')
+def test_admin():
+    return render_template('user/test_admin.html')
 
 
 @user.route('/profile/')

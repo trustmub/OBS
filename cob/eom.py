@@ -8,6 +8,8 @@ import os
 from flask import flash, session as login_session
 from sqlalchemy.orm import sessionmaker
 
+from functions.Enums import TransactionType
+from functions.transactions import ChargeTransaction
 from models import *
 from functions.genarators import *
 
@@ -74,7 +76,8 @@ class AccountsEom:
                     # update an EOM transaction update
                     TransactionUpdate.eomServfeeTransactionUpdate(account, Getters.getSysDate().date, charge.tran_charge)
                     print("Transaction updated " + str(account) + " " + str(charge.tran_charge) + " " + str(Getters.getSysDate().date) + " record effected")
-                    TransactionUpdate.accChargeUpdate('SF', account, Getters.getSysDate().date)
+                    # TransactionUpdate.accChargeUpdate('SF', account, Getters.getSysDate().date)
+                    ChargeTransaction(Getters.getSysDate().date, account).charges(TransactionType.SERVICE_FEE)
                     print("Charge effected for account {}".format(account))
             new = CobDates(date=Getters.getSysDate().date,
                            process='sf',

@@ -6,7 +6,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from functions.genarators import *
-from models import Base, Customer, Transactions
+from functions.transactions import AccountTransaction
+from models import Base, Customer
 
 customer = Blueprint('customer', __name__)
 
@@ -50,7 +51,10 @@ def add_cus():
                        inputter_id=Nav.userDetails().uid)
         session.add(new)
         session.commit()
-        TransactionUpdate.accCreationCash(time.strftime('%Y-%m-%d'), working_bal, new_account)
+        # TransactionUpdate.accCreationCash(time.strftime('%Y-%m-%d'), working_bal, new_account)
+
+        AccountTransaction(time.strftime('%Y-%m-%d'), working_bal, new_account).create_account()
+
         return redirect(url_for('customer.my_cus'))
     else:
         return render_template('customer/add_cus.html', new_account=new_account, user=Nav.userDetails(),

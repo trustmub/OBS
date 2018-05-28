@@ -26,5 +26,7 @@ while b < 20:
     session.add(record)
     session.commit()
     print("Customer Number {} has been created successfully for account number {}".format(b, new_account))
-    TransactionUpdate.accCreationCash(time.strftime('%Y-%m-%d'), rand_amount, new_account)
+    # TransactionUpdate.accCreationCash(time.strftime('%Y-%m-%d'), rand_amount, new_account)
+    AccountTransaction(time.strftime('%Y-%m-%d'), rand_amount, new_account).create_account()
+
     b += 1
