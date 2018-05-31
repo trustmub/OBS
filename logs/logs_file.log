@@ -1,0 +1,152 @@
+INFO 2018-05-31 01:53:03,705  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-05-31 01:53:03,707  * Restarting with stat
+WARNING 2018-05-31 01:53:04,575  * Debugger is active!
+INFO 2018-05-31 01:53:04,618  * Debugger PIN: 265-378-225
+INFO 2018-05-31 01:53:18,805 127.0.0.1 - - [31/May/2018 01:53:18] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-05-31 01:53:18,911 127.0.0.1 - - [31/May/2018 01:53:18] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 01:53:27,380 127.0.0.1 - - [31/May/2018 01:53:27] "GET /add_cus/ HTTP/1.1" 200 -
+INFO 2018-05-31 01:53:27,405 127.0.0.1 - - [31/May/2018 01:53:27] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 01:53:53,555 Account Created: 33215824
+INFO 2018-05-31 01:53:53,559 127.0.0.1 - - [31/May/2018 01:53:53] "POST /add_cus/ HTTP/1.1" 302 -
+INFO 2018-05-31 01:53:53,951 127.0.0.1 - - [31/May/2018 01:53:53] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-05-31 01:53:56,723 127.0.0.1 - - [31/May/2018 01:53:56] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 01:56:05,615  * Detected change in '/Users/trustmub/PycharmProjects/OBS/cob/log_module.py', reloading
+INFO 2018-05-31 01:56:05,743  * Restarting with stat
+WARNING 2018-05-31 01:56:07,311  * Debugger is active!
+INFO 2018-05-31 01:56:07,335  * Debugger PIN: 265-378-225
+INFO 2018-05-31 01:56:07,477 127.0.0.1 - - [31/May/2018 01:56:07] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-05-31 01:56:07,583 127.0.0.1 - - [31/May/2018 01:56:07] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 01:56:09,303 127.0.0.1 - - [31/May/2018 01:56:09] "GET /deposits/ HTTP/1.1" 200 -
+INFO 2018-05-31 01:56:09,330 127.0.0.1 - - [31/May/2018 01:56:09] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:01:20,748  * Detected change in '/Users/trustmub/PycharmProjects/OBS/cob/log_module.py', reloading
+INFO 2018-05-31 02:01:20,839  * Restarting with stat
+WARNING 2018-05-31 02:01:21,572  * Debugger is active!
+INFO 2018-05-31 02:01:21,594  * Debugger PIN: 265-378-225
+INFO 2018-05-31 02:01:41,480 127.0.0.1 - - [31/May/2018 02:01:41] "GET /add_cus/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:01:41,522 127.0.0.1 - - [31/May/2018 02:01:41] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:01:44,188 127.0.0.1 - - [31/May/2018 02:01:44] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:01:46,944 127.0.0.1 - - [31/May/2018 02:01:46] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:02:05,596 127.0.0.1 - - [31/May/2018 02:02:05] "GET /open_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:02:05,675 127.0.0.1 - - [31/May/2018 02:02:05] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:02:27,712 127.0.0.1 - - [31/May/2018 02:02:27] "POST /open_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:02:27,771 127.0.0.1 - - [31/May/2018 02:02:27] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:02:27,794 127.0.0.1 - - [31/May/2018 02:02:27] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:02:34,382 127.0.0.1 - - [31/May/2018 02:02:34] "GET /open_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:02:34,401 127.0.0.1 - - [31/May/2018 02:02:34] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:02:46,443 127.0.0.1 - - [31/May/2018 02:02:46] "GET /withdrawal HTTP/1.1" 200 -
+INFO 2018-05-31 02:02:46,470 127.0.0.1 - - [31/May/2018 02:02:46] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:02:51,609 127.0.0.1 - - [31/May/2018 02:02:51] "POST /with_account_search/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:02:51,637 127.0.0.1 - - [31/May/2018 02:02:51] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:03:11,909 127.0.0.1 - - [31/May/2018 02:03:11] "POST /withdrawal HTTP/1.1" 500 -
+INFO 2018-05-31 02:03:11,946 127.0.0.1 - - [31/May/2018 02:03:11] "GET /withdrawal?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-05-31 02:03:11,948 127.0.0.1 - - [31/May/2018 02:03:11] "GET /withdrawal?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-05-31 02:03:11,951 127.0.0.1 - - [31/May/2018 02:03:11] "GET /withdrawal?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-05-31 02:03:11,984 127.0.0.1 - - [31/May/2018 02:03:11] "GET /withdrawal?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-05-31 02:03:12,037 127.0.0.1 - - [31/May/2018 02:03:12] "GET /withdrawal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-05-31 02:03:12,087 127.0.0.1 - - [31/May/2018 02:03:12] "GET /withdrawal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-05-31 02:04:52,217  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/transactions.py', reloading
+INFO 2018-05-31 02:04:52,352  * Restarting with stat
+WARNING 2018-05-31 02:04:53,834  * Debugger is active!
+INFO 2018-05-31 02:04:53,858  * Debugger PIN: 265-378-225
+INFO 2018-05-31 02:05:01,100 127.0.0.1 - - [31/May/2018 02:05:01] "POST /withdrawal HTTP/1.1" 500 -
+INFO 2018-05-31 02:05:01,133 127.0.0.1 - - [31/May/2018 02:05:01] "GET /withdrawal?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-05-31 02:05:01,136 127.0.0.1 - - [31/May/2018 02:05:01] "GET /withdrawal?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-05-31 02:05:01,140 127.0.0.1 - - [31/May/2018 02:05:01] "GET /withdrawal?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-05-31 02:05:01,190 127.0.0.1 - - [31/May/2018 02:05:01] "GET /withdrawal?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-05-31 02:05:01,337 127.0.0.1 - - [31/May/2018 02:05:01] "GET /withdrawal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-05-31 02:05:01,482 127.0.0.1 - - [31/May/2018 02:05:01] "GET /withdrawal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-05-31 02:07:22,882  * Detected change in '/Users/trustmub/PycharmProjects/OBS/views/banking.py', reloading
+INFO 2018-05-31 02:07:22,990  * Restarting with stat
+WARNING 2018-05-31 02:07:24,490  * Debugger is active!
+INFO 2018-05-31 02:07:24,522  * Debugger PIN: 265-378-225
+INFO 2018-05-31 02:07:39,441 127.0.0.1 - - [31/May/2018 02:07:39] "POST /withdrawal HTTP/1.1" 500 -
+INFO 2018-05-31 02:07:39,482 127.0.0.1 - - [31/May/2018 02:07:39] "GET /withdrawal?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-05-31 02:07:39,490 127.0.0.1 - - [31/May/2018 02:07:39] "GET /withdrawal?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-05-31 02:07:39,496 127.0.0.1 - - [31/May/2018 02:07:39] "GET /withdrawal?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-05-31 02:07:39,567 127.0.0.1 - - [31/May/2018 02:07:39] "GET /withdrawal?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-05-31 02:07:39,671 127.0.0.1 - - [31/May/2018 02:07:39] "GET /withdrawal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-05-31 02:07:39,780 127.0.0.1 - - [31/May/2018 02:07:39] "GET /withdrawal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-05-31 02:09:02,939  * Detected change in '/Users/trustmub/PycharmProjects/OBS/views/banking.py', reloading
+INFO 2018-05-31 02:09:03,063  * Restarting with stat
+WARNING 2018-05-31 02:09:05,083  * Debugger is active!
+INFO 2018-05-31 02:09:05,124  * Debugger PIN: 265-378-225
+INFO 2018-05-31 02:09:18,355 127.0.0.1 - - [31/May/2018 02:09:18] "POST /withdrawal HTTP/1.1" 500 -
+INFO 2018-05-31 02:09:18,431 127.0.0.1 - - [31/May/2018 02:09:18] "GET /withdrawal?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-05-31 02:09:18,440 127.0.0.1 - - [31/May/2018 02:09:18] "GET /withdrawal?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-05-31 02:09:18,452 127.0.0.1 - - [31/May/2018 02:09:18] "GET /withdrawal?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-05-31 02:09:18,550 127.0.0.1 - - [31/May/2018 02:09:18] "GET /withdrawal?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-05-31 02:09:18,808 127.0.0.1 - - [31/May/2018 02:09:18] "GET /withdrawal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-05-31 02:09:19,062 127.0.0.1 - - [31/May/2018 02:09:19] "GET /withdrawal?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-05-31 02:12:00,961  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/genarators.py', reloading
+INFO 2018-05-31 02:12:01,188  * Restarting with stat
+WARNING 2018-05-31 02:12:03,582  * Debugger is active!
+INFO 2018-05-31 02:12:03,627  * Debugger PIN: 265-378-225
+INFO 2018-05-31 02:12:09,083 127.0.0.1 - - [31/May/2018 02:12:09] "POST /withdrawal HTTP/1.1" 302 -
+INFO 2018-05-31 02:12:09,213 127.0.0.1 - - [31/May/2018 02:12:09] "GET /withdrawal?user=%3Cmodels.User+object+at+0x1103315f8%3E HTTP/1.1" 200 -
+INFO 2018-05-31 02:12:09,317 127.0.0.1 - - [31/May/2018 02:12:09] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:12:17,553 127.0.0.1 - - [31/May/2018 02:12:17] "GET /open_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:12:17,596 127.0.0.1 - - [31/May/2018 02:12:17] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:12:22,330 127.0.0.1 - - [31/May/2018 02:12:22] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:12:22,372 127.0.0.1 - - [31/May/2018 02:12:22] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:12:48,686 127.0.0.1 - - [31/May/2018 02:12:48] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:12:48,759 127.0.0.1 - - [31/May/2018 02:12:48] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:12:48,814 127.0.0.1 - - [31/May/2018 02:12:48] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:13:45,536 127.0.0.1 - - [31/May/2018 02:13:45] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:13:45,610 127.0.0.1 - - [31/May/2018 02:13:45] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:13:45,656 127.0.0.1 - - [31/May/2018 02:13:45] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:14:00,825 127.0.0.1 - - [31/May/2018 02:14:00] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:14:00,888 127.0.0.1 - - [31/May/2018 02:14:00] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:14:00,929 127.0.0.1 - - [31/May/2018 02:14:00] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:14:40,417 127.0.0.1 - - [31/May/2018 02:14:40] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:14:40,494 127.0.0.1 - - [31/May/2018 02:14:40] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:14:40,553 127.0.0.1 - - [31/May/2018 02:14:40] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:15:12,145 127.0.0.1 - - [31/May/2018 02:15:12] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:15:12,227 127.0.0.1 - - [31/May/2018 02:15:12] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:15:12,281 127.0.0.1 - - [31/May/2018 02:15:12] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:15:23,832 127.0.0.1 - - [31/May/2018 02:15:23] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:15:23,897 127.0.0.1 - - [31/May/2018 02:15:23] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:15:23,939 127.0.0.1 - - [31/May/2018 02:15:23] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:16:04,788 127.0.0.1 - - [31/May/2018 02:16:04] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:16:04,876 127.0.0.1 - - [31/May/2018 02:16:04] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:16:04,940 127.0.0.1 - - [31/May/2018 02:16:04] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:16:47,666 127.0.0.1 - - [31/May/2018 02:16:47] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:16:47,719 127.0.0.1 - - [31/May/2018 02:16:47] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:16:47,758 127.0.0.1 - - [31/May/2018 02:16:47] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:17:38,762 127.0.0.1 - - [31/May/2018 02:17:38] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:17:38,819 127.0.0.1 - - [31/May/2018 02:17:38] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:17:38,859 127.0.0.1 - - [31/May/2018 02:17:38] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:17:50,061 127.0.0.1 - - [31/May/2018 02:17:50] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:17:50,114 127.0.0.1 - - [31/May/2018 02:17:50] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:17:50,151 127.0.0.1 - - [31/May/2018 02:17:50] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:18:05,819 127.0.0.1 - - [31/May/2018 02:18:05] "POST /close_till/ HTTP/1.1" 500 -
+INFO 2018-05-31 02:18:05,851 127.0.0.1 - - [31/May/2018 02:18:05] "GET /close_till/?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-05-31 02:18:05,854 127.0.0.1 - - [31/May/2018 02:18:05] "GET /close_till/?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-05-31 02:18:05,857 127.0.0.1 - - [31/May/2018 02:18:05] "GET /close_till/?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-05-31 02:18:05,919 127.0.0.1 - - [31/May/2018 02:18:05] "GET /close_till/?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-05-31 02:18:06,014 127.0.0.1 - - [31/May/2018 02:18:06] "GET /close_till/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-05-31 02:18:06,106 127.0.0.1 - - [31/May/2018 02:18:06] "GET /close_till/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-05-31 02:21:51,951  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/Enums.py', reloading
+INFO 2018-05-31 02:21:52,202  * Restarting with stat
+WARNING 2018-05-31 02:21:54,118  * Debugger is active!
+INFO 2018-05-31 02:21:54,174  * Debugger PIN: 265-378-225
+INFO 2018-05-31 02:22:21,055  * Detected change in '/Users/trustmub/PycharmProjects/OBS/views/till.py', reloading
+INFO 2018-05-31 02:22:21,183  * Restarting with stat
+WARNING 2018-05-31 02:22:23,182  * Debugger is active!
+INFO 2018-05-31 02:22:23,222  * Debugger PIN: 265-378-225
+INFO 2018-05-31 02:22:29,129 127.0.0.1 - - [31/May/2018 02:22:29] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-05-31 02:22:29,300 127.0.0.1 - - [31/May/2018 02:22:29] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:22:29,393 127.0.0.1 - - [31/May/2018 02:22:29] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:30:11,733  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/transactions.py', reloading
+INFO 2018-05-31 02:30:11,870  * Restarting with stat
+WARNING 2018-05-31 02:30:13,439  * Debugger is active!
+INFO 2018-05-31 02:30:13,476  * Debugger PIN: 265-378-225
+INFO 2018-05-31 02:30:20,325 127.0.0.1 - - [31/May/2018 02:30:20] "GET /open_till/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:30:20,412 127.0.0.1 - - [31/May/2018 02:30:20] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:55:28,325 127.0.0.1 - - [31/May/2018 02:55:28] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:55:28,372 127.0.0.1 - - [31/May/2018 02:55:28] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:55:40,544 127.0.0.1 - - [31/May/2018 02:55:40] "POST /stmt_search/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:55:40,583 127.0.0.1 - - [31/May/2018 02:55:40] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:55:52,984 127.0.0.1 - - [31/May/2018 02:55:52] "GET /add_cus/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:55:53,023 127.0.0.1 - - [31/May/2018 02:55:53] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-05-31 02:55:56,935 127.0.0.1 - - [31/May/2018 02:55:56] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-05-31 02:56:03,068 127.0.0.1 - - [31/May/2018 02:56:03] "GET /static/img/user/ HTTP/1.1" 404 -

@@ -3,6 +3,7 @@ import datetime
 
 from flask import Blueprint, render_template, request, url_for, redirect
 
+from functions.Enums import TransactionType
 from functions.genarators import *
 
 till = Blueprint('till', __name__)
@@ -31,7 +32,7 @@ def open_till():
         session.commit()
         # do a till transaction in creadditing the till and affecting the suspense account
         suspense = session.query(Customer).filter_by(account_type='suspense').first()
-        TransactionUpdate.ttUpdate('CR TR', o_balance, time.strftime('%Y-%m-%d'), 'Teller Transfer', suspense.acc_number)
+        TransactionUpdate.ttUpdate(TransactionType.CR_DR, o_balance, time.strftime('%Y-%m-%d'), 'Teller Transfer', suspense.acc_number)
         # ------------------------
 
         # Update the working balance of the suspense account
@@ -64,7 +65,7 @@ def close_till():
                     # send cash back to suspense account
                     #  tt transaction
                     suspense = session.query(Customer).filter_by(account_type='suspense').first()
-                    TransactionUpdate.ttUpdate('DR TR', sys_balance, time.strftime('%Y-%m-%d'), 'Closing Balance',
+                    TransactionUpdate.ttUpdate(TransactionType.CR_DR, sys_balance, time.strftime('%Y-%m-%d'), 'Closing Balance',
                                                suspense.acc_number)
                     till_detail = session.query(Till).filter_by(
                         till_account=Getters.getTillDetails().till_account).first()

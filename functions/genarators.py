@@ -22,8 +22,7 @@ session = DBSession()
 class Getters:
     @staticmethod
     def getTransactionType():
-        trantype = session.query(TransactionCharge).all()
-        return trantype
+        return session.query(TransactionCharge).all()
 
     @staticmethod
     def getAllUsers():
@@ -31,33 +30,23 @@ class Getters:
 
     @staticmethod
     def getAvailableTellers():
-        teller = session.query(Till).filter_by(user_id='').all()
-        return teller
+        return session.query(Till).filter_by(user_id='').all()
 
     @staticmethod
     def getAllTellers():
-        teller = session.query(Till).all()
-        return teller
+        return session.query(Till).all()
 
     @staticmethod
     def getTillDetails():
-        x = []
-        for i in Getters.getAllTellers():
-            x = x + [i.id]
-        if Nav.userDetails().uid in x:
-            till = session.query(Till).filter_by(user_id=Nav.userDetails().uid).first()
-            return till
+        till_ids = [i.id for i in Getters.getAllTellers()]
+        if Nav.userDetails().uid in till_ids:
+            return session.query(Till).filter_by(user_id=Nav.userDetails().uid).first()
         else:
-            till = []
-            return till
+            return []
 
     @staticmethod
     def getTellerStatus():
-        alltills = session.query(Till).all()
-        mylist = []
-        for i in alltills:
-            mylist = mylist + [i.user_id]
-            # logging.info("user ID : {} added on the list".format(i.user_id))
+        mylist = [i.user_id for i in session.query(Till).all()]
         if Nav.userDetails().uid in mylist:
             return 1
 
@@ -97,8 +86,7 @@ class Getters:
     def getTellerTransactions():
         date = Getters.getSysDate().date  # time.strftime('%Y-%m-%d')
         if Getters.getTillDetails() is None:
-            all_records = []
-            return all_records
+            return []
         else:
             all_records = session.query(TellerTransactions).filter_by(user_id=Nav.userDetails().uid).filter_by(
                 date=date).all()
@@ -112,28 +100,23 @@ class Getters:
 
     @staticmethod
     def getAccountType():
-        record = session.query(Account).all()
-        return record
+        return session.query(Account).all()
 
     @staticmethod
     def getCustomerAccountDetails(acc_number):
-        record = session.query(Customer).filter_by(acc_number=acc_number).first()
-        return record
+        return session.query(Customer).filter_by(acc_number=acc_number).first()
 
     @staticmethod
     def getBranch():
-        branch = session.query(Branch).all()
-        return branch
+        return session.query(Branch).all()
 
     @staticmethod
     def getCurrency():
-        currency = session.query(Currency).all()
-        return currency
+        return session.query(Currency).all()
 
     @staticmethod
     def getBanks():
-        banks = session.query(Banks).all()
-        return banks
+        return session.query(Banks).all()
 
     # End of business getters
     @staticmethod
@@ -170,7 +153,7 @@ class TransactionUpdate:
         cus = session.query(Customer).filter_by(acc_number=acc_num).one()
         # Update transactions Table
         trans = Transactions(trantype='CR',
-                             tranref=Auto.referenceStringGen(),
+                             tranref=Auto.reference_string_generator(),
                              tranmethod='Cash',
                              tran_date=date,
                              cheque_num='None',
@@ -199,7 +182,7 @@ class TransactionUpdate:
 
         till_detail = session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
         trans = Transactions(trantype='CR',
-                             tranref=Auto.referenceStringGen(),
+                             tranref=Auto.reference_string_generator(),
                              tranmethod='Cash',
                              tran_date=tran_date,
                              cheque_num='None',
@@ -261,7 +244,7 @@ class TransactionUpdate:
         get_charge = session.query(TransactionCharge).filter_by(tran_type='DR').first()
         cb2 = float(customer.working_bal) - float(get_charge.tran_charge)
         trans2 = Transactions(trantype='DR',
-                              tranref=Auto.referenceStringGen(),
+                              tranref=Auto.reference_string_generator(),
                               tranmethod='Charge Transfer',
                               tran_date=tran_date,
                               cheque_num='None',
@@ -287,7 +270,7 @@ class TransactionUpdate:
         f_customer = Getters.getCustomerAccountDetails(from_acc)
         current_balance = f_customer.working_bal - float(amount)
         # transaction reference for this transaction is the same since its one transaction
-        tranref = Auto.referenceStringGen()
+        tranref = Auto.reference_string_generator()
         # transaction for a from customer
         trans = Transactions(trantype='TR',
                              tranref=tranref,
@@ -338,7 +321,7 @@ class TransactionUpdate:
         get_charge = session.query(TransactionCharge).filter_by(tran_type='TR').first()
         cb2 = float(f_customer.working_bal) - float(get_charge.tran_charge)
         trans2 = Transactions(trantype='DR',
-                              tranref=Auto.referenceStringGen(),
+                              tranref=Auto.reference_string_generator(),
                               tranmethod='Charge Transfer',
                               tran_date=tran_date,
                               cheque_num='None',
@@ -364,7 +347,7 @@ class TransactionUpdate:
         f_customer = Getters.getCustomerAccountDetails(from_acc)
         current_balance = f_customer.working_bal - float(amount)
         # same transaction reference between from account and suspence account
-        tranref = Auto.referenceStringGen()
+        tranref = Auto.reference_string_generator()
         # transaction for a from customer
         trans = Transactions(trantype='RTGS',
                              tranref=tranref,
@@ -415,7 +398,7 @@ class TransactionUpdate:
         get_charge = session.query(TransactionCharge).filter_by(tran_type='RTGS').first()
         cb2 = float(f_customer.working_bal) - float(get_charge.tran_charge)
         trans2 = Transactions(trantype='DR',
-                              tranref=Auto.referenceStringGen(),
+                              tranref=Auto.reference_string_generator(),
                               tranmethod='Charge RTGS',
                               tran_date=tran_date,
                               cheque_num='None',
@@ -440,12 +423,12 @@ class TransactionUpdate:
     def accInterestUpdate(cr_acc, total_amount, cb, cust_id):
         dr_acc_record = session.query(Customer).filter_by(account_type='interest').first()
         trans2 = Transactions(trantype='CR',
-                              tranref=Auto.referenceStringGen(),
+                              tranref=Auto.reference_string_generator(),
                               tranmethod='Interest',
                               tran_date=Getters.getSysDate().date,
                               cheque_num='None',
                               acc_number=int(dr_acc_record.acc_number),  # interest account
-                              cr_acc_number=int(cr_acc),  # Client account
+                              cr_acc_number=cr_acc,  # Client account
                               amount=float(total_amount),
                               current_balance=round(cb, 2),
                               remark='Interest',
@@ -458,13 +441,12 @@ class TransactionUpdate:
 
     @staticmethod
     def eomServfeeTransactionUpdate(acc_number, tran_date, amount):
-
         charged_customer = session.query(Customer).filter_by(acc_number=acc_number).first()
         current_balance = charged_customer.working_bal - amount
 
         servfee = session.query(Customer).filter_by(account_type='servfee').first()
         # same transactiion reference for customer and suspense account
-        tranref = Auto.referenceStringGen()
+        tranref = Auto.reference_string_generator()
         # transaction for Charged Customer
         trans = Transactions(trantype='SF',
                              tranref=tranref,
@@ -518,8 +500,8 @@ class TransactionUpdate:
         customer = session.query(Customer).filter_by(acc_number=acc_num).first()
         till_detail = session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
 
-        tt = TellerTransactions(tran_type=t_type,  # CR or DR
-                                tranref=Auto.referenceStringGen(),
+        tt = TellerTransactions(tran_type=t_type.value,  # CR or DR
+                                tranref=Auto.reference_string_generator(),
                                 amount=amount,
                                 date=tran_date,
                                 remark=tran_ref,
@@ -544,31 +526,32 @@ class TransactionUpdate:
         # 2. charge details between customer and charge account
         # Effect the transaction
         # 1. between customer and till
-        # 2. cutomer and charge account
+        # 2. customer and charge account
 
         # update the charges table with charges information
         pass
 
 
 class Auto:
-    @staticmethod
-    def accountNumGen():
+
+    def __init__(self):
+        self.account_listing = session.query(Customer).all()
+
+    def account_number_generator(self):
         # Generates account numbers
         branch = str(33)
         acc_number = str(random.randint(111111, 999999))
         str_acc_num = branch + acc_number
         account_number = int(str_acc_num)
-        mylist = []
-        all_account = session.query(Customer).all()
-        for i in all_account:
-            mylist = mylist + [i.acc_number]
-        if account_number in mylist:
-            Auto.accountNumGen()
+        account_list = [i.acc_number for i in self.account_listing]
+        if account_number in account_list:
+            print("Duplicate found::::: Running again")
+            self.account_number_generator()
         else:
             return account_number
 
     @staticmethod
-    def referenceStringGen():
+    def reference_string_generator():
         sys_date = datetime.datetime.strptime(Getters.getSysDate().date, '%Y-%m-%d')
         time_component = sys_date.strftime("%y%m%d")
         alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
@@ -577,27 +560,26 @@ class Auto:
         rand_string = random.sample(alphabet, 5)
         alp = "".join(rand_string)
         ref_str = "FT" + str(time_component) + alp.upper()
-        mylist = []
-        tr = session.query(Transactions).all()
-        for i in tr:
-            mylist = mylist + [i.tranref]
-        if ref_str in mylist:
-            Auto.referenceStringGen()
+
+        transaction_list = [i.tranref for i in session.query(Transactions).all()]
+
+        if ref_str in transaction_list:
+            Auto.reference_string_generator()
         else:
             return ref_str
 
     @staticmethod
-    def systemAccNumberGen():
+    def system_account_number_generator():
         branch = '33'
         currency = 'USD'
         acc = str(random.randint(11111111, 99999999))
         str_acc_number = branch + acc
-        mylist = []
+        mylist = [1]
         all_account = session.query(Customer).all()
         for i in all_account:
             mylist = mylist + [i.acc_number]
         if int(str_acc_number) in mylist:
-            Auto.systemAccNumberGen()
+            Auto.system_account_number_generator()
         else:
             return int(str_acc_number)
 

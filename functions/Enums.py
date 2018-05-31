@@ -7,6 +7,7 @@ class TransactionType(Enum):
     SERVICE_FEE = 'SF'
     RTGS = 'RTGS'
     TRANSFER = 'TR'
+    CR_DR = 'CR DR'
 
 
 class TransactionCategory(Enum):

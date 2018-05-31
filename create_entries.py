@@ -9,33 +9,33 @@ print("Done creating system Date")
 
 rtgs = Customer(first_name='sys_user', last_name='sys_user', dob=time.strftime('%Y-%m-%d'), address='address',
                 country='Zimbabwe', email='system', gender='system', contact_number='09100000', working_bal=0,
-                acc_number=Auto.accountNumGen(), account_type='rtgs', create_date=datetime.datetime.now(),
+                acc_number=Auto.account_number_generator(), account_type='rtgs', create_date=datetime.datetime.now(),
                 inputter_id=1)
 print("RTGS Account Created")
 new = Customer(first_name='sys_user1', last_name='sys_user1', dob=time.strftime('%Y-%m-%d'), address='address',
                country='Zimbabwe', email='system', gender='system', contact_number='09100000', working_bal=0,
-               acc_number=Auto.accountNumGen(), account_type='charges', create_date=datetime.datetime.now(),
+               acc_number=Auto.account_number_generator(), account_type='charges', create_date=datetime.datetime.now(),
                inputter_id=1)
 
 print("Charges Account Created : " + new.first_name, new.last_name, new.acc_number)
 new1 = Customer(first_name='sys_user2', last_name='sys_user2', dob=time.strftime('%Y-%m-%d'), address='address',
                 country='Zimbabwe', email='system', gender='system', contact_number='09100000', working_bal=0,
-                acc_number=Auto.accountNumGen(), account_type='suspense', create_date=datetime.datetime.now(),
+                acc_number=Auto.account_number_generator(), account_type='suspense', create_date=datetime.datetime.now(),
                 inputter_id=1)
 print("Teller Suspense Account Created : " + new1.first_name, new1.last_name, new1.acc_number)
 new2 = Customer(first_name='PL52232', last_name='PL52232', dob=time.strftime('%Y-%m-%d'), address='address',
                 country='Zimbabwe', email='system', gender='system', contact_number='09100000', working_bal=0,
-                acc_number=Auto.accountNumGen(), account_type='servfee', create_date=datetime.datetime.now(),
+                acc_number=Auto.account_number_generator(), account_type='servfee', create_date=datetime.datetime.now(),
                 inputter_id=1)
 print("Service Fee Account Created" + new2.first_name, new2.last_name, new2.acc_number)
 new3 = Customer(first_name='sys_user4', last_name='sys_user4', dob=time.strftime('%Y-%m-%d'), address='Address',
                 country='Zimbabwe', email='System', gender='system', contact_number='09100000', working_bal=0,
-                acc_number=Auto.accountNumGen(), account_type='acccreate', create_date=datetime.datetime.now(),
+                acc_number=Auto.account_number_generator(), account_type='acccreate', create_date=datetime.datetime.now(),
                 inputter_id=1)
 print("Account Creation Suspense Account Created" + new2.first_name, new2.last_name, new2.acc_number)
 new4 = Customer(first_name='sys_user4', last_name='sys_user4', dob=time.strftime('%Y-%m-%d'), address='Address',
                 country='Zimbabwe', email='System', gender='system', contact_number='09100000', working_bal=0,
-                acc_number=Auto.accountNumGen(), account_type='interest', create_date=datetime.datetime.now(),
+                acc_number=Auto.account_number_generator(), account_type='interest', create_date=datetime.datetime.now(),
                 inputter_id=1)
 print("Interests Suspense Account Created Created" + new3.first_name, new3.last_name, new3.acc_number)
 # all deposits to this account will be moved at monthend to the respective branch suspense accounts
@@ -47,16 +47,16 @@ session.add(new3)
 session.add(new4)
 session.commit()
 
-teller1 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto.systemAccNumberGen(), currency='USD',
+teller1 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto.system_account_number_generator(), currency='USD',
                remark='', date='', create_date=datetime.datetime.now(), user_id='')
 print("Teller Created")
-teller2 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto.systemAccNumberGen(), currency='USD',
+teller2 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto.system_account_number_generator(), currency='USD',
                remark='', date='', create_date=datetime.datetime.now(), user_id='')
 print("Teller Created")
-teller3 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto.systemAccNumberGen(), currency='USD',
+teller3 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto.system_account_number_generator(), currency='USD',
                remark='', date='', create_date=datetime.datetime.now(), user_id='')
 print("Teller Created")
-teller4 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto.systemAccNumberGen(), currency='USD',
+teller4 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto.system_account_number_generator(), currency='USD',
                remark='', date='', create_date=datetime.datetime.now(), user_id='')
 print("Teller Created")
 session.add(teller1)

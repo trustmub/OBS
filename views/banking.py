@@ -157,7 +157,7 @@ def transfer():
         else:
             TransactionUpdate.transferTransactionUpdate(from_acc, to_acc, amount, remark, Getters.getSysDate().date)
             # TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
-            ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.TRANSFER.value)
+            ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.TRANSFER)
 
             flash('Transfer Successful')
             return redirect(url_for('banking.transfer'))
@@ -205,7 +205,7 @@ def external_transfer():
                                                                 Getters.getSysDate().date)
 
             # TransactionUpdate.accChargeUpdate('RTGS', from_acc, Getters.getSysDate().date)
-            ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.RTGS.value)
+            ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.RTGS)
             flash('RTGS Successful')
             return redirect(url_for('banking.external_transfer'))
     else:
@@ -243,14 +243,14 @@ def withdrawal():
             if Checker.accNumberChecker(acc_num):
                 date = Getters.getSysDate().date  # time.strftime('%Y-%m-%d')
                 dep_ref = request.form['withdrawal_ref']
-                ref = Auto.referenceStringGen()
+                ref = Auto.reference_string_generator()
                 amount = float(request.form['withdrawal_amount'])
 
                 # TransactionUpdate.withdrawalTransactionUpdate(date, acc_num, amount, ref)
                 AccountTransaction(date, amount, acc_num).withdrawal(ref)
 
                 # TransactionUpdate.accChargeUpdate(TransactionType.CREDIT, acc_num, date)
-                ChargeTransaction(date, acc_num).charges(TransactionType.CREDIT.value)
+                ChargeTransaction(date, acc_num).charges(TransactionType.CREDIT)
 
                 TransactionUpdate.ttUpdate(TransactionType.CREDIT, amount, date, dep_ref, acc_num)
                 flash('Account Debited')

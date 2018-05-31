@@ -44,17 +44,17 @@ def login():
             email = request.form['email']
             password = request.form['password']
             if Checker.userEmailChecker(email):
-                user = session.query(User).filter_by(email=email).first()
-                # user.lock = 0
-                if user.lock == 1:  # Checker.userDbSession(email):
+                user_account = session.query(User).filter_by(email=email).first()
+                # user_account.lock = 0
+                if user_account.lock == 1:  # Checker.userDbSession(email):
                     flash('User is locked, Contact Systems Administrator')
                     return redirect(url_for('user.login'))
                 else:
-                    if bcrypt.check_password_hash(user.password, password):
+                    if bcrypt.check_password_hash(user_account.password, password):
                         login_session['username'] = email
 
-                        user.lock = 1
-                        session.add(user)
+                        user_account.lock = 1
+                        session.add(user_account)
                         session.commit()
                         return redirect(url_for('home'))
                     else:
@@ -105,9 +105,9 @@ def register():
 def logout():
     if 'username' in login_session:
         login_user = login_session['username']
-        user = session.query(User).filter_by(email=login_user).first()
+        user_account = session.query(User).filter_by(email=login_user).first()
         user.lock = 0
-        session.add(user)
+        session.add(user_account)
         session.commit()
         login_session.pop('username', None)
         flash("Logged Out")

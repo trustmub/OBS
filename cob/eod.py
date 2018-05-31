@@ -21,15 +21,16 @@ class Accounts:
         acc_opened = session.query(Transactions).filter_by(remark='Account Creation').filter_by(tran_date=dt).all()
         for i in acc_opened:
             count += float(i.amount)
-        with open("reports/AccountsOpened" + Getters.getSysDate().date + ".csv", mode="w",
-                  encoding="utf-8") as myFile:
-            for i in acc_opened:
-                myFile.write(
-                    str(i.trantype) + "," + i.tranref + "," + i.tranmethod + "," + str(i.tran_date) + "," + str(
-                        i.cheque_num) + "," + str(i.acc_number) + "," + str(i.cr_acc_number) + "," + str(
-                        i.amount) + "," + str(i.custid) + "\n")
+        if acc_opened is not None:
+            with open("reports/AccountsOpened" + Getters.getSysDate().date + ".csv", mode="w",
+                      encoding="utf-8") as myFile:
+                for i in acc_opened:
+                    myFile.write(
+                        str(i.trantype) + "," + i.tranref + "," + i.tranmethod + "," + str(i.tran_date) + "," + str(
+                            i.cheque_num) + "," + str(i.acc_number) + "," + str(i.cr_acc_number) + "," + str(
+                            i.amount) + "," + str(i.custid) + "\n")
 
-        # update the account opening accordingly
+            # update the account opening accordingly
         acc_opening_account = session.query(Customer).filter_by(account_type='acccreate').first()
         acc_opening_account.working_bal += count
         session.add(acc_opening_account)
@@ -107,13 +108,18 @@ class Reporting:
         # all deposits done for the day
         record = session.query(Transactions).filter_by(tran_date=Getters.getSysDate().date).filter_by(
             trantype='CR').all()
-        with open("reports/CreditTransactions" + Getters.getSysDate().date + ".csv", mode="w",
-                  encoding="utf-8") as myFile:
-            for i in record:
-                myFile.write(
-                    str(i.trantype) + "," + i.tranref + "," + i.tranmethod + "," + str(i.tran_date) + "," + str(
-                        i.cheque_num) + "," + str(i.acc_number) + "," + str(i.cr_acc_number) + "," + str(
-                        i.amount) + "," + str(i.custid) + "\n")
+        if record is not None:
+            print("The number of records are " + str(len(record)))
+            with open("reports/CreditTransactions" + Getters.getSysDate().date + ".csv", mode="w",
+                      encoding="utf-8") as myFile:
+                skip_account = [33139793]
+                for i in record:
+                    print("The record giving problems is" + str(i.cr_acc_number))
+                    if i.cr_acc_number not in skip_account:
+                        myFile.write(
+                            str(i.trantype) + "," + i.tranref + "," + i.tranmethod + "," + str(i.tran_date) + "," + str(
+                                i.cheque_num) + "," + str(i.acc_number) + "," + str(i.cr_acc_number) + "," + str(
+                                i.amount) + "," + str(i.custid) + "\n")
 
         pass
 

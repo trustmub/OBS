@@ -19,7 +19,7 @@ session = DBSession()
 
 @customer.route('/add_cus/', methods=['POST', 'GET'])
 def add_cus():
-    new_account = Auto.accountNumGen()
+    new_account = Auto().account_number_generator()
     # name = request.form['first_name']
 
     if request.method == 'POST':
@@ -33,27 +33,35 @@ def add_cus():
         address = request.form['address']
         country = request.form['country']
         acc_number = request.form['acc_number']
-        working_bal = float(request.form['working_bal'])
+        initial_deposit = request.form['working_bal']
+        if initial_deposit == "":
+            working_bal = float(0)
+        else:
+            working_bal = float(initial_deposit)
         account_type = request.form['account_type']
 
-        new = Customer(first_name=first_name,
-                       last_name=last_name,
-                       dob=dob,
-                       gender=gender,
-                       contact_number=contact_number,
-                       email=email,
-                       address=address,
-                       country=country,
-                       acc_number=new_account,
-                       working_bal=working_bal,
-                       account_type=account_type,
-                       create_date=datetime.datetime.now(),
-                       inputter_id=Nav.userDetails().uid)
-        session.add(new)
+        new_client = Customer(first_name=first_name,
+                              last_name=last_name,
+                              dob=dob,
+                              gender=gender,
+                              contact_number=contact_number,
+                              email=email,
+                              address=address,
+                              country=country,
+                              acc_number=new_account,
+                              working_bal=working_bal,
+                              account_type=account_type,
+                              create_date=datetime.datetime.now(),
+                              inputter_id=Nav.userDetails().uid)
+        session.add(new_client)
         session.commit()
         # TransactionUpdate.accCreationCash(time.strftime('%Y-%m-%d'), working_bal, new_account)
-
-        AccountTransaction(time.strftime('%Y-%m-%d'), working_bal, new_account).create_account()
+        #
+        result = AccountTransaction(time.strftime('%Y-%m-%d'), working_bal, new_account).create_account()
+        if result == 0:
+            flash("account Creation Failed")
+        else:
+            flash("Account Created Successfully")
 
         return redirect(url_for('customer.my_cus'))
     else:
