@@ -213,3 +213,267 @@ INFO 2018-06-01 16:56:44,406 127.0.0.1 - - [01/Jun/2018 16:56:44] "GET /dashboar
 INFO 2018-06-01 16:56:44,443 127.0.0.1 - - [01/Jun/2018 16:56:44] "GET /static/img/user/ HTTP/1.1" 404 -
 INFO 2018-06-01 17:41:12,867  * Detected change in '/Users/trustmub/PycharmProjects/OBS/obs_app.py', reloading
 INFO 2018-06-01 17:41:12,933  * Restarting with stat
+INFO 2018-06-01 22:39:02,044  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-01 22:39:02,046  * Restarting with stat
+WARNING 2018-06-01 22:39:02,649  * Debugger is active!
+INFO 2018-06-01 22:39:02,668  * Debugger PIN: 265-378-225
+INFO 2018-06-01 22:39:23,141 127.0.0.1 - - [01/Jun/2018 22:39:23] "GET /dashboard/ HTTP/1.1" 500 -
+INFO 2018-06-01 22:39:23,178 127.0.0.1 - - [01/Jun/2018 22:39:23] "GET /dashboard/?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:23,180 127.0.0.1 - - [01/Jun/2018 22:39:23] "GET /dashboard/?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:23,189 127.0.0.1 - - [01/Jun/2018 22:39:23] "GET /dashboard/?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:23,263 127.0.0.1 - - [01/Jun/2018 22:39:23] "GET /dashboard/?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:23,287 127.0.0.1 - - [01/Jun/2018 22:39:23] "GET /dashboard/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:23,409 127.0.0.1 - - [01/Jun/2018 22:39:23] "GET /dashboard/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:34,812 127.0.0.1 - - [01/Jun/2018 22:39:34] "GET /dashboard/ HTTP/1.1" 500 -
+INFO 2018-06-01 22:39:34,831 127.0.0.1 - - [01/Jun/2018 22:39:34] "GET /dashboard/?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:34,833 127.0.0.1 - - [01/Jun/2018 22:39:34] "GET /dashboard/?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:34,835 127.0.0.1 - - [01/Jun/2018 22:39:34] "GET /dashboard/?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:34,886 127.0.0.1 - - [01/Jun/2018 22:39:34] "GET /dashboard/?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:34,910 127.0.0.1 - - [01/Jun/2018 22:39:34] "GET /dashboard/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:46,823 127.0.0.1 - - [01/Jun/2018 22:39:46] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-06-01 22:39:46,840 127.0.0.1 - - [01/Jun/2018 22:39:46] "GET / HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:46,905 127.0.0.1 - - [01/Jun/2018 22:39:46] "GET /static/plugins/iCheck/square/blue@2x.png HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:54,384 127.0.0.1 - - [01/Jun/2018 22:39:54] "POST / HTTP/1.1" 302 -
+INFO 2018-06-01 22:39:54,403 127.0.0.1 - - [01/Jun/2018 22:39:54] "GET /dashboard/ HTTP/1.1" 500 -
+INFO 2018-06-01 22:39:54,428 127.0.0.1 - - [01/Jun/2018 22:39:54] "GET /dashboard/?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:54,429 127.0.0.1 - - [01/Jun/2018 22:39:54] "GET /dashboard/?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:54,431 127.0.0.1 - - [01/Jun/2018 22:39:54] "GET /dashboard/?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:54,471 127.0.0.1 - - [01/Jun/2018 22:39:54] "GET /dashboard/?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-06-01 22:39:54,497 127.0.0.1 - - [01/Jun/2018 22:39:54] "GET /dashboard/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 22:40:57,245  * Detected change in '/Users/trustmub/PycharmProjects/OBS/obs_app.py', reloading
+INFO 2018-06-01 22:40:57,308  * Restarting with stat
+WARNING 2018-06-01 22:40:58,208  * Debugger is active!
+INFO 2018-06-01 22:40:58,224  * Debugger PIN: 265-378-225
+INFO 2018-06-01 22:40:59,082 127.0.0.1 - - [01/Jun/2018 22:40:59] "GET /dashboard/ HTTP/1.1" 500 -
+INFO 2018-06-01 22:40:59,108 127.0.0.1 - - [01/Jun/2018 22:40:59] "GET /dashboard/?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-06-01 22:40:59,110 127.0.0.1 - - [01/Jun/2018 22:40:59] "GET /dashboard/?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-06-01 22:40:59,112 127.0.0.1 - - [01/Jun/2018 22:40:59] "GET /dashboard/?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-06-01 22:40:59,185 127.0.0.1 - - [01/Jun/2018 22:40:59] "GET /dashboard/?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-06-01 22:40:59,201 127.0.0.1 - - [01/Jun/2018 22:40:59] "GET /dashboard/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 22:40:59,342 127.0.0.1 - - [01/Jun/2018 22:40:59] "GET /dashboard/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 22:41:29,708  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/genarators.py', reloading
+INFO 2018-06-01 22:41:29,765  * Restarting with stat
+WARNING 2018-06-01 22:41:30,274  * Debugger is active!
+INFO 2018-06-01 22:41:30,286  * Debugger PIN: 265-378-225
+INFO 2018-06-01 22:41:36,018 127.0.0.1 - - [01/Jun/2018 22:41:36] "GET /dashboard/ HTTP/1.1" 500 -
+INFO 2018-06-01 22:41:36,032 127.0.0.1 - - [01/Jun/2018 22:41:36] "GET /dashboard/?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-06-01 22:41:36,037 127.0.0.1 - - [01/Jun/2018 22:41:36] "GET /dashboard/?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-06-01 22:41:36,042 127.0.0.1 - - [01/Jun/2018 22:41:36] "GET /dashboard/?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-06-01 22:41:36,109 127.0.0.1 - - [01/Jun/2018 22:41:36] "GET /dashboard/?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-06-01 22:41:36,143 127.0.0.1 - - [01/Jun/2018 22:41:36] "GET /dashboard/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 22:41:36,266 127.0.0.1 - - [01/Jun/2018 22:41:36] "GET /dashboard/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 22:43:28,994  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/genarators.py', reloading
+INFO 2018-06-01 22:43:29,084  * Restarting with stat
+WARNING 2018-06-01 22:43:30,162  * Debugger is active!
+INFO 2018-06-01 22:43:30,179  * Debugger PIN: 265-378-225
+INFO 2018-06-01 22:43:36,273  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/genarators.py', reloading
+INFO 2018-06-01 22:43:36,329  * Restarting with stat
+WARNING 2018-06-01 22:43:36,777  * Debugger is active!
+INFO 2018-06-01 22:43:36,791  * Debugger PIN: 265-378-225
+INFO 2018-06-01 22:43:49,907 127.0.0.1 - - [01/Jun/2018 22:43:49] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:43:49,957 127.0.0.1 - - [01/Jun/2018 22:43:49] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:43:55,806 127.0.0.1 - - [01/Jun/2018 22:43:55] "GET /add_cus/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:43:55,832 127.0.0.1 - - [01/Jun/2018 22:43:55] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:43:59,233 127.0.0.1 - - [01/Jun/2018 22:43:59] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:44:00,958 127.0.0.1 - - [01/Jun/2018 22:44:00] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:44:10,261 127.0.0.1 - - [01/Jun/2018 22:44:10] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:44:10,285 127.0.0.1 - - [01/Jun/2018 22:44:10] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:44:14,817 127.0.0.1 - - [01/Jun/2018 22:44:14] "GET /account_reset/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:44:14,845 127.0.0.1 - - [01/Jun/2018 22:44:14] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:44:18,664 127.0.0.1 - - [01/Jun/2018 22:44:18] "GET /deposits/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:44:18,692 127.0.0.1 - - [01/Jun/2018 22:44:18] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:44:20,673 127.0.0.1 - - [01/Jun/2018 22:44:20] "GET /withdrawal HTTP/1.1" 200 -
+INFO 2018-06-01 22:44:20,698 127.0.0.1 - - [01/Jun/2018 22:44:20] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:44:25,458 127.0.0.1 - - [01/Jun/2018 22:44:25] "GET /open_till/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:44:25,485 127.0.0.1 - - [01/Jun/2018 22:44:25] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:44:29,437 127.0.0.1 - - [01/Jun/2018 22:44:29] "GET /authorise/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:44:29,465 127.0.0.1 - - [01/Jun/2018 22:44:29] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:44:35,874 127.0.0.1 - - [01/Jun/2018 22:44:35] "GET /amend_cus/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:44:35,898 127.0.0.1 - - [01/Jun/2018 22:44:35] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:44:52,077 127.0.0.1 - - [01/Jun/2018 22:44:52] "POST /cus_account_search/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:44:52,104 127.0.0.1 - - [01/Jun/2018 22:44:52] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:45:02,857 127.0.0.1 - - [01/Jun/2018 22:45:02] "POST /id_search/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:45:02,889 127.0.0.1 - - [01/Jun/2018 22:45:02] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:46:29,321 127.0.0.1 - - [01/Jun/2018 22:46:29] "POST /cus_account_search/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:46:29,355 127.0.0.1 - - [01/Jun/2018 22:46:29] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:47:19,242 127.0.0.1 - - [01/Jun/2018 22:47:19] "GET /deposits/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:47:19,269 127.0.0.1 - - [01/Jun/2018 22:47:19] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:47:25,905 127.0.0.1 - - [01/Jun/2018 22:47:25] "GET /withdrawal HTTP/1.1" 200 -
+INFO 2018-06-01 22:47:25,938 127.0.0.1 - - [01/Jun/2018 22:47:25] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:51:21,593  * Detected change in '/Users/trustmub/PycharmProjects/OBS/views/banking.py', reloading
+INFO 2018-06-01 22:51:21,653  * Restarting with stat
+WARNING 2018-06-01 22:51:22,747  * Debugger is active!
+INFO 2018-06-01 22:51:22,764  * Debugger PIN: 265-378-225
+INFO 2018-06-01 22:51:27,220 127.0.0.1 - - [01/Jun/2018 22:51:27] "GET /deposits/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:51:27,256 127.0.0.1 - - [01/Jun/2018 22:51:27] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:51:30,942 127.0.0.1 - - [01/Jun/2018 22:51:30] "POST /dep_account_search/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:51:30,965 127.0.0.1 - - [01/Jun/2018 22:51:30] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:51:37,331 127.0.0.1 - - [01/Jun/2018 22:51:37] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:51:39,024 127.0.0.1 - - [01/Jun/2018 22:51:39] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:51:45,201 127.0.0.1 - - [01/Jun/2018 22:51:45] "GET /deposits/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:51:45,256 127.0.0.1 - - [01/Jun/2018 22:51:45] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 22:51:49,724 127.0.0.1 - - [01/Jun/2018 22:51:49] "POST /dep_account_search/ HTTP/1.1" 200 -
+INFO 2018-06-01 22:51:49,760 127.0.0.1 - - [01/Jun/2018 22:51:49] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:13:35,147  * Detected change in '/Users/trustmub/PycharmProjects/OBS/views/banking.py', reloading
+INFO 2018-06-01 23:13:35,222  * Restarting with stat
+WARNING 2018-06-01 23:13:36,671  * Debugger is active!
+INFO 2018-06-01 23:13:36,688  * Debugger PIN: 265-378-225
+INFO 2018-06-01 23:19:34,825  * Detected change in '/Users/trustmub/PycharmProjects/OBS/views/banking.py', reloading
+INFO 2018-06-01 23:19:34,888  * Restarting with stat
+INFO 2018-06-01 23:24:15,099  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-01 23:24:15,101  * Restarting with stat
+WARNING 2018-06-01 23:24:15,524  * Debugger is active!
+INFO 2018-06-01 23:24:15,541  * Debugger PIN: 265-378-225
+INFO 2018-06-01 23:24:27,853 127.0.0.1 - - [01/Jun/2018 23:24:27] "GET /deposits/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:27,889 127.0.0.1 - - [01/Jun/2018 23:24:27] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:24:30,101 127.0.0.1 - - [01/Jun/2018 23:24:30] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:30,131 127.0.0.1 - - [01/Jun/2018 23:24:30] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:24:32,377 127.0.0.1 - - [01/Jun/2018 23:24:32] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:32,403 127.0.0.1 - - [01/Jun/2018 23:24:32] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:24:33,754 127.0.0.1 - - [01/Jun/2018 23:24:33] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:33,781 127.0.0.1 - - [01/Jun/2018 23:24:33] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:24:37,065 127.0.0.1 - - [01/Jun/2018 23:24:37] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:38,764 127.0.0.1 - - [01/Jun/2018 23:24:38] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:24:48,712 127.0.0.1 - - [01/Jun/2018 23:24:48] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:48,789 127.0.0.1 - - [01/Jun/2018 23:24:48] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:24:58,928 127.0.0.1 - - [01/Jun/2018 23:24:58] "POST /stmt_search/ HTTP/1.1" 500 -
+INFO 2018-06-01 23:24:58,953 127.0.0.1 - - [01/Jun/2018 23:24:58] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:58,955 127.0.0.1 - - [01/Jun/2018 23:24:58] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:58,957 127.0.0.1 - - [01/Jun/2018 23:24:58] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:58,992 127.0.0.1 - - [01/Jun/2018 23:24:58] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:59,021 127.0.0.1 - - [01/Jun/2018 23:24:59] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 23:24:59,089 127.0.0.1 - - [01/Jun/2018 23:24:59] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 23:26:03,333  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/Search.py', reloading
+INFO 2018-06-01 23:26:03,394  * Restarting with stat
+WARNING 2018-06-01 23:26:04,252  * Debugger is active!
+INFO 2018-06-01 23:26:04,267  * Debugger PIN: 265-378-225
+INFO 2018-06-01 23:26:29,587 127.0.0.1 - - [01/Jun/2018 23:26:29] "POST /stmt_search/ HTTP/1.1" 500 -
+INFO 2018-06-01 23:26:29,604 127.0.0.1 - - [01/Jun/2018 23:26:29] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-06-01 23:26:29,606 127.0.0.1 - - [01/Jun/2018 23:26:29] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-06-01 23:26:29,613 127.0.0.1 - - [01/Jun/2018 23:26:29] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-06-01 23:26:29,686 127.0.0.1 - - [01/Jun/2018 23:26:29] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-06-01 23:26:29,717 127.0.0.1 - - [01/Jun/2018 23:26:29] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 23:27:45,746  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/Search.py', reloading
+INFO 2018-06-01 23:27:45,802  * Restarting with stat
+WARNING 2018-06-01 23:27:46,291  * Debugger is active!
+INFO 2018-06-01 23:27:46,309  * Debugger PIN: 265-378-225
+INFO 2018-06-01 23:27:59,410 127.0.0.1 - - [01/Jun/2018 23:27:59] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:28:01,129 127.0.0.1 - - [01/Jun/2018 23:28:01] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:28:07,357 127.0.0.1 - - [01/Jun/2018 23:28:07] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:28:07,417 127.0.0.1 - - [01/Jun/2018 23:28:07] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:28:14,679 127.0.0.1 - - [01/Jun/2018 23:28:14] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:28:14,707 127.0.0.1 - - [01/Jun/2018 23:28:14] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:28:24,252 127.0.0.1 - - [01/Jun/2018 23:28:24] "POST /stmt_search/ HTTP/1.1" 500 -
+INFO 2018-06-01 23:28:24,272 127.0.0.1 - - [01/Jun/2018 23:28:24] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-06-01 23:28:24,282 127.0.0.1 - - [01/Jun/2018 23:28:24] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-06-01 23:28:24,283 127.0.0.1 - - [01/Jun/2018 23:28:24] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-06-01 23:28:24,343 127.0.0.1 - - [01/Jun/2018 23:28:24] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-06-01 23:28:24,376 127.0.0.1 - - [01/Jun/2018 23:28:24] "GET /stmt_search/?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-01 23:29:11,555  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/Search.py', reloading
+INFO 2018-06-01 23:29:11,618  * Restarting with stat
+WARNING 2018-06-01 23:29:12,844  * Debugger is active!
+INFO 2018-06-01 23:29:12,859  * Debugger PIN: 265-378-225
+INFO 2018-06-01 23:29:20,977 33383561 2018-06-01 2018-08-25
+INFO 2018-06-01 23:29:21,036 127.0.0.1 - - [01/Jun/2018 23:29:21] "POST /stmt_search/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:29:21,073 127.0.0.1 - - [01/Jun/2018 23:29:21] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:36:30,202  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/Search.py', reloading
+INFO 2018-06-01 23:36:30,263  * Restarting with stat
+WARNING 2018-06-01 23:36:31,144  * Debugger is active!
+INFO 2018-06-01 23:36:31,161  * Debugger PIN: 265-378-225
+INFO 2018-06-01 23:36:45,520 127.0.0.1 - - [01/Jun/2018 23:36:45] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:36:45,561 127.0.0.1 - - [01/Jun/2018 23:36:45] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:36:55,441 33383561 2018-06-01 2018-09-29
+INFO 2018-06-01 23:36:55,441 33383561
+INFO 2018-06-01 23:36:55,462 127.0.0.1 - - [01/Jun/2018 23:36:55] "POST /stmt_search/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:36:55,486 127.0.0.1 - - [01/Jun/2018 23:36:55] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-01 23:42:46,607  * Detected change in '/Users/trustmub/PycharmProjects/OBS/views/banking.py', reloading
+INFO 2018-06-01 23:42:46,673  * Restarting with stat
+WARNING 2018-06-01 23:42:47,764  * Debugger is active!
+INFO 2018-06-01 23:42:47,785  * Debugger PIN: 265-378-225
+INFO 2018-06-01 23:42:52,102 33383561 2018-06-01 2018-09-29
+INFO 2018-06-01 23:42:52,103 33383561
+INFO 2018-06-01 23:42:52,132 127.0.0.1 - - [01/Jun/2018 23:42:52] "GET /stmt_print/33383561/2018-06-01/2018-09-29 HTTP/1.1" 200 -
+INFO 2018-06-01 23:43:08,517 127.0.0.1 - - [01/Jun/2018 23:43:08] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:44:21,767 33383561 2018-06-01 2018-09-29
+INFO 2018-06-01 23:44:21,767 33383561
+INFO 2018-06-01 23:44:21,786 127.0.0.1 - - [01/Jun/2018 23:44:21] "POST /stmt_search/ HTTP/1.1" 200 -
+INFO 2018-06-01 23:44:24,654 127.0.0.1 - - [01/Jun/2018 23:44:24] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-02 00:15:17,867  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/genarators.py', reloading
+INFO 2018-06-02 00:15:17,975  * Restarting with stat
+WARNING 2018-06-02 00:15:19,436  * Debugger is active!
+INFO 2018-06-02 00:15:19,461  * Debugger PIN: 265-378-225
+INFO 2018-06-02 00:15:26,596  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 00:15:26,654  * Restarting with stat
+WARNING 2018-06-02 00:15:27,527  * Debugger is active!
+INFO 2018-06-02 00:15:27,543  * Debugger PIN: 265-378-225
+INFO 2018-06-02 00:35:11,991  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/genarators.py', reloading
+INFO 2018-06-02 00:35:12,055  * Restarting with stat
+WARNING 2018-06-02 00:35:13,034  * Debugger is active!
+INFO 2018-06-02 00:35:13,059  * Debugger PIN: 265-378-225
+INFO 2018-06-02 00:35:17,413 127.0.0.1 - - [02/Jun/2018 00:35:17] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-06-02 00:35:17,492 127.0.0.1 - - [02/Jun/2018 00:35:17] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 00:36:47,414  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/Search.py', reloading
+INFO 2018-06-02 00:36:47,484  * Restarting with stat
+WARNING 2018-06-02 00:36:48,556  * Debugger is active!
+INFO 2018-06-02 00:36:48,574  * Debugger PIN: 265-378-225
+INFO 2018-06-02 00:36:58,490 33383561 2018-06-01 2018-09-29
+INFO 2018-06-02 00:36:58,490 33383561
+INFO 2018-06-02 00:36:58,515 127.0.0.1 - - [02/Jun/2018 00:36:58] "POST /stmt_search/ HTTP/1.1" 500 -
+INFO 2018-06-02 00:37:02,358 127.0.0.1 - - [02/Jun/2018 00:37:02] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-06-02 00:37:02,379 127.0.0.1 - - [02/Jun/2018 00:37:02] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 00:38:05,525 127.0.0.1 - - [02/Jun/2018 00:38:05] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 00:38:25,727 127.0.0.1 - - [02/Jun/2018 00:38:25] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 00:38:32,598 Email Verification trustmub@gmail.com
+INFO 2018-06-02 00:38:32,869 127.0.0.1 - - [02/Jun/2018 00:38:32] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 00:38:32,923 127.0.0.1 - - [02/Jun/2018 00:38:32] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-02 00:38:32,953 127.0.0.1 - - [02/Jun/2018 00:38:32] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 00:59:47,584  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 00:59:47,697  * Restarting with stat
+WARNING 2018-06-02 00:59:48,982  * Debugger is active!
+INFO 2018-06-02 00:59:49,007  * Debugger PIN: 265-378-225
+INFO 2018-06-02 01:05:58,293  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/genarators.py', reloading
+INFO 2018-06-02 01:05:58,347  * Restarting with stat
+WARNING 2018-06-02 01:05:58,822  * Debugger is active!
+INFO 2018-06-02 01:05:58,834  * Debugger PIN: 265-378-225
+INFO 2018-06-02 01:06:04,926 127.0.0.1 - - [02/Jun/2018 01:06:04] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:06:04,968 127.0.0.1 - - [02/Jun/2018 01:06:04] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:06:08,505 127.0.0.1 - - [02/Jun/2018 01:06:08] "GET /add_cus/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:06:08,538 127.0.0.1 - - [02/Jun/2018 01:06:08] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:06:19,647 127.0.0.1 - - [02/Jun/2018 01:06:19] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-06-02 01:06:19,660 127.0.0.1 - - [02/Jun/2018 01:06:19] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 01:06:25,183 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 01:06:25,445 127.0.0.1 - - [02/Jun/2018 01:06:25] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 01:06:25,466 127.0.0.1 - - [02/Jun/2018 01:06:25] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:06:25,503 127.0.0.1 - - [02/Jun/2018 01:06:25] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:07:16,247 127.0.0.1 - - [02/Jun/2018 01:07:16] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-06-02 01:07:16,255 127.0.0.1 - - [02/Jun/2018 01:07:16] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 01:07:30,929  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-02 01:07:30,930  * Restarting with stat
+WARNING 2018-06-02 01:07:31,357  * Debugger is active!
+INFO 2018-06-02 01:07:31,369  * Debugger PIN: 265-378-225
+INFO 2018-06-02 01:07:40,812 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 01:07:41,091 127.0.0.1 - - [02/Jun/2018 01:07:41] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 01:07:41,142 127.0.0.1 - - [02/Jun/2018 01:07:41] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:07:41,184 127.0.0.1 - - [02/Jun/2018 01:07:41] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:07:56,539 127.0.0.1 - - [02/Jun/2018 01:07:56] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:07:56,565 127.0.0.1 - - [02/Jun/2018 01:07:56] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:07:58,058 127.0.0.1 - - [02/Jun/2018 01:07:58] "GET /add_cus/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:07:58,084 127.0.0.1 - - [02/Jun/2018 01:07:58] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:08:00,721 127.0.0.1 - - [02/Jun/2018 01:08:00] "GET /authorise/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:08:00,749 127.0.0.1 - - [02/Jun/2018 01:08:00] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:08:02,707 127.0.0.1 - - [02/Jun/2018 01:08:02] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:08:04,443 127.0.0.1 - - [02/Jun/2018 01:08:04] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:08:09,805 127.0.0.1 - - [02/Jun/2018 01:08:09] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:08:09,875 127.0.0.1 - - [02/Jun/2018 01:08:09] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:08:12,533 127.0.0.1 - - [02/Jun/2018 01:08:12] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:08:14,143 127.0.0.1 - - [02/Jun/2018 01:08:14] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:08:21,872 127.0.0.1 - - [02/Jun/2018 01:08:21] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:08:21,934 127.0.0.1 - - [02/Jun/2018 01:08:21] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:08:33,415 33197522 2018-06-01 2018-09-28
+INFO 2018-06-02 01:08:33,415 33197522
+INFO 2018-06-02 01:08:33,438 127.0.0.1 - - [02/Jun/2018 01:08:33] "POST /stmt_search/ HTTP/1.1" 200 -
+INFO 2018-06-02 01:08:33,471 127.0.0.1 - - [02/Jun/2018 01:08:33] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 01:09:13,832  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/genarators.py', reloading
+INFO 2018-06-02 01:09:13,894  * Restarting with stat
+WARNING 2018-06-02 01:09:14,758  * Debugger is active!
+INFO 2018-06-02 01:09:14,774  * Debugger PIN: 265-378-225

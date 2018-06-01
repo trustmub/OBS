@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, redirect, request, url_for
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
 
+from controller.verifier import Verify
 from functions.genarators import *
 
 UPLOAD_FOLDER = os.path.abspath("static//img//user")
@@ -43,7 +44,7 @@ def login():
         else:
             email = request.form['email']
             password = request.form['password']
-            if Checker.userEmailChecker(email):
+            if Verify().email_exists(email):
                 user_account = session.query(User).filter_by(email=email).first()
                 # user_account.lock = 0
                 if user_account.lock == 1:  # Checker.userDbSession(email):
@@ -77,7 +78,7 @@ def register():
         if password != password_confirm:
             flash('Passwords Don\'t match')
             return redirect(url_for('user.register'))
-        elif Checker.userEmailChecker(email):
+        elif Verify().email_exists(email):
             flash('User Already Exists')
             return redirect(url_for('user.register'))
         else:

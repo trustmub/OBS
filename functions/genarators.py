@@ -36,15 +36,15 @@ class Getters:
     @staticmethod
     def getTillDetails():
         till_ids = [i.id for i in Getters.getAllTellers()]
-        if Profile.user_details().uid in till_ids:
-            return session.query(Till).filter_by(user_id=Profile.user_details().uid).first()
+        if Profile().user_details().uid in till_ids:
+            return session.query(Till).filter_by(user_id=Profile().user_details().uid).first()
         else:
             return []
 
     @staticmethod
     def getTellerStatus():
         mylist = [i.user_id for i in session.query(Till).all()]
-        if Profile.user_details().uid in mylist:
+        if Profile().user_details().uid in mylist:
             return 1
 
     @staticmethod
@@ -85,7 +85,7 @@ class Getters:
         if Getters.getTillDetails() is None:
             return []
         else:
-            all_records = session.query(TellerTransactions).filter_by(user_id=Profile.user_details().uid).filter_by(
+            all_records = session.query(TellerTransactions).filter_by(user_id=Profile().user_details().uid).filter_by(
                 date=date).all()
             return all_records
 
@@ -505,7 +505,7 @@ class TransactionUpdate:
                                 create_date=datetime.datetime.now(),
                                 teller_id=till_detail.id,
                                 customer_id=customer.custid,
-                                user_id=Profile.user_details().uid
+                                user_id=Profile().user_details().uid
                                 )
         session.add(tt)
         session.commit()
@@ -589,49 +589,8 @@ class Profile:
         user_record = session.query(User).filter_by(email=self.user_session).first()
         return user_record
 
-    @staticmethod
-    def message_details():
-        pass
-
-    @staticmethod
-    def activity_details():
-        pass
-
 
 class Checker:
-    @staticmethod
-    def accNumberChecker(acc_number):
-        acc = int(acc_number)
-        all_acc = session.query(Customer).all()
-        acc_list = []
-        for i in all_acc:
-            acc_list = acc_list + [i.acc_number]
-        if acc in acc_list:
-            return True
-
-    @staticmethod
-    def userEmailChecker(email):
-        user = session.query(User).all()
-        user_list = []
-        for i in user:
-            user_list = user_list + [i.email]
-        if email in user_list:
-            return True
-
-    @staticmethod
-    def userDbSession(email):
-        user = session.query(User).filter_by(email=email).first()
-        if not user.lock:
-            return False
-
-    @staticmethod
-    def userTillLink(email):
-        user = session.query(User).filter_by(email=email).first()
-        till_list = []
-        for i in Getters.getAllTellers():
-            till_list = till_list + [i.user_id]
-        if user.uid in till_list:
-            return True
 
     @staticmethod
     def eom_process_day():

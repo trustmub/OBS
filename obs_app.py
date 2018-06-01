@@ -29,7 +29,7 @@ def home():
 
     usr = session.query(User).all()
     # interest = session.query(Interest).all()
-    return render_template('dashboard.html', usr=usr, user=Profile.user_details(), teller=Getters.getTillDetails(),
+    return render_template('dashboard.html', usr=usr, user=Profile().user_details(), teller=Getters.getTillDetails(),
                            withd=Getters.getTellerWithdrawal(), deposits=Getters.getTellerDeposits(),
                            sys_date=sys_date.strftime('%d %B %Y'))
 

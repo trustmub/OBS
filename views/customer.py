@@ -3,6 +3,7 @@ import datetime
 
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 
+from controller.verifier import Verify
 from functions.genarators import Auto, Getters, Profile, Checker
 from functions.transactions import AccountTransaction
 from models.models import Customer
@@ -102,7 +103,7 @@ def amend_cus():
     record = None
     if request.method == 'POST':
         acc_num = int(request.form['acc_number'])
-        if Checker.accNumberChecker(acc_num):
+        if Verify().account_exists(acc_num):
 
             a_record = session.query(Customer).filter_by(acc_number=acc_num).one()
             if request.form['first_name'] == a_record.first_name:
