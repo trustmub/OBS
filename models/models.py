@@ -11,6 +11,7 @@ Base = declarative_base()
 
 
 class User(Base):
+    """This table contains all the systems users from the teller, backend operations and system users"""
     __tablename__ = 'user'
     uid = Column(Integer, primary_key=True)
     full_name = Column(String(100))
@@ -44,7 +45,7 @@ class User(Base):
 
 
 class Customer(Base):
-    """THis table contains all the cutomer details and each customer"""
+    """THis table contains all the customer details."""
     __tablename__ = 'customer'
     custid = Column(Integer, primary_key=True)
     first_name = Column(String(100))
