@@ -1,22 +1,18 @@
 import time
-import datetime
-import string
 
 from flask import Blueprint, render_template, redirect, request, url_for, flash
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from flask import session as login_session
 
 from functions.Enums import TransactionType
-from functions.genarators import *
+from functions.genarators import Profile, Checker, Getters, TransactionUpdate, Auto
 from functions.transactions import AccountTransaction, ChargeTransaction
-from models import Base, Customer, Transactions
+from models.models import Customer, Transactions, Banks
+
+from models.database_connection import session
 
 banking = Blueprint('banking', __name__)
 
-engine = create_engine('sqlite:///bnk.db')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
+user_profile = Profile().user_details()
 
 
 @banking.route('/dep_account_search/', methods=['post', 'get'])
@@ -25,11 +21,11 @@ def account_search():
         acc_num = int(request.form['account_number'])
         if session.query(Customer).filter_by(acc_number=acc_num).first():
             record = session.query(Customer).filter_by(acc_number=acc_num).first()
-            return render_template('banking/deposits.html', record=record, user=Nav.userDetails())
+            return render_template('banking/deposits.html', record=record, user=user_profile)
         else:
             flash('The Account Number Provided Is NOT In The System')
             record = None
-            return render_template('banking/deposits.html', record=record, user=Nav.userDetails())
+            return render_template('banking/deposits.html', record=record, user=user_profile)
     else:
         return redirect(url_for('banking.deposits'))
 
@@ -52,15 +48,15 @@ def deposits():
 
                 TransactionUpdate.ttUpdate('DR', amount, t_date, dep_ref, cr_account_number)
                 flash('Account Credited')
-                return redirect(url_for('banking.deposits', user=Nav.userDetails()))
+                return redirect(url_for('banking.deposits', user=user_profile))
             else:
                 flash('Account Cannot be found: Search again')
-                return redirect(url_for('banking.deposits', user=Nav.userDetails()))
+                return redirect(url_for('banking.deposits', user=user_profile))
         else:
             flash('User is NOT linked to Any Till. Please Open a Till First')
             return redirect(url_for('banking.deposits'))
     else:
-        return render_template('banking/deposits.html', record=record, user=Nav.userDetails())
+        return render_template('banking/deposits.html', record=record, user=user_profile)
 
 
 @banking.route('/stmt_search/', methods=['post', 'get'])
@@ -80,15 +76,15 @@ def stmt_search():
                 Transactions.tranid).all()
 
             return render_template('banking/statement.html', record=record, stmt=stmt, dt=dt, sd=start_date,
-                                   ed=end_date, user=Nav.userDetails())
+                                   ed=end_date, user=Profile().user_details())
         else:
             flash('The Account Number Provided Is NOT In The System')
             record = None
             stmt = []
             return render_template('banking/statement.html', record=record, stmt=stmt, dt=dt, sd=start_date,
-                                   ed=end_date, user=Nav.userDetails())
+                                   ed=end_date, user=Profile().user_details())
     else:
-        return redirect(url_for('banking.statement', dt=dt, sd=start_date, ed=end_date, user=Nav.userDetails()))
+        return redirect(url_for('banking.statement', dt=dt, sd=start_date, ed=end_date, user=user_profile))
 
 
 @banking.route('/stmt_print/<account>/<start_date>/<end_date>')
@@ -103,7 +99,7 @@ def stmt_print(account, start_date, end_date):
         Transactions.tran_date >= start_date).filter(Transactions.tran_date <= end_date).order_by(
         Transactions.tranid).all()
     return render_template('banking/stmt_printed.html', record=record, stmt=stmt, dt=dt, sd=start_date, ed=end_date,
-                           user=Nav.userDetails())
+                           user=user_profile)
 
 
 @banking.route('/statement/')
@@ -114,7 +110,7 @@ def statement():
     stmt = []
     dt = time.strftime('%Y-%m-%d')
     return render_template('banking/statement.html', record=record, stmt=stmt, dt=dt, sd=sd, ed=ed,
-                           user=Nav.userDetails())
+                           user=user_profile)
 
 
 @banking.route('/transfer_search/', methods=['POST', 'GET'])
@@ -129,9 +125,9 @@ def transfer_search():
             if Checker.accNumberChecker(from_account):
                 if Checker.accNumberChecker(to_account):
                     record = [from_account, to_account]
-                    # fad -- From Accopunt Details
-                    # tad -- To acc details
-                    return render_template('banking/transfer.html', user=Nav.userDetails(), record=record,
+                    # fad -- From account Details
+                    # tad -- To account details
+                    return render_template('banking/transfer.html', user=Profile().user_details(), record=record,
                                            fad=Getters.getCustomerAccountDetails(from_account),
                                            tad=Getters.getCustomerAccountDetails(to_account))
                 else:
@@ -165,7 +161,7 @@ def transfer():
         record = []
         fad = None
         tad = None
-        return render_template('banking/transfer.html', user=Nav.userDetails(), record=record, fad=fad, tad=tad)
+        return render_template('banking/transfer.html', user=user_profile, record=record, fad=fad, tad=tad)
 
 
 @banking.route('/external_transfer_search/', methods=['post', 'get'])
@@ -175,13 +171,12 @@ def external_transfer_search():
         if session.query(Customer).filter_by(acc_number=acc_num).first():
             record = session.query(Customer).filter_by(acc_number=acc_num).first()
             return render_template('banking/external_transfer.html', record=Getters.getCustomerAccountDetails(acc_num),
-                                   user=Nav.userDetails(),
+                                   user=Profile().user_details(),
                                    banks=Getters.getBanks(), fad=Getters.getCustomerAccountDetails(acc_num))
         else:
             flash('The Account Number Provided Is NOT In The System')
             record = None
-            return render_template('banking/deposits.html', record=record, user=Nav.userDetails(),
-                                   banks=Getters.getBanks())
+            return render_template('banking/deposits.html', record=record, user=user_profile, banks=Getters.getBanks())
     else:
         return redirect(url_for('banking.deposits'))
 
@@ -215,7 +210,7 @@ def external_transfer():
         fad = None
         tad = None
         return render_template('banking/external_transfer.html', fad=fad, tad=tad, record=record,
-                               user=Nav.userDetails(), banks=Getters.getBanks())
+                               user=Profile().user_details(), banks=Getters.getBanks())
 
 
 @banking.route('/with_account_search/', methods=['post', 'get'])
@@ -224,11 +219,11 @@ def with_account_search():
         acc_num = int(request.form['account_number'])
         if session.query(Customer).filter_by(acc_number=acc_num).first():
             record = session.query(Customer).filter_by(acc_number=acc_num).first()
-            return render_template('banking/withdrawal.html', record=record, user=Nav.userDetails())
+            return render_template('banking/withdrawal.html', record=record, user=Profile().user_details())
         else:
             flash('The Account Number Provided Is NOT In The System')
             record = None
-            return render_template('banking/withdrawal.html', record=record, user=Nav.userDetails())
+            return render_template('banking/withdrawal.html', record=record, user=Profile().user_details())
     else:
         return redirect(url_for('banking.withdrawal'))
 
@@ -254,14 +249,14 @@ def withdrawal():
 
                 TransactionUpdate.ttUpdate(TransactionType.CREDIT, amount, date, dep_ref, acc_num)
                 flash('Account Debited')
-                return redirect(url_for('banking.withdrawal', user=Nav.userDetails()))
+                return redirect(url_for('banking.withdrawal', user=Profile.user_details()))
             else:
                 flash('Account Cannot be found: Search again')
-                return redirect(url_for('banking.withdrawal', user=Nav.userDetails()))
+                return redirect(url_for('banking.withdrawal', user=Profile.user_details()))
         else:
             flash('User is not linked to Any Till. Please Open a Till First')
-            return redirect(url_for('banking.withdrawal', user=Nav.userDetails()))
+            return redirect(url_for('banking.withdrawal', user=Profile.user_details()))
     else:
-        return render_template('banking/withdrawal.html', record=record, user=Nav.userDetails())
+        return render_template('banking/withdrawal.html', record=record, user=Profile.user_details())
 
         # End of banking views

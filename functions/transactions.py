@@ -1,15 +1,11 @@
-from sqlalchemy.orm import sessionmaker
 import datetime
 
 from cob.log_module import SystemOBS
 from functions.Enums import TransactionType, TransactionMethod
 from functions.genarators import Auto, Getters
-from models import *
+from models.models import Transactions, Customer, Till, ChargeTransactionTable, TransactionCharge
 
-engine = create_engine('sqlite:///bnk.db')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
+from models.database_connection import session
 
 
 class Transaction(object):

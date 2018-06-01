@@ -6,14 +6,11 @@ import time
 import os
 
 from flask import flash, session as login_session
-from sqlalchemy.orm import sessionmaker
 
-from models import *
+from models.models import Till, TransactionCharge, Transactions, TellerTransactions, Account, Customer, Branch, \
+    Currency, Banks, CobDates, SysDate, User
 
-engine = create_engine('sqlite:///bnk.db')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
+from models.database_connection import session
 
 
 # logging.basicConfig(filename="logs/system" + str(Getters.getSysDate().date) + ".log", level=logging.DEBUG)
@@ -39,15 +36,15 @@ class Getters:
     @staticmethod
     def getTillDetails():
         till_ids = [i.id for i in Getters.getAllTellers()]
-        if Nav.userDetails().uid in till_ids:
-            return session.query(Till).filter_by(user_id=Nav.userDetails().uid).first()
+        if Profile.user_details().uid in till_ids:
+            return session.query(Till).filter_by(user_id=Profile.user_details().uid).first()
         else:
             return []
 
     @staticmethod
     def getTellerStatus():
         mylist = [i.user_id for i in session.query(Till).all()]
-        if Nav.userDetails().uid in mylist:
+        if Profile.user_details().uid in mylist:
             return 1
 
     @staticmethod
@@ -88,7 +85,7 @@ class Getters:
         if Getters.getTillDetails() is None:
             return []
         else:
-            all_records = session.query(TellerTransactions).filter_by(user_id=Nav.userDetails().uid).filter_by(
+            all_records = session.query(TellerTransactions).filter_by(user_id=Profile.user_details().uid).filter_by(
                 date=date).all()
             return all_records
 
@@ -508,7 +505,7 @@ class TransactionUpdate:
                                 create_date=datetime.datetime.now(),
                                 teller_id=till_detail.id,
                                 customer_id=customer.custid,
-                                user_id=Nav.userDetails().uid
+                                user_id=Profile.user_details().uid
                                 )
         session.add(tt)
         session.commit()
@@ -584,19 +581,20 @@ class Auto:
             return int(str_acc_number)
 
 
-class Nav:
-    @staticmethod
-    def userDetails():
-        usr = login_session['username']
-        user = session.query(User).filter_by(email=usr).first()
-        return user
+class Profile:
+    def __init__(self):
+        self.user_session = login_session['username']
+
+    def user_details(self):
+        user_record = session.query(User).filter_by(email=self.user_session).first()
+        return user_record
 
     @staticmethod
-    def messageDetails():
+    def message_details():
         pass
 
     @staticmethod
-    def activityDetails():
+    def activity_details():
         pass
 
 

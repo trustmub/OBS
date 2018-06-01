@@ -1,20 +1,16 @@
+import os
+
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from werkzeug.utils import secure_filename
 
 from functions.Enums import TransactionType
-from functions.genarators import *
+from functions.genarators import TransactionUpdate, Getters, Profile
 from functions.transactions import ChargeTransaction
-from models import Base, Customer, Transactions
 
 bulk = Blueprint('bulk', __name__)
 
 UPLOAD_FOLDER = "Uploads\\"
 ALLOWED_EXTENSIONS = {'txt', 'csv'}
-
-engine = create_engine('sqlite:///bnk.db')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
 
 
 def allowed_file(filename):
@@ -56,12 +52,12 @@ def bulk_salaries():
         else:
             flash("Please Check file extension")
             return redirect(url_for('bulk.bulk_salaries'))
-        return render_template('bulk/bulk_salaries.html', record=record, user=Nav.userDetails())
+        return render_template('bulk/bulk_salaries.html', record=record, user=Profile().user_details())
     else:
-        return render_template('bulk/bulk_salaries.html', record=record, user=Nav.userDetails())
+        return render_template('bulk/bulk_salaries.html', record=record, user=Profile().user_details())
 
 
 @bulk.route('/bulk_transfers/')
 def bulk_transfers():
     record = []
-    return render_template('bulk/bulk_transfers.html', record=record, user=Nav.userDetails())
+    return render_template('bulk/bulk_transfers.html', record=record, user=Profile().user_details())

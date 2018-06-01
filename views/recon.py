@@ -1,17 +1,8 @@
-import datetime
-import time
-
 from flask import Blueprint, redirect, render_template, url_for, request
 
-from functions.genarators import *
-from models import Base, Customer, Transactions
+from functions.genarators import Profile, Getters
 
 reconciliation = Blueprint('reconciliation', __name__)
-
-engine = create_engine('sqlite:///bnk.db')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
 
 
 @reconciliation.route('/teller_reversal/')
@@ -20,7 +11,7 @@ def reversal_teller():
     if request.method == 'POST':
         pass
     else:
-        return render_template('reconciliation/teller_reversal.html', record=record, user=Nav.userDetails())
+        return render_template('reconciliation/teller_reversal.html', record=record, user=Profile().user_details())
 
 
 @reconciliation.route('/recon_reverse_withdrawals/')
@@ -29,7 +20,7 @@ def reversal_withdrawal():
     if request.method == 'POST':
         pass
     else:
-        return render_template('reconciliation/withdrawal_reversal.html', record=record, user=Nav.userDetails())
+        return render_template('reconciliation/withdrawal_reversal.html', record=record, user=Profile().user_details())
     pass
 
 
@@ -52,4 +43,4 @@ def reversal_interest():
 def teller_transactions():
     record = None
     return render_template('reconciliation/teller_transactions.html', my_tt=Getters.getAllTts(), record=record,
-                           user=Nav.userDetails())
+                           user=Profile().user_details())

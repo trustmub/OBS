@@ -112,7 +112,16 @@ class Reporting:
             print("The number of records are " + str(len(record)))
             with open("reports/CreditTransactions" + Getters.getSysDate().date + ".csv", mode="w",
                       encoding="utf-8") as myFile:
-                skip_account = [33139793]
+                skip_account = [33139793,
+                                33139793,
+                                33145826,
+                                33145826,
+                                33145826,
+                                33145826,
+                                33722073,
+                                33202507,
+                                33613681
+                                ]
                 for i in record:
                     print("The record giving problems is" + str(i.cr_acc_number))
                     if i.cr_acc_number not in skip_account:

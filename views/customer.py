@@ -2,19 +2,14 @@ import time
 import datetime
 
 from flask import Blueprint, render_template, redirect, request, url_for, flash
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
 
-from functions.genarators import *
+from functions.genarators import Auto, Getters, Profile, Checker
 from functions.transactions import AccountTransaction
-from models import Base, Customer
+from models.models import Customer
+
+from models.database_connection import session
 
 customer = Blueprint('customer', __name__)
-
-engine = create_engine('sqlite:///bnk.db')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
 
 
 @customer.route('/add_cus/', methods=['POST', 'GET'])
@@ -52,7 +47,7 @@ def add_cus():
                               working_bal=working_bal,
                               account_type=account_type,
                               create_date=datetime.datetime.now(),
-                              inputter_id=Nav.userDetails().uid)
+                              inputter_id=Profile().user_details().uid)
         session.add(new_client)
         session.commit()
         # TransactionUpdate.accCreationCash(time.strftime('%Y-%m-%d'), working_bal, new_account)
@@ -65,7 +60,7 @@ def add_cus():
 
         return redirect(url_for('customer.my_cus'))
     else:
-        return render_template('customer/add_cus.html', new_account=new_account, user=Nav.userDetails(),
+        return render_template('customer/add_cus.html', new_account=new_account, user=Profile().user_details(),
                                account=Getters.getAccountType())
 
 
@@ -75,15 +70,15 @@ def id_search():
         id_num = int(request.form['customer_id'])
         if session.query(Customer).filter_by(custid=id_num).first():
             record = session.query(Customer).filter_by(custid=id_num).first()
-            return render_template('customer/amend_cus.html', record=record, user=Nav.userDetails(),
+            return render_template('customer/amend_cus.html', record=record, user=Profile().user_details(),
                                    account=Getters.getAccountType())
         else:
             flash('The Customer System ID Provided Is NOT Valid')
             record = None
-            return render_template('customer/amend_cus.html', record=record, user=Nav.userDetails())
+            return render_template('customer/amend_cus.html', record=record, user=Profile().user_details())
     else:
         flash('Failed to go through the IF STMT')
-        return redirect(url_for('customer.amend_cus', user=Nav.userDetails()))
+        return redirect(url_for('customer.amend_cus', user=Profile().user_details()))
 
 
 @customer.route('/cus_account_search/', methods=['post', 'get'])
@@ -92,14 +87,14 @@ def account_search():
         acc_num = int(request.form['account_number'])
         if session.query(Customer).filter_by(acc_number=acc_num).first():
             record = session.query(Customer).filter_by(acc_number=acc_num).first()
-            return render_template('customer/amend_cus.html', record=record, user=Nav.userDetails(),
+            return render_template('customer/amend_cus.html', record=record, user=Profile().user_details(),
                                    account=Getters.getAccountType())
         else:
             flash('The Account Number Provided Is NOT In The System')
             record = None
-            return render_template('customer/amend_cus.html', record=record, user=Nav.userDetails())
+            return render_template('customer/amend_cus.html', record=record, user=Profile().user_details())
     else:
-        return redirect(url_for('customer.amend_cus', user=Nav.userDetails()))
+        return redirect(url_for('customer.amend_cus', user=Profile().user_details()))
 
 
 @customer.route('/amend_cus/', methods=['POST', 'GET'])
@@ -158,22 +153,22 @@ def amend_cus():
 
             session.add(a_record)
             session.commit()
-            return redirect(url_for('customer.my_cus', user=Nav.userDetails()))
+            return redirect(url_for('customer.my_cus', user=Profile().user_details()))
         else:
             flash('Account Cannot be modified, Search Again')
             record = None
             return redirect(url_for('customer.amend_cus'))
     else:
-        return render_template('customer/amend_cus.html', record=record, user=Nav.userDetails(),
+        return render_template('customer/amend_cus.html', record=record, user=Profile().user_details(),
                                account=Getters.getAccountType())
 
 
 @customer.route('/authorise/')
 def authorise_cus():
-    return render_template('customer/authorise.html', user=Nav.userDetails())
+    return render_template('customer/authorise.html', user=Profile().user_details())
 
 
 @customer.route('/my_cus/')
 def my_cus():
     all_customer = session.query(Customer).all()
-    return render_template('customer/my_cus.html', customer=all_customer, user=Nav.userDetails())
+    return render_template('customer/my_cus.html', customer=all_customer, user=Profile().user_details())

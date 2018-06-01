@@ -18,20 +18,20 @@ def lockscreen():
     if request.method == 'POST':
         password = request.form['password']
         email = login_session['username']
-        user_record = session.query(User).filter_by(email=email).first()
-        if bcrypt.check_password_hash(user.password, password):
-            user_record.lock = 1
-            session.add(user)
+        user_account = session.query(User).filter_by(email=email).first()
+        if bcrypt.check_password_hash(user_account.password, password):
+            user_account.lock = 1
+            session.add(user_account)
             session.commit()
             return redirect(url_for('home'))
         else:
             return redirect(url_for('user.lockscreen'))
     else:
-        usr = login_session['username']
-        user_record = session.query(User).filter_by(email=usr).first()
-        user_record.lock = 0
+        user_session = login_session['username']
+        user_account = session.query(User).filter_by(email=user_session).first()
+        user_account.lock = 0
 
-        return render_template('user/lockscreen.html', user=user_record)
+        return render_template('user/lockscreen.html', user=user_account)
 
 
 @user.route('/', methods=['POST', 'GET'])
@@ -73,8 +73,8 @@ def register():
         full_name = request.form['full_name']
         email = request.form['email']
         password = request.form['password']
-        password2 = request.form['password2']
-        if password != password2:
+        password_confirm = request.form['password2']
+        if password != password_confirm:
             flash('Passwords Don\'t match')
             return redirect(url_for('user.register'))
         elif Checker.userEmailChecker(email):
@@ -106,7 +106,7 @@ def logout():
     if 'username' in login_session:
         login_user = login_session['username']
         user_account = session.query(User).filter_by(email=login_user).first()
-        user.lock = 0
+        user_account.lock = 0
         session.add(user_account)
         session.commit()
         login_session.pop('username', None)
@@ -124,42 +124,42 @@ def allowed_file(filename):
 @user.route('/edit_user/', methods=['POST', 'GET'])
 def edit_profile():
     if request.method == 'POST':
-        usr = Nav.userDetails()
-        if request.form['full_name'] == usr.full_name:
+        user_details = Profile().user_details()
+        if request.form['full_name'] == user_details.full_name:
             pass
         else:
-            usr.full_name = request.form['full_name']
-        if request.form['job_title'] == usr.job_title:
+            user_details.full_name = request.form['full_name']
+        if request.form['job_title'] == user_details.job_title:
             pass
         else:
-            usr.job_title = request.form['job_title']
-        if request.form['department'] == usr.department:
+            user_details.job_title = request.form['job_title']
+        if request.form['department'] == user_details.department:
             pass
         else:
-            usr.department = request.form['department']
-        if request.form['branch_code'] == usr.branch_code:
+            user_details.department = request.form['department']
+        if request.form['branch_code'] == user_details.branch_code:
             pass
         else:
-            usr.branch_code = request.form['branch_code']
-        if request.form['access_level'] == usr.access_level:
+            user_details.branch_code = request.form['branch_code']
+        if request.form['access_level'] == user_details.access_level:
             pass
         else:
-            usr.access_level = request.form['access_level']
+            user_details.access_level = request.form['access_level']
 
-        if request.files['image_string'].filename == usr.image_string:
+        if request.files['image_string'].filename == user_details.image_string:
             pass
         else:
-            usr.image_string = secure_filename(request.files['image_string'].filename)
+            user_details.image_string = secure_filename(request.files['image_string'].filename)
             file = request.files['image_string']
             if file and allowed_file(file.filename):
                 filename = secure_filename(file.filename)
                 file.save(os.path.join(UPLOAD_FOLDER, filename))
                 print(UPLOAD_FOLDER)
-        session.add(usr)
+        session.add(user_details)
         session.commit()
-        return redirect(url_for('user.profile', user=Nav.userDetails()))
+        return redirect(url_for('user.profile', user=Profile().user_details()))
     else:
-        return render_template('user/edit_user.html', user=Nav.userDetails(), branch=Getters.getBranch())
+        return render_template('user/edit_user.html', user=Profile().user_details(), branch=Getters.getBranch())
 
 
 @user.route('/admin')
@@ -169,4 +169,4 @@ def test_admin():
 
 @user.route('/profile/')
 def profile():
-    return render_template('user/profile.html', user=Nav.userDetails())
+    return render_template('user/profile.html', user=Profile().user_details())

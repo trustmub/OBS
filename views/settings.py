@@ -17,7 +17,7 @@ def add_tran_type():
         session.commit()
         return redirect(url_for('settings.system_setting'))
     else:
-        return render_template('settings/add_trans_type.html', user=Nav.userDetails())
+        return render_template('settings/add_trans_type.html', user=Profile().user_details())
 
 
 @settings.route('/del_tran_type/<int:tid>/')
@@ -42,7 +42,7 @@ def add_acc_type():
         session.commit()
         return redirect(url_for('settings.system_setting'))
     else:
-        return render_template('settings/add_acc_type.html', user=Nav.userDetails())
+        return render_template('settings/add_acc_type.html', user=Profile().user_details())
 
 
 @settings.route('/del_acc_type/<int:id>/')
@@ -61,14 +61,13 @@ def add_branch():
         description = request.form['description']
         date = datetime.datetime.now()
         new = Branch(code=code,
-                     description=description,
-                     create_date=date)
+                     description=description,)
         session.add(new)
         session.commit()
         return redirect(url_for('settings.system_setting'))
         pass
     else:
-        return render_template('settings/add_branch.html', user=Nav.userDetails())
+        return render_template('settings/add_branch.html', user=Profile().user_details())
 
 
 @settings.route('/del_branch/<int:id>/', methods=['POST', 'GET'])
@@ -91,7 +90,7 @@ def add_bank():
         session.commit()
         return redirect(url_for('settings.system_setting'))
     else:
-        return render_template('settings/add_bank.html', user=Nav.userDetails())
+        return render_template('settings/add_bank.html', user=Profile().user_details())
 
 
 @settings.route('/delete_bank/<int:id>/', methods=['POST', 'GET'])
@@ -104,16 +103,16 @@ def delete_bank(id):
 
 @settings.route('/system_setting/')
 def system_setting():
-    return render_template('settings/system_settings.html', user=Nav.userDetails(),
+    return render_template('settings/system_settings.html', user=Profile().user_details(),
                            tran=TransactionUpdate.getTransationTypeCharge(), acct=Getters.getAccountType(),
                            branch=Getters.getBranch(), banks=Getters.getBanks(), currency=Getters.getCurrency())
 
 
 @settings.route('/user_setting/')
 def user_setting():
-    return render_template('settings/user_settings.html', user=Nav.userDetails())
+    return render_template('settings/user_settings.html', user=Profile().user_details())
 
 
 @settings.route('/information_setting/')
 def information_setting():
-    return render_template('settings/information_settings.html', user=Nav.userDetails())
+    return render_template('settings/information_settings.html', user=Profile().user_details())

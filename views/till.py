@@ -11,7 +11,7 @@ till = Blueprint('till', __name__)
 
 @till.route('/my_till/')
 def my_till():
-    return render_template('till/my_till.html', user=Nav.userDetails())
+    return render_template('till/my_till.html', user=Profile().user_details())
 
 
 @till.route('/open_till/', methods=['POST', 'GET'])
@@ -46,7 +46,7 @@ def open_till():
     else:
         # if current user has a till linked, display the till detail
         # else display the general till opening
-        return render_template('till/open_till.html', user=Nav.userDetails(),
+        return render_template('till/open_till.html', user=Profile().user_details(),
                                branch=Getters.getBranch(), teller=Getters.getAvailableTellers(),
                                teller2=Getters.getAllTellers(), ts=Getters.getTellerStatus())
 
@@ -94,5 +94,5 @@ def close_till():
             return redirect(url_for('till.close_till'))
         pass
     else:
-        return render_template('till/close_till.html', user=Nav.userDetails(), my_till=Getters.getTillDetails(),
+        return render_template('till/close_till.html', user=Profile().user_details(), my_till=Getters.getTillDetails(),
                                my_tt=Getters.getTellerTransactions(), ts=Getters.getTellerStatus())
