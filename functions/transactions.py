@@ -45,8 +45,7 @@ class CommitTransaction:
                                    amount=self.amount,
                                    current_balance=self.current_balance,
                                    remark=self.remark,
-                                   custid=self.customer_id,
-                                   create_date=datetime.datetime.now())
+                                   custid=self.customer_id)
         session.add(transaction)
         session.commit()
 
@@ -61,6 +60,8 @@ class AccountTransaction(Transaction):
         if Getters.getTillDetails() is not None:
             self.suspense_account_teller = session.query(Till).filter_by(
                 till_account=Getters.getTillDetails().till_account).first()
+        else:
+            SystemOBS().start_logging("there is no till details")
 
         self.suspense_account_charges = session.query(Customer).filter_by(account_type='charges').first()
 

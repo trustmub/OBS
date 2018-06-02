@@ -1,11 +1,15 @@
+import random
+
+from models.models import Account
 from views.customer import *
 import threading
+from flask import session as login_session
 
 
 def create_random_users():
-    b = 500
+    b = 0
     count = 0
-    while b < 500_000:
+    while b < 20:
         bee = str(b)
         name = "Customer" + bee
 
@@ -29,6 +33,7 @@ def create_random_users():
         session.add(record)
 
         session.commit()
+        # login_session['username'] = 'systemuser@obs.com'
         result = AccountTransaction(time.strftime('%Y-%m-%d'), rand_amount, new_account).create_account()
         if result == 1:
             print("Customer Number {} has been created successfully for account number {}".format(b, new_account))

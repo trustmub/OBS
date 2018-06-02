@@ -1,5 +1,3 @@
-import os
-import sys
 import datetime
 
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean
@@ -332,5 +330,5 @@ class SysDate(Base):
 # insert this at the end of the classes #######
 
 
-engine = create_engine('sqlite:///bnk.db')
+engine = create_engine('sqlite:///bank_database.db')
 Base.metadata.create_all(engine)

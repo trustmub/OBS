@@ -1,11 +1,11 @@
-from flask import Blueprint, render_template, redirect, request, url_for
+from flask import Blueprint, render_template, redirect, request, url_for, flash
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
 
 from controller.verifier import Verify
 from functions.genarators import *
 
-UPLOAD_FOLDER = os.path.abspath("static//img//user_view")
+UPLOAD_FOLDER = os.path.abspath("static//img//user")
 
 user_view = Blueprint('user_view', __name__)
 
