@@ -10,15 +10,16 @@ class Verify:
         self.verify_logging = SystemOBS().start_logging
 
     def account_exists(self, account_number):
-        self.verify_logging("Account Verification" + account_number)
+        self.verify_logging("Account Verification " + account_number)
         record = session.query(Customer).filter_by(acc_num=account_number).first()
         if record is not None:
             return True
 
     def email_exists(self, email):
-        self.verify_logging("Email Verification" + email)
+        self.verify_logging("Email Verification " + email)
         record = session.query(User).filter_by(email=email).first()
         if record is not None:
+            self.verify_logging("Email Verification " + email + " FOUND")
             return True
 
     def till_is_linked(self, email):

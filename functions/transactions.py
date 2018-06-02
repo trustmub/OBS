@@ -106,7 +106,6 @@ class AccountTransaction(Transaction):
         customer = session.query(Customer).filter_by(acc_number=self.cr_account).one()
         current_balance = float(self.amount) + float(customer.working_bal)
 
-        # till_detail = session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
         CommitTransaction(trans_type=TransactionType.CREDIT.value,
                           trans_ref=Auto.reference_string_generator(),
                           trans_method=TransactionMethod.CASH.value,
@@ -120,7 +119,7 @@ class AccountTransaction(Transaction):
                           customer_id=customer.custid,
                           ).commit_to_database()
 
-        # Update customer working balance
+        # Update customers working balance
         customer.working_bal = round(current_balance, 2)
         session.add(customer)
         session.commit()
@@ -140,7 +139,7 @@ class AccountTransaction(Transaction):
 
     def withdrawal(self, transaction_reference):
         customer = session.query(Customer).filter_by(acc_number=self.cr_account).one()
-        # till_detail = session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
+
         current_balance = float(customer.working_bal) - float(self.amount)
         main_withdrawal_transaction = Transactions(trantype='DR',
                                                    tranref=transaction_reference,
@@ -152,8 +151,7 @@ class AccountTransaction(Transaction):
                                                    amount=self.amount,
                                                    current_balance=round(current_balance, 2),
                                                    remark='Withdrawal ' + transaction_reference,
-                                                   custid=customer.custid,
-                                                   create_date=datetime.datetime.now())
+                                                   custid=customer.custid)
         session.add(main_withdrawal_transaction)
         session.commit()
         # update customer working balance
@@ -181,8 +179,7 @@ class AccountTransaction(Transaction):
                                                      amount=float(get_charge.tran_charge),
                                                      current_balance=round(current_balance_after_charge, 2),
                                                      remark='Debit Charge',
-                                                     custid=customer.custid,
-                                                     create_date=datetime.datetime.now())
+                                                     custid=customer.custid)
         session.add(charge_withdrawal_transaction)
         session.commit()
 
@@ -210,6 +207,8 @@ class ChargeTransaction:
         self.suspense_account_service_fees = session.query(Customer).filter_by(account_type='servfee').first()
 
     def charges(self, transaction_type):
+        """Service fees go to a different suspense account from the transaction charges."""
+
         get_charge = session.query(TransactionCharge).filter_by(tran_type=transaction_type.value).first()
 
         charge_category = [TransactionType.DEBIT, TransactionType.CREDIT, TransactionType.RTGS]
@@ -220,8 +219,7 @@ class ChargeTransaction:
                 dr_account=self.dr_account,
                 cr_account=self.suspense_account_charges.acc_number,
                 charge=get_charge.tran_charge,
-                date=self.date,
-                create_date=datetime.datetime.now()
+                date=self.date
             )
             session.add(charge_transaction)
             session.commit()
@@ -229,16 +227,13 @@ class ChargeTransaction:
             self.suspense_account_charges.working_bal += get_charge.tran_charge
             session.add(self.suspense_account_charges)
             session.commit()
-
         elif transaction_type == TransactionType.SERVICE_FEE:
             new = ChargeTransactionTable(
                 tran_type=transaction_type.value,
                 dr_account=self.dr_account,
                 cr_account=self.suspense_account_service_fees.acc_number,
                 charge=get_charge.tran_charge,
-                date=self.date,
-                create_date=datetime.datetime.now()
-            )
+                date=self.date)
             session.add(new)
             session.commit()
             # Update charge account working balance
@@ -246,4 +241,5 @@ class ChargeTransaction:
             session.add(self.suspense_account_service_fees)
             session.commit()
         else:
+            SystemOBS().logger.error().start_logging("transaction charge type not found.")
             pass

@@ -8,7 +8,7 @@ from controller.verifier import Verify
 from functions.Enums import TransactionType
 from functions.genarators import Profile, Checker, Getters, TransactionUpdate, Auto
 from functions.transactions import AccountTransaction, ChargeTransaction
-from models.models import Customer, Transactions, Banks
+from models.models import Customer, Banks
 
 from models.database_connection import session
 
@@ -36,16 +36,13 @@ def deposits():
         if Verify().till_is_linked(login_session['username']):
             cr_account_number = int(request.form['client_account'])
             if Verify().account_exists(cr_account_number):
-                # t_date = time.strftime('%Y-%m-%d')
-                t_date = Getters.getSysDate().date  # use system date for transactions
+                system_date = Getters.getSysDate().date  # use system date for transactions
                 dep_ref = request.form['deposit_ref']
                 amount = float(request.form['deposit_amount'])
 
-                # TransactionUpdate.depositTransactionUpdate(t_date, acc_num, amount, dep_ref)
+                AccountTransaction(date=system_date, amount=amount, cr_account=cr_account_number).deposit(dep_ref)
 
-                AccountTransaction(date=t_date, amount=amount, cr_account=cr_account_number).deposit(dep_ref)
-
-                TransactionUpdate.ttUpdate('DR', amount, t_date, dep_ref, cr_account_number)
+                TransactionUpdate.ttUpdate('DR', amount, system_date, dep_ref, cr_account_number)
                 flash('Account Credited')
                 return redirect(url_for('banking.deposits', user=Profile().user_details()))
             else:
@@ -211,11 +208,11 @@ def with_account_search():
 
         # if session.query(Customer).filter_by(acc_number=acc_num).first():
         #     record = session.query(Customer).filter_by(acc_number=acc_num).first()
-        #     return render_template('banking/withdrawal.html', record=record, user=Profile().user_details())
+        #     return render_template('banking/withdrawal.html', record=record, user_view=Profile().user_details())
         # else:
         #     flash('The Account Number Provided Is NOT In The System')
         #     record = None
-        #     return render_template('banking/withdrawal.html', record=record, user=Profile().user_details())
+        #     return render_template('banking/withdrawal.html', record=record, user_view=Profile().user_details())
     else:
         return redirect(url_for('banking.withdrawal'))
 

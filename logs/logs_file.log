@@ -477,3 +477,194 @@ INFO 2018-06-02 01:09:13,832  * Detected change in '/Users/trustmub/PycharmProje
 INFO 2018-06-02 01:09:13,894  * Restarting with stat
 WARNING 2018-06-02 01:09:14,758  * Debugger is active!
 INFO 2018-06-02 01:09:14,774  * Debugger PIN: 265-378-225
+INFO 2018-06-02 01:14:43,041 127.0.0.1 - - [02/Jun/2018 01:14:43] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-06-02 01:14:43,062 127.0.0.1 - - [02/Jun/2018 01:14:43] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 14:40:05,248  * Detected change in '/Users/trustmub/PycharmProjects/OBS/obs_app.py', reloading
+INFO 2018-06-02 14:40:05,514  * Restarting with stat
+WARNING 2018-06-02 14:40:07,885  * Debugger is active!
+INFO 2018-06-02 14:40:07,903  * Debugger PIN: 265-378-225
+INFO 2018-06-02 14:40:32,254  * Detected change in '/Users/trustmub/PycharmProjects/OBS/obs_app.py', reloading
+INFO 2018-06-02 14:40:32,308  * Restarting with stat
+WARNING 2018-06-02 14:40:32,746  * Debugger is active!
+INFO 2018-06-02 14:40:32,763  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:03:04,336  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-02 15:03:04,337  * Restarting with stat
+WARNING 2018-06-02 15:03:04,752  * Debugger is active!
+INFO 2018-06-02 15:03:04,765  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:03:15,786  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-02 15:03:15,787  * Restarting with stat
+WARNING 2018-06-02 15:03:16,208  * Debugger is active!
+INFO 2018-06-02 15:03:16,222  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:08:51,522  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-02 15:08:51,522  * Restarting with stat
+WARNING 2018-06-02 15:08:51,984  * Debugger is active!
+INFO 2018-06-02 15:08:51,997  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:09:16,504 127.0.0.1 - - [02/Jun/2018 15:09:16] "GET /api/books HTTP/1.1" 404 -
+INFO 2018-06-02 15:09:22,298 127.0.0.1 - - [02/Jun/2018 15:09:22] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:09:22,323 127.0.0.1 - - [02/Jun/2018 15:09:22] "GET /static/css/bootstrap.min.css HTTP/1.1" 304 -
+INFO 2018-06-02 15:09:22,325 127.0.0.1 - - [02/Jun/2018 15:09:22] "GET /static/font-awesome/css/font-awesome.min.css HTTP/1.1" 304 -
+INFO 2018-06-02 15:09:22,329 127.0.0.1 - - [02/Jun/2018 15:09:22] "GET /static/dist/css/AdminLTE.min.css HTTP/1.1" 304 -
+INFO 2018-06-02 15:09:22,332 127.0.0.1 - - [02/Jun/2018 15:09:22] "GET /static/plugins/iCheck/square/blue.css HTTP/1.1" 304 -
+INFO 2018-06-02 15:09:22,334 127.0.0.1 - - [02/Jun/2018 15:09:22] "GET /static/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 304 -
+INFO 2018-06-02 15:09:22,337 127.0.0.1 - - [02/Jun/2018 15:09:22] "GET /static/js/bootstrap.min.js HTTP/1.1" 304 -
+INFO 2018-06-02 15:09:22,339 127.0.0.1 - - [02/Jun/2018 15:09:22] "GET /static/plugins/iCheck/icheck.min.js HTTP/1.1" 304 -
+INFO 2018-06-02 15:09:22,378 127.0.0.1 - - [02/Jun/2018 15:09:22] "GET /static/plugins/iCheck/square/blue@2x.png HTTP/1.1" 304 -
+INFO 2018-06-02 15:09:22,394 127.0.0.1 - - [02/Jun/2018 15:09:22] "GET /static/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 304 -
+INFO 2018-06-02 15:09:29,587 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:09:29,604 127.0.0.1 - - [02/Jun/2018 15:09:29] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 15:09:29,609 127.0.0.1 - - [02/Jun/2018 15:09:29] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:09:37,792 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:09:37,795 127.0.0.1 - - [02/Jun/2018 15:09:37] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 15:09:37,800 127.0.0.1 - - [02/Jun/2018 15:09:37] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:10:06,168 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:10:06,171 127.0.0.1 - - [02/Jun/2018 15:10:06] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 15:10:06,177 127.0.0.1 - - [02/Jun/2018 15:10:06] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:10:14,856 127.0.0.1 - - [02/Jun/2018 15:10:14] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:10:21,882 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:10:21,884 127.0.0.1 - - [02/Jun/2018 15:10:21] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 15:10:21,895 127.0.0.1 - - [02/Jun/2018 15:10:21] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:12:59,803 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:13:06,978 Email Verificationtrustmub@gmail.comm
+INFO 2018-06-02 15:15:13,137 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:15:13,139 127.0.0.1 - - [02/Jun/2018 15:15:13] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 15:15:13,149 127.0.0.1 - - [02/Jun/2018 15:15:13] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:15:22,486 Email Verificationtrustmub@gmail.comm
+INFO 2018-06-02 15:15:22,489 127.0.0.1 - - [02/Jun/2018 15:15:22] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 15:15:22,494 127.0.0.1 - - [02/Jun/2018 15:15:22] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:15:30,487 Email Verificationtrustmub@gmail.comm
+INFO 2018-06-02 15:15:30,490 127.0.0.1 - - [02/Jun/2018 15:15:30] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 15:15:30,495 127.0.0.1 - - [02/Jun/2018 15:15:30] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:18:06,471 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:19:37,312  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 15:19:37,374  * Restarting with stat
+WARNING 2018-06-02 15:19:37,846  * Debugger is active!
+INFO 2018-06-02 15:19:37,857  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:19:44,868 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:19:44,887 127.0.0.1 - - [02/Jun/2018 15:19:44] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 15:19:44,900 127.0.0.1 - - [02/Jun/2018 15:19:44] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:20:20,685 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:20:40,825 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:21:09,542 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:22:48,638  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 15:22:48,691  * Restarting with stat
+WARNING 2018-06-02 15:22:49,132  * Debugger is active!
+INFO 2018-06-02 15:22:49,144  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:22:56,863 Email Verificationtrustmub@gmail.com
+INFO 2018-06-02 15:23:16,963 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:25:04,020 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:25:27,488 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:26:03,575 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:30:15,582 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:30:31,734 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:33:17,651  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-02 15:33:17,652  * Restarting with stat
+WARNING 2018-06-02 15:33:18,100  * Debugger is active!
+INFO 2018-06-02 15:33:18,120  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:33:23,214 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:33:23,237 127.0.0.1 - - [02/Jun/2018 15:33:23] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 15:33:23,253 127.0.0.1 - - [02/Jun/2018 15:33:23] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:36:20,368  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-02 15:36:20,369  * Restarting with stat
+WARNING 2018-06-02 15:36:20,787  * Debugger is active!
+INFO 2018-06-02 15:36:20,801  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:36:46,108 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:36:46,126 127.0.0.1 - - [02/Jun/2018 15:36:46] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 15:36:46,140 127.0.0.1 - - [02/Jun/2018 15:36:46] "GET / HTTP/1.1" 200 -
+INFO 2018-06-02 15:40:22,486 Account Verification trustmub@gmail.com
+INFO 2018-06-02 15:42:06,815  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 15:42:06,871  * Restarting with stat
+WARNING 2018-06-02 15:42:07,303  * Debugger is active!
+INFO 2018-06-02 15:42:07,315  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:42:21,009 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:44:06,037  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 15:44:06,100  * Restarting with stat
+WARNING 2018-06-02 15:44:06,531  * Debugger is active!
+INFO 2018-06-02 15:44:06,543  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:46:58,037 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:49:58,495  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 15:49:58,552  * Restarting with stat
+WARNING 2018-06-02 15:49:59,028  * Debugger is active!
+INFO 2018-06-02 15:49:59,040  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:50:07,140 Email Verification trustmub@gmail.com1
+INFO 2018-06-02 15:50:26,953 Email Verification trustmub@gmail.com1
+INFO 2018-06-02 15:50:37,980 Email Verification trustmub@gmail.com
+INFO 2018-06-02 15:52:35,289  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 15:52:35,344  * Restarting with stat
+WARNING 2018-06-02 15:52:35,780  * Debugger is active!
+INFO 2018-06-02 15:52:35,797  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:54:50,559 Till account Linked to :  trustmub@gmail.com1
+INFO 2018-06-02 15:56:47,428  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 15:56:47,483  * Restarting with stat
+WARNING 2018-06-02 15:56:47,922  * Debugger is active!
+INFO 2018-06-02 15:56:47,936  * Debugger PIN: 265-378-225
+INFO 2018-06-02 15:57:12,894 Till account Linked to :  trustmub@gmail.com1
+INFO 2018-06-02 15:59:27,226  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 15:59:27,284  * Restarting with stat
+WARNING 2018-06-02 15:59:27,741  * Debugger is active!
+INFO 2018-06-02 15:59:27,753  * Debugger PIN: 265-378-225
+INFO 2018-06-02 16:06:20,776  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 16:06:20,831  * Restarting with stat
+WARNING 2018-06-02 16:06:21,471  * Debugger is active!
+INFO 2018-06-02 16:06:21,487  * Debugger PIN: 265-378-225
+INFO 2018-06-02 16:06:47,350 Email Verification trustmub@gmail.com1
+INFO 2018-06-02 16:07:39,605  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 16:07:39,670  * Restarting with stat
+WARNING 2018-06-02 16:07:40,110  * Debugger is active!
+INFO 2018-06-02 16:07:40,121  * Debugger PIN: 265-378-225
+INFO 2018-06-02 16:07:41,162 Email Verification trustmub@gmail.com1
+INFO 2018-06-02 16:07:51,919 Email Verification trustmub@gmail.com1
+INFO 2018-06-02 16:11:51,707  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/models.py', reloading
+INFO 2018-06-02 16:11:51,784  * Restarting with stat
+WARNING 2018-06-02 16:11:52,236  * Debugger is active!
+INFO 2018-06-02 16:11:52,248  * Debugger PIN: 265-378-225
+INFO 2018-06-02 16:13:31,672  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/models.py', reloading
+INFO 2018-06-02 16:13:31,743  * Restarting with stat
+WARNING 2018-06-02 16:13:32,204  * Debugger is active!
+INFO 2018-06-02 16:13:32,215  * Debugger PIN: 265-378-225
+INFO 2018-06-02 16:14:39,196  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/models.py', reloading
+INFO 2018-06-02 16:14:39,254  * Restarting with stat
+WARNING 2018-06-02 16:14:39,691  * Debugger is active!
+INFO 2018-06-02 16:14:39,702  * Debugger PIN: 265-378-225
+INFO 2018-06-02 16:15:48,745  * Detected change in '/Users/trustmub/PycharmProjects/OBS/controller/verifier.py', reloading
+INFO 2018-06-02 16:15:48,803  * Restarting with stat
+WARNING 2018-06-02 16:15:49,274  * Debugger is active!
+INFO 2018-06-02 16:15:49,293  * Debugger PIN: 265-378-225
+INFO 2018-06-02 16:15:56,995 Email Verification trustmub@gmail.com
+INFO 2018-06-02 16:15:57,023 127.0.0.1 - - [02/Jun/2018 16:15:57] "POST / HTTP/1.1" 500 -
+INFO 2018-06-02 16:15:57,040 127.0.0.1 - - [02/Jun/2018 16:15:57] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-06-02 16:15:57,042 127.0.0.1 - - [02/Jun/2018 16:15:57] "GET /?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-06-02 16:15:57,047 127.0.0.1 - - [02/Jun/2018 16:15:57] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-06-02 16:15:57,121 127.0.0.1 - - [02/Jun/2018 16:15:57] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-06-02 16:15:57,230 127.0.0.1 - - [02/Jun/2018 16:15:57] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-02 16:15:57,369 127.0.0.1 - - [02/Jun/2018 16:15:57] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-02 16:16:48,654  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-02 16:16:48,655  * Restarting with stat
+WARNING 2018-06-02 16:16:49,069  * Debugger is active!
+INFO 2018-06-02 16:16:49,081  * Debugger PIN: 265-378-225
+INFO 2018-06-02 16:16:56,283 Email Verification trustmub@gmail.com
+INFO 2018-06-02 16:16:56,302 127.0.0.1 - - [02/Jun/2018 16:16:56] "POST / HTTP/1.1" 500 -
+INFO 2018-06-02 16:16:56,321 127.0.0.1 - - [02/Jun/2018 16:16:56] "GET /?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200 -
+INFO 2018-06-02 16:16:56,324 127.0.0.1 - - [02/Jun/2018 16:16:56] "GET /?__debugger__=yes&cmd=resource&f=jquery.js HTTP/1.1" 200 -
+INFO 2018-06-02 16:16:56,327 127.0.0.1 - - [02/Jun/2018 16:16:56] "GET /?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1" 200 -
+INFO 2018-06-02 16:16:56,369 127.0.0.1 - - [02/Jun/2018 16:16:56] "GET /?__debugger__=yes&cmd=resource&f=ubuntu.ttf HTTP/1.1" 200 -
+INFO 2018-06-02 16:16:56,416 127.0.0.1 - - [02/Jun/2018 16:16:56] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-02 16:16:56,489 127.0.0.1 - - [02/Jun/2018 16:16:56] "GET /?__debugger__=yes&cmd=resource&f=console.png HTTP/1.1" 200 -
+INFO 2018-06-02 16:18:22,435  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/models.py', reloading
+INFO 2018-06-02 16:18:22,499  * Restarting with stat
+WARNING 2018-06-02 16:18:23,002  * Debugger is active!
+INFO 2018-06-02 16:18:23,018  * Debugger PIN: 265-378-225
+INFO 2018-06-02 16:18:27,612 Email Verification trustmub@gmail.com
+INFO 2018-06-02 16:18:27,630 Email Verification trustmub@gmail.com FOUND
+INFO 2018-06-02 16:18:27,894 127.0.0.1 - - [02/Jun/2018 16:18:27] "POST / HTTP/1.1" 302 -
+INFO 2018-06-02 16:18:27,961 127.0.0.1 - - [02/Jun/2018 16:18:27] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-02 16:18:27,980 127.0.0.1 - - [02/Jun/2018 16:18:27] "GET /static/dist/css/skins/_all-skins.min.css HTTP/1.1" 304 -
+INFO 2018-06-02 16:18:27,987 127.0.0.1 - - [02/Jun/2018 16:18:27] "GET /static/plugins/slimScroll/jquery.slimscroll.min.js HTTP/1.1" 304 -
+INFO 2018-06-02 16:18:27,994 127.0.0.1 - - [02/Jun/2018 16:18:27] "GET /static/plugins/fastclick/fastclick.js HTTP/1.1" 200 -
+INFO 2018-06-02 16:18:28,004 127.0.0.1 - - [02/Jun/2018 16:18:28] "GET /static/dist/js/app.min.js HTTP/1.1" 304 -
+INFO 2018-06-02 16:18:28,009 127.0.0.1 - - [02/Jun/2018 16:18:28] "GET /static/dist/js/demo.js HTTP/1.1" 304 -
+INFO 2018-06-02 16:18:28,022 127.0.0.1 - - [02/Jun/2018 16:18:28] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 16:18:28,043 127.0.0.1 - - [02/Jun/2018 16:18:28] "GET /static/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3 HTTP/1.1" 304 -
+INFO 2018-06-02 16:21:33,839  * Detected change in '/Users/trustmub/PycharmProjects/OBS/views/user.py', reloading
+INFO 2018-06-02 16:21:33,894  * Restarting with stat
+WARNING 2018-06-02 16:21:34,406  * Debugger is active!
+INFO 2018-06-02 16:21:34,420  * Debugger PIN: 265-378-225

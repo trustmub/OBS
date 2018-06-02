@@ -1,6 +1,5 @@
-from flask import Blueprint, render_template, redirect, request, flash, url_for
+from flask import Blueprint, render_template, redirect, request, url_for
 from functions.genarators import *
-from models import *
 
 settings = Blueprint('settings', __name__)
 
@@ -11,8 +10,7 @@ def add_tran_type():
         tran_type = str.upper(request.form['tran_type'])
         tran_charge = float(request.form['tran_charge'])
         new = TransactionCharge(tran_type=tran_type,
-                                tran_charge=tran_charge,
-                                create_date=datetime.datetime.now())
+                                tran_charge=tran_charge)
         session.add(new)
         session.commit()
         return redirect(url_for('settings.system_setting'))

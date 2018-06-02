@@ -44,7 +44,7 @@ def open_till():
         return redirect(url_for('home'))
 
     else:
-        # if current user has a till linked, display the till detail
+        # if current user_view has a till linked, display the till detail
         # else display the general till opening
         return render_template('till/open_till.html', user=Profile().user_details(),
                                branch=Getters.getBranch(), teller=Getters.getAvailableTellers(),

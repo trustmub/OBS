@@ -28,8 +28,7 @@ class User(Base):
     lock = Column(Integer)
 
     def __init__(self, full_name, job_title, image_string, department, branch_code, access_level, till_o_balance,
-                 till_c_balance,
-                 create_date, email, password, lock):
+                 till_c_balance, email, password, lock):
         self.full_name = full_name
         self.job_title = job_title
         self.image_string = image_string
@@ -38,7 +37,7 @@ class User(Base):
         self.access_level = access_level
         self.till_o_balance = till_o_balance
         self.till_c_balance = till_c_balance
-        self.create_date = create_date
+        self.create_date = datetime.datetime.now()
         self.email = email
         self.password = password
         self.lock = lock
@@ -116,7 +115,7 @@ class Transactions(Base):
     create_date = Column(String(30))
 
     def __init__(self, trantype, tranref, tranmethod, tran_date, cheque_num, acc_number, cr_acc_number, amount,
-                 current_balance, remark, custid, create_date):
+                 current_balance, remark, custid):
         self.trantype = trantype
         self.tranref = tranref
         self.tranmethod = tranmethod
@@ -128,7 +127,7 @@ class Transactions(Base):
         self.current_balance = current_balance
         self.remark = remark
         self.custid = custid
-        self.create_date = create_date
+        self.create_date = datetime.datetime.now()
 
 
 class TransactionCharge(Base):
@@ -142,10 +141,10 @@ class TransactionCharge(Base):
     tran_charge = Column(Float(2))
     create_date = Column(String(30))
 
-    def __init__(self, tran_type, tran_charge, create_date):
+    def __init__(self, tran_type, tran_charge):
         self.tran_type = tran_type
         self.tran_charge = tran_charge
-        self.create_date = create_date
+        self.create_date = datetime.datetime.now()
 
 
 class ChargeTransactionTable(Base):
@@ -161,18 +160,18 @@ class ChargeTransactionTable(Base):
     date = Column(String(30))
     create_date = Column(String(30))
 
-    def __init__(self, tran_type, dr_account, cr_account, charge, date, create_date):
+    def __init__(self, tran_type, dr_account, cr_account, charge, date):
         self.tran_type = tran_type
         self.dr_account = dr_account
         self.cr_account = cr_account
         self.charge = charge
         self.date = date
-        self.create_date = create_date
+        self.create_date = datetime.datetime.now()
 
 
 class Till(Base):
-    """This table keeps the teller accounts and each teller account is linked to a user ID which helps to identify
-    the user who is linked to the teller account for tracking transactions flow. """
+    """This table keeps the teller accounts and each teller account is linked to a user_view ID which helps to identify
+    the user_view who is linked to the teller account for tracking transactions flow. """
     __tablename__ = 'till'
     id = Column(Integer, primary_key=True)
     branch_code = Column(String(10))

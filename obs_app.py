@@ -2,7 +2,7 @@ from flask import Flask, render_template
 
 from functions.genarators import *
 
-from views.user import user
+from views.user import user_view
 from views.banking import banking
 from views.customer import customer
 from views.till import till
@@ -13,7 +13,7 @@ from views.bulk import bulk
 
 app = Flask(__name__)
 app.secret_key = 'asdkerhg8927qr9w0rhgwe70gw9eprg7w0e9r7g'
-app.register_blueprint(user)
+app.register_blueprint(user_view)
 app.register_blueprint(banking)
 app.register_blueprint(customer)
 app.register_blueprint(till)
@@ -35,4 +35,5 @@ def home():
 
 
 if __name__ == '__main__':
+    print("Server started press Crtl-C to terminate server")
     app.run(debug=True, port=5001)
