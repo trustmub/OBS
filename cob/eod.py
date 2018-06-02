@@ -2,11 +2,9 @@
 
 from cob.eom import AccountsEom
 from functions.genarators import *
+from models.database_connection import session
 
-engine = create_engine('sqlite:///bnk.db')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
+from models.models import Interest
 
 
 class Accounts:
@@ -120,7 +118,8 @@ class Reporting:
                                 33145826,
                                 33722073,
                                 33202507,
-                                33613681
+                                33613681,
+                                33407739
                                 ]
                 for i in record:
                     print("The record giving problems is" + str(i.cr_acc_number))

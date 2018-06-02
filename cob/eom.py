@@ -1,22 +1,17 @@
 # This is where all End of Month procedures are structured
-
-import random
-import time
-import datetime
-import os
-
-from flask import flash, session as login_session
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import extract
 
 from functions.Enums import TransactionType
-from functions.transactions import ChargeTransaction
-from models import *
 from functions.genarators import *
+from functions.transactions import ChargeTransaction
+from models.database_connection import *
 
-engine = create_engine('sqlite:///bnk.db')
-Base.metadata.bind = engine
-DBSession = sessionmaker(bind=engine)
-session = DBSession()
+
+# importengine = create_engine('sqlite:///bnk.db')
+# Base.metadata.bind = engine
+# DBSession = sessionmaker(bind=engine)
+# session = DBSession()
+from models.models import Interest
 
 
 class AccountsEom:

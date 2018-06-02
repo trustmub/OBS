@@ -668,3 +668,25 @@ INFO 2018-06-02 16:21:33,839  * Detected change in '/Users/trustmub/PycharmProje
 INFO 2018-06-02 16:21:33,894  * Restarting with stat
 WARNING 2018-06-02 16:21:34,406  * Debugger is active!
 INFO 2018-06-02 16:21:34,420  * Debugger PIN: 265-378-225
+INFO 2018-06-02 16:24:57,528 127.0.0.1 - - [02/Jun/2018 16:24:57] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-02 16:24:57,564 127.0.0.1 - - [02/Jun/2018 16:24:57] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 16:24:59,835 127.0.0.1 - - [02/Jun/2018 16:24:59] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-06-02 16:25:01,603 127.0.0.1 - - [02/Jun/2018 16:25:01] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 16:25:02,129 127.0.0.1 - - [02/Jun/2018 16:25:02] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-06-02 16:25:03,837 127.0.0.1 - - [02/Jun/2018 16:25:03] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 16:25:04,114 127.0.0.1 - - [02/Jun/2018 16:25:04] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-06-02 16:25:05,791 127.0.0.1 - - [02/Jun/2018 16:25:05] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 16:25:24,134 127.0.0.1 - - [02/Jun/2018 16:25:24] "GET /open_till/ HTTP/1.1" 200 -
+INFO 2018-06-02 16:25:24,194 127.0.0.1 - - [02/Jun/2018 16:25:24] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 16:25:34,574 127.0.0.1 - - [02/Jun/2018 16:25:34] "POST /open_till/ HTTP/1.1" 302 -
+INFO 2018-06-02 16:25:34,601 127.0.0.1 - - [02/Jun/2018 16:25:34] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-02 16:25:34,622 127.0.0.1 - - [02/Jun/2018 16:25:34] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 16:25:49,419 127.0.0.1 - - [02/Jun/2018 16:25:49] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-06-02 16:25:49,443 127.0.0.1 - - [02/Jun/2018 16:25:49] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 16:26:06,434 127.0.0.1 - - [02/Jun/2018 16:26:06] "POST /close_till/ HTTP/1.1" 302 -
+INFO 2018-06-02 16:26:06,452 127.0.0.1 - - [02/Jun/2018 16:26:06] "GET /close_till/ HTTP/1.1" 200 -
+INFO 2018-06-02 16:26:06,472 127.0.0.1 - - [02/Jun/2018 16:26:06] "GET /static/img/user/ HTTP/1.1" 404 -
+INFO 2018-06-02 16:40:56,638  * Detected change in '/Users/trustmub/PycharmProjects/OBS/functions/genarators.py', reloading
+INFO 2018-06-02 16:40:56,699  * Restarting with stat
+WARNING 2018-06-02 16:40:57,365  * Debugger is active!
+INFO 2018-06-02 16:40:57,406  * Debugger PIN: 265-378-225

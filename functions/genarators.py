@@ -5,7 +5,7 @@ import time
 
 import os
 
-from flask import flash, session as login_session
+from flask import session as login_session
 
 from models.models import Till, TransactionCharge, Transactions, TellerTransactions, Account, Customer, Branch, \
     Currency, Banks, CobDates, SysDate, User
@@ -159,8 +159,7 @@ class TransactionUpdate:
                              amount=amount,
                              current_balance=round(amount, 2),
                              remark='Account Creation',
-                             custid=cus.custid,
-                             create_date=datetime.datetime.now())
+                             custid=cus.custid)
         session.add(trans)
         session.commit()
 
@@ -188,8 +187,7 @@ class TransactionUpdate:
                              amount=amount,
                              current_balance=round(current_balance, 2),
                              remark='Deposit ' + tranref,
-                             custid=customer.custid,
-                             create_date=datetime.datetime.now())
+                             custid=customer.custid)
         session.add(trans)
         session.commit()
         # Update customer working balance
@@ -221,8 +219,7 @@ class TransactionUpdate:
                              amount=amount,
                              current_balance=round(cb, 2),
                              remark='Withdrawal ' + tranref,
-                             custid=customer.custid,
-                             create_date=datetime.datetime.now())
+                             custid=customer.custid)
         session.add(trans)
         session.commit()
         # update customer working balance
@@ -250,8 +247,7 @@ class TransactionUpdate:
                               amount=float(get_charge.tran_charge),
                               current_balance=round(cb2, 2),
                               remark='Debit Charge',
-                              custid=customer.custid,
-                              create_date=datetime.datetime.now())
+                              custid=customer.custid)
         session.add(trans2)
         session.commit()
 
@@ -279,8 +275,7 @@ class TransactionUpdate:
                              amount=amount,
                              current_balance=round(current_balance, 2),
                              remark='Transfer ' + remark,
-                             custid=f_customer.custid,
-                             create_date=datetime.datetime.now())
+                             custid=f_customer.custid)
 
         session.add(trans)
         session.commit()
@@ -307,8 +302,7 @@ class TransactionUpdate:
                                 amount=amount,
                                 current_balance=round(to_customer.working_bal, 2),
                                 remark='Transfer ' + remark,
-                                custid=to_customer.custid,
-                                create_date=datetime.datetime.now()
+                                custid=to_customer.custid
                                 )
         session.add(trans_to)
         session.commit()
@@ -327,8 +321,7 @@ class TransactionUpdate:
                               amount=float(get_charge.tran_charge),
                               current_balance=round(cb2, 2),
                               remark='Debit Charge',
-                              custid=f_customer.custid,
-                              create_date=datetime.datetime.now())
+                              custid=f_customer.custid)
         session.add(trans2)
         session.commit()
 
@@ -356,8 +349,7 @@ class TransactionUpdate:
                              amount=amount,
                              current_balance=round(current_balance, 2),
                              remark='RTGS ' + remark,
-                             custid=f_customer.custid,
-                             create_date=datetime.datetime.now())
+                             custid=f_customer.custid)
 
         session.add(trans)
         session.commit()
@@ -384,8 +376,7 @@ class TransactionUpdate:
                                 amount=amount,
                                 current_balance=round(to_suspense.working_bal, 2),
                                 remark='RTGS ' + remark,
-                                custid=to_suspense.custid,
-                                create_date=datetime.datetime.now()
+                                custid=to_suspense.custid
                                 )
         session.add(trans_to)
         session.commit()
@@ -404,8 +395,7 @@ class TransactionUpdate:
                               amount=float(get_charge.tran_charge),
                               current_balance=round(cb2, 2),
                               remark='RTGS Charge',
-                              custid=f_customer.custid,
-                              create_date=datetime.datetime.now())
+                              custid=f_customer.custid)
         session.add(trans2)
         session.commit()
 
@@ -429,8 +419,7 @@ class TransactionUpdate:
                               amount=float(total_amount),
                               current_balance=round(cb, 2),
                               remark='Interest',
-                              custid=cust_id,
-                              create_date=datetime.datetime.now())
+                              custid=cust_id)
 
         session.add(trans2)
         session.commit()
@@ -455,8 +444,7 @@ class TransactionUpdate:
                              amount=amount,
                              current_balance=round(current_balance, 2),
                              remark='SERVFEES',
-                             custid=charged_customer.custid,
-                             create_date=datetime.datetime.now())
+                             custid=charged_customer.custid)
         session.add(trans)
         session.commit()
 
@@ -478,8 +466,7 @@ class TransactionUpdate:
                                  amount=amount,
                                  current_balance=round(cb, 2),
                                  remark='SERVFEES',
-                                 custid=servfee.custid,
-                                 create_date=datetime.datetime.now())
+                                 custid=servfee.custid)
 
         session.add(trans_sus)
         session.commit()
