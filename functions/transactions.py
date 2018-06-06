@@ -5,7 +5,7 @@ from functions.Enums import TransactionType, TransactionMethod
 from functions.genarators import Auto, Getters
 from models.models import Transactions, Customer, Till, ChargeTransactionTable, TransactionCharge
 
-from models.database_connection import session
+from models.db_conn import session
 
 
 class Transaction(object):

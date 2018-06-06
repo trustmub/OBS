@@ -195,6 +195,10 @@ class Till(Base):
         self.create_date = create_date
         self.user_id = user_id
 
+    def __str__(self):
+        return self.till_account
+
+
 
 class TellerTransactions(Base):
     """This table contains all the transactions a teller does. Each transaction a teller does i linked to their

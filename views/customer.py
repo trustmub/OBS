@@ -3,12 +3,12 @@ import datetime
 
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 
-from controller.verifier import Verify
+from utilities.verifier import Verify
 from functions.genarators import Auto, Getters, Profile, Checker
 from functions.transactions import AccountTransaction
 from models.models import Customer
 
-from models.database_connection import session
+from models.db_conn import session
 
 customer = Blueprint('customer', __name__)
 

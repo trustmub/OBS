@@ -5,6 +5,7 @@ from flask import Blueprint, render_template, request, url_for, redirect
 
 from functions.Enums import TransactionType
 from functions.genarators import *
+from functions.queries import Query
 
 till = Blueprint('till', __name__)
 
@@ -47,8 +48,8 @@ def open_till():
         # if current user_view has a till linked, display the till detail
         # else display the general till opening
         return render_template('till/open_till.html', user=Profile().user_details(),
-                               branch=Getters.getBranch(), teller=Getters.getAvailableTellers(),
-                               teller2=Getters.getAllTellers(), ts=Getters.getTellerStatus())
+                               branch=Getters.getBranch(), teller=Query().available_tellers(),
+                               teller2=Getters.getAllTellers(), ts=Query().teller_status())
 
 
 @till.route('/close_till/', methods=['POST', 'GET'])

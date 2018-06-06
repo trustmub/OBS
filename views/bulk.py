@@ -44,7 +44,6 @@ def bulk_salaries():
 
                     TransactionUpdate.transferTransactionUpdate(from_acc, to_acc, amount, remark,
                                                                 Getters.getSysDate().date)
-                    # TransactionUpdate.accChargeUpdate('TR', from_acc, Getters.getSysDate().date)
                     ChargeTransaction(Getters.getSysDate().date, from_acc).charges(TransactionType.TRANSFER)
 
                     # print(line, end='')

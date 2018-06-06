@@ -4,7 +4,7 @@ from sqlalchemy import extract
 from functions.Enums import TransactionType
 from functions.genarators import *
 from functions.transactions import ChargeTransaction
-from models.database_connection import *
+from models.db_conn import *
 
 
 # importengine = create_engine('sqlite:///bnk.db')

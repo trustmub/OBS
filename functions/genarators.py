@@ -1,16 +1,10 @@
 import datetime
-import logging
 import random
-import time
-
-import os
-
 from flask import session as login_session
 
+from models.db_conn import session
 from models.models import Till, TransactionCharge, Transactions, TellerTransactions, Account, Customer, Branch, \
     Currency, Banks, CobDates, SysDate, User
-
-from models.database_connection import session
 
 
 # logging.basicConfig(filename="logs/system" + str(Getters.getSysDate().date) + ".log", level=logging.DEBUG)
@@ -41,11 +35,11 @@ class Getters:
         else:
             return []
 
-    @staticmethod
-    def getTellerStatus():
-        mylist = [i.user_id for i in session.query(Till).all()]
-        if Profile().user_details().uid in mylist:
-            return 1
+    # @staticmethod
+    # def getTellerStatus():
+    #     mylist = [i.user_id for i in session.query(Till).all()]
+    #     if Profile().user_details().uid in mylist:
+    #         return 1
 
     @staticmethod
     def getTellerWithdrawal():

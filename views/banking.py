@@ -3,14 +3,14 @@ import time
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from flask import session as login_session
 
-from controller.Search import Search
-from controller.verifier import Verify
+from utilities.search import Search
+from utilities.verifier import Verify
 from functions.Enums import TransactionType
 from functions.genarators import Profile, Checker, Getters, TransactionUpdate, Auto
 from functions.transactions import AccountTransaction, ChargeTransaction
 from models.models import Customer, Banks
 
-from models.database_connection import session
+from models.db_conn import session
 
 banking = Blueprint('banking', __name__)
 

@@ -824,3 +824,110 @@ INFO 2018-06-02 20:39:31,678 127.0.0.1 - - [02/Jun/2018 20:39:31] "POST /lockscr
 INFO 2018-06-02 20:39:31,713 127.0.0.1 - - [02/Jun/2018 20:39:31] "GET /dashboard/ HTTP/1.1" 200 -
 INFO 2018-06-02 20:39:42,953 127.0.0.1 - - [02/Jun/2018 20:39:42] "GET /logout/ HTTP/1.1" 302 -
 INFO 2018-06-02 20:39:42,966 127.0.0.1 - - [02/Jun/2018 20:39:42] "GET / HTTP/1.1" 200 -
+INFO 2018-06-04 02:49:17,657  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-04 02:49:17,659  * Restarting with stat
+WARNING 2018-06-04 02:49:18,202  * Debugger is active!
+INFO 2018-06-04 02:49:18,295  * Debugger PIN: 265-378-225
+INFO 2018-06-04 02:49:41,486 127.0.0.1 - - [04/Jun/2018 02:49:41] "GET / HTTP/1.1" 200 -
+INFO 2018-06-04 02:49:41,618 127.0.0.1 - - [04/Jun/2018 02:49:41] "GET /static/css/bootstrap.min.css HTTP/1.1" 304 -
+INFO 2018-06-04 02:49:41,621 127.0.0.1 - - [04/Jun/2018 02:49:41] "GET /static/font-awesome/css/font-awesome.min.css HTTP/1.1" 304 -
+INFO 2018-06-04 02:49:41,624 127.0.0.1 - - [04/Jun/2018 02:49:41] "GET /static/dist/css/AdminLTE.min.css HTTP/1.1" 304 -
+INFO 2018-06-04 02:49:41,628 127.0.0.1 - - [04/Jun/2018 02:49:41] "GET /static/plugins/iCheck/square/blue.css HTTP/1.1" 304 -
+INFO 2018-06-04 02:49:41,631 127.0.0.1 - - [04/Jun/2018 02:49:41] "GET /static/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 304 -
+INFO 2018-06-04 02:49:41,634 127.0.0.1 - - [04/Jun/2018 02:49:41] "GET /static/js/bootstrap.min.js HTTP/1.1" 304 -
+INFO 2018-06-04 02:49:41,637 127.0.0.1 - - [04/Jun/2018 02:49:41] "GET /static/plugins/iCheck/icheck.min.js HTTP/1.1" 304 -
+INFO 2018-06-04 02:49:42,156 127.0.0.1 - - [04/Jun/2018 02:49:42] "GET /static/plugins/iCheck/square/blue@2x.png HTTP/1.1" 200 -
+INFO 2018-06-04 02:49:42,161 127.0.0.1 - - [04/Jun/2018 02:49:42] "GET /static/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 -
+INFO 2018-06-04 02:49:42,483 127.0.0.1 - - [04/Jun/2018 02:49:42] "GET /favicon.ico HTTP/1.1" 404 -
+INFO 2018-06-04 02:49:47,853 127.0.0.1 - - [04/Jun/2018 02:49:47] "POST / HTTP/1.1" 302 -
+INFO 2018-06-04 02:49:47,864 127.0.0.1 - - [04/Jun/2018 02:49:47] "GET / HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:02,179 127.0.0.1 - - [04/Jun/2018 02:54:02] "GET / HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:02,258 127.0.0.1 - - [04/Jun/2018 02:54:02] "GET /static/css/bootstrap.min.css HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:02,267 127.0.0.1 - - [04/Jun/2018 02:54:02] "GET /static/font-awesome/css/font-awesome.min.css HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:02,270 127.0.0.1 - - [04/Jun/2018 02:54:02] "GET /static/dist/css/AdminLTE.min.css HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:02,279 127.0.0.1 - - [04/Jun/2018 02:54:02] "GET /static/plugins/iCheck/square/blue.css HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:02,281 127.0.0.1 - - [04/Jun/2018 02:54:02] "GET /static/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:02,292 127.0.0.1 - - [04/Jun/2018 02:54:02] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:02,323 127.0.0.1 - - [04/Jun/2018 02:54:02] "GET /static/plugins/iCheck/icheck.min.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:05,573 127.0.0.1 - - [04/Jun/2018 02:54:05] "GET /static/plugins/iCheck/square/blue@2x.png HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:05,581 127.0.0.1 - - [04/Jun/2018 02:54:05] "GET /static/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:05,886 127.0.0.1 - - [04/Jun/2018 02:54:05] "GET /favicon.ico HTTP/1.1" 404 -
+INFO 2018-06-04 02:54:14,491 127.0.0.1 - - [04/Jun/2018 02:54:14] "POST / HTTP/1.1" 302 -
+INFO 2018-06-04 02:54:14,511 127.0.0.1 - - [04/Jun/2018 02:54:14] "GET / HTTP/1.1" 200 -
+INFO 2018-06-04 02:54:25,096 127.0.0.1 - - [04/Jun/2018 02:54:25] "GET /static/css/bootstrap.min.css.map HTTP/1.1" 200 -
+INFO 2018-06-04 02:55:37,903 Email Verification trustmub@gmail.com
+INFO 2018-06-04 02:55:37,941 Email Verification trustmub@gmail.com FOUND
+INFO 2018-06-04 02:55:38,237 127.0.0.1 - - [04/Jun/2018 02:55:38] "POST / HTTP/1.1" 302 -
+INFO 2018-06-04 02:55:38,322 127.0.0.1 - - [04/Jun/2018 02:55:38] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-04 02:55:38,343 127.0.0.1 - - [04/Jun/2018 02:55:38] "GET /static/dist/css/skins/_all-skins.min.css HTTP/1.1" 304 -
+INFO 2018-06-04 02:55:38,362 127.0.0.1 - - [04/Jun/2018 02:55:38] "GET /static/img/user/Screen_Shot_2018-05-08_at_21.26.11.png HTTP/1.1" 200 -
+INFO 2018-06-04 02:55:38,470 127.0.0.1 - - [04/Jun/2018 02:55:38] "GET /static/plugins/slimScroll/jquery.slimscroll.min.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:55:38,500 127.0.0.1 - - [04/Jun/2018 02:55:38] "GET /static/plugins/fastclick/fastclick.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:55:38,502 127.0.0.1 - - [04/Jun/2018 02:55:38] "GET /static/dist/js/app.min.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:55:38,532 127.0.0.1 - - [04/Jun/2018 02:55:38] "GET /static/dist/js/demo.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:55:38,566 127.0.0.1 - - [04/Jun/2018 02:55:38] "GET /static/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3 HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,297 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,345 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/css/bootstrap.min.css HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,349 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/font-awesome/css/font-awesome.min.css HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,352 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/dist/css/AdminLTE.min.css HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,362 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/dist/css/skins/_all-skins.min.css HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,374 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,386 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,393 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/plugins/slimScroll/jquery.slimscroll.min.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,395 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/plugins/fastclick/fastclick.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,397 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/dist/js/app.min.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,398 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/dist/js/demo.js HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,399 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/img/user/Screen_Shot_2018-05-08_at_21.26.11.png HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:12,924 127.0.0.1 - - [04/Jun/2018 02:56:12] "GET /static/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3 HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:13,229 127.0.0.1 - - [04/Jun/2018 02:56:13] "GET /favicon.ico HTTP/1.1" 404 -
+INFO 2018-06-04 02:56:18,582 127.0.0.1 - - [04/Jun/2018 02:56:18] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-06-04 02:56:18,591 127.0.0.1 - - [04/Jun/2018 02:56:18] "GET / HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:29,141 Email Verification trustmub@gmail.com
+INFO 2018-06-04 02:56:29,145 Email Verification trustmub@gmail.com FOUND
+INFO 2018-06-04 02:56:29,418 127.0.0.1 - - [04/Jun/2018 02:56:29] "POST / HTTP/1.1" 302 -
+INFO 2018-06-04 02:56:29,452 127.0.0.1 - - [04/Jun/2018 02:56:29] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:37,453 127.0.0.1 - - [04/Jun/2018 02:56:37] "GET /open_till/ HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:45,263 127.0.0.1 - - [04/Jun/2018 02:56:45] "GET /open_till/ HTTP/1.1" 200 -
+INFO 2018-06-04 02:56:47,887 127.0.0.1 - - [04/Jun/2018 02:56:47] "GET /deposits/ HTTP/1.1" 200 -
+INFO 2018-06-04 02:57:03,316 33718552
+INFO 2018-06-04 02:57:03,328 127.0.0.1 - - [04/Jun/2018 02:57:03] "POST /dep_account_search/ HTTP/1.1" 200 -
+INFO 2018-06-04 02:57:11,490 127.0.0.1 - - [04/Jun/2018 02:57:11] "GET /user_setting/ HTTP/1.1" 200 -
+INFO 2018-06-04 02:57:12,804 127.0.0.1 - - [04/Jun/2018 02:57:12] "GET /system_setting/ HTTP/1.1" 200 -
+INFO 2018-06-04 02:58:05,621 127.0.0.1 - - [04/Jun/2018 02:58:05] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-06-04 02:58:05,631 127.0.0.1 - - [04/Jun/2018 02:58:05] "GET / HTTP/1.1" 200 -
+INFO 2018-06-04 02:58:12,087 127.0.0.1 - - [04/Jun/2018 02:58:12] "GET / HTTP/1.1" 200 -
+INFO 2018-06-04 02:58:17,957 Email Verification trustmub@gmail.com
+INFO 2018-06-04 02:58:17,962 Email Verification trustmub@gmail.com FOUND
+INFO 2018-06-04 02:58:18,238 127.0.0.1 - - [04/Jun/2018 02:58:18] "POST / HTTP/1.1" 302 -
+INFO 2018-06-04 02:58:18,263 127.0.0.1 - - [04/Jun/2018 02:58:18] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-04 02:58:21,625 127.0.0.1 - - [04/Jun/2018 02:58:21] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-06-04 02:58:21,634 127.0.0.1 - - [04/Jun/2018 02:58:21] "GET / HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:14,059  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-06-06 18:40:14,065  * Restarting with stat
+WARNING 2018-06-06 18:40:14,553  * Debugger is active!
+INFO 2018-06-06 18:40:14,585  * Debugger PIN: 265-378-225
+INFO 2018-06-06 18:40:30,489 127.0.0.1 - - [06/Jun/2018 18:40:30] "GET / HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:30,578 127.0.0.1 - - [06/Jun/2018 18:40:30] "GET /static/plugins/iCheck/square/blue.css HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:30,580 127.0.0.1 - - [06/Jun/2018 18:40:30] "GET /static/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:30,583 127.0.0.1 - - [06/Jun/2018 18:40:30] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:30,585 127.0.0.1 - - [06/Jun/2018 18:40:30] "GET /static/css/bootstrap.min.css HTTP/1.1" 304 -
+INFO 2018-06-06 18:40:30,587 127.0.0.1 - - [06/Jun/2018 18:40:30] "GET /static/font-awesome/css/font-awesome.min.css HTTP/1.1" 304 -
+INFO 2018-06-06 18:40:30,589 127.0.0.1 - - [06/Jun/2018 18:40:30] "GET /static/dist/css/AdminLTE.min.css HTTP/1.1" 304 -
+INFO 2018-06-06 18:40:30,592 127.0.0.1 - - [06/Jun/2018 18:40:30] "GET /static/plugins/iCheck/icheck.min.js HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:30,645 127.0.0.1 - - [06/Jun/2018 18:40:30] "GET /static/plugins/iCheck/square/blue@2x.png HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:30,702 127.0.0.1 - - [06/Jun/2018 18:40:30] "GET /static/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:33,599 127.0.0.1 - - [06/Jun/2018 18:40:33] "GET /favicon.ico HTTP/1.1" 404 -
+INFO 2018-06-06 18:40:38,536 Email Verification trustmub@gmail.com
+INFO 2018-06-06 18:40:38,572 Email Verification trustmub@gmail.com FOUND
+INFO 2018-06-06 18:40:38,858 127.0.0.1 - - [06/Jun/2018 18:40:38] "POST / HTTP/1.1" 302 -
+INFO 2018-06-06 18:40:38,913 127.0.0.1 - - [06/Jun/2018 18:40:38] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:38,937 127.0.0.1 - - [06/Jun/2018 18:40:38] "GET /static/dist/css/skins/_all-skins.min.css HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:38,942 127.0.0.1 - - [06/Jun/2018 18:40:38] "GET /static/plugins/slimScroll/jquery.slimscroll.min.js HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:38,947 127.0.0.1 - - [06/Jun/2018 18:40:38] "GET /static/plugins/fastclick/fastclick.js HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:38,956 127.0.0.1 - - [06/Jun/2018 18:40:38] "GET /static/dist/js/app.min.js HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:38,959 127.0.0.1 - - [06/Jun/2018 18:40:38] "GET /static/dist/js/demo.js HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:38,963 127.0.0.1 - - [06/Jun/2018 18:40:38] "GET /static/img/user/Screen_Shot_2018-05-08_at_21.26.11.png HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:39,019 127.0.0.1 - - [06/Jun/2018 18:40:39] "GET /static/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3 HTTP/1.1" 200 -
+INFO 2018-06-06 18:40:57,613 127.0.0.1 - - [06/Jun/2018 18:40:57] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-06-06 18:41:14,384 127.0.0.1 - - [06/Jun/2018 18:41:14] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-06-06 18:41:18,310 127.0.0.1 - - [06/Jun/2018 18:41:18] "GET /statement/ HTTP/1.1" 200 -

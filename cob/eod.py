@@ -2,7 +2,7 @@
 
 from cob.eom import AccountsEom
 from functions.genarators import *
-from models.database_connection import session
+from models.db_conn import session
 
 from models.models import Interest
 

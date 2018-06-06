@@ -1,4 +1,4 @@
-from models.database_connection import session
+from models.db_conn import session
 
 
 class Retrieve:

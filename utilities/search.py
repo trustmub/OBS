@@ -1,5 +1,5 @@
 from cob.log_module import SystemOBS
-from models.database_connection import session
+from models.db_conn import session
 from models.models import Customer, Transactions
 
 
