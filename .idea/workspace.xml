@@ -3,14 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e2aa55e2-e756-4fd8-95af-88fd76e0ab89" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AccountClosingBalances2012-02-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TellerTransactions2012-02-25.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/bank_database.db" beforeDir="false" afterPath="$PROJECT_DIR$/bank_database.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cob/eod.py" beforeDir="false" afterPath="$PROJECT_DIR$/cob/eod.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/logs_file.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/logs_file.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/views/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/views/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -85,16 +77,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="229">
-              <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
+            <state relative-caret-position="154">
+              <caret line="29" column="1" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SOURCES.txt" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SOURCES.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/obs.egg-info/SOURCES.txt">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
@@ -251,11 +243,6 @@
               <item name="OBS" type="b2602c69:ProjectViewProjectNode" />
               <item name="OBS" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OBS" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OBS" type="462c0819:PsiDirectoryNode" />
-              <item name="obs.egg-info" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -1104,13 +1091,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="34" column="5" selection-start-line="34" selection-start-column="5" selection-end-line="34" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/obs.egg-info/PKG-INFO">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1119,6 +1099,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/obs.egg-info/SOURCES.txt">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="29" column="1" selection-start-line="29" selection-start-column="1" selection-end-line="29" selection-end-column="1" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
