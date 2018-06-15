@@ -82,8 +82,7 @@ def add_bank():
         name = request.form['name']
         swift_code = str.upper(request.form['swift_code'])
         new = Banks(name=name,
-                    swift_code=swift_code,
-                    create_date=datetime.datetime.now())
+                    swift_code=swift_code)
         session.add(new)
         session.commit()
         return redirect(url_for('settings.system_setting'))

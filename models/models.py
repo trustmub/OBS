@@ -40,6 +40,12 @@ class User(Base):
         self.password = password
         self.lock = lock
 
+    def __str__(self):
+        return self.full_name
+
+    def __repr__(self):
+        return f"{self.full_name} the {self.job_title}"
+
 
 class Customer(Base):
     """THis table contains all the customer details."""
@@ -78,6 +84,16 @@ class Customer(Base):
         self.create_date = create_date
         self.inputter_id = inputter_id
 
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+    def __repr__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 class Account(Base):
     """This table contains the type of accounts the systems handles for example, Savings current of Corporate Account"""
@@ -89,6 +105,9 @@ class Account(Base):
     def __init__(self, acc_type, minbalance):
         self.acc_type = acc_type
         self.minbalance = minbalance
+
+    def __str__(self):
+        return f'account type: {self.acc_type}'
 
 
 class Transactions(Base):
@@ -127,6 +146,9 @@ class Transactions(Base):
         self.custid = custid
         self.create_date = datetime.datetime.now()
 
+    def __str__(self):
+        return self.tranref
+
 
 class TransactionCharge(Base):
     """This table keeps the charge fees for each respective Transaction type. aditional transaction typex can be
@@ -143,6 +165,9 @@ class TransactionCharge(Base):
         self.tran_type = tran_type
         self.tran_charge = tran_charge
         self.create_date = datetime.datetime.now()
+
+    def __str__(self):
+        return f"{self.tran_type} charged {self.tran_charge}"
 
 
 class ChargeTransactionTable(Base):
@@ -165,6 +190,9 @@ class ChargeTransactionTable(Base):
         self.charge = charge
         self.date = date
         self.create_date = datetime.datetime.now()
+
+    def __str__(self):
+        return f'DR Account {self.cr_account} Credit Account {self.dr_account}'
 
 
 class Till(Base):
@@ -197,7 +225,6 @@ class Till(Base):
 
     def __str__(self):
         return self.till_account
-
 
 
 class TellerTransactions(Base):
@@ -276,12 +303,18 @@ class Interest(Base):
     interest_earned = Column(Float(2))
     create_date = Column(String(30))
 
-    def __init__(self, date, account, eod_bal, interest_earned, create_date):
+    def __init__(self, date, account, eod_bal, interest_earned):
         self.date = date
         self.account = account
         self.eod_bal = eod_bal
         self.interest_earned = interest_earned
-        self.create_date = create_date
+        self.create_date = datetime.datetime.now()
+
+    def __repr__(self):
+        return f"Interest({self.date}, {self.account}, {self.eod_bal}, {self.interest_earned})"
+
+    def __str__(self):
+        return self.account
 
 
 class Banks(Base):
@@ -292,10 +325,16 @@ class Banks(Base):
     swift_code = Column(String(50))
     create_date = Column(String(30))
 
-    def __init__(self, name, swift_code, create_date):
+    def __init__(self, name, swift_code):
         self.name = name
         self.swift_code = swift_code
-        self.create_date = create_date
+        self.create_date = datetime.datetime.now()
+
+    def __repr__(self):
+        return f"Banks({self.name}, {self.swift_code})"
+
+    def __str__(self):
+        return self.name
 
 
 # Complete Of Business tables
@@ -317,6 +356,12 @@ class CobDates(Base):
         self.status = status
         self.create_date = create_date
 
+    def __repr__(self):
+        return f"CabDates({self.date}, {self.process}, {self.status})"
+
+    def __str__(self):
+        return self.process
+
 
 class SysDate(Base):
     """This table keeps the current system date since the last End Of Day (EOD) process. When the end of day
@@ -329,6 +374,12 @@ class SysDate(Base):
     def __init__(self, date, create_date):
         self.date = date
         self.create_date = create_date
+
+    def __repr__(self):
+        return f"SysDate({self.date}, {self.create_date})"
+
+    def __str__(self):
+        return self.date
 
 
 # insert this at the end of the classes #######

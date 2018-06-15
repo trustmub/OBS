@@ -62,8 +62,7 @@ class Accounts:
             table_update = Interest(date=date,
                                     account=acc,
                                     eod_bal=round(eod_bal, 2),
-                                    interest_earned=round(interest, 4),
-                                    create_date=datetime.datetime.now())
+                                    interest_earned=round(interest, 4))
             session.add(table_update)
             print("Record Account " + date + " || " + str(acc) + " || " + str(
                 eod_bal) + " ==== daily interest ----" + str(interest) + " Updated on date : ----" + date)
