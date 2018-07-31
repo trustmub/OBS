@@ -1,6 +1,7 @@
+import datetime
 from flask import Flask, render_template
 
-from functions.genarators import *
+from functions.genarators import Getters, session, User, Profile
 
 from views.user import user_view
 from views.banking import banking
@@ -11,29 +12,33 @@ from views.recon import reconciliation
 from views.enquiry import enquiry
 from views.bulk import bulk
 
-app = Flask(__name__)
-app.secret_key = 'asdkerhg8927qr9w0rhgwe70gw9eprg7w0e9r7g'
-app.register_blueprint(user_view)
-app.register_blueprint(banking)
-app.register_blueprint(customer)
-app.register_blueprint(till)
-app.register_blueprint(reconciliation)
-app.register_blueprint(enquiry)
-app.register_blueprint(bulk)
-app.register_blueprint(settings)
+APP = Flask(__name__)
+APP.secret_key = 'asdkerhg8927qr9w0rhgwe70gw9eprg7w0e9r7g'
+APP.register_blueprint(user_view)
+APP.register_blueprint(banking)
+APP.register_blueprint(customer)
+APP.register_blueprint(till)
+APP.register_blueprint(reconciliation)
+APP.register_blueprint(enquiry)
+APP.register_blueprint(bulk)
+APP.register_blueprint(settings)
 
 
-@app.route('/dashboard/')
+@APP.route('/dashboard/')
 def home():
     sys_date = datetime.datetime.strptime(Getters.getSysDate().date, '%Y-%m-%d')
 
     usr = session.query(User).all()
     # interest = session.query(Interest).all()
-    return render_template('dashboard.html', usr=usr, user=Profile().user_details(), teller=Getters.getTillDetails(),
-                           withd=Getters.getTellerWithdrawal(), deposits=Getters.getTellerDeposits(),
+    return render_template('dashboard.html',
+                           usr=usr,
+                           user=Profile().user_details(),
+                           teller=Getters.getTillDetails(),
+                           withd=Getters.getTellerWithdrawal(),
+                           deposits=Getters.getTellerDeposits(),
                            sys_date=sys_date.strftime('%d %B %Y'))
 
 
 if __name__ == '__main__':
     print("Server started press Crtl-C to terminate server")
-    app.run(debug=True, port=5001)
+    APP.run(debug=True, port=5001)

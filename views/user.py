@@ -158,9 +158,12 @@ def edit_profile():
                 print(UPLOAD_FOLDER)
         session.add(user_details)
         session.commit()
-        return redirect(url_for('user_view.profile', user=Profile().user_details()))
+        return redirect(url_for('user_view.profile',
+                                user=Profile().user_details()))
     else:
-        return render_template('user/edit_user.html', user=Profile().user_details(), branch=Getters.getBranch())
+        return render_template('user/edit_user.html',
+                               user=Profile().user_details(),
+                               branch=Getters.getBranch())
 
 
 @user_view.route('/admin')

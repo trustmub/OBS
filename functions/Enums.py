@@ -17,3 +17,8 @@ class TransactionCategory(Enum):
 class TransactionMethod(Enum):
     CASH = 'Cash'
     TRANSFER = 'TR'
+
+class AccountTypes(Enum):
+    CHARGES = 'charges'
+    SERVICE_FEES = 'servfee'
+    ACCOUNT_CREATION = 'acccreate'
