@@ -12,8 +12,9 @@ class SystemOBS:
     def __init__(self):
         self.logger = logging.getLogger()
 
-    """THe start Logging function takes in one parameter, message, specifying specific thing to log like error 
-    messages on try catch blocks """
-
     def start_logging(self, message):
+        """
+        THe start Logging function takes in one parameter, message, specifying specific thing to log like error
+        messages on try catch blocks
+        """
         self.logger.info(message)

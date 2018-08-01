@@ -3,9 +3,9 @@ Persistence of all transactions to the database are carried out of this file.
 
 """
 
-
 from cob.log_module import SystemOBS
 from functions.Enums import TransactionType, TransactionMethod, AccountTypes
+# from functions.constants import CHARGES, SERVICE_FEES, ACCOUNT_CREATION
 from functions.genarators import Auto, Getters
 from models.models import Transactions, Customer, Till, ChargeTransactionTable, TransactionCharge
 
@@ -81,7 +81,7 @@ class AccountTransaction(Transaction):
     def __init__(self, date, amount, cr_account):
         Transaction.__init__(self, date, amount, cr_account)
         self.suspense_account_new_account = session.query(Customer).filter_by(
-            account_type=AccountTypes.ACCOUNT_CREATION).first()
+            account_type=AccountTypes.ACCOUNT_CREATION.value).first()
         if Getters.getTillDetails() is not None:
             self.suspense_account_teller = session.query(Till).filter_by(
                 till_account=Getters.getTillDetails().till_account).first()
@@ -90,7 +90,7 @@ class AccountTransaction(Transaction):
 
         self.suspense_account_charges = session \
             .query(Customer) \
-            .filter_by(account_type='charges').first()
+            .filter_by(account_type=AccountTypes.CHARGES.value).first()
 
     def create_account(self):
 
@@ -199,7 +199,7 @@ class AccountTransaction(Transaction):
 
         # 2. charge details between customer and charge account
         # charge_account = session.query(Customer).filter_by(account_type='charges').first()
-        get_charge = session.query(TransactionCharge).filter_by(tran_type='DR').first()
+        get_charge = session.query(TransactionCharge).filter_by(tran_type=TransactionType.DEBIT).first()
         current_balance_after_charge = float(customer.working_bal) - float(get_charge.tran_charge)
         charge_withdrawal_transaction \
             = Transactions(trantype='DR',
@@ -224,23 +224,25 @@ class AccountTransaction(Transaction):
 
 
 class ChargeTransaction:
-    """ Charge Transaction Class handles all the charge logic for Withdrawals, internal transfers,
+    """
+    Charge Transaction Class handles all the charge logic for Withdrawals, internal transfers,
     external transfers methods:
             charges(transaction_type)
     initialising instance:
             ChargeTransaction(date, dr_account).charges(TransactionType.DEBIT)
 
-    Transaction charges are charges according to the charges tables and each transactio type has
-    a charge associated with it """
+    Transaction charges are charges according to the charges tables and each transaction type has
+    a charge associated with it
+    """
 
     def __init__(self, date, dr_account):
         self.date = date
         self.dr_account = dr_account
         self.suspense_account_charges = session.query(Customer) \
-            .filter_by(account_type=AccountTypes.CHARGES) \
+            .filter_by(account_type=AccountTypes.CHARGES.value) \
             .first()
         self.suspense_account_service_fees = session.query(Customer) \
-            .filter_by(account_type=AccountTypes.SERVICE_FEES) \
+            .filter_by(account_type=AccountTypes.SERVICE_FEES.value) \
             .first()
 
     def charges(self, transaction_type):
@@ -280,4 +282,4 @@ class ChargeTransaction:
             session.add(self.suspense_account_service_fees)
             session.commit()
         else:
-            SystemOBS().logger.error().start_logging("transaction charge type not found.")
+            SystemOBS().start_logging("transaction charge type not found.")

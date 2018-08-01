@@ -11,7 +11,7 @@ class Verify:
 
     def account_exists(self, account_number):
         self.verify_logging("Account Verification " + account_number)
-        record = session.query(Customer).filter_by(acc_num=account_number).first()
+        record = session.query(Customer).filter_by(acc_number=account_number).first()
         if record is not None:
             return True
 
