@@ -1,15 +1,20 @@
+"""
+This files handled all the models
+"""
 import datetime
 
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, backref
-from sqlalchemy import create_engine, extract
+from sqlalchemy.orm import relationship
+from sqlalchemy import create_engine
 
-Base = declarative_base()
+BASE = declarative_base()
 
 
-class User(Base):
-    """This table contains all the systems users from the teller, backend operations and system users"""
+class User(BASE):
+    """
+    This table contains all the systems users from the teller, backend operations and system users.
+    """
     __tablename__ = 'user'
     uid = Column(Integer, primary_key=True)
     full_name = Column(String(100))
@@ -25,8 +30,17 @@ class User(Base):
     password = Column(String(100))
     lock = Column(Integer)
 
-    def __init__(self, full_name, job_title, image_string, department, branch_code, access_level, till_o_balance,
-                 till_c_balance, email, password, lock):
+    def __init__(self, full_name,
+                 job_title,
+                 image_string,
+                 department,
+                 branch_code,
+                 access_level,
+                 till_o_balance,
+                 till_c_balance,
+                 email,
+                 password,
+                 lock):
         self.full_name = full_name
         self.job_title = job_title
         self.image_string = image_string
@@ -44,11 +58,13 @@ class User(Base):
         return self.full_name
 
     def __repr__(self):
-        return f"{self.full_name} the {self.job_title}"
+        return "{} the {}".format(self.full_name, self.job_title)
 
 
-class Customer(Base):
-    """THis table contains all the customer details."""
+class Customer(BASE):
+    """
+    THis table contains all the customer details.
+    """
     __tablename__ = 'customer'
     custid = Column(Integer, primary_key=True)
     first_name = Column(String(100))
@@ -68,8 +84,19 @@ class Customer(Base):
     inputter_id = Column(Integer, ForeignKey('user.uid'))
     inputter = relationship(User)
 
-    def __init__(self, first_name, last_name, dob, address, country, email, gender, contact_number, working_bal,
-                 acc_number, account_type, create_date, inputter_id):
+    def __init__(self, first_name,
+                 last_name,
+                 dob,
+                 address,
+                 country,
+                 email,
+                 gender,
+                 contact_number,
+                 working_bal,
+                 acc_number,
+                 account_type,
+                 create_date,
+                 inputter_id):
         self.first_name = first_name
         self.last_name = last_name
         self.dob = dob
@@ -86,17 +113,24 @@ class Customer(Base):
 
     @property
     def full_name(self):
-        return f"{self.first_name} {self.last_name}"
+        """
+        full name as a property
+        :return: first_name and last_name
+        """
+        return "{} {}".format(self.first_name, self.last_name)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return "{} {}".format(self.first_name, self.last_name)
 
     def __repr__(self):
-        return f"{self.first_name} {self.last_name}"
+        return "{} {}".format(self.first_name, self.last_name)
 
 
-class Account(Base):
-    """This table contains the type of accounts the systems handles for example, Savings current of Corporate Account"""
+class Account(BASE):
+    """
+    This table contains the type of accounts the systems handles for example, Savings current of
+    Corporate Account
+    """
     __tablename__ = 'account'
     id = Column(Integer, primary_key=True)
     acc_type = Column(String(10))
@@ -107,12 +141,14 @@ class Account(Base):
         self.minbalance = minbalance
 
     def __str__(self):
-        return f'account type: {self.acc_type}'
+        return "account type: {}".format(self.acc_type)
 
 
-class Transactions(Base):
-    """This table contains all the client transaction that are done in the system. these include Witdrawal, Deposits,
-    transfers that affect the client account."""
+class Transactions(BASE):
+    """
+    This table contains all the client transaction that are done in the system. these include
+    Withdrawal, Deposits, transfers that affect the client account.
+    """
     __tablename__ = 'transactions'
     tranid = Column(Integer, primary_key=True)
     trantype = Column(String(10))
@@ -131,8 +167,17 @@ class Transactions(Base):
 
     create_date = Column(String(30))
 
-    def __init__(self, trantype, tranref, tranmethod, tran_date, cheque_num, acc_number, cr_acc_number, amount,
-                 current_balance, remark, custid):
+    def __init__(self, trantype,
+                 tranref,
+                 tranmethod,
+                 tran_date,
+                 cheque_num,
+                 acc_number,
+                 cr_acc_number,
+                 amount,
+                 current_balance,
+                 remark,
+                 custid):
         self.trantype = trantype
         self.tranref = tranref
         self.tranmethod = tranmethod
@@ -150,9 +195,10 @@ class Transactions(Base):
         return self.tranref
 
 
-class TransactionCharge(Base):
-    """This table keeps the charge fees for each respective Transaction type. aditional transaction typex can be
-    added in the transaction type table
+class TransactionCharge(BASE):
+    """
+    This table keeps the charge fees for each respective Transaction type. additional transaction
+    typex can be added in the transaction type table
     TODO Transaction type table
     """
     __tablename__ = 'transactioncharge'
@@ -167,13 +213,15 @@ class TransactionCharge(Base):
         self.create_date = datetime.datetime.now()
 
     def __str__(self):
-        return f"{self.tran_type} charged {self.tran_charge}"
+        return "{} charged {}".format(self.tran_type, self.tran_charge)
 
 
-class ChargeTransactionTable(Base):
-    """This table contains all the transactions for charges that the clients have been charged on their operations
-    including service fees. Windrawal and frasnfer charges are also captured in here with apropriate reference to
-    show the type of charge. """
+class ChargeTransactionTable(BASE):
+    """
+    This table contains all the transactions for charges that the clients have been charged on
+    their operations including service fees. Windrawal and frasnfer charges are also captured in
+    here with apropriate reference to show the type of charge.
+    """
     __tablename__ = 'chargetransaction'
     id = Column(Integer, primary_key=True)
     tran_type = Column(String(10))
@@ -192,12 +240,15 @@ class ChargeTransactionTable(Base):
         self.create_date = datetime.datetime.now()
 
     def __str__(self):
-        return f'DR Account {self.cr_account} Credit Account {self.dr_account}'
+        return "DR Account {} Credit Account {}".format(self.cr_account, self.dr_account)
 
 
-class Till(Base):
-    """This table keeps the teller accounts and each teller account is linked to a user_view ID which helps to identify
-    the user_view who is linked to the teller account for tracking transactions flow. """
+class Till(BASE):
+    """
+    This table keeps the teller accounts and each teller account is linked to a user_view ID which
+    helps to identify the user_view who is linked to the teller account for tracking transactions
+    flow.
+    """
     __tablename__ = 'till'
     id = Column(Integer, primary_key=True)
     branch_code = Column(String(10))
@@ -212,7 +263,15 @@ class Till(Base):
     user_id = Column(Integer, ForeignKey('user.uid'), nullable=True)
     user = relationship(User)
 
-    def __init__(self, branch_code, o_balance, c_balance, till_account, currency, remark, date, create_date, user_id):
+    def __init__(self, branch_code,
+                 o_balance,
+                 c_balance,
+                 till_account,
+                 currency,
+                 remark,
+                 date,
+                 create_date,
+                 user_id):
         self.branch_code = branch_code
         self.o_balance = o_balance
         self.c_balance = c_balance
@@ -227,10 +286,12 @@ class Till(Base):
         return self.till_account
 
 
-class TellerTransactions(Base):
-    """This table contains all the transactions a teller does. Each transaction a teller does i linked to their
-    teller ID and the Till Account ID. The transaction is also linked to the client Account ID enabling a complete
-    trail of the transaction flow """
+class TellerTransactions(BASE):
+    """
+    This table contains all the transactions a teller does. Each transaction a teller does i
+    linked to their teller ID and the Till Account ID. The transaction is also linked to the client
+    Account ID enabling a complete trail of the transaction flow.
+    """
     __tablename__ = 'tellertransactions'
     id = Column(Integer, primary_key=True)
     tran_type = Column(String(10))
@@ -249,7 +310,15 @@ class TellerTransactions(Base):
     user_id = Column(Integer, ForeignKey('user.uid'))
     user = relationship(User)
 
-    def __init__(self, tran_type, tranref, amount, date, remark, create_date, teller_id, customer_id, user_id):
+    def __init__(self, tran_type,
+                 tranref,
+                 amount,
+                 date,
+                 remark,
+                 create_date,
+                 teller_id,
+                 customer_id,
+                 user_id):
         self.tran_type = tran_type
         self.tranref = tranref
         self.amount = amount
@@ -261,9 +330,11 @@ class TellerTransactions(Base):
         self.user_id = user_id
 
 
-class Currency(Base):
-    """This table contains all the currencies the system will be working using. the currencies will be added as the
-    operations needs may be """
+class Currency(BASE):
+    """
+    This table contains all the currencies the system will be working using. the currencies will be
+    added as the operations needs may be.
+    """
     __tablename__ = 'currency'
     id = Column(Integer, primary_key=True)
     currency_code = Column(String(5))
@@ -276,9 +347,11 @@ class Currency(Base):
         self.create_date = create_date
 
 
-class Branch(Base):
-    """This is the table for branches and their codes. Each account belongs to a particular branch the default branch
-    is the head office (01) which will be created during the system setup process."""
+class Branch(BASE):
+    """
+    This is the table for branches and their codes. Each account belongs to a particular branch the
+    default branch is the head office (01) which will be created during the system setup process.
+    """
     __tablename__ = 'branch'
     id = Column(Integer, primary_key=True)
     code = Column(String(5))
@@ -291,10 +364,12 @@ class Branch(Base):
         self.create_date = datetime.datetime.now()
 
 
-class Interest(Base):
-    """This is the table where interest earnings are captured. the end of day process calculates the interest daily
-    for each account and saves the values into this table for the End O Month preocess to credit the interest earned
-    into the respective accounts as a total figure."""
+class Interest(BASE):
+    """
+    This is the table where interest earnings are captured. the end of day process calculates the
+    interest daily for each account and saves the values into this table for the End O Month
+    preocess to credit the interest earned into the respective accounts as a total figure.
+    """
     __tablename__ = 'interest'
     id = Column(Integer, primary_key=True)
     date = Column(String(30))
@@ -311,14 +386,20 @@ class Interest(Base):
         self.create_date = datetime.datetime.now()
 
     def __repr__(self):
-        return f"Interest({self.date}, {self.account}, {self.eod_bal}, {self.interest_earned})"
+        return "Interest({}, {}, {}, {})".format(self.date,
+                                                 self.account,
+                                                 self.eod_bal,
+                                                 self.interest_earned)
 
     def __str__(self):
         return self.account
 
 
-class Banks(Base):
-    """This table contains a list of other banks which contains swift codes. This is used for external transfers."""
+class Banks(BASE):
+    """
+    This table contains a list of other banks which contains swift codes. This is used for external
+    transfers.
+    """
     __tablename__ = 'banks'
     id = Column(Integer, primary_key=True)
     name = Column(String(100))
@@ -331,7 +412,7 @@ class Banks(Base):
         self.create_date = datetime.datetime.now()
 
     def __repr__(self):
-        return f"Banks({self.name}, {self.swift_code})"
+        return "Banks({}, {})".format(self.name, self.swift_code)
 
     def __str__(self):
         return self.name
@@ -339,10 +420,12 @@ class Banks(Base):
 
 # Complete Of Business tables
 
-class CobDates(Base):
-    """This table keeps a list of all the processes that have been run and marks the process with the system date so
-    that if the system crashes and the EOD is reinitiated, the processes that have executed will not be executed
-    again. """
+class CobDates(BASE):
+    """
+    This table keeps a list of all the processes that have been run and marks the process with the
+    system date so that if the system crashes and the EOD is reinitiated, the processes that have
+    executed will not be executed again.
+    """
     __tablename__ = 'cobdates'
     id = Column(Integer, primary_key=True)
     date = Column(String(30))
@@ -357,15 +440,19 @@ class CobDates(Base):
         self.create_date = create_date
 
     def __repr__(self):
-        return f"CabDates({self.date}, {self.process}, {self.status})"
+        return "CabDates({}, {}, {})".format(self.date,
+                                             self.process,
+                                             self.status)
 
     def __str__(self):
         return self.process
 
 
-class SysDate(Base):
-    """This table keeps the current system date since the last End Of Day (EOD) process. When the end of day
-        completes the date is changes to the next trading date."""
+class SysDate(BASE):
+    """
+    This table keeps the current system date since the last End Of Day (EOD) process. When the end
+    of day completes the date is changes to the next trading date.
+    """
     __tablename__ = 'sysdate'
     id = Column(Integer, primary_key=True)
     date = Column(String(30))
@@ -376,7 +463,8 @@ class SysDate(Base):
         self.create_date = create_date
 
     def __repr__(self):
-        return f"SysDate({self.date}, {self.create_date})"
+        return "SysDate({}, {})".format(self.date,
+                                        self.create_date)
 
     def __str__(self):
         return self.date
@@ -385,5 +473,5 @@ class SysDate(Base):
 # insert this at the end of the classes #######
 
 
-engine = create_engine('sqlite:///bank_database.db')
-Base.metadata.create_all(engine)
+ENGINE = create_engine('sqlite:///bank_database.db')
+BASE.metadata.create_all(ENGINE)

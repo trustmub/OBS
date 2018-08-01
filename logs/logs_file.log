@@ -1192,3 +1192,57 @@ INFO 2018-08-01 01:46:26,963 there are no till details
 INFO 2018-08-01 01:46:26,982 Account Created: 33931973
 INFO 2018-08-01 01:46:26,983 127.0.0.1 - - [01/Aug/2018 01:46:26] "POST /add_cus/ HTTP/1.1" 302 -
 INFO 2018-08-01 01:46:27,025 127.0.0.1 - - [01/Aug/2018 01:46:27] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-08-01 11:56:58,071  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/models.py', reloading
+INFO 2018-08-01 11:56:58,311  * Restarting with stat
+WARNING 2018-08-01 11:56:59,223  * Debugger is active!
+INFO 2018-08-01 11:56:59,235  * Debugger PIN: 314-603-313
+INFO 2018-08-01 12:05:08,640  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/models.py', reloading
+INFO 2018-08-01 12:05:08,700  * Restarting with stat
+WARNING 2018-08-01 12:05:09,365  * Debugger is active!
+INFO 2018-08-01 12:05:09,376  * Debugger PIN: 314-603-313
+INFO 2018-08-01 12:10:20,940  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/models.py', reloading
+INFO 2018-08-01 12:10:21,090  * Restarting with stat
+WARNING 2018-08-01 12:10:22,502  * Debugger is active!
+INFO 2018-08-01 12:10:22,518  * Debugger PIN: 314-603-313
+INFO 2018-08-01 12:14:44,277  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/db_conn.py', reloading
+INFO 2018-08-01 12:14:44,351  * Restarting with stat
+WARNING 2018-08-01 12:14:45,470  * Debugger is active!
+INFO 2018-08-01 12:14:45,479  * Debugger PIN: 314-603-313
+INFO 2018-08-01 12:15:14,887 127.0.0.1 - - [01/Aug/2018 12:15:14] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:14,925 127.0.0.1 - - [01/Aug/2018 12:15:14] "GET /static/css/bootstrap.min.css HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:14,928 127.0.0.1 - - [01/Aug/2018 12:15:14] "GET /static/font-awesome/css/font-awesome.min.css HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:14,930 127.0.0.1 - - [01/Aug/2018 12:15:14] "GET /static/dist/css/AdminLTE.min.css HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:14,933 127.0.0.1 - - [01/Aug/2018 12:15:14] "GET /static/dist/css/skins/_all-skins.min.css HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:14,938 127.0.0.1 - - [01/Aug/2018 12:15:14] "GET /static/img/user/Screen_Shot_2018-05-08_at_21.26.11.png HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:14,947 127.0.0.1 - - [01/Aug/2018 12:15:14] "GET /static/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:14,979 127.0.0.1 - - [01/Aug/2018 12:15:14] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:14,982 127.0.0.1 - - [01/Aug/2018 12:15:14] "GET /static/plugins/slimScroll/jquery.slimscroll.min.js HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:15,004 127.0.0.1 - - [01/Aug/2018 12:15:15] "GET /static/plugins/fastclick/fastclick.js HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:15,007 127.0.0.1 - - [01/Aug/2018 12:15:15] "GET /static/dist/js/app.min.js HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:15,020 127.0.0.1 - - [01/Aug/2018 12:15:15] "GET /static/dist/js/demo.js HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:16,132 127.0.0.1 - - [01/Aug/2018 12:15:16] "GET /static/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3 HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:34,840 127.0.0.1 - - [01/Aug/2018 12:15:34] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:37,806 127.0.0.1 - - [01/Aug/2018 12:15:37] "GET /my_cus/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:48,233 127.0.0.1 - - [01/Aug/2018 12:15:48] "GET /statement/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:15:57,076 127.0.0.1 - - [01/Aug/2018 12:15:57] "GET /account_reset/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:17:05,906 127.0.0.1 - - [01/Aug/2018 12:17:05] "GET /add_cus/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:19:51,054 127.0.0.1 - - [01/Aug/2018 12:19:51] "GET /user_setting/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:19:53,820 127.0.0.1 - - [01/Aug/2018 12:19:53] "GET /system_setting/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:22:44,114 127.0.0.1 - - [01/Aug/2018 12:22:44] "GET /add_bank/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:22:50,474 127.0.0.1 - - [01/Aug/2018 12:22:50] "GET /system_setting/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:22:52,192 127.0.0.1 - - [01/Aug/2018 12:22:52] "GET /add_acc_type/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:22:54,499 127.0.0.1 - - [01/Aug/2018 12:22:54] "GET /system_setting/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:22:56,260 127.0.0.1 - - [01/Aug/2018 12:22:56] "GET /add_tran_type/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:22:58,261 127.0.0.1 - - [01/Aug/2018 12:22:58] "GET /system_setting/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:23:00,214 127.0.0.1 - - [01/Aug/2018 12:23:00] "GET /add_branch/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:23:04,070 127.0.0.1 - - [01/Aug/2018 12:23:04] "GET /system_setting/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:23:12,859 127.0.0.1 - - [01/Aug/2018 12:23:12] "GET /add_bank/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:23:15,400 127.0.0.1 - - [01/Aug/2018 12:23:15] "GET /system_setting/ HTTP/1.1" 200 -
+INFO 2018-08-01 12:27:53,074  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/models.py', reloading
+INFO 2018-08-01 12:27:53,144  * Restarting with stat
+WARNING 2018-08-01 12:27:53,791  * Debugger is active!
+INFO 2018-08-01 12:27:53,799  * Debugger PIN: 314-603-313
+INFO 2018-08-01 12:28:30,374  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/models.py', reloading
+INFO 2018-08-01 12:28:30,425  * Restarting with stat
+WARNING 2018-08-01 12:28:31,043  * Debugger is active!
+INFO 2018-08-01 12:28:31,050  * Debugger PIN: 314-603-313

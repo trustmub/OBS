@@ -8,7 +8,7 @@ from models.db_conn import *
 
 
 # importengine = create_engine('sqlite:///bnk.db')
-# Base.metadata.bind = engine
+# BASE.metadata.bind = engine
 # DBSession = sessionmaker(bind=engine)
 # session = DBSession()
 from models.models import Interest
