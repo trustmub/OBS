@@ -2,7 +2,8 @@ import os
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
-from forms.registration import RegistrationsForm
+from forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm
+from controller.user import UserController
 
 from utilities.verifier import Verify
 from functions.genarators import *
@@ -39,68 +40,62 @@ def lockscreen():
 
 @user_view.route('/', methods=['POST', 'GET'])
 def login():
-    if request.method == 'POST':
-        if 'username' in login_session:
-            flash('User already Logged in')
-            return redirect(url_for('user_view.login'))
-        else:
-            email = request.form['email']
-            password = request.form['password']
-            if Verify().email_exists(email):
-                user_account = session.query(User).filter_by(email=email).first()
-                # user_account.lock = 0
-                if user_account.lock == 1:  # Checker.userDbSession(email):
-                    flash('User is locked, Contact Systems Administrator')
-                    return redirect(url_for('user_view.login'))
-                else:
-                    if bcrypt.check_password_hash(user_account.password, password):
-                        login_session['username'] = email
+    """
+    This function handles the login requests by the user. it takes in the email and password as input parameters
+    :return: template and form
+    """
+    form = LoginForm()
 
-                        user_account.lock = 1
-                        session.add(user_account)
-                        session.commit()
-                        return redirect(url_for('home'))
-                    else:
-                        flash('Password is Incorrect')
-                        return redirect(url_for('user_view.login'))
-            else:
-                flash('Email does not exist')
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
+        if Verify().email_exists(email):
+            user_account = session.query(User).filter_by(email=email).first()
+            # user_account.lock = 0
+            if user_account.lock == 1:  # Checker.userDbSession(email):
+                flash('User is locked, Contact Systems Administrator', 'danger')
                 return redirect(url_for('user_view.login'))
-    else:
-        return render_template('user/login.html')
+            else:
+                if bcrypt.check_password_hash(user_account.password, password):
+                    login_session['username'] = email
+
+                    user_account.lock = 1
+                    session.add(user_account)
+                    session.commit()
+                    return redirect(url_for('home'))
+                else:
+                    flash('Password is Incorrect', 'danger')
+                    return redirect(url_for('user_view.login'))
+        else:
+            flash('Email does not exist', 'warning')
+            return redirect(url_for('user_view.login'))
+
+    return render_template('user/login.html', form=form)
 
 
 @user_view.route('/register/', methods=['POST', 'GET'])
 def register():
-    if request.method == 'POST':
-        full_name = request.form['full_name']
-        email = request.form['email']
-        password = request.form['password']
-        password_confirm = request.form['password2']
-        if password != password_confirm:
-            flash('Passwords Don\'t match')
-            return redirect(url_for('user_view.register'))
-        elif Verify().email_exists(email):
-            flash('User Already Exists')
+    """
+    this function handles the registration of a new user
+    :return:
+    """
+    form = RegistrationsForm()
+    if form.validate_on_submit():
+        full_name = form.fullname.data
+        email = form.email.data
+        password = form.password.data
+        ts_and_cs = form.ts_and_cs.data
+
+        record = UserController(full_name, email, password)
+        if record.email_exists():
+            flash('Email already exists', 'danger')
             return redirect(url_for('user_view.register'))
         else:
-            new = User(full_name=full_name,
-                       job_title='',
-                       image_string='',
-                       department='',
-                       branch_code='',
-                       access_level=0,
-                       till_o_balance=0,
-                       till_c_balance=0,
-                       email=email,
-                       password=bcrypt.generate_password_hash(password, 12),
-                       lock=0)
-            session.add(new)
-            session.commit()
-            flash('User Successfully Registered')
+            record.add_new_user()
+            flash('User Successfully Registered', 'success')
             return redirect(url_for('user_view.login'))
     else:
-        return render_template('user/register.html')
+        return render_template('user/register.html', form=form)
 
 
 @user_view.route('/logout/')
@@ -125,6 +120,7 @@ def allowed_file(filename):
 
 @user_view.route('/edit_user/', methods=['POST', 'GET'])
 def edit_profile():
+    form = UserProfileForm()
     if request.method == 'POST':
         user_details = Profile().user_details()
         if request.form['full_name'] == user_details.full_name:

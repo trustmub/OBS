@@ -60,6 +60,9 @@ class User(BASE):
     def __repr__(self):
         return "{} the {}".format(self.full_name, self.job_title)
 
+    def add_user(self):
+        return
+
 
 class Customer(BASE):
     """
