@@ -1246,3 +1246,17 @@ INFO 2018-08-01 12:28:30,374  * Detected change in '/Users/trustmub/PycharmProje
 INFO 2018-08-01 12:28:30,425  * Restarting with stat
 WARNING 2018-08-01 12:28:31,043  * Debugger is active!
 INFO 2018-08-01 12:28:31,050  * Debugger PIN: 314-603-313
+INFO 2018-08-01 14:54:40,789  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-08-01 14:54:40,793  * Restarting with stat
+WARNING 2018-08-01 14:54:41,226  * Debugger is active!
+INFO 2018-08-01 14:54:41,252  * Debugger PIN: 307-328-159
+INFO 2018-08-01 14:54:51,198 127.0.0.1 - - [01/Aug/2018 14:54:51] "GET /system_setting/ HTTP/1.1" 200 -
+INFO 2018-08-01 14:54:56,641 127.0.0.1 - - [01/Aug/2018 14:54:56] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-08-01 14:54:56,651 127.0.0.1 - - [01/Aug/2018 14:54:56] "GET / HTTP/1.1" 200 -
+INFO 2018-08-01 14:54:56,668 127.0.0.1 - - [01/Aug/2018 14:54:56] "GET /static/plugins/iCheck/square/blue.css HTTP/1.1" 200 -
+INFO 2018-08-01 14:54:56,673 127.0.0.1 - - [01/Aug/2018 14:54:56] "GET /static/plugins/iCheck/icheck.min.js HTTP/1.1" 200 -
+INFO 2018-08-01 14:54:56,697 127.0.0.1 - - [01/Aug/2018 14:54:56] "GET /static/plugins/iCheck/square/blue@2x.png HTTP/1.1" 200 -
+INFO 2018-08-01 14:54:56,699 127.0.0.1 - - [01/Aug/2018 14:54:56] "GET /static/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 -
+INFO 2018-08-01 14:56:19,372 127.0.0.1 - - [01/Aug/2018 14:56:19] "GET /register/ HTTP/1.1" 200 -
+INFO 2018-08-01 14:56:20,207 127.0.0.1 - - [01/Aug/2018 14:56:20] "GET / HTTP/1.1" 200 -
+INFO 2018-08-01 14:56:21,995 127.0.0.1 - - [01/Aug/2018 14:56:21] "GET /register/ HTTP/1.1" 200 -
