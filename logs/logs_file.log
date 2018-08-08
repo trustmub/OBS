@@ -1260,3 +1260,24 @@ INFO 2018-08-01 14:54:56,699 127.0.0.1 - - [01/Aug/2018 14:54:56] "GET /static/f
 INFO 2018-08-01 14:56:19,372 127.0.0.1 - - [01/Aug/2018 14:56:19] "GET /register/ HTTP/1.1" 200 -
 INFO 2018-08-01 14:56:20,207 127.0.0.1 - - [01/Aug/2018 14:56:20] "GET / HTTP/1.1" 200 -
 INFO 2018-08-01 14:56:21,995 127.0.0.1 - - [01/Aug/2018 14:56:21] "GET /register/ HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:01,369  * Restarting with stat
+WARNING 2018-08-08 16:36:03,307  * Debugger is active!
+INFO 2018-08-08 16:36:03,322  * Debugger PIN: 296-861-257
+INFO 2018-08-08 16:36:03,369  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-08-08 16:36:19,302 127.0.0.1 - - [08/Aug/2018 16:36:19] "GET / HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:19,402 127.0.0.1 - - [08/Aug/2018 16:36:19] "GET /static/css/bootstrap.min.css HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:19,495 127.0.0.1 - - [08/Aug/2018 16:36:19] "GET /static/font-awesome/css/font-awesome.min.css HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:19,729 127.0.0.1 - - [08/Aug/2018 16:36:19] "GET /static/dist/css/AdminLTE.min.css HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:19,744 127.0.0.1 - - [08/Aug/2018 16:36:19] "GET /static/plugins/iCheck/square/blue.css HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:19,756 127.0.0.1 - - [08/Aug/2018 16:36:19] "GET /static/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:19,772 127.0.0.1 - - [08/Aug/2018 16:36:19] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:19,784 127.0.0.1 - - [08/Aug/2018 16:36:19] "GET /static/plugins/iCheck/icheck.min.js HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:21,216 127.0.0.1 - - [08/Aug/2018 16:36:21] "GET /static/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:21,265 127.0.0.1 - - [08/Aug/2018 16:36:21] "GET /static/plugins/iCheck/square/blue.png HTTP/1.1" 200 -
+INFO 2018-08-08 16:36:21,761 127.0.0.1 - - [08/Aug/2018 16:36:21] "GET /favicon.ico HTTP/1.1" 404 -
+INFO 2018-08-08 16:36:24,029 127.0.0.1 - - [08/Aug/2018 16:36:24] "GET /register/ HTTP/1.1" 200 -
+INFO 2018-08-08 16:48:03,158  * Detected change in 'C:\\Users\\trustmub\\PycharmProjects\\OBS\\views\\user.py', reloading
+INFO 2018-08-08 16:48:03,330  * Restarting with stat
+WARNING 2018-08-08 16:48:05,571  * Debugger is active!
+INFO 2018-08-08 16:48:05,586  * Debugger PIN: 296-861-257
+INFO 2018-08-08 16:48:05,618  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
