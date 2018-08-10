@@ -4,13 +4,8 @@ from sqlalchemy import extract
 from functions.Enums import TransactionType
 from functions.genarators import *
 from functions.transactions import ChargeTransaction
-from models.db_conn import *
+from models import session
 
-
-# importengine = create_engine('sqlite:///bnk.db')
-# BASE.metadata.bind = engine
-# DBSession = sessionmaker(bind=engine)
-# session = DBSession()
 from models.models import Interest
 
 

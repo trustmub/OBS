@@ -2,7 +2,7 @@ import datetime
 import random
 from flask import session as login_session
 
-from models.db_conn import session
+from models import session
 from models.models import Till, TransactionCharge, Transactions, TellerTransactions, Account, Customer, Branch, \
     Currency, Banks, CobDates, SysDate, User
 

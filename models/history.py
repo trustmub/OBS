@@ -2,8 +2,6 @@ import datetime
 
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Boolean
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship, backref
-from sqlalchemy import create_engine, extract
 
 Base = declarative_base()
 

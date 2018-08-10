@@ -2,24 +2,23 @@
     controller.user
     ---------------
 
-    A user controller that provide functionalities for the user resgistration login and ammendments of user record.
+    A user controller that provide functionalities for the user resgistration login and amendments
+    of user record.
 
     this controller interacts with the user views.user module
 """
 
-from models.db_conn import session
-from models.models import User
 from flask_bcrypt import Bcrypt
-
-
-class UserBase(object):
-    def __init__(self, full_name, email, password):
-        self.full_name = full_name
-        self.email = email
-        self.password = password
+from models.models import User
+from controller import session
 
 
 class UserController(object):
+    """
+    Hanndles all the functions for persisting to database whci are Create, Update and
+    Delete
+    """
+
     def __init__(self,
                  full_name,
                  email,
@@ -45,6 +44,10 @@ class UserController(object):
         self.password = password
 
     def add_new_user(self):
+        """
+        Method to add new user record
+        :return:
+        """
         new_record = User(full_name=self.full_name,
                           job_title=self.job_title,
                           image_string=self.image_string,
@@ -55,32 +58,51 @@ class UserController(object):
                           till_c_balance=self.till_c_balance,
                           email=self.email,
                           password=self.encrypted_password,
-                          lock=self.lock
-                          )
+                          lock=self.lock)
         session.add(new_record)
         session.commit()
 
     @property
     def encrypted_password(self):
+        """
+        Property Method to encrypt the passed password.
+        :return: byte string
+        """
         bcrypt = Bcrypt()
-        pwd = bcrypt.generate_password_hash(self.password, 12)
-        return pwd
+        password = bcrypt.generate_password_hash(self.password, 12)
+        return password
 
     def email_exists(self):
-        if session.query(User).filter_by(email=self.email).first(): return True
+        """
+        Method to check is email exists
+        :return:
+        """
+        if session.query(User).filter_by(email=self.email).first():
+            return True
 
     def update_user(self):
+        """
+        Method to update the user profile.
+        :return:
+        """
         old_user = session.query(User).filter_by(email=self.email).first()
 
-        if old_user.full_name != self.full_name or '': old_user.full_name = self.full_name
-        if old_user.job_title != self.job_title or '': old_user.job_title = self.job_title
-        if old_user.image_string != self.image_string or '': old_user.image_string = self.image_string
-        if old_user.department != self.department or '': old_user.department = self.department
-        if old_user.branch_code != self.branch_code or '': old_user.branch_code = self.branch_code
-        if old_user.access_level != self.access_level or 0: old_user.access_level = self.access_level
-        if old_user.till_o_balance != self.till_o_balance or 0: old_user.till_o_balance = self.till_o_balance
-        if old_user.till_c_balance != self.till_c_balance or 0: old_user.till_c_balance = self.till_c_balance
+        if old_user.full_name != self.full_name or '':
+            old_user.full_name = self.full_name
+        if old_user.job_title != self.job_title or '':
+            old_user.job_title = self.job_title
+        if old_user.image_string != self.image_string or '':
+            old_user.image_string = self.image_string
+        if old_user.department != self.department or '':
+            old_user.department = self.department
+        if old_user.branch_code != self.branch_code or '':
+            old_user.branch_code = self.branch_code
+        if old_user.access_level != self.access_level or 0:
+            old_user.access_level = self.access_level
+        if old_user.till_o_balance != self.till_o_balance or 0:
+            old_user.till_o_balance = self.till_o_balance
+        if old_user.till_c_balance != self.till_c_balance or 0:
+            old_user.till_c_balance = self.till_c_balance
 
         session.add(old_user)
         session.commit()
-        return

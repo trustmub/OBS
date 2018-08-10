@@ -85,15 +85,10 @@ def register():
         email = form.email.data
         password = form.password.data
         ts_and_cs = form.ts_and_cs.data
-
         record = UserController(full_name, email, password)
-        if record.email_exists():
-            flash('Email already exists', 'danger')
-            return redirect(url_for('user_view.register'))
-        else:
-            record.add_new_user()
-            flash('User Successfully Registered', 'success')
-            return redirect(url_for('user_view.login'))
+        record.add_new_user()
+        flash('User Successfully Registered', 'success')
+        return redirect(url_for('user_view.login'))
     else:
         return render_template('user/register.html', form=form)
 
@@ -107,10 +102,10 @@ def logout():
         session.add(user_account)
         session.commit()
         login_session.pop('username', None)
-        flash("Logged Out")
+        flash("Logged Out", "success")
         return redirect(url_for('user_view.login'))
     else:
-        flash('Already Logged Off')
+        flash('Already Logged Off', 'warning')
         return redirect(url_for('user_view.login'))
 
 

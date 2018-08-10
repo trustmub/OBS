@@ -1,5 +1,5 @@
 from functions.genarators import Profile
-from models.db_conn import session
+from models import session
 from models.models import TransactionCharge, Till
 
 

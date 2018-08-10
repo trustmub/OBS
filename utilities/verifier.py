@@ -1,6 +1,6 @@
 from cob.log_module import SystemOBS
 from functions.genarators import Getters
-from models.db_conn import session
+from models import session
 from models.models import Customer, User
 
 

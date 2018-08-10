@@ -1,9 +1,21 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+"""
+    forms.user_forms
+    ----------------
+
+    forms for user input fields verifications and validation etc
+
+"""
+
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from forms import (FlaskForm, StringField, PasswordField, SubmitField, BooleanField, IntegerField)
+from models import session
+from models.models import User
 
 
 class RegistrationsForm(FlaskForm):
+    """
+    form class for user registrations
+    """
     fullname = StringField('Username', validators=[DataRequired(), Length(min=4)])
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=5)])
@@ -11,15 +23,32 @@ class RegistrationsForm(FlaskForm):
     ts_and_cs = BooleanField('Agree to ')
     submit = SubmitField('Register')
 
+    def validate_email(self, email):
+        """
+        This method evaluates on submission if the user with the same email exists. if so a
+        validation error is sent.
+        :param email:
+        :return: ValidationError
+        """
+        user = session.query(User).filter_by(email=email.data).first()
+        if user:
+            raise ValidationError("This email already exists. Please try a different one.")
+
 
 class LoginForm(FlaskForm):
+    """
+    form class for user login.
+    """
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=5)])
     remember_me = BooleanField('Remeber me')
     submit = SubmitField('Login')
 
 
-class UserProfile(FlaskForm):
+class UserProfileForm(FlaskForm):
+    """
+    form class for user profile edit.
+    """
     fullname = StringField('Username', validators=[DataRequired(), Length(min=4)])
     job_title = StringField('Job_Title')
     department = StringField('Department')

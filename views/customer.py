@@ -8,7 +8,7 @@ from functions.genarators import Auto, Getters, Profile, Checker
 from functions.transactions import AccountTransaction
 from models.models import Customer
 
-from models.db_conn import session
+from models import session
 
 customer = Blueprint('customer', __name__)
 

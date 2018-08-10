@@ -10,7 +10,7 @@ from functions.genarators import Profile, Checker, Getters, TransactionUpdate, A
 from functions.transactions import AccountTransaction, ChargeTransaction
 from models.models import Customer, Banks
 
-from models.db_conn import session
+from models import session
 
 banking = Blueprint('banking', __name__)
 
