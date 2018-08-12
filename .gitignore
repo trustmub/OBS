@@ -28,6 +28,9 @@ $RECYCLE.BIN/
 .AppleDouble
 .LSOverride
 
+# Python byte code
+*.pyc
+
 /.idea
 
 # Thumbnails

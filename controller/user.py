@@ -15,16 +15,16 @@ from controller import session
 
 class UserController(object):
     """
-    Hanndles all the functions for persisting to database whci are Create, Update and
+    Handles all the functions for persisting to database whci are Create, Update and
     Delete
     """
 
     def __init__(self,
-                 full_name,
                  email,
                  password,
+                 full_name='',
                  job_title='',
-                 image_string='',
+                 image_string='avatar.png',
                  department='',
                  branch_code='',
                  access_level=0,
@@ -46,7 +46,7 @@ class UserController(object):
     def add_new_user(self):
         """
         Method to add new user record
-        :return:
+        :return: None
         """
         new_record = User(full_name=self.full_name,
                           job_title=self.job_title,
@@ -72,18 +72,27 @@ class UserController(object):
         password = bcrypt.generate_password_hash(self.password, 12)
         return password
 
-    def email_exists(self):
+    def verify_email(self):
         """
         Method to check is email exists
-        :return:
+        :return: Boolean
         """
         if session.query(User).filter_by(email=self.email).first():
+            return True
+
+    def verify_password(self):
+        """
+        Method to verify password
+        :return: Boolean
+        """
+        user = session.query(User).filter_by(email=self.email).first()
+        if Bcrypt().check_password_hash(user.password, self.password):
             return True
 
     def update_user(self):
         """
         Method to update the user profile.
-        :return:
+        :return: None
         """
         old_user = session.query(User).filter_by(email=self.email).first()
 

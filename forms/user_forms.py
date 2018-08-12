@@ -41,7 +41,12 @@ class LoginForm(FlaskForm):
     """
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=5)])
-    remember_me = BooleanField('Remeber me')
+    remember_me = BooleanField('Remember me')
+    submit = SubmitField('Login')
+
+
+class LockScreenForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=5)])
     submit = SubmitField('Login')
 
 

@@ -2,7 +2,7 @@ import os
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
-from forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm
+from forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm, LockScreenForm
 from controller.user import UserController
 
 from utilities.verifier import Verify
@@ -19,29 +19,41 @@ bcrypt = Bcrypt()
 
 @user_view.route('/lockscreen/', methods=['post', 'get'])
 def lockscreen():
-    if request.method == 'POST':
-        password = request.form['password']
+    form = LockScreenForm()
+
+    if form.validate_on_submit():
+        password = form.password.data
         email = login_session['username']
+
         user_account = session.query(User).filter_by(email=email).first()
-        if bcrypt.check_password_hash(user_account.password, password):
+
+        user_instance = UserController(full_name=user_account.full_name,
+                                       email=email,
+                                       password=password)
+
+        if user_instance.verify_password():
             user_account.lock = 1
             session.add(user_account)
             session.commit()
             return redirect(url_for('home'))
         else:
+            flash("Wrong Password try again", "danger")
             return redirect(url_for('user_view.lockscreen'))
     else:
         user_session = login_session['username']
         user_account = session.query(User).filter_by(email=user_session).first()
         user_account.lock = 0
+        session.add(user_account)
+        session.commit()
 
-        return render_template('user/lockscreen.html', user=user_account)
+        return render_template('user/lockscreen.html', user=user_account, form=form)
 
 
 @user_view.route('/', methods=['POST', 'GET'])
 def login():
     """
-    This function handles the login requests by the user. it takes in the email and password as input parameters
+    This function handles the login requests by the user. it takes in the email and password as
+    input parameters
     :return: template and form
     """
     form = LoginForm()
@@ -49,14 +61,16 @@ def login():
     if form.validate_on_submit():
         email = form.email.data
         password = form.password.data
-        if Verify().email_exists(email):
+
+        user_instance = UserController(email=email, password=password)
+        if user_instance.verify_email():
             user_account = session.query(User).filter_by(email=email).first()
-            # user_account.lock = 0
+
             if user_account.lock == 1:  # Checker.userDbSession(email):
                 flash('User is locked, Contact Systems Administrator', 'danger')
                 return redirect(url_for('user_view.login'))
             else:
-                if bcrypt.check_password_hash(user_account.password, password):
+                if user_instance.verify_password():
                     login_session['username'] = email
 
                     user_account.lock = 1
