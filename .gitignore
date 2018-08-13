@@ -37,9 +37,9 @@ $RECYCLE.BIN/
 ._*
 
 #reports and virtual environments
-/reports/*
+reports/*
 /venv
-/logs/*
+logs/*
 *.log
 
 # Files that might appear in the root of a volume
