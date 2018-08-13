@@ -2206,3 +2206,34 @@ INFO 2018-08-12 03:06:09,477  * Detected change in '/Users/trustmub/PycharmProje
 INFO 2018-08-12 03:06:09,543  * Restarting with stat
 WARNING 2018-08-12 03:06:10,253  * Debugger is active!
 INFO 2018-08-12 03:06:10,261  * Debugger PIN: 314-603-313
+INFO 2018-08-13 23:41:41,396  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-08-13 23:41:41,399  * Restarting with stat
+WARNING 2018-08-13 23:41:41,720  * Debugger is active!
+INFO 2018-08-13 23:41:41,729  * Debugger PIN: 314-603-313
+INFO 2018-08-13 23:42:50,781  * Detected change in '/Users/trustmub/PycharmProjects/OBS/models/models.py', reloading
+INFO 2018-08-13 23:42:50,832  * Restarting with stat
+INFO 2018-08-13 23:49:58,437  * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
+INFO 2018-08-13 23:49:58,442  * Restarting with stat
+WARNING 2018-08-13 23:49:58,753  * Debugger is active!
+INFO 2018-08-13 23:49:58,767  * Debugger PIN: 314-603-313
+INFO 2018-08-13 23:50:10,233 127.0.0.1 - - [13/Aug/2018 23:50:10] "GET / HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:10,255 127.0.0.1 - - [13/Aug/2018 23:50:10] "GET /static/css/bootstrap.min.css HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:10,259 127.0.0.1 - - [13/Aug/2018 23:50:10] "GET /static/font-awesome/css/font-awesome.min.css HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:10,268 127.0.0.1 - - [13/Aug/2018 23:50:10] "GET /static/dist/css/AdminLTE.min.css HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:10,271 127.0.0.1 - - [13/Aug/2018 23:50:10] "GET /static/plugins/iCheck/square/blue.css HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:10,273 127.0.0.1 - - [13/Aug/2018 23:50:10] "GET /static/plugins/jQuery/jquery-2.2.3.min.js HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:10,276 127.0.0.1 - - [13/Aug/2018 23:50:10] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:10,280 127.0.0.1 - - [13/Aug/2018 23:50:10] "GET /static/plugins/iCheck/icheck.min.js HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:11,924 127.0.0.1 - - [13/Aug/2018 23:50:11] "GET /static/plugins/iCheck/square/blue@2x.png HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:12,101 127.0.0.1 - - [13/Aug/2018 23:50:12] "GET /static/fonts/glyphicons-halflings-regular.woff2 HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:23,486 127.0.0.1 - - [13/Aug/2018 23:50:23] "POST / HTTP/1.1" 302 -
+INFO 2018-08-13 23:50:23,560 127.0.0.1 - - [13/Aug/2018 23:50:23] "GET /dashboard/ HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:23,620 127.0.0.1 - - [13/Aug/2018 23:50:23] "GET /static/dist/css/skins/_all-skins.min.css HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:23,631 127.0.0.1 - - [13/Aug/2018 23:50:23] "GET /static/img/user/Screen_Shot_2018-05-08_at_21.26.11.png HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:23,636 127.0.0.1 - - [13/Aug/2018 23:50:23] "GET /static/plugins/slimScroll/jquery.slimscroll.min.js HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:23,644 127.0.0.1 - - [13/Aug/2018 23:50:23] "GET /static/plugins/fastclick/fastclick.js HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:23,648 127.0.0.1 - - [13/Aug/2018 23:50:23] "GET /static/dist/js/app.min.js HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:23,657 127.0.0.1 - - [13/Aug/2018 23:50:23] "GET /static/dist/js/demo.js HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:23,717 127.0.0.1 - - [13/Aug/2018 23:50:23] "GET /static/font-awesome/fonts/fontawesome-webfont.woff2?v=4.6.3 HTTP/1.1" 200 -
+INFO 2018-08-13 23:50:27,665 127.0.0.1 - - [13/Aug/2018 23:50:27] "GET /logout/ HTTP/1.1" 302 -
+INFO 2018-08-13 23:50:27,674 127.0.0.1 - - [13/Aug/2018 23:50:27] "GET / HTTP/1.1" 200 -
