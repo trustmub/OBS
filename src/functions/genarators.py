@@ -35,11 +35,11 @@ class Getters:
         else:
             return []
 
-    # @staticmethod
-    # def getTellerStatus():
-    #     mylist = [i.user_id for i in session.query(Till).all()]
-    #     if Profile().user_details().uid in mylist:
-    #         return 1
+    @staticmethod
+    def getTellerStatus():
+        mylist = [i.user_id for i in session.query(Till).all()]
+        if Profile().user_details().uid in mylist:
+            return 1
 
     @staticmethod
     def getTellerWithdrawal():

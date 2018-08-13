@@ -2,6 +2,8 @@ import os
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from flask_bcrypt import Bcrypt
 from werkzeug.utils import secure_filename
+
+from src import login_manager
 from src.forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm, LockScreenForm
 from src.controller.user import UserController
 

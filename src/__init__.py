@@ -1,7 +1,20 @@
 import datetime
 from flask import Flask, render_template
+from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
 
 from .functions.genarators import Getters, session, User, Profile
+
+
+APP = Flask(__name__)
+APP.secret_key = 'asdkerhg8927qr9w0rhgwe70gw9eprg7w0e9r7g'
+
+bcrypt = Bcrypt(APP)
+
+login_manager = LoginManager(APP)
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'info'
+
 
 from .views.user import user_view
 from .views.banking import banking
@@ -12,8 +25,6 @@ from .views.recon import reconciliation
 from .views.enquiry import enquiry
 from .views.bulk import bulk
 
-APP = Flask(__name__)
-APP.secret_key = 'asdkerhg8927qr9w0rhgwe70gw9eprg7w0e9r7g'
 APP.register_blueprint(user_view)
 APP.register_blueprint(banking)
 APP.register_blueprint(customer)

@@ -8,7 +8,7 @@
     this controller interacts with the user views.user module
 """
 
-from flask_bcrypt import Bcrypt
+from src import bcrypt
 from src.models.models import User
 from src.controller import session
 
@@ -68,7 +68,6 @@ class UserController(object):
         Property Method to encrypt the passed password.
         :return: byte string
         """
-        bcrypt = Bcrypt()
         password = bcrypt.generate_password_hash(self.password, 12)
         return password
 
@@ -86,7 +85,7 @@ class UserController(object):
         :return: Boolean
         """
         user = session.query(User).filter_by(email=self.email).first()
-        if Bcrypt().check_password_hash(user.password, self.password):
+        if bcrypt.check_password_hash(user.password, self.password):
             return True
 
     def update_user(self):
