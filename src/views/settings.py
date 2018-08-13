@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, request, url_for
-from functions.genarators import *
+from src.functions.genarators import *
 
 settings = Blueprint('settings', __name__)
 

@@ -5,8 +5,8 @@ from werkzeug.utils import secure_filename
 from src.forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm, LockScreenForm
 from src.controller.user import UserController
 
-from utilities.verifier import Verify
-from functions.genarators import *
+from src.utilities.verifier import Verify
+from src.functions.genarators import *
 
 UPLOAD_FOLDER = os.path.abspath("static//img//user")
 

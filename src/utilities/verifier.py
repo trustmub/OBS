@@ -1,5 +1,5 @@
-from cob.log_module import SystemOBS
-from functions.genarators import Getters
+from src.cob.log_module import SystemOBS
+from src.functions.genarators import Getters
 from src.models import session
 from src.models.models import Customer, User
 

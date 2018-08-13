@@ -1,6 +1,6 @@
 from flask import Blueprint, redirect, render_template, url_for, request
 
-from functions.genarators import Profile, Getters
+from src.functions.genarators import Profile, Getters
 
 reconciliation = Blueprint('reconciliation', __name__)
 

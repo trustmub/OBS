@@ -2,7 +2,7 @@ import logging
 import os
 
 LOG_FORMAT = "%(levelname)s %(asctime)s %(message)s"
-UPLOAD_FOLDER = os.path.abspath("logs//logs_file.log")
+UPLOAD_FOLDER = os.path.abspath("src//logs//logs_file.log")
 logging.basicConfig(filename=UPLOAD_FOLDER, level=logging.DEBUG, format=LOG_FORMAT)
 
 

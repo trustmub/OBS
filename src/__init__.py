@@ -1,16 +1,16 @@
 import datetime
 from flask import Flask, render_template
 
-from functions.genarators import Getters, session, User, Profile
+from .functions.genarators import Getters, session, User, Profile
 
-from views.user import user_view
-from views.banking import banking
-from views.customer import customer
-from views.till import till
-from views.settings import settings
-from views.recon import reconciliation
-from views.enquiry import enquiry
-from views.bulk import bulk
+from .views.user import user_view
+from .views.banking import banking
+from .views.customer import customer
+from .views.till import till
+from .views.settings import settings
+from .views.recon import reconciliation
+from .views.enquiry import enquiry
+from .views.bulk import bulk
 
 APP = Flask(__name__)
 APP.secret_key = 'asdkerhg8927qr9w0rhgwe70gw9eprg7w0e9r7g'

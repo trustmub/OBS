@@ -3,9 +3,9 @@ import datetime
 
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 
-from utilities.verifier import Verify
-from functions.genarators import Auto, Getters, Profile, Checker
-from functions.transactions import AccountTransaction
+from src.utilities.verifier import Verify
+from src.functions.genarators import Auto, Getters, Profile, Checker
+from src.functions.transactions import AccountTransaction
 from src.models.models import Customer
 
 from src.models import session

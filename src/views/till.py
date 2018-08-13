@@ -3,9 +3,9 @@ import datetime
 
 from flask import Blueprint, render_template, request, url_for, redirect
 
-from functions.Enums import TransactionType
-from functions.genarators import *
-from functions.queries import Query
+from src.functions.Enums import TransactionType
+from src.functions.genarators import *
+from src.functions.queries import Query
 
 till = Blueprint('till', __name__)
 

@@ -1,4 +1,4 @@
-from functions.genarators import Profile
+from src.functions.genarators import Profile
 from src.models import session
 from src.models.models import TransactionCharge, Till
 

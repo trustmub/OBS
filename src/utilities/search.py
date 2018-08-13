@@ -1,4 +1,4 @@
-from cob.log_module import SystemOBS
+from src.cob.log_module import SystemOBS
 from src.models import session
 from src.models.models import Customer, Transactions
 
