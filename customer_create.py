@@ -1,6 +1,6 @@
 import random
 
-from models.models import Account
+from src.models.models import Account
 from views.customer import *
 import threading
 from flask import session as login_session

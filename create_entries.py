@@ -1,4 +1,4 @@
-from models.models import SysDate, Till, TransactionCharge, Account, Branch, Currency
+from src.models.models import SysDate, Till, TransactionCharge, Account, Branch, Currency
 from views.customer import *
 
 print("Creating System Date")
