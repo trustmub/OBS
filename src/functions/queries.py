@@ -21,7 +21,7 @@ class Query:
     def teller_status(self):
         mylist = [i.user_id for i in self.teller_list]
         if Profile().user_details().uid in mylist:
-            return 1
+            return True
 
     def till_details(self):
         _teller_id_list = [i.id for i in self.teller_list]

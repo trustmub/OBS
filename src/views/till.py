@@ -6,6 +6,7 @@ from flask import Blueprint, render_template, request, url_for, redirect, flash
 from src.functions.Enums import TransactionType
 from src.functions.genarators import *
 from src.functions.queries import Query
+from src.forms.till_forms import OpenTillForm
 
 till = Blueprint('till', __name__)
 
@@ -17,6 +18,8 @@ def my_till():
 
 @till.route('/open_till/', methods=['POST', 'GET'])
 def open_till():
+    form = OpenTillForm()
+    form.branch.choices = [(b.code, b.description) for b in Getters.getBranch()]
     if request.method == 'POST':
         till_num = int(request.form['teller_num'])
         branch_code = request.form['branch_code']
@@ -49,7 +52,7 @@ def open_till():
         # else display the general till opening
         return render_template('till/open_till.html', user=Profile().user_details(),
                                branch=Getters.getBranch(), teller=Query().available_tellers(),
-                               teller2=Getters.getAllTellers(), ts=Query().teller_status())
+                               teller2=Getters.getAllTellers(), ts=Query().teller_status(), form=form)
 
 
 @till.route('/close_till/', methods=['POST', 'GET'])
@@ -96,4 +99,4 @@ def close_till():
         pass
     else:
         return render_template('till/close_till.html', user=Profile().user_details(), my_till=Getters.getTillDetails(),
-                               my_tt=Getters.getTellerTransactions(), ts=Getters.getTellerStatus())
+                               my_tt=Getters.getTellerTransactions(), teller_linked=Getters.getTellerStatus())
