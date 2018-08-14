@@ -101,7 +101,7 @@ def register():
         email = form.email.data
         password = form.password.data
         ts_and_cs = form.ts_and_cs.data
-        record = UserController(full_name, email, password)
+        record = UserController(full_name=full_name, email=email, password=password)
         record.add_new_user()
         flash('User Successfully Registered', 'success')
         return redirect(url_for('user_view.login'))

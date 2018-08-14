@@ -1,7 +1,7 @@
 import time
 import datetime
 
-from flask import Blueprint, render_template, request, url_for, redirect
+from flask import Blueprint, render_template, request, url_for, redirect, flash
 
 from src.functions.Enums import TransactionType
 from src.functions.genarators import *

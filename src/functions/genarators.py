@@ -30,10 +30,15 @@ class Getters:
     @staticmethod
     def getTillDetails():
         till_ids = [i.id for i in Getters.getAllTellers()]
-        if Profile().user_details().uid in till_ids:
-            return session.query(Till).filter_by(user_id=Profile().user_details().uid).first()
-        else:
-            return []
+        tellers = Getters.getAllTellers()
+        user_id = Profile().user_details().uid
+        print("Till IDs: {}".format(till_ids))
+        print("Profile details id: {}".format(Profile().user_details().uid))
+        for teller in tellers:
+            if teller.user is not None:
+                if user_id == teller.user.uid:
+                    return session.query(Till).filter_by(user_id=user_id).first()
+
 
     @staticmethod
     def getTellerStatus():
@@ -47,9 +52,13 @@ class Getters:
         # Get all transactions by current teller for today with credits
         total = 0
         if Getters.getTillDetails() is not None:
-            my_till_trans = session.query(TellerTransactions).filter_by(
-                teller_id=Getters.getTillDetails().id).filter_by(date=today).filter_by(tran_type='CR').filter(
-                TellerTransactions.remark != 'Teller Transfer').all()
+            print("This is the till details: {}".format(Getters.getTillDetails()))
+            my_till_trans = session.query(TellerTransactions)\
+                .filter_by(teller_id=Getters.getTillDetails().id)\
+                .filter_by(date=today)\
+                .filter_by(tran_type='CR')\
+                .filter(TellerTransactions.remark != 'Teller Transfer')\
+                .all()
 
             for i in my_till_trans:
                 total += i.amount
@@ -476,6 +485,7 @@ class TransactionUpdate:
     @staticmethod
     def ttUpdate(t_type, amount, tran_date, tran_ref, acc_num):
         customer = session.query(Customer).filter_by(acc_number=acc_num).first()
+        print("Till Details: {}".format(Getters.getTillDetails()))
         till_detail = session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
 
         tt = TellerTransactions(tran_type=t_type.value,  # CR or DR
@@ -486,8 +496,7 @@ class TransactionUpdate:
                                 create_date=datetime.datetime.now(),
                                 teller_id=till_detail.id,
                                 customer_id=customer.custid,
-                                user_id=Profile().user_details().uid
-                                )
+                                user_id=Profile().user_details().uid)
         session.add(tt)
         session.commit()
         pass

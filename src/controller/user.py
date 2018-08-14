@@ -10,7 +10,7 @@
 
 from src import bcrypt
 from src.models.models import User
-from src.controller import session
+from . import session
 
 
 class UserController(object):

@@ -1,5 +1,8 @@
-from src.models.models import SysDate, Till, TransactionCharge, Account, Branch, Currency
-from views.customer import *
+import time
+import datetime
+from src.models import session
+from src.models.models import SysDate, Till, TransactionCharge, Account, Branch, Currency, Customer
+from src.functions.genarators import Auto
 
 print("Creating System Date")
 sys_date = SysDate(date=time.strftime('%Y-%m-%d'), create_date=datetime.datetime.now())

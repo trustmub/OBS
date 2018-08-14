@@ -42,7 +42,7 @@ def deposits():
 
                 AccountTransaction(date=system_date, amount=amount, cr_account=cr_account_number).deposit(dep_ref)
 
-                TransactionUpdate.ttUpdate('DR', amount, system_date, dep_ref, cr_account_number)
+                TransactionUpdate.ttUpdate(TransactionType.DEBIT, amount, system_date, dep_ref, cr_account_number)
                 flash('Account Credited')
                 return redirect(url_for('banking.deposits', user=Profile().user_details()))
             else:
