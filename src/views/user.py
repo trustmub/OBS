@@ -1,7 +1,7 @@
 import os
 import secrets
 from flask import Blueprint, render_template, redirect, request, url_for, flash
-from flask_bcrypt import Bcrypt
+# from flask_bcrypt import Bcrypt
 from PIL import Image
 from werkzeug.utils import secure_filename
 
@@ -16,9 +16,8 @@ UPLOAD_FOLDER = os.path.abspath("src/static/img/user///")
 
 user_view = Blueprint('user_view', __name__)
 
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
-bcrypt = Bcrypt()
+# bcrypt = Bcrypt()
 
 
 @user_view.route('/lockscreen/', methods=['post', 'get'])
@@ -126,9 +125,9 @@ def logout():
         flash('Already Logged Off', 'warning')
         return redirect(url_for('user_view.login'))
 
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+#
+# def allowed_file(filename):
+#     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 def save_image(form_picture):
