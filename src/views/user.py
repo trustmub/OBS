@@ -12,7 +12,7 @@ from src.controller.user import UserController
 from src.utilities.verifier import Verify
 from src.functions.genarators import *
 
-UPLOAD_FOLDER = os.path.abspath("src//static//img//user/")
+UPLOAD_FOLDER = os.path.abspath("src/static/img/user///")
 
 user_view = Blueprint('user_view', __name__)
 
@@ -132,16 +132,25 @@ def allowed_file(filename):
 
 
 def save_image(form_picture):
+    """
+    function saves the passes image callable to a specified file path (imafe_path) the file is renamed
+    to an 8 byte name using the secrets.token_hex function. the file is resized to 125 x 125 using
+    the Pillow image library
+
+    The returned filename is saved on the database.
+
+    :param form_picture:
+    :return: image_filename
+    """
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
-    image_fn = random_hex + f_ext
-    image_path = os.path.join(UPLOAD_FOLDER + image_fn)
-    print("The Image path is:", image_path)
-    output_size = (25,25)
+    image_filename = random_hex + f_ext
+    image_path = os.path.join(UPLOAD_FOLDER, image_filename)
+    output_size = (125,125)
     resize_image = Image.open(form_picture)
     resize_image.thumbnail(output_size)
     resize_image.save(image_path)
-    return image_fn
+    return image_filename
 
 
 @user_view.route('/edit_user/', methods=['POST', 'GET'])
@@ -150,9 +159,7 @@ def edit_profile():
     form.branch_code.choices = [(t.code, t.description) for t in Getters.getBranch()]
     if form.validate_on_submit():
         image_file = ''
-        print("we are in the validation success")
         if form.image_string.data:
-            print("there is smething in the form picture data")
             image_file = save_image(form.image_string.data)
 
         usr = Profile().user_details()
