@@ -1,13 +1,14 @@
 """
-Persistence of all transactions to the database are carried out of this file.
+Persistence of all transactions to the database are carried out of this module.
 
 """
 
-from src.cob.log_module import SystemOBS
-from src.functions.Enums import TransactionType, TransactionMethod, AccountTypes
+import time
+from ..cob.log_module import SystemOBS
+from ..functions.Enums import TransactionType, TransactionMethod, AccountTypes
 # from functions.constants import CHARGES, SERVICE_FEES, ACCOUNT_CREATION
-from src.functions.genarators import Auto, Getters
-from src.models.models import Transactions, Customer, Till, ChargeTransactionTable, TransactionCharge
+from ..functions.genarators import Auto, Getters
+from ..models.models import Transactions, Customer, Till, ChargeTransactionTable, TransactionCharge
 
 from src.models import session
 
@@ -26,6 +27,14 @@ class Transaction(object):
     def __str__(self):
         return self.cr_account
 
+    @property
+    def amount(self):
+        return float(self.amount)
+
+    @amount.setter
+    def amount(self, value):
+        self.amount = value
+
 
 class CommitTransaction:
     """
@@ -35,8 +44,16 @@ class CommitTransaction:
 
     def __init__(self, trans_type,
                  trans_ref,
-                 trans_method, trans_date, cheque_number, dr_account_number,
-                 cr_account_number, amount, current_balance, remark, customer_id):
+                 trans_method,
+                 dr_account_number,
+                 cr_account_number,
+                 amount,
+                 current_balance,
+                 remark,
+                 customer_id,
+                 cheque_number='',
+                 trans_date=time.strftime('%Y-%m-%d')
+                 ):
         self.trans_type = trans_type
         self.trans_ref = trans_ref
         self.trans_method = trans_method

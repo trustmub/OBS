@@ -484,6 +484,16 @@ class TransactionUpdate:
 
     @staticmethod
     def ttUpdate(t_type, amount, tran_date, tran_ref, acc_num):
+        """
+        when a withdrawal or a deposit is done this is how the till is affected
+
+        :param t_type:
+        :param amount:
+        :param tran_date:
+        :param tran_ref:
+        :param acc_num:
+        :return:
+        """
         customer = session.query(Customer).filter_by(acc_number=acc_num).first()
         print("Till Details: {}".format(Getters.getTillDetails()))
         till_detail = session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()

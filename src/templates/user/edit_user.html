@@ -1,76 +1,119 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="content-wrapper" style="min-height: 626px;">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Amend Customer
-        <small>...</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Edit User</li>
-      </ol>
-    </section>
-    <section class="content">
-        <form class="form-group" enctype="multipart/form-data" method="POST" action="{{ url_for('user_view.edit_profile') }}">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">New Customer</div>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon" id="sizing-addon3">Full Name:</span>
-                            <input class="form-control" id="full_name" name="full_name" type="text" value="{{ user.full_name }}" placeholder="{{ user.full_name }}" aria-describedby="sizing-addon3" autofocus>
-                        </div><br>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon" id="sizing-addon3">Job Title:</span>
-                            <input class="form-control" id="job_title" name="job_title" type="text" value="{{ user.job_title }}" placeholder="{{ user.job_title }}" aria-describedby="sizing-addon3" >
-                        </div><br>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon" id="sizing-addon3">Department:</span>
-                            <input class="form-control" id="department" name="department" type="text" value="{{ user.department }}" placeholder="{{ user.department }}" aria-describedby="sizing-addon3" >
-                        </div><br>
+    <div class="content-wrapper" style="min-height: 626px;">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Amend Customer
+                <small>...</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Edit User</li>
+            </ol>
+        </section>
+        <section class="content">
+            <form class="form-group" action="" enctype="multipart/form-data" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box box-primary">
+                            <div class="box-header with-border"> Edit Profile</div>
+                            <div class="input-group input-group-sm">
+                                {% if form.full_name.errors %}
+                                    {% for error in form.full_name.errors %}
+                                        {{ form.full_name.label(class="input-group-addon", id="sizing-addon3") }}
+                                        {{ form.full_name(class="form-control", value= user.full_name, placeholder= user.full_name) }}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form.full_name.label(class="input-group-addon", id="sizing-addon3") }}
+                                    {{ form.full_name(class="form-control", value= user.full_name, placeholder= user.full_name) }}
+                                {% endif %}
+                            </div>
+                            <br>
+                            <div class="input-group input-group-sm">
+                                {% if form.job_title.errors %}
+                                    {% for error in form.job_title.errors %}
+                                        {{ form.job_title.label(class="input-group-addon", id="sizing-addon3") }}
+                                        {{ form.job_title(class="form-control", id="job_title", value= user.job_title, placeholder= user.job_title) }}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form.job_title.label(class="input-group-addon", id="sizing-addon3") }}
+                                    {{ form.job_title(class="form-control", id="job_title", value= user.job_title, placeholder= user.job_title) }}
+                                {% endif %}
+                            </div>
+                            <br>
+                            <div class="input-group input-group-sm">
+                                {% if form.department.errors %}
+                                    {% for error in form.department.errors %}
+                                        {{ form.department.label(class="input-group-addon", id="sizing-addon3") }}
+                                        {{ form.department(class="form-control", id="department", value= user.department, placeholder=user.department) }}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form.department.label(class="input-group-addon", id="sizing-addon3") }}
+                                    {{ form.department(class="form-control", id="department", value= user.department, placeholder=user.department) }}
+                                {% endif %}
+
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">...</div>
+                            <div class="input-group input-group-sm">
+                                {% if form.branch_code.errors %}
+                                    {% for error in form.branch_code.errors %}
+                                        {{ form.branch_code.label(class="input-group-addon", id="sizing-addon3") }}
+                                        {{ form.branch_code(class="form-control") }}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form.branch_code.label(class="input-group-addon", id="sizing-addon3") }}
+                                    {{ form.branch_code(class="form-control") }}
+
+                                {% endif %}
+                            </div>
+                            <br>
+                            <div class="input-group input-group-sm">
+                                {% if form.access_level.errors %}
+                                    {% for error in form.access_level.errors %}
+                                        {{ form.access_level.label(class="input-group-addon", id="sizing-addon3") }}
+                                        {{ form.access_level(class="form-control", value= user.access_level, placeholder= user.access_level) }}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                {% else %}
+                                    {{ form.access_level.label(class="input-group-addon", id="sizing-addon3") }}
+                                    {{ form.access_level(class="form-control", value= user.access_level, placeholder= user.access_level) }}
+                                {% endif %}
+
+                            </div>
+                            <br>
+                            <div class="input-group input-group-sm">
+                                {{ form.image_string.label(class="input-group-addon", id="sizing-addon3") }}
+                                {{ form.image_string(class="form-control", value= user.image_string ) }}
+                                {% if form.image_string.errors %}
+                                    {% for error in form.image_string.errors %}
+                                        <span class="text-danger">{{ error }}</span>
+                                    {% endfor %}
+                                {% endif %}
+
+                            </div>
+                            <br>
+                            <div class="input-group input-group-sm">
+                                {{ form.submit(class="btn btn-primary form-control") }}
+                            </div>
+                            <br>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="box box-primary">
-                        <div class="box-header with-border">...</div>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon" id="sizing-addon3">Branch Code:</span>
-                            <select class="form-control" name="branch_code">
-                                <option>{{ user.branch_code }}</option>
-                                {% for i in branch %}
-                                <option>{{ i.description }}</option>
-                                {% endfor %}
-                            </select>
-                        </div><br>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon" id="sizing-addon3">Access Level:</span>
-                            <input class="form-control" id="access_level" name="access_level" type="text" value="{{ user.access_level }}" placeholder="{{ user.access_level }}" aria-describedby="sizing-addon3" >
-                        </div><br>
-                        <div class="input-group input-group-sm">
-                            <span class="input-group-addon" id="sizing-addon3">Image :</span>
-                            <input class="form-control" id="image_string" name="image_string" value="{{ user.image_string }}" type="file" aria-describedby="sizing-addon3">
-                        </div><br>
-                        <div class="input-group input-group-sm">
-                            <button class="btn btn-primary form-control"  type="submit">Submit</button>
-                        </div><br>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </section>
+            </form>
+        </section>
 
 
-
-
-
-
-
-
-
-
-
-</div>
+    </div>
 {% endblock %}

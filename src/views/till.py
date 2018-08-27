@@ -7,6 +7,7 @@ from src.functions.Enums import TransactionType
 from src.functions.genarators import *
 from src.functions.queries import Query
 from src.forms.till_forms import OpenTillForm
+from src.controller.till import TillController
 
 till = Blueprint('till', __name__)
 
@@ -19,40 +20,27 @@ def my_till():
 @till.route('/open_till/', methods=['POST', 'GET'])
 def open_till():
     form = OpenTillForm()
+    form.teller_num.choices = [(str(t.id), t.currency) for t in Query().available_tellers()]
     form.branch.choices = [(b.code, b.description) for b in Getters.getBranch()]
-    if request.method == 'POST':
-        till_num = int(request.form['teller_num'])
-        branch_code = request.form['branch_code']
-        o_balance = float(request.form['o_balance'])
-        user_id = int(request.form['user_id'])
-        till_record = session.query(Till).filter_by(id=till_num).first()
+    if form.validate_on_submit():
+        print("branch code: {}".format(form.branch.data))
+        print("opening balance: {}".format(form.o_balance.data))
+        print("user ID: {}".format(form.user_id.data))
+        print("till number: {}".format(form.teller_num.data))
 
-        till_record.branch_code = branch_code
-        till_record.o_balance = o_balance
-        till_record.user_id = user_id
-        till_record.date = time.strftime('%Y-%m-%d')
+        till_controller = TillController(branch_code=form.branch.data,
+                                         o_balance=form.o_balance.data,
+                                         user_id=form.user_id.data,
+                                         teller_id=form.teller_num)
 
-        session.add(till_record)
-        session.commit()
-        # do a till transaction in creadditing the till and affecting the suspense account
-        suspense = session.query(Customer).filter_by(account_type='suspense').first()
-        TransactionUpdate.ttUpdate(TransactionType.CR_DR, o_balance, time.strftime('%Y-%m-%d'), 'Teller Transfer', suspense.acc_number)
-        # ------------------------
-
-        # Update the working balance of the suspense account
-        suspense.working_bal -= o_balance
-        session.add(suspense)
-        session.commit()
-        # ---------------------------------------------------
-
-        return redirect(url_for('home'))
+        return redirect(url_for('till.open_till'))
 
     else:
         # if current user_view has a till linked, display the till detail
         # else display the general till opening
         return render_template('till/open_till.html', user=Profile().user_details(),
-                               branch=Getters.getBranch(), teller=Query().available_tellers(),
-                               teller2=Getters.getAllTellers(), ts=Query().teller_status(), form=form)
+                               branch=Getters.getBranch(),
+                               teller2=Getters.getAllTellers(), teller_linked=Query().teller_status(), form=form)
 
 
 @till.route('/close_till/', methods=['POST', 'GET'])
@@ -69,7 +57,8 @@ def close_till():
                     # send cash back to suspense account
                     #  tt transaction
                     suspense = session.query(Customer).filter_by(account_type='suspense').first()
-                    TransactionUpdate.ttUpdate(TransactionType.CR_DR, sys_balance, time.strftime('%Y-%m-%d'), 'Closing Balance',
+                    TransactionUpdate.ttUpdate(TransactionType.CR_DR, sys_balance, time.strftime('%Y-%m-%d'),
+                                               'Closing Balance',
                                                suspense.acc_number)
                     till_detail = session.query(Till).filter_by(
                         till_account=Getters.getTillDetails().till_account).first()

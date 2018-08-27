@@ -27,7 +27,7 @@ class UserController(object):
                  image_string='avatar.png',
                  department='',
                  branch_code='',
-                 access_level=0,
+                 access_level=1,
                  till_o_balance=0,
                  till_c_balance=0,
                  lock=0):
@@ -91,26 +91,26 @@ class UserController(object):
     def update_user(self):
         """
         Method to update the user profile.
-        :return: None
+
+        requisite fields:
+
+            - full_name
+            - job_title
+            - department
+            - branch_code
+            - access_level
+            - image_string
         """
-        old_user = session.query(User).filter_by(email=self.email).first()
 
-        if old_user.full_name != self.full_name or '':
-            old_user.full_name = self.full_name
-        if old_user.job_title != self.job_title or '':
-            old_user.job_title = self.job_title
-        if old_user.image_string != self.image_string or '':
-            old_user.image_string = self.image_string
-        if old_user.department != self.department or '':
-            old_user.department = self.department
-        if old_user.branch_code != self.branch_code or '':
-            old_user.branch_code = self.branch_code
-        if old_user.access_level != self.access_level or 0:
-            old_user.access_level = self.access_level
-        if old_user.till_o_balance != self.till_o_balance or 0:
-            old_user.till_o_balance = self.till_o_balance
-        if old_user.till_c_balance != self.till_c_balance or 0:
-            old_user.till_c_balance = self.till_c_balance
+        user = session.query(User).filter_by(email=self.email).first()
 
-        session.add(old_user)
+        user.full_name = self.full_name
+        user.job_title = self.job_title
+        user.department = self.department
+        user.branch_code = self.branch_code
+        user.access_level = self.access_level
+        if self.image_string != '':
+            user.image_string = self.image_string
+
+        session.add(user)
         session.commit()

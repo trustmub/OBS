@@ -7,7 +7,7 @@
 """
 
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from src.forms import (FlaskForm, StringField, PasswordField, SubmitField, BooleanField, IntegerField)
+from src.forms import (FlaskForm, StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, FileField,  FileAllowed)
 from src.models import session
 from src.models.models import User
 
@@ -54,10 +54,10 @@ class UserProfileForm(FlaskForm):
     """
     form class for user profile edit.
     """
-    fullname = StringField('Username', validators=[DataRequired(), Length(min=4)])
-    job_title = StringField('Job_Title')
+    full_name = StringField('Full Name', validators=[DataRequired(), Length(min=4)])
+    job_title = StringField('Job Title')
     department = StringField('Department')
-    branch_code = StringField('Branch_Code', validators=[DataRequired()])
-    access_level = IntegerField('access_level', validators=[DataRequired()])
-    image_string = StringField('image_string')
-    submit = SubmitField('update')
+    branch_code = SelectField('Branch Code', validators=[DataRequired()])
+    access_level = IntegerField('Access level', validators=[DataRequired()])
+    image_string = FileField('Image', validators=[FileAllowed(['jpg','png'])])
+    submit = SubmitField('Update')

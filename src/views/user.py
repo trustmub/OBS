@@ -1,6 +1,8 @@
 import os
+import secrets
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from flask_bcrypt import Bcrypt
+from PIL import Image
 from werkzeug.utils import secure_filename
 
 from src import login_manager
@@ -10,7 +12,7 @@ from src.controller.user import UserController
 from src.utilities.verifier import Verify
 from src.functions.genarators import *
 
-UPLOAD_FOLDER = os.path.abspath("static//img//user")
+UPLOAD_FOLDER = os.path.abspath("src//static//img//user/")
 
 user_view = Blueprint('user_view', __name__)
 
@@ -129,49 +131,46 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+def save_image(form_picture):
+    random_hex = secrets.token_hex(8)
+    _, f_ext = os.path.splitext(form_picture.filename)
+    image_fn = random_hex + f_ext
+    image_path = os.path.join(UPLOAD_FOLDER + image_fn)
+    print("The Image path is:", image_path)
+    output_size = (25,25)
+    resize_image = Image.open(form_picture)
+    resize_image.thumbnail(output_size)
+    resize_image.save(image_path)
+    return image_fn
+
+
 @user_view.route('/edit_user/', methods=['POST', 'GET'])
 def edit_profile():
     form = UserProfileForm()
-    if request.method == 'POST':
-        user_details = Profile().user_details()
-        if request.form['full_name'] == user_details.full_name:
-            pass
-        else:
-            user_details.full_name = request.form['full_name']
-        if request.form['job_title'] == user_details.job_title:
-            pass
-        else:
-            user_details.job_title = request.form['job_title']
-        if request.form['department'] == user_details.department:
-            pass
-        else:
-            user_details.department = request.form['department']
-        if request.form['branch_code'] == user_details.branch_code:
-            pass
-        else:
-            user_details.branch_code = request.form['branch_code']
-        if request.form['access_level'] == user_details.access_level:
-            pass
-        else:
-            user_details.access_level = request.form['access_level']
+    form.branch_code.choices = [(t.code, t.description) for t in Getters.getBranch()]
+    if form.validate_on_submit():
+        image_file = ''
+        print("we are in the validation success")
+        if form.image_string.data:
+            print("there is smething in the form picture data")
+            image_file = save_image(form.image_string.data)
 
-        if request.files['image_string'].filename == user_details.image_string:
-            pass
-        else:
-            user_details.image_string = secure_filename(request.files['image_string'].filename)
-            file = request.files['image_string']
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                file.save(os.path.join(UPLOAD_FOLDER, filename))
-                print(UPLOAD_FOLDER)
-        session.add(user_details)
-        session.commit()
+        usr = Profile().user_details()
+        user_controller = UserController(usr.email, 'blank',
+                                         form.full_name.data,
+                                         form.job_title.data,
+                                         image_file,
+                                         form.department.data,
+                                         form.branch_code.data,
+                                         form.access_level.data)
+        user_controller.update_user()
+        print("all is valid")
         return redirect(url_for('user_view.profile',
                                 user=Profile().user_details()))
-    else:
-        return render_template('user/edit_user.html',
-                               user=Profile().user_details(),
-                               branch=Getters.getBranch())
+    print("reloaded")
+    return render_template('user/edit_user.html',
+                           user=Profile().user_details(),
+                           branch=Getters.getBranch(), form=form)
 
 
 @user_view.route('/admin')

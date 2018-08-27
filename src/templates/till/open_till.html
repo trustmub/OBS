@@ -22,47 +22,81 @@
                         <div class="box box-info">
                             <div class="box-header">Open Till</div>
                             {% if not teller_linked %}
-                                <form method="POST" ACTION="{{ url_for('till.open_till') }}">
-                                    {{ form.hidden_tag() }}
-                                    <div class="col-md-3">
-                                        <div class="input-group input-group-sm">
-                                            {{ form.teller_num.label(class="input-group-addon", id="sizing-addon3") }}
-
-                                            <select class="form-control" name="teller_num" autofocus required>
-                                                <option></option>
-                                                {% for i in teller %}
-                                                    <option>{{ i.id }}</option>
-                                                {% endfor %}
-                                            </select>
+                                <form method="POST" action="">
+                                    <div class="box-body">
+                                        {{ form.hidden_tag() }}
+                                        <div class="col-md-3 has-feedback">
+                                            <div class="input-group input-group-sm">
+                                                {% if form.teller_num.errors %}
+                                                    {{ form.teller_num.label(class="input-group-addon", id="sizing-addon3") }}
+                                                    {{ form.teller_num(class="form-control", autofocus=true) }}
+                                                    {% for error in form.teller_num.errors %}
+                                                        <div class="help-block">
+                                                            <span class="with-error" style="color: red;"><small>{{ error }}</small></span>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {{ form.teller_num.label(class="input-group-addon", id="sizing-addon3") }}
+                                                    {{ form.teller_num(class="form-control", autofocus=true) }}
+                                                {% endif %}
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group input-group-sm">
+                                                {% if form.teller_num.errors %}
+                                                    {{ form.branch.label(class="input-group-addon", id="sizing-addon3") }}
+                                                    {{ form.branch(class="form-control") }}
+                                                    {% for error in form.branch.errors %}
+                                                        <div class="help-block">
+                                                            <span class="with-error" style="color: red;"><small>{{ error }}</small></span>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {{ form.branch.label(class="input-group-addon", id="sizing-addon3") }}
+                                                    {{ form.branch(class="form-control") }}
+                                                {% endif %}
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group input-group-sm">
+                                                {% if form.teller_num.errors %}
+                                                    {{ form.o_balance.label(class="input-group-addon", id="sizing-addon3") }}
+                                                    {{ form.o_balance(class="form-control", id="o_balance") }}
+                                                    {% for error in form.o_balance.errors %}
+                                                        <div class="help-block">
+                                                            <span class="with-error" style="color: red;"><small>{{ error }}</small></span>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {{ form.o_balance.label(class="input-group-addon", id="sizing-addon3") }}
+                                                    {{ form.o_balance(class="form-control") }}
+                                                {% endif %}
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group input-group-sm">
+                                                {% if form.teller_num.errors %}
+                                                    {{ form.user_id.label(class="input-group-addon", id="sizing-addon3") }}
+                                                    {{ form.user_id(class="form-control", value= user.uid ) }}
+                                                    {% for error in form.user_id.errors %}
+                                                        <div class="help-block">
+                                                            <span class="with-error" style="color: red;"><small>{{ error }}</small></span>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    {{ form.user_id.label(class="input-group-addon", id="sizing-addon3") }}
+                                                    {{ form.user_id(class="form-control", value= user.uid) }}
+                                                {% endif %}
+                                            </div>
+                                            <br>
                                         </div>
                                         <br>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="input-group input-group-sm">
-                                            {{ form.branch.label(class="input-group-addon", id="sizing-addon3") }}
-                                            {{ form.branch(class="form-control") }}
-
-                                        </div>
-                                        <br>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="input-group input-group-sm">
-                                            <span class="input-group-addon" id="sizing-addon3">Opening Balance:</span>
-                                            <input class="form-control" id="o_balance" name="o_balance" type="text"
-                                                   aria-describedby="sizing-addon3" required>
-                                        </div>
-                                        <br>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="input-group input-group-sm">
-                                            <span class="input-group-addon" id="sizing-addon3">User ID:</span>
-                                            <input class="form-control" id="user_id" name="user_id" type="text"
-                                                   value="{{ user.uid }}" aria-describedby="sizing-addon3" required>
-                                        </div>
-                                        <br>
-                                    </div>
-                                    <div class="input-group input-group-sm">
-                                        <button class="btn btn-primary form-control" type="submit">Submit</button>
+                                    <div class="input-group box-footer">
+                                        {{ form.submit(class="btn btn-primary form-control") }}
                                     </div>
                                 </form>
                             {% else %}
