@@ -11,11 +11,23 @@ class ApiUserController(object):
         self.user_number = user_number
 
     def check_account_exists(self):
+        """
+        This method check if the accout provided exists
+
+        :return: True if account exists and False if it does not exists
+        """
         if session.query(Customer).filter_by(acc_number=self.account).first():
             return True
         return False
 
     def customer_details(self) -> object:
+        """
+        This method will return a Customer serialized Object from the serialised property
+
+        :return:
+
+            JSON object of Customer details
+        """
         customer = session.query(Customer).filter_by(acc_number=self.account).first()
         return customer.serialize
 
