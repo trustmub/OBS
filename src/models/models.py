@@ -64,6 +64,32 @@ class User(BASE):
         return
 
 
+class ApiUser(BASE):
+    """
+    This table is for mobile users access through the API
+    """
+    __tablename__ = 'api_user'
+    user_id = Column(Integer, primary_key=True)
+    account_number = Column(Integer)
+    device = Column(String(50))
+    pin = Column(Integer)
+    user_number = Column(Integer)
+
+    def __init__(self, account_number, device, pin, user_number):
+        self.account_number = account_number
+        self.device = device
+        self.pin = pin
+        self.user_number = user_number
+
+    @property
+    def serialize(self):
+        return {
+            'account': self.account_number,
+            'user_number': self.user_number,
+            'device': str(self.device)
+        }
+
+
 class Customer(BASE):
     """
     THis table contains all the customer details.
@@ -127,6 +153,16 @@ class Customer(BASE):
 
     def __repr__(self):
         return "{} {}".format(self.first_name, self.last_name)
+
+    @property
+    def serialize(self):
+        return {
+            'full_name': self.full_name,
+            'email': self.email,
+            'balance': self.working_bal,
+            'account_type': self.account_type,
+            'account_number': self.acc_number
+        }
 
 
 class Account(BASE):

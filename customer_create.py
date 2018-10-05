@@ -1,7 +1,7 @@
 import random
 
 from src.models.models import Account
-from views.customer import *
+from src.views.customer import *
 import threading
 from flask import session as login_session
 

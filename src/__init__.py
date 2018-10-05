@@ -24,6 +24,7 @@ from .views.settings import settings
 from .views.recon import reconciliation
 from .views.enquiry import enquiry
 from .views.bulk import bulk
+from .api.api import bank_api
 
 APP.register_blueprint(user_view)
 APP.register_blueprint(banking)
@@ -33,6 +34,7 @@ APP.register_blueprint(reconciliation)
 APP.register_blueprint(enquiry)
 APP.register_blueprint(bulk)
 APP.register_blueprint(settings)
+APP.register_blueprint(bank_api)
 
 
 @APP.route('/dashboard/')

@@ -21,19 +21,19 @@ class Transaction(object):
 
     def __init__(self, date, amount, cr_account):
         self.date = date
-        self.amount = amount
+        self.amount = float(amount)
         self.cr_account = cr_account
 
     def __str__(self):
         return self.cr_account
 
-    @property
-    def amount(self):
-        return float(self.amount)
-
-    @amount.setter
-    def amount(self, value):
-        self.amount = value
+    # @property
+    # def amount(self):
+    #     return float(self.amount)
+    #
+    # @amount.setter
+    # def amount(self, value):
+    #     self.amount = value
 
 
 class CommitTransaction:

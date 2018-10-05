@@ -1,5 +1,5 @@
 from datetime import datetime
-from . import APP
+from src import APP
 from flask_sqlalchemy import SQLAlchemy
 
 APP.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'

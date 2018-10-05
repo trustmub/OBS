@@ -45,8 +45,7 @@ class UserController(object):
 
     def add_new_user(self):
         """
-        Method to add new user record
-        :return: None
+        Method to add new user record into the database
         """
         new_record = User(full_name=self.full_name,
                           job_title=self.job_title,
@@ -65,16 +64,18 @@ class UserController(object):
     @property
     def encrypted_password(self):
         """
-        Property Method to encrypt the passed password.
-        :return: byte string
+        Property Method to encrypt self.password.
+        :return:
+            encrypted string of self.password by 12 cycles/rounds.
         """
         password = bcrypt.generate_password_hash(self.password, 12)
         return password
 
     def verify_email(self):
         """
-        Method to check is email exists
-        :return: Boolean
+        Method to check if email exists
+        :return:
+            True id self.email exists and None/False if self.email does not exist.
         """
         if session.query(User).filter_by(email=self.email).first():
             return True
@@ -82,7 +83,9 @@ class UserController(object):
     def verify_password(self):
         """
         Method to verify password
-        :return: Boolean
+        :return:
+
+            True if self.password correct and None/False if self.password is wrong
         """
         user = session.query(User).filter_by(email=self.email).first()
         if bcrypt.check_password_hash(user.password, self.password):

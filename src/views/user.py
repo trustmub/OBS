@@ -1,15 +1,12 @@
 import os
 import secrets
 from flask import Blueprint, render_template, redirect, request, url_for, flash
-# from flask_bcrypt import Bcrypt
 from PIL import Image
-from werkzeug.utils import secure_filename
 
-from src import login_manager
 from src.forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm, LockScreenForm
 from src.controller.user import UserController
 
-from src.utilities.verifier import Verify
+# from src.utilities.verifier import Verify
 from src.functions.genarators import *
 
 UPLOAD_FOLDER = os.path.abspath("src/static/img/user///")
@@ -95,6 +92,7 @@ def register():
     """
     this function handles the registration of a new user
     :return:
+        render_template and form
     """
     form = RegistrationsForm()
     if form.validate_on_submit():
@@ -125,6 +123,7 @@ def logout():
         flash('Already Logged Off', 'warning')
         return redirect(url_for('user_view.login'))
 
+
 #
 # def allowed_file(filename):
 #     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -132,20 +131,22 @@ def logout():
 
 def save_image(form_picture):
     """
-    function saves the passes image callable to a specified file path (imafe_path) the file is renamed
-    to an 8 byte name using the secrets.token_hex function. the file is resized to 125 x 125 using
+    saves the form_picture object with new randomly generated name and scales the image to 125 x 125 using
     the Pillow image library
 
-    The returned filename is saved on the database.
-
-    :param form_picture:
-    :return: image_filename
+    :param
+        form_picture: is an object of type <class 'werkzeug.datastructures.FileStorage'>
+    :return:
+        a string for the new image filename
     """
     random_hex = secrets.token_hex(8)
+
     _, f_ext = os.path.splitext(form_picture.filename)
     image_filename = random_hex + f_ext
+
     image_path = os.path.join(UPLOAD_FOLDER, image_filename)
-    output_size = (125,125)
+
+    output_size = (125, 125)
     resize_image = Image.open(form_picture)
     resize_image.thumbnail(output_size)
     resize_image.save(image_path)
