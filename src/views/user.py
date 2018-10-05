@@ -1,5 +1,6 @@
 import os
-import secrets
+# import secrets
+import string
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from PIL import Image
 
@@ -128,6 +129,9 @@ def logout():
 # def allowed_file(filename):
 #     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def generate_random_key(length):
+    return ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(length))
+
 
 def save_image(form_picture):
     """
@@ -139,7 +143,7 @@ def save_image(form_picture):
     :return:
         a string for the new image filename
     """
-    random_hex = secrets.token_hex(8)
+    random_hex = generate_random_key(8)
 
     _, f_ext = os.path.splitext(form_picture.filename)
     image_filename = random_hex + f_ext
