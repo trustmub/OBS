@@ -10,6 +10,39 @@ class ApiUserController(object):
         self.device = device
         self.user_number = user_number
 
+    def create_mobile_account(self):
+        new_mobile_user = ApiUser(account_number=int(self.account),
+                                  pin=self.encrypted_pin,
+                                  device=self.device,
+                                  user_number=self.user_number)
+
+        session.add(new_mobile_user)
+        session.commit()
+
+    @property
+    def encrypted_pin(self):
+        """
+        Property Method to encrypt self.pin. the pin will be converted to string first. this is because
+        integer values are not iterable
+        :return:
+            encrypted string of self.password by 12 cycles/rounds. 12 rounds is the default value which can be omitted
+            on the parameters
+        """
+        pin = bcrypt.generate_password_hash(str(self.pin))
+        return pin
+
+    def verify_pin(self):
+        """
+        Method to verify pin
+        :return:
+
+            True if self.pin correct and None/False if self.pin is wrong
+        """
+        user = session.query(ApiUser).filter_by(account_number=self.account).first()
+
+        if user and bcrypt.check_password_hash(user.pin, str(self.pin)):
+            return True
+
     def check_account_exists(self):
         """
         This method check if the accout provided exists
@@ -42,27 +75,6 @@ class ApiUserController(object):
         details = session.query(ApiUser).filter_by(account_number=self.account).first()
         return details.serialize
 
-    def create_mobile_account(self):
-        new_mobile_user = ApiUser(account_number=int(self.account),
-                                  pin=self.pin,
-                                  device=self.encrypted_pin,
-                                  user_number=self.user_number)
-
-        session.add(new_mobile_user)
-        session.commit()
-
-    @property
-    def encrypted_pin(self):
-        """
-        Property Method to encrypt self.pin. the pin will be converted to string first. this is because
-        integer values are not iterable
-        :return:
-            encrypted string of self.password by 12 cycles/rounds. 12 rounds is the default value which can be omitted
-            on the parameters
-        """
-        pin = bcrypt.generate_password_hash(self.device)
-        return pin
-
     def verify_account(self):
         """
         Method to check if account number exists in the Customer table
@@ -72,18 +84,6 @@ class ApiUserController(object):
         if session.query(Customer).filter_by(acc_number=self.account).first():
             return True
         return False
-
-    def verify_pin(self):
-        """
-        Method to verify pin
-        :return:
-
-            True if self.pin correct and None/False if self.pin is wrong
-        """
-        user = session.query(ApiUser).filter_by(account_number=self.account).first()
-
-        if user and bcrypt.check_password_hash(user.device, self.device):
-            return True
 
     def verify_registration(self):
         """

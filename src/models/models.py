@@ -72,7 +72,7 @@ class ApiUser(BASE):
     user_id = Column(Integer, primary_key=True)
     account_number = Column(Integer)
     device = Column(String(50))
-    pin = Column(Integer)
+    pin = Column(String(100))
     user_number = Column(Integer)
 
     def __init__(self, account_number, device, pin, user_number):
