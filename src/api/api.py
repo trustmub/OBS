@@ -34,7 +34,7 @@ class Login(Resource):
         pin = reqparse.request.json["pin"]
         user_number = reqparse.request.json["user_number"]
 
-        user_obj: ApiUserController = ApiUserController(account=account, pin=pin, user_number=user_number)
+        user_obj = ApiUserController(account=account, pin=pin, user_number=user_number)
         if user_obj.verify_account() and user_obj.verify_pin():
             customer = user_obj.customer_details()
             user = user_obj.user_details()
