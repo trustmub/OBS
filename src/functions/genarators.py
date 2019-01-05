@@ -2,6 +2,7 @@ import datetime
 import random
 from flask import session as login_session
 
+from src.functions.Enums import AccountTypes
 from src.models import session
 from src.models.models import Till, TransactionCharge, Transactions, TellerTransactions, Account, Customer, Branch, \
     Currency, Banks, CobDates, SysDate, User
@@ -39,7 +40,6 @@ class Getters:
                 if user_id == teller.user.uid:
                     return session.query(Till).filter_by(user_id=user_id).first()
 
-
     @staticmethod
     def getTellerStatus():
         mylist = [i.user_id for i in session.query(Till).all()]
@@ -53,11 +53,11 @@ class Getters:
         total = 0
         if Getters.getTillDetails() is not None:
             print("This is the till details: {}".format(Getters.getTillDetails()))
-            my_till_trans = session.query(TellerTransactions)\
-                .filter_by(teller_id=Getters.getTillDetails().id)\
-                .filter_by(date=today)\
-                .filter_by(tran_type='CR')\
-                .filter(TellerTransactions.remark != 'Teller Transfer')\
+            my_till_trans = session.query(TellerTransactions) \
+                .filter_by(teller_id=Getters.getTillDetails().id) \
+                .filter_by(date=today) \
+                .filter_by(tran_type='CR') \
+                .filter(TellerTransactions.remark != 'Teller Transfer') \
                 .all()
 
             for i in my_till_trans:
@@ -142,6 +142,41 @@ class Getters:
     def getTransactionDetails(ref):
         record = session.query(Transactions).filter_by(tranref=ref).first()
         return record
+
+
+class TransactionPersist:
+
+    def __init__(self, date, acc_number, amount, suspence_account_type = AccountTypes.ACCOUNT_CREATION):
+        self.date = date
+        self.acc_number = acc_number
+        self.amount = amount
+        self._suspence_account_type = suspence_account_type
+        self._suspence_account = session.query(Customer).filter_by(account_type=self.suspence_account_type.value).first()
+        self._customer_account = session.query(Customer).filter_by(acc_number=self.acc_number).one()
+
+    def deposit(self):
+        account_creation_current_balance = round(self.amount, 2)
+
+
+        transaction = Transactions(trantype='CR',
+                                   tranref=Auto.reference_string_generator(),
+                                   tranmethod='Cash',
+                                   tran_date=self.date,
+                                   cheque_num='None',
+                                   acc_number=self._suspence_account.acc_number,
+                                   cr_acc_number=self.acc_number,
+                                   amount=self.amount,
+                                   current_balance=round(self.amount, 2),
+                                   remark='Account Creation',
+                                   custid=self._customer_account.custid)
+        session.add(transaction)
+        session.commit()
+
+    def withdrawal(self):
+        pass
+
+    def transfer(self):
+        pass
 
 
 class TransactionUpdate:
@@ -259,7 +294,6 @@ class TransactionUpdate:
         session.add(customer)
         session.commit()
         # ---------------------------------
-        pass
 
     @staticmethod
     def transferTransactionUpdate(from_acc, to_acc, amount, remark, tran_date):

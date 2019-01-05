@@ -9,6 +9,7 @@ class TransactionType(Enum):
     TRANSFER = 'TR'
     CR_DR = 'CR DR'
 
+
     def __str__(self):
         return self.string
 

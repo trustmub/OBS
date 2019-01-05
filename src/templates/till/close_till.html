@@ -32,7 +32,7 @@
                 <div class="col-md-12">
                     <div class="box box-info">
                         <div class="box-header">Close Till</div>
-                        {% if ts == 1 %}
+                        {% if teller_linked == 1 %}
                         <form method="post" action="{{ url_for('till.close_till') }}">
                             <div class="col-md-4">
                             <div class="input-group input-group-sm">
@@ -70,7 +70,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="box box-warning">
-                    {% if ts == 1 %}
+                    {% if teller_linked == 1 %}
                         <table class="table">
                             <tr>
                                 <th>Type</th>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="box box-danger">
-                        {%  if ts == 1 %}
+                        {%  if teller_linked == 1 %}
                         <div class="box-body">
                             <dl class="dl-horizontal">
                                 <dt>Branch</dt>

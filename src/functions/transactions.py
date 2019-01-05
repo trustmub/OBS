@@ -6,7 +6,6 @@ Persistence of all transactions to the database are carried out of this module.
 import time
 from ..cob.log_module import SystemOBS
 from ..functions.Enums import TransactionType, TransactionMethod, AccountTypes
-# from functions.constants import CHARGES, SERVICE_FEES, ACCOUNT_CREATION
 from ..functions.genarators import Auto, Getters
 from ..models.models import Transactions, Customer, Till, ChargeTransactionTable, TransactionCharge
 

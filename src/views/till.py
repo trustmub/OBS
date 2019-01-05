@@ -20,8 +20,9 @@ def my_till():
 @till.route('/open_till/', methods=['POST', 'GET'])
 def open_till():
     form = OpenTillForm()
-    form.teller_num.choices = [(str(t.id), t.currency) for t in Query().available_tellers()]
+    form.teller_num.choices = [(str(t.id), t.id) for t in Query().available_tellers()]
     form.branch.choices = [(b.code, b.description) for b in Getters.getBranch()]
+
     if form.validate_on_submit():
         print("branch code: {}".format(form.branch.data))
         print("opening balance: {}".format(form.o_balance.data))
@@ -31,16 +32,21 @@ def open_till():
         till_controller = TillController(branch_code=form.branch.data,
                                          o_balance=form.o_balance.data,
                                          user_id=form.user_id.data,
-                                         teller_id=form.teller_num)
+                                         teller_id=form.teller_num.data)
+        till_controller.open_till()
 
         return redirect(url_for('till.open_till'))
 
     else:
         # if current user_view has a till linked, display the till detail
         # else display the general till opening
+        if form.errors:
+            print(form.errors)
         return render_template('till/open_till.html', user=Profile().user_details(),
                                branch=Getters.getBranch(),
-                               teller2=Getters.getAllTellers(), teller_linked=Query().teller_status(), form=form)
+                               teller2=Getters.getAllTellers(),
+                               teller_linked=Query().teller_status(),
+                               form=form)
 
 
 @till.route('/close_till/', methods=['POST', 'GET'])

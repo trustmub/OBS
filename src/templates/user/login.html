@@ -24,6 +24,8 @@
   <![endif]-->
 </head>
 <body class="hold-transition login-page">
+
+
 <div style=" width: 50%; margin-right: auto; margin-left: auto; margin-top: 3%">
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
@@ -35,6 +37,16 @@
         {% endif %}
     {% endwith %}
 </div>
+
+<div id="browserType">
+    <div class="row margin">
+        <div class="col-lg-4 col-md-4 col-sm-12 alert alert-warning">
+            <p>The system is designed to work with the Chromium based browser engine.</p>
+            <h3><a href="">Download Chrome Browser.</a></h3>
+        </div>
+    </div>
+</div>
+
 <div class="login-box">
     <div class="login-logo">
         <a href="{{ url_for('home') }}"><b>Open Banking </b>System</a>
@@ -126,6 +138,23 @@
             radioClass: 'iradio_square-blue',
             increaseArea: '20%' // optional
         });
+    });
+
+    $(function () {
+
+        let browserElement = document.getElementById("browserType");
+        browserElement.style.visibility = "hidden";
+
+        if (navigator.userAgent.indexOf("Chrome") !== -1) {
+            browserElement.style.visibility = "hidden";
+        }
+        else if (navigator.userAgent.indexOf("Safari") !== -1) {
+            browserElement.style.visibility = "visible";
+        }
+
+        else if ((navigator.userAgent.indexOf("MSIE") !== -1) || (!!document.documentMode === true)) {
+            browserElement.style.visibility = "visible";
+        }
     });
 </script>
 
