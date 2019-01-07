@@ -1,15 +1,18 @@
 # This is where End  Of Day procedures are done
-
-from cob.eom import AccountsEom
-from functions.genarators import *
+import os
+import time
+from src.cob.eom import AccountsEom
+from src.functions.genarators import *
 from src.models import session
 
 from src.models.models import Interest
 
 
 class Accounts:
-    @staticmethod
-    def accOpeningBalancing():
+    def __init__(self):
+        self.account_opening = os.path.abspath("src//reports//AccountsOpened" + Getters.getSysDate().date + ".csv")
+
+    def accOpeningBalancing(self):
         print("Account Opening balancing")
         # Check all account opened today
         count = 0
@@ -20,7 +23,7 @@ class Accounts:
         for i in acc_opened:
             count += float(i.amount)
         if acc_opened is not None:
-            with open("reports/AccountsOpened" + Getters.getSysDate().date + ".csv", mode="w",
+            with open(self.account_opening, mode="w",
                       encoding="utf-8") as myFile:
                 for i in acc_opened:
                     myFile.write(
@@ -78,12 +81,16 @@ class Accounts:
 
 
 class Reporting:
+
+    def __init__(self):
+        self.credit_transactions = os.path.abspath("src//reports//CreditTransactions" + Getters.getSysDate().date + ".csv")
+
     @staticmethod
     def accountClosingBalances():
         # a report of all accounts and there closing balance for the day
         acc_list = session.query(Customer).all()
         dt = Getters.getSysDate().date  # .strftime("%Y-%m-%d")
-        with open("reports/AccountClosingBalances" + str(dt) + ".txt", mode="w", encoding="utf-8") as myfile:
+        with open("src/reports/AccountClosingBalances" + str(dt) + ".txt", mode="w", encoding="utf-8") as myfile:
             for i in acc_list:
                 myfile.write(str(i.acc_number) + " : " + str(i.working_bal) + "\n")
         pass
@@ -93,22 +100,20 @@ class Reporting:
         # report of all transactions done by each teller
         dt = Getters.getSysDate().date
         tt = Getters.getAllTts()
-        with open("reports/TellerTransactions" + str(dt) + ".txt", mode="w", encoding="utf-8") as myfile:
+        with open("src/reports/TellerTransactions" + str(dt) + ".txt", mode="w", encoding="utf-8") as myfile:
             for i in tt:
                 myfile.write(
                     str(i.id) + " : " + str(i.tran_type) + " : " + str(i.amount) + " : " + str(i.date) + " : " + str(
                         i.teller_id) + " : " + str(i.customer.acc_number) + " : " + str(i.user_id) + "\n")
         pass
 
-    @staticmethod
-    def creditTransactions():
+    def creditTransactions(self):
         # all deposits done for the day
         record = session.query(Transactions).filter_by(tran_date=Getters.getSysDate().date).filter_by(
             trantype='CR').all()
         if record is not None:
             print("The number of records are " + str(len(record)))
-            with open("reports/CreditTransactions" + Getters.getSysDate().date + ".csv", mode="w",
-                      encoding="utf-8") as myFile:
+            with open(self.credit_transactions, mode="w", encoding="utf-8") as myFile:
                 skip_account = [33139793,
                                 33139793,
                                 33145826,
@@ -118,8 +123,7 @@ class Reporting:
                                 33722073,
                                 33202507,
                                 33613681,
-                                33407739
-                                ]
+                                33407739]
                 for i in record:
                     print("The record giving problems is" + str(i.cr_acc_number))
                     if i.cr_acc_number not in skip_account:
@@ -145,7 +149,7 @@ class Reporting:
         # all withdrawals done for the day on customer account
         record = session.query(Transactions).filter_by(tran_date=Getters.getSysDate().date).filter_by(
             trantype='DR').all()
-        with open("reports/DebitTransactions" + Getters.getSysDate().date + ".csv", mode="w",
+        with open("src/reports/DebitTransactions" + Getters.getSysDate().date + ".csv", mode="w",
                   encoding="utf-8") as myFile:
             for i in record:
                 myFile.write(
@@ -163,11 +167,11 @@ class Reporting:
 
 def eod_process():
     print("Accouts : Accounts Opening Balancing")
-    Accounts.accOpeningBalancing()
+    Accounts().accOpeningBalancing()
     print("Account : Account Interest End Of Day")
     Accounts.accountInterestEod()
     print("Reporting : Creadit Transaction Report")
-    Reporting.creditTransactions()
+    Reporting().creditTransactions()
     print("Reporting : Debit Transaction Reports")
     Reporting.debitTransactions()
     print("Reports : Account Closing Balance")
@@ -182,7 +186,7 @@ def eom_process():
     AccountsEom.accountInterestEom()
     print("Service Fee charges")
     AccountsEom.serviceFeesEom()
-    Reporting.creditTransactions()
+    Reporting().creditTransactions()
     print("Reporting : Debit Transaction Reports")
     Reporting.debitTransactions()
     print("Reports : Account Closing Balance")

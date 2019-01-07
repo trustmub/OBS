@@ -37,7 +37,7 @@ $RECYCLE.BIN/
 ._*
 
 #reports and virtual environments
-reports/*
+/src/reports/*
 /venv
 logs/*
 *.log

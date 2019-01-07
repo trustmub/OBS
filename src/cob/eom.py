@@ -1,9 +1,9 @@
 # This is where all End of Month procedures are structured
 from sqlalchemy import extract
 
-from functions.Enums import TransactionType
-from functions.genarators import *
-from functions.transactions import ChargeTransaction
+from src.functions.Enums import TransactionType
+from src.functions.genarators import *
+from src.functions.transactions import ChargeTransaction
 from src.models import session
 
 from src.models.models import Interest

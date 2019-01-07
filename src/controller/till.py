@@ -26,16 +26,18 @@ class TillController(object):
         # use teller_id to set the currency, till_account
         teller_record = session.query(Till).filter_by(id=self.teller_id).first()
 
-        record = Till(branch_code=self.branch_code,
-                      o_balance=self.o_balance,
-                      c_balance=self.c_balance,
-                      till_account=teller_record.till_account,
-                      currency=teller_record.currency,
-                      remark=self.remark,
-                      date=time.strftime('%Y-%m-%d'),
-                      create_date=datetime.now(),
-                      user_id=self.user_id)
-        session.add(record)
+
+        teller_record.branch_code=self.branch_code
+        teller_record.o_balance=self.o_balance
+        teller_record.c_balance=self.c_balance
+        teller_record.till_account=teller_record.till_account
+        teller_record.currency=teller_record.currency
+        teller_record.remark=self.remark
+        teller_record.date=time.strftime('%Y-%m-%d')
+        teller_record.create_date=datetime.now()
+        teller_record.user_id=self.user_id
+
+        session.add(teller_record)
         session.commit()
 
         # do a till transaction in crediting the till and affecting the volt Suspense account
