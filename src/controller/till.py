@@ -2,6 +2,7 @@ import time
 from . import datetime
 from . import session
 from src.models.models import Till, Customer, TellerTransactions
+from src.functions.genarators import Getters, TransactionUpdate
 from src.functions.transactions import CommitTransaction
 from src.functions.Enums import TransactionType, TransactionMethod
 from src.helpers.references import get_transaction_reference
@@ -20,22 +21,22 @@ class TillController(object):
         self.user_id = user_id
         self.teller_id = teller_id
         self.c_balance = c_balance
-        self._suspense_account = 12
+        self._suspense_account = session.query(Customer).filter_by(account_type='suspense').first()
+
 
     def open_till(self):
         # use teller_id to set the currency, till_account
         teller_record = session.query(Till).filter_by(id=self.teller_id).first()
 
-
-        teller_record.branch_code=self.branch_code
-        teller_record.o_balance=self.o_balance
-        teller_record.c_balance=self.c_balance
-        teller_record.till_account=teller_record.till_account
-        teller_record.currency=teller_record.currency
-        teller_record.remark=self.remark
-        teller_record.date=time.strftime('%Y-%m-%d')
-        teller_record.create_date=datetime.now()
-        teller_record.user_id=self.user_id
+        teller_record.branch_code = self.branch_code
+        teller_record.o_balance = self.o_balance
+        teller_record.c_balance = self.c_balance
+        teller_record.till_account = teller_record.till_account
+        teller_record.currency = teller_record.currency
+        teller_record.remark = self.remark
+        teller_record.date = time.strftime('%Y-%m-%d')
+        teller_record.create_date = datetime.now()
+        teller_record.user_id = self.user_id
 
         session.add(teller_record)
         session.commit()
@@ -64,7 +65,24 @@ class TillController(object):
         # session.commit()
         # ---------------------------------------------------
 
+    def close_till(self):
 
+        TransactionUpdate.ttUpdate(TransactionType.CR_DR, sys_balance, time.strftime('%Y-%m-%d'),
+                                   'Closing Balance',
+                                   self._suspense_account.acc_number)
+        till_detail = session.query(Till).filter_by(
+            till_account=Getters.getTillDetails().till_account).first()
+        till_detail.c_balance = 0
+        till_detail.o_balance = 0
+        till_detail.user_id = ''
+        session.add(till_detail)
+        session.commit()
+        # Credit suspense account with the closing balanced figure
+        suspense.working_bal += sys_balance
+        session.add(suspense)
+        session.commit()
+
+        pass
 
     # def ttUpdate(t_type, amount, tran_date, tran_ref, acc_num):
     #     customer = session.query(Customer).filter_by(acc_number=acc_num).first()

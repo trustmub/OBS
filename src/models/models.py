@@ -7,6 +7,7 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
 from src.models import create_engine
+from sqlalchemy.dialects import postgresql
 
 BASE = declarative_base()
 
@@ -90,6 +91,43 @@ class ApiUser(BASE):
         }
 
 
+class BankingServices(BASE):
+    __tablename__ = 'banking_services'
+    id = Column(Integer, primary_key=True)
+    service_name = Column(String(50))
+    service_description = Column(String(200))
+    created_date = Column(String(30))
+
+    def __init__(self, service_name, service_description):
+        self.service_name = service_name
+        self.service_description = service_description
+        self.created_date = datetime.datetime.now()
+
+
+class CustomerBankingService(BASE):
+    __tablename__ = "registered_services"
+    id = Column(Integer, primary_key=True)
+    api_user_id = Column(Integer, ForeignKey('api_user.user_id'))
+    api_user = relationship(ApiUser)
+    service_id = Column(Integer, ForeignKey('banking_services.id'))
+    service = relationship(BankingServices)
+    status = Column(String(10))
+    created_date = Column(String(30))
+
+    def __init__(self, api_user_id, service_id, status):
+        self.api_user_id = api_user_id
+        self.service_id = service_id
+        self.status = status
+        self.created_date = datetime.datetime.now()
+
+    @property
+    def serialize(self):
+        return {
+            "name": self.service.service_name,
+            "status": self.status
+        }
+
+
 class Customer(BASE):
     """
     THis table contains all the customer details.
@@ -108,6 +146,7 @@ class Customer(BASE):
     acc_number = Column(Integer)
     account_type = Column(String(10))
     create_date = Column(String(30))
+    # services = Column(postgresql.ARRAY(Integer, dimensions=1))
     # signature_img = Column(String(100))
 
     inputter_id = Column(Integer, ForeignKey('user.uid'))

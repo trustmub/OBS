@@ -21,6 +21,7 @@ from flask import Blueprint, jsonify, request
 from flask_restful import Resource, Api, reqparse
 
 from src.controller.api_user import ApiUserController
+from src.controller.banking_services import BankingServicesController
 
 bank_api = Blueprint("bank_api", __name__)
 api = Api(bank_api)
@@ -55,5 +56,52 @@ class Register(Resource):
         return jsonify({"response": "account does not exist"})
 
 
+class Services(Resource):
+
+    def post(self):
+        account = reqparse.request.json["account"]
+        pin = reqparse.request.json["pin"]
+        user_number = reqparse.request.json["user_number"]
+
+        user_obj = ApiUserController(account=account, pin=pin, user_number=user_number)
+
+        if user_obj.verify_account() and user_obj.verify_pin():
+            services = BankingServicesController(account).customer_banking_services()
+            print("services are {services}")
+
+            return jsonify({
+                "response": "success",
+                "body": {
+                    "account": "serving account",
+                    "card_number": "9334 0000 81",
+                    "count": 5,
+                    "services": services
+                        # [
+                        #     {
+                        #         "name": "Pay",
+                        #         "status": "active"
+                        #     },
+                        #     {
+                        #         "name": "Transfer",
+                        #         "status": "active"
+                        #     },
+                        #     {
+                        #         "name": "CashSend",
+                        #         "status": "active"
+                        #     },
+                        #     {
+                        #         "name": "Buy Airtime",
+                        #         "status": "active"
+                        #     },
+                        #     {
+                        #         "name": "Buy Electricity",
+                        #         "status": "active"
+                        #     }
+                        # ]
+                }
+            })
+
+
 api.add_resource(Login, '/api/v1/login/')
 api.add_resource(Register, '/api/v1/login/register/')
+api.add_resource(Services, '/api/v1/account/services/')
