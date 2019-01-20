@@ -1,16 +1,16 @@
 import time
 import datetime
 from src.models import session
-from src.models.models import SysDate, Till, TransactionCharge, Account, Branch, Currency, Customer
+from src.models.models import SysDate, Till, TransactionCharge, Account, Branch, Currency, Customer, BankingServices
 from src.functions.genarators import Auto
 
-print("Creating System Date")
-sys_date = SysDate(date=time.strftime('%Y-%m-%d'), create_date=datetime.datetime.now())
-session.add(sys_date)
-session.commit()
+# print("Creating System Date")
+# sys_date = SysDate(date=time.strftime('%Y-%m-%d'), create_date=datetime.datetime.now())
+# session.add(sys_date)
+# session.commit()
 
-print("Done creating system Date")
-
+# print("Done creating system Date")
+"""
 rtgs = Customer(first_name='sys_user', last_name='sys_user', dob=time.strftime('%Y-%m-%d'), address='address',
                 country='Zimbabwe', email='system', gender='system', contact_number='09100000', working_bal=0,
                 acc_number=Auto().account_number_generator(), account_type='rtgs', create_date=datetime.datetime.now(),
@@ -110,12 +110,57 @@ session.add(charges3)
 session.add(charges4)
 session.add(charges5)
 session.commit()
+"""
 
-acc1 = Account(acc_type='Savings', minbalance=0)
-acc2 = Account(acc_type='Current', minbalance=5)
-acc3 = Account(acc_type='Corporate', minbalance=100)
-print("Account types created")
-session.add(acc1)
-session.add(acc2)
-session.add(acc3)
-session.commit()
+def create_account_type():
+    account_types = [{"acc_type": "Savings", "minbalance": 0},
+                     {"acc_type": "Current", "minbalance": 5},
+                     {"acc_type": "Corporate", "minbalance": 100}]
+    for type in account_types:
+        type_name = type.get("acc_type")
+        min_balance = type.get("minbalance")
+        if type_name not in [t.acc_type for t in session.query(Account).filter_by(acc_type=type_name).all()]:
+            new_type = Account(acc_type=type_name, minbalance=min_balance)
+            print("Account types created")
+            session.add(new_type)
+            session.commit()
+        else:
+            continue
+
+
+# acc1 = Account(acc_type='Savings', minbalance=0)
+# acc2 = Account(acc_type='Current', minbalance=5)
+# acc3 = Account(acc_type='Corporate', minbalance=100)
+# print("Account types created")
+# session.add(acc1)
+# session.add(acc2)
+# session.add(acc3)
+# session.commit()
+
+
+def create_banking_services():
+    service_dictionary = [{"service_name": "Pay", "service_description": "for payments"},
+                          {"service_name": "Transfer", "service_description": "Transfer funds to local banks"},
+                          {"service_name": "CashSend", "service_description": "E-wallet services"},
+                          {"service_name": "Bill Payments", "service_description": "Bill Payments"}]
+    for service in service_dictionary:
+
+        service_n = service.get("service_name")
+        service_d = service.get("service_description")
+
+        if service_n not in [s.service_name for s in  session.query(BankingServices).filter_by(service_name=service_n).all()]:
+            service_record = BankingServices(service_name=service_n, service_description=service_d)
+            print("Banking service: {} create".format(service_n))
+            session.add(service_record)
+            session.commit()
+        else:
+            continue
+
+
+def create_application_defaults():
+    create_banking_services()
+    create_account_type()
+
+
+if __name__ == '__main__':
+    create_application_defaults()

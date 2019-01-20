@@ -1,9 +1,9 @@
 # This is where End  Of Day procedures are done
 import os
 import time
-from src.cob.eom import AccountsEom
 from src.functions.genarators import *
 from src.models import session
+from src.cob.eom import AccountsEom
 
 from src.models.models import Interest
 
@@ -83,7 +83,8 @@ class Accounts:
 class Reporting:
 
     def __init__(self):
-        self.credit_transactions = os.path.abspath("src//reports//CreditTransactions" + Getters.getSysDate().date + ".csv")
+        self.credit_transactions = os.path.abspath(
+            "src//reports//CreditTransactions" + Getters.getSysDate().date + ".csv")
 
     @staticmethod
     def accountClosingBalances():
@@ -212,4 +213,6 @@ def main():
         Reporting.dbsysdate()
         Reporting.dbsysdate()
 
-# main()
+
+if __name__ == '__main__':
+    main()

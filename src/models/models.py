@@ -128,6 +128,30 @@ class CustomerBankingService(BASE):
         }
 
 
+class Card(BASE):
+    __tablename__ = "card"
+    id = Column(Integer, primary_key=True)
+    card_number = Column(String(15))
+    account_number = Column(Integer)
+    card_type = Column(String(100))
+    created_date = Column(String(30))
+
+    def __init__(self, card_number, account_number, card_type, created_date):
+        self.card_number = card_number
+        self.account_number = account_number
+        self.card_type = card_type
+        self.created_date = datetime.datetime.now()
+
+    @property
+    def serialize(self):
+        return {
+            "id": self.id,
+            "card": self.card_number,
+            "account": self.account_number,
+            "type": self.card_type
+        }
+
+
 class Customer(BASE):
     """
     THis table contains all the customer details.
@@ -148,6 +172,9 @@ class Customer(BASE):
     create_date = Column(String(30))
     # services = Column(postgresql.ARRAY(Integer, dimensions=1))
     # signature_img = Column(String(100))
+
+    card_id = Column(Integer, ForeignKey("card.id"))
+    card = relationship(Card)
 
     inputter_id = Column(Integer, ForeignKey('user.uid'))
     inputter = relationship(User)
