@@ -5,9 +5,12 @@ jobs:
     docker:
     - image: circleci/python:3.6.4
     steps:
-    - checkout
+    - checkout # check out source code to working directory
+    - run: sudo chown -R circleci:circleci /usr/local/bin
+    - run: sudo chown -R circleci:circleci /usr/local/lib/python3.6/site-packages
     - run:
       command: |
         sudo pip install pipenv
-        pipenv install requirements.txt
-        pipenv run "test"
+        pipenv install
+    - run:
+      command: pipenv run "test"
