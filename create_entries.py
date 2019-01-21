@@ -55,62 +55,126 @@ session.add(new2)
 session.add(new3)
 session.add(new4)
 session.commit()
-
-teller1 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto().system_account_number_generator(),
-               currency='USD',
-               remark='', date='', create_date=datetime.datetime.now(), user_id='')
-print("Teller Created")
-teller2 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto().system_account_number_generator(),
-               currency='USD',
-               remark='', date='', create_date=datetime.datetime.now(), user_id='')
-print("Teller Created")
-teller3 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto().system_account_number_generator(),
-               currency='USD',
-               remark='', date='', create_date=datetime.datetime.now(), user_id='')
-print("Teller Created")
-teller4 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto().system_account_number_generator(),
-               currency='USD',
-               remark='', date='', create_date=datetime.datetime.now(), user_id='')
-print("Teller Created")
-session.add(teller1)
-session.add(teller2)
-session.add(teller3)
-session.add(teller4)
-session.commit()
-
-currency1 = Currency(currency_code='USD', description='United States Dollar', create_date=datetime.datetime.now())
-print("USD Currency Created")
-currency2 = Currency(currency_code='ZAR', description='South African Rand', create_date=datetime.datetime.now())
-print("ZAR Currency Created")
-currency3 = Currency(currency_code='GBP', description='Great Britain Pound', create_date=datetime.datetime.now())
-print("GBP Currency Created")
-session.add(currency1)
-session.add(currency2)
-session.add(currency3)
-session.commit()
-
-branch1 = Branch(code='33', description='Head Office')
-branch2 = Branch(code='40', description='Durban Branch')
-branch3 = Branch(code='21', description='Pretoria Branch')
-print("Initial branch Created")
-session.add(branch1)
-session.add(branch2)
-session.add(branch3)
-session.commit()
-
-charges1 = TransactionCharge(tran_type='CR', tran_charge=0)
-charges2 = TransactionCharge(tran_type='DR', tran_charge=1.50)
-charges3 = TransactionCharge(tran_type='TR', tran_charge=1.0)
-charges4 = TransactionCharge(tran_type='RTGS', tran_charge=5.0)
-charges5 = TransactionCharge(tran_type='SF', tran_charge=3.0)
-print("Basic Charges Created")
-session.add(charges1)
-session.add(charges2)
-session.add(charges3)
-session.add(charges4)
-session.add(charges5)
-session.commit()
 """
+
+
+def create_system_tellers():
+    for _ in range(0, 6):
+        new_teller = Till(branch_code='', o_balance=0, c_balance=0,
+                          till_account=Auto().system_account_number_generator(),
+                          currency="USD", remark='', date='', create_date=datetime.datetime.now(), user_id='')
+        session.add(new_teller)
+        session.commit()
+
+
+# teller1 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto().system_account_number_generator(),
+#                currency='USD',
+#                remark='', date='', create_date=datetime.datetime.now(), user_id='')
+# print("Teller Created")
+# teller2 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto().system_account_number_generator(),
+#                currency='USD',
+#                remark='', date='', create_date=datetime.datetime.now(), user_id='')
+# print("Teller Created")
+# teller3 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto().system_account_number_generator(),
+#                currency='USD',
+#                remark='', date='', create_date=datetime.datetime.now(), user_id='')
+# print("Teller Created")
+# teller4 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto().system_account_number_generator(),
+#                currency='USD',
+#                remark='', date='', create_date=datetime.datetime.now(), user_id='')
+# print("Teller Created")
+# session.add(teller1)
+# session.add(teller2)
+# session.add(teller3)
+# session.add(teller4)
+# session.commit()
+#
+
+def create_system_currencies():
+    currencies = [{"currency_code": "USD", "description": "United States Dollar"},
+                  {"currency_code": "ZAR", "description": "South African Rand"},
+                  {"currency_code": "GBP", "description": "Great Britain Pound"}]
+
+    for currency in currencies:
+        code = currency.get("currency_code")
+        description = currency.get("description")
+        if code not in [c.currency_code for c in session.query(Currency).all()]:
+            new_currency = Currency(currency_code=code, description=description, create_date=datetime.datetime.now())
+            session.add(new_currency)
+            session.commit()
+        else:
+            continue
+
+
+# currency1 = Currency(currency_code='USD', description='United States Dollar', create_date=datetime.datetime.now())
+# print("USD Currency Created")
+# currency2 = Currency(currency_code='ZAR', description='South African Rand', create_date=datetime.datetime.now())
+# print("ZAR Currency Created")
+# currency3 = Currency(currency_code='GBP', description='Great Britain Pound', create_date=datetime.datetime.now())
+# print("GBP Currency Created")
+# session.add(currency1)
+# session.add(currency2)
+# session.add(currency3)
+# session.commit()
+
+
+def create_system_branches():
+    branches = [{"code": "01", "description": "Head Office"},
+                {"code": "02", "description": "Treasury"},
+                {"code": "03", "description": "Reconciliation"}]
+    for branch in branches:
+        branch_code = branch.get("code")
+        description = branch.get("description")
+        if branch_code not in [b.code for b in session.query(Branch).all()]:
+            new_branch = Branch(code=branch_code, description=description)
+            session.add(new_branch)
+            session.commit()
+        else:
+            continue
+
+
+# branch1 = Branch(code='33', description='Head Office')
+# branch2 = Branch(code='40', description='Durban Branch')
+# branch3 = Branch(code='21', description='Pretoria Branch')
+# print("Initial branch Created")
+# session.add(branch1)
+# session.add(branch2)
+# session.add(branch3)
+# session.commit()
+
+
+def create_transaction_charge_type():
+    charge_types = [{"tran_type": "CR", "tran_charge": 0},
+                    {"tran_type": "DR", "tran_charge": 1.50},
+                    {"tran_type": "TR", "tran_charge": 1.0},
+                    {"tran_type": "RTGS", "tran_charge": 5.0},
+                    {"tran_type": "SF", "tran_charge": 3.0}]
+
+    for charge in charge_types:
+        trans_type = charge.get("tran_type")
+        trans_charge = charge.get("tran_charge")
+        if trans_type not in [chg.tran_type for chg in session.query(TransactionCharge).all()]:
+            new_charge = TransactionCharge(tran_type=trans_type, tran_charge=trans_charge)
+            session.add(new_charge)
+            session.commit()
+            print("Charge Type created")
+        else:
+            continue
+
+
+# charges1 = TransactionCharge(tran_type='CR', tran_charge=0)
+# charges2 = TransactionCharge(tran_type='DR', tran_charge=1.50)
+# charges3 = TransactionCharge(tran_type='TR', tran_charge=1.0)
+# charges4 = TransactionCharge(tran_type='RTGS', tran_charge=5.0)
+# charges5 = TransactionCharge(tran_type='SF', tran_charge=3.0)
+# print("Basic Charges Created")
+# session.add(charges1)
+# session.add(charges2)
+# session.add(charges3)
+# session.add(charges4)
+# session.add(charges5)
+# session.commit()
+
 
 def create_account_type():
     account_types = [{"acc_type": "Savings", "minbalance": 0},
@@ -148,7 +212,8 @@ def create_banking_services():
         service_n = service.get("service_name")
         service_d = service.get("service_description")
 
-        if service_n not in [s.service_name for s in  session.query(BankingServices).filter_by(service_name=service_n).all()]:
+        if service_n not in [s.service_name for s in
+                             session.query(BankingServices).filter_by(service_name=service_n).all()]:
             service_record = BankingServices(service_name=service_n, service_description=service_d)
             print("Banking service: {} create".format(service_n))
             session.add(service_record)
@@ -158,6 +223,9 @@ def create_banking_services():
 
 
 def create_application_defaults():
+    create_system_currencies()
+    create_system_branches()
+    create_transaction_charge_type()
     create_banking_services()
     create_account_type()
 
