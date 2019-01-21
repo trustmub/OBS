@@ -3,11 +3,11 @@ jobs:
   build:
     working_directory: ~/circleci-python-flask
     docker:
-      - image: circleci/python:3.6.4
-      steps:
-        - checkout
-        - run:
-          command: |
-            sudo pip install pipenv
-            pipenv install requirements.txt
-            pipenv run "test"
+    - image: circleci/python:3.6.4
+    steps:
+    - checkout
+    - run:
+      command: |
+        sudo pip install pipenv
+        pipenv install requirements.txt
+        pipenv run "test"
