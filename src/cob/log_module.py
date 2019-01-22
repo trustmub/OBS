@@ -9,12 +9,17 @@ logging.basicConfig(filename=UPLOAD_FOLDER, level=logging.DEBUG, format=LOG_FORM
 class SystemOBS:
     """This is a logging class which takes in a messages where logging is required"""
 
-    def __init__(self):
-        self.logger = logging.getLogger()
+    # def __init__(self)?=:
+    #     self.logger = logging.getLogger()
+    _logger = logging.getLogger()
+    _counter = 0
 
-    def start_logging(self, message):
+    @classmethod
+    def start_logging(cls, message):
         """
         THe start Logging function takes in one parameter, message, specifying specific thing to log like error
         messages on try catch blocks
         """
-        self.logger.info(message)
+        cls._counter += 1
+        _log_id = str(cls._counter).zfill(9)
+        cls._logger.info(message + " ID: " + _log_id)

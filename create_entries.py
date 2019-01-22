@@ -4,12 +4,50 @@ from src.models import session
 from src.models.models import SysDate, Till, TransactionCharge, Account, Branch, Currency, Customer, BankingServices
 from src.functions.genarators import Auto
 
+
 # print("Creating System Date")
 # sys_date = SysDate(date=time.strftime('%Y-%m-%d'), create_date=datetime.datetime.now())
 # session.add(sys_date)
 # session.commit()
 
 # print("Done creating system Date")
+
+def create_system_date():
+    date_obj = session.query(SysDate).all()
+    if not date_obj:
+        sys_date = SysDate(date=time.strftime('%Y-%m-%d'), create_date=datetime.datetime.now())
+        session.add(sys_date)
+        session.commit()
+    else:
+        print("System Date Already Set To: {}".format(date_obj[0].date))
+
+
+def create_system_accounts():
+    account_types = [{"type": "rtgs"},
+                     {"type": "charges"},
+                     {"type": "suspense"},
+                     {"type": "servfee"},
+                     {"type": "acccreate"},
+                     {"type": "interest"}
+                     ]
+    contact_number_counter = 772000000
+    for acc_type in account_types:
+        account_type = acc_type.get("type")
+        if account_type not in [at.account_type for at in session.query(Customer).all()]:
+            print("Account of type {} create.".format(account_type))
+            contact_number = str(contact_number_counter).zfill(10)
+            record = Customer(first_name='sys_user', last_name='sys_user', dob=time.strftime('%Y-%m-%d'),
+                              address='Head Office', country='Zimbabwe', email='system@obs.com', gender='system',
+                              contact_number=contact_number, working_bal=0,
+                              acc_number=Auto().account_number_generator(),
+                              account_type=account_type, create_date=datetime.datetime.now(), inputter_id=1)
+            session.add(record)
+            session.commit()
+            contact_number_counter += 1
+        else:
+            continue
+
+
 """
 rtgs = Customer(first_name='sys_user', last_name='sys_user', dob=time.strftime('%Y-%m-%d'), address='address',
                 country='Zimbabwe', email='system', gender='system', contact_number='09100000', working_bal=0,
@@ -59,12 +97,15 @@ session.commit()
 
 
 def create_system_tellers():
-    for _ in range(0, 6):
-        new_teller = Till(branch_code='', o_balance=0, c_balance=0,
-                          till_account=Auto().system_account_number_generator(),
-                          currency="USD", remark='', date='', create_date=datetime.datetime.now(), user_id='')
-        session.add(new_teller)
-        session.commit()
+    record_till = session.query(Till).all()
+    if len(record_till) <= 6:
+        for _ in range(0, 6):
+            print("Teller account created")
+            new_teller = Till(branch_code='', o_balance=0, c_balance=0,
+                              till_account=Auto().system_account_number_generator(),
+                              currency="USD", remark='', date='', create_date=datetime.datetime.now(), user_id='')
+            session.add(new_teller)
+            session.commit()
 
 
 # teller1 = Till(branch_code='', o_balance=0, c_balance=0, till_account=Auto().system_account_number_generator(),
@@ -223,7 +264,10 @@ def create_banking_services():
 
 
 def create_application_defaults():
+    create_system_date()
+    create_system_accounts()
     create_system_currencies()
+    create_system_tellers()
     create_system_branches()
     create_transaction_charge_type()
     create_banking_services()

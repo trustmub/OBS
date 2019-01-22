@@ -19,7 +19,7 @@ banking = Blueprint('banking', __name__)
 def account_search():
     if request.method == 'POST':
         acc_num = int(request.form['account_number'])
-        record = Search().search_by_account(acc_num)
+        record = Search.search_by_account(acc_num)
         if record is not None:
             return render_template('banking/deposits.html', record=record, user=Profile().user_details())
         else:
@@ -65,7 +65,7 @@ def stmt_search():
         start_date = request.form['start_date']
         end_date = request.form['end_date']
 
-        record, statement_records = Search().search_stmt_transactions(acc_num, start_date, end_date)
+        record, statement_records = Search.search_stmt_transactions(acc_num, start_date, end_date)
 
         if record is not None and statement_records:
             return render_template('banking/statement.html', record=record, stmt=statement_records, dt=dt,
@@ -85,7 +85,7 @@ def stmt_print(account, start_date, end_date):
     start_date = start_date
     end_date = end_date
     # record = session.query(Customer).filter_by(acc_number=acc_num).first()
-    record, statement_records = Search().search_stmt_transactions(acc_num, start_date, end_date)
+    record, statement_records = Search.search_stmt_transactions(acc_num, start_date, end_date)
     return render_template('banking/stmt_printed.html', record=record, stmt=statement_records, dt=dt, sd=start_date,
                            ed=end_date, user=Profile().user_details())
 
@@ -199,7 +199,7 @@ def external_transfer():
 def with_account_search():
     if request.method == 'POST':
         acc_num = int(request.form['account_number'])
-        record = Search().search_by_account(acc_num)
+        record = Search.search_by_account(acc_num)
         if record is not None:
             return render_template('banking/withdrawal.html', record=record, user=Profile().user_details())
         else:

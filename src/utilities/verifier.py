@@ -9,6 +9,15 @@ class Verify:
     def __init__(self):
         self.verify_logging = SystemOBS().start_logging
 
+    _v_logging = SystemOBS.start_logging
+
+    @classmethod
+    def _account_exists(cls, account_number):
+        cls._v_logging("Account Verification " + str(account_number))
+        record = session.query(Customer).filter_by(acc_number=account_number).first()
+        if record is not None:
+            return True
+
     def account_exists(self, account_number):
         self.verify_logging("Account Verification " + str(account_number))
         record = session.query(Customer).filter_by(acc_number=account_number).first()
