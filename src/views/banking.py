@@ -33,9 +33,9 @@ def account_search():
 def deposits():
     record = None
     if request.method == 'POST':
-        if Verify().till_is_linked(login_session['username']):
+        if Verify.till_is_linked(login_session['username']):
             cr_account_number = int(request.form['client_account'])
-            if Verify().account_exists(cr_account_number):
+            if Verify.account_exists(cr_account_number):
                 system_date = Getters.getSysDate().date  # use system date for transactions
                 dep_ref = request.form['deposit_ref']
                 amount = float(request.form['deposit_amount'])
@@ -107,8 +107,8 @@ def transfer_search():
             flash('The Accounts submitted are the same')
             return redirect(url_for('banking.transfer'))
 
-        if Verify().account_exists(from_account):
-            if Verify().account_exists(to_account):
+        if Verify.account_exists(from_account):
+            if Verify.account_exists(to_account):
                 record = [from_account, to_account]
                 return render_template('banking/transfer.html', user=Profile().user_details(), record=record,
                                        fad=Getters.getCustomerAccountDetails(from_account),
@@ -221,10 +221,10 @@ def with_account_search():
 def withdrawal():
     record = None
     if request.method == 'POST':
-        if Verify().till_is_linked(login_session['username']):
+        if Verify.till_is_linked(login_session['username']):
 
             acc_num = int(request.form['client_account'])
-            if Verify().account_exists(acc_num):
+            if Verify.account_exists(acc_num):
                 date = Getters.getSysDate().date  # time.strftime('%Y-%m-%d')
                 dep_ref = request.form['withdrawal_ref']
                 ref = Auto.reference_string_generator()

@@ -7,6 +7,7 @@ from src.utilities.verifier import Verify
 from src.functions.genarators import Auto, Getters, Profile, Checker
 from src.functions.transactions import AccountTransaction
 from src.models.models import Customer
+from src.controller.customer import CustomerController
 
 from src.models import session
 
@@ -36,24 +37,22 @@ def add_cus():
             working_bal = float(initial_deposit)
         account_type = request.form['account_type']
 
-        new_client = Customer(first_name=first_name,
-                              last_name=last_name,
-                              dob=dob,
-                              gender=gender,
-                              contact_number=contact_number,
-                              email=email,
-                              address=address,
-                              country=country,
-                              acc_number=new_account,
-                              working_bal=working_bal,
-                              account_type=account_type,
-                              create_date=datetime.datetime.now(),
-                              inputter_id=Profile().user_details().uid)
-        session.add(new_client)
-        session.commit()
-        # TransactionUpdate.accCreationCash(time.strftime('%Y-%m-%d'), working_bal, new_account)
-        #
-        result = AccountTransaction(time.strftime('%Y-%m-%d'), working_bal, new_account).create_account()
+        CustomerController(first_name=first_name,
+                           last_name=last_name,
+                           dob=dob,
+                           gender=gender,
+                           contact_number=contact_number,
+                           email=email,
+                           address=address,
+                           country=country,
+                           new_account=new_account,
+                           working_bal=working_bal,
+                           account_type=account_type,
+                           inputter_id=Profile().user_details().uid
+                           ).create_customer()
+
+        result = AccountTransaction(date=time.strftime('%Y-%m-%d'), amount=working_bal,
+                                    cr_account=new_account).create_account()
         if result == 0:
             flash("account Creation Failed")
         else:
@@ -103,7 +102,7 @@ def amend_cus():
     record = None
     if request.method == 'POST':
         acc_num = int(request.form['acc_number'])
-        if Verify().account_exists(acc_num):
+        if Verify.account_exists(acc_num):
 
             a_record = session.query(Customer).filter_by(acc_number=acc_num).one()
             if request.form['first_name'] == a_record.first_name:

@@ -5,9 +5,8 @@ from src.models.models import Customer, User
 
 
 class Verify:
-
-    def __init__(self):
-        self.verify_logging = SystemOBS().start_logging
+    # def __init__(self):
+    #     self.verify_logging = SystemOBS().start_logging
 
     _v_logging = SystemOBS.start_logging
 
@@ -18,21 +17,24 @@ class Verify:
         if record is not None:
             return True
 
-    def account_exists(self, account_number):
-        self.verify_logging("Account Verification " + str(account_number))
+    @classmethod
+    def account_exists(cls, account_number):
+        cls._v_logging("Account Verification " + str(account_number))
         record = session.query(Customer).filter_by(acc_number=account_number).first()
         if record is not None:
             return True
 
-    def email_exists(self, email):
-        self.verify_logging("Email Verification " + email)
+    @classmethod
+    def email_exists(cls, email):
+        cls._v_logging("Email Verification " + email)
         record = session.query(User).filter_by(email=email).first()
         if record is not None:
-            self.verify_logging("Email Verification " + email + " FOUND")
+            cls._v_logging("Email Verification " + email + " FOUND")
             return True
 
-    def till_is_linked(self, email):
-        self.verify_logging("Till account Linked to :  " + email)
+    @classmethod
+    def till_is_linked(cls, email):
+        cls._v_logging("Till account Linked to :  " + email)
         record = session.query(User).filter_by(email=email).first()
         till_list = [i.user_id for i in Getters.getAllTellers()]
         if record.uid in till_list:

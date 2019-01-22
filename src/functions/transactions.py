@@ -4,6 +4,8 @@ Persistence of all transactions to the database are carried out of this module.
 """
 
 import time
+
+from src.helpers.references import References
 from ..cob.log_module import SystemOBS
 from ..functions.Enums import TransactionType, TransactionMethod, AccountTypes
 from ..functions.genarators import Auto, Getters
@@ -102,7 +104,7 @@ class AccountTransaction(Transaction):
             self.suspense_account_teller = session.query(Till).filter_by(
                 till_account=Getters.getTillDetails().till_account).first()
         else:
-            SystemOBS().start_logging("there are no till details")
+            SystemOBS.start_logging("there are no till details")
 
         self.suspense_account_charges = session \
             .query(Customer) \
@@ -123,24 +125,23 @@ class AccountTransaction(Transaction):
             SystemOBS().start_logging(value_error)
             return 0
         # Update transactions Table
-        CommitTransaction(TransactionType.CREDIT.value,
-                          Auto.reference_string_generator(),
-                          TransactionMethod.CASH.value,
-                          self.date,
-                          'None',
-                          self.suspense_account_new_account.acc_number,
-                          self.cr_account,
-                          self.amount,
-                          round(self.amount, 2),
-                          'Account Creation',
-                          customer.custid) \
+        CommitTransaction(trans_type=TransactionType.CREDIT.value,
+                          trans_ref=References().get_transaction_reference,
+                          trans_method=TransactionMethod.CASH.value,
+                          cheque_number='None',
+                          dr_account_number=self.suspense_account_new_account.acc_number,
+                          cr_account_number=self.cr_account,
+                          amount=self.amount,
+                          current_balance=round(self.amount, 2),
+                          remark='Account Creation',
+                          customer_id=customer.custid) \
             .commit_to_database()
 
         # update the Account creation Suspense Account
         self.suspense_account_new_account.working_bal -= self.amount
         session.add(self.suspense_account_new_account)
         session.commit()
-        SystemOBS().start_logging("Account Created: " + str(customer.acc_number))
+        SystemOBS.start_logging("Account Created: " + str(customer.acc_number))
         return 1
         # ---------------------------------------------
 
@@ -153,9 +154,10 @@ class AccountTransaction(Transaction):
         """
         customer = session.query(Customer).filter_by(acc_number=self.cr_account).one()
         current_balance = float(self.amount) + float(customer.working_bal)
+        trans_ref = References().get_transaction_reference
 
         CommitTransaction(trans_type=TransactionType.CREDIT.value,
-                          trans_ref=Auto.reference_string_generator(),
+                          trans_ref=trans_ref,
                           trans_method=TransactionMethod.CASH.value,
                           trans_date=self.date,
                           cheque_number='None',

@@ -26,6 +26,7 @@ class References:
         ref_str = "FT" + str(time_component) + alp.upper()
         return ref_str
 
+    @property
     def get_transaction_reference(self):
         while True:
             self._reference = self._generate_transaction_reference

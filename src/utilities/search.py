@@ -23,12 +23,14 @@ class Search:
         return record
 
     @classmethod
-    def search_stmt_transactions(self, account_number, start_date, end_date):
+    def search_stmt_transactions(cls, account_number, start_date, end_date):
         """Search the Transaction table for transactions within a provided date range"""
 
         log_message = str(account_number) + " " + str(start_date) + " " + str(end_date)
         Search._s_logging(log_message)
         record = Search.search_by_account(account_number)
+
+        print("Customer record object: {}".format(record))
 
         if record is not None:
             statement = session.query(Transactions).filter(Transactions.custid == record.custid).filter(
