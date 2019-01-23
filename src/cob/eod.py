@@ -17,8 +17,6 @@ class Accounts:
         # Check all account opened today
         count = 0
         dt = Getters.getSysDate().date
-        mo = time.strftime('%m')
-        ma = datetime.datetime.month
         acc_opened = session.query(Transactions).filter_by(remark='Account Creation').filter_by(tran_date=dt).all()
         for i in acc_opened:
             count += float(i.amount)
@@ -40,7 +38,6 @@ class Accounts:
         # credit the ...acccreate.... account with the figure to zero it off
         # generate a report for all those account and the zeroing off process
         # create a list for all th entries being done
-        pass
 
     @staticmethod
     def accountInterestEod():
@@ -72,12 +69,10 @@ class Accounts:
 
         session.commit()
         print("Account interest Calculation complete")
-        pass
 
         # check the closing balance for each account
         # calculates a daily interest for the account
         # populates the interest table with account number, interest for the day and date
-        pass
 
 
 class Reporting:
@@ -85,16 +80,15 @@ class Reporting:
     def __init__(self):
         self.credit_transactions = os.path.abspath(
             "src//reports//CreditTransactions" + Getters.getSysDate().date + ".csv")
+        self._account_closing_balances = os.path.abspath(
+            "src/reports/AccountClosingBalances" + Getters.getSysDate().date + ".txt")
 
-    @staticmethod
-    def accountClosingBalances():
+    def account_closing_balances_report(self):
         # a report of all accounts and there closing balance for the day
         acc_list = session.query(Customer).all()
-        dt = Getters.getSysDate().date  # .strftime("%Y-%m-%d")
-        with open("src/reports/AccountClosingBalances" + str(dt) + ".txt", mode="w", encoding="utf-8") as myfile:
+        with open(self._account_closing_balances, mode="w", encoding="utf-8") as myfile:
             for i in acc_list:
                 myfile.write(str(i.acc_number) + " : " + str(i.working_bal) + "\n")
-        pass
 
     @staticmethod
     def tellerTransactionReport():
@@ -106,25 +100,27 @@ class Reporting:
                 myfile.write(
                     str(i.id) + " : " + str(i.tran_type) + " : " + str(i.amount) + " : " + str(i.date) + " : " + str(
                         i.teller_id) + " : " + str(i.customer.acc_number) + " : " + str(i.user_id) + "\n")
-        pass
 
-    def creditTransactions(self):
+
+    def credit_transactions_report(self):
         # all deposits done for the day
         record = session.query(Transactions).filter_by(tran_date=Getters.getSysDate().date).filter_by(
             trantype='CR').all()
         if record is not None:
             print("The number of records are " + str(len(record)))
             with open(self.credit_transactions, mode="w", encoding="utf-8") as myFile:
-                skip_account = [33139793,
-                                33139793,
-                                33145826,
-                                33145826,
-                                33145826,
-                                33145826,
-                                33722073,
-                                33202507,
-                                33613681,
-                                33407739]
+                # skip_account = [33139793,
+                #                 33139793,
+                #                 33145826,
+                #                 33145826,
+                #                 33145826,
+                #                 33145826,
+                #                 33722073,
+                #                 33202507,
+                #                 33613681,
+                #                 33407739]
+                skip_account = [acc.acc_number for acc in
+                                session.query(Customer).filter_by(email="system@obs.com").all()]
                 for i in record:
                     print("The record giving problems is" + str(i.cr_acc_number))
                     if i.cr_acc_number not in skip_account:
@@ -133,10 +129,8 @@ class Reporting:
                                 i.cheque_num) + "," + str(i.acc_number) + "," + str(i.cr_acc_number) + "," + str(
                                 i.amount) + "," + str(i.custid) + "\n")
 
-        pass
-
     @staticmethod
-    def dbsysdate():
+    def rollover_system_date():
         date_change = session.query(SysDate).first()
         mydate = datetime.datetime.strptime(Getters.getSysDate().date, '%Y-%m-%d')
         add_day = datetime.timedelta(days=1)
@@ -172,11 +166,11 @@ def eod_process():
     print("Account : Account Interest End Of Day")
     Accounts.accountInterestEod()
     print("Reporting : Creadit Transaction Report")
-    Reporting().creditTransactions()
+    Reporting().credit_transactions_report()
     print("Reporting : Debit Transaction Reports")
     Reporting.debitTransactions()
     print("Reports : Account Closing Balance")
-    Reporting.accountClosingBalances()
+    Reporting().account_closing_balances_report()
     print("Reporting : Teller Transaction Reports")
     Reporting.tellerTransactionReport()
 
@@ -187,11 +181,11 @@ def eom_process():
     AccountsEom.accountInterestEom()
     print("Service Fee charges")
     AccountsEom.serviceFeesEom()
-    Reporting().creditTransactions()
+    Reporting().credit_transactions_report()
     print("Reporting : Debit Transaction Reports")
     Reporting.debitTransactions()
     print("Reports : Account Closing Balance")
-    Reporting.accountClosingBalances()
+    Reporting.account_closing_balances_report()
 
 
 def main():
@@ -207,11 +201,11 @@ def main():
             eom_process()
         print(Checker.is_weekday(md))
         print("System : Date change")
-        Reporting.dbsysdate()
+        Reporting.rollover_system_date()
     else:
         print("System : Date change")
-        Reporting.dbsysdate()
-        Reporting.dbsysdate()
+        Reporting.rollover_system_date()
+        Reporting.rollover_system_date()
 
 
 if __name__ == '__main__':

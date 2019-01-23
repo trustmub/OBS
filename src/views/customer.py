@@ -137,14 +137,6 @@ def amend_cus():
                 pass
             else:
                 a_record.country = request.form['country']
-            '''if request.form['acc_number'] == a_record.acc_number:
-                pass
-            else:
-                a_record.acc_number = request.form['acc_number']
-            if request.form['working_bal'] == a_record.working_bal:
-                pass
-            else:
-                a_record.working_bal = float(request.form['working_bal'])'''
             if request.form['account_type'] == a_record.account_type:
                 pass
             else:

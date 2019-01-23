@@ -76,4 +76,3 @@ class AccountsEom:
             session.add(new)
             session.commit()
             print("Process table updated")
-            pass

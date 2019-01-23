@@ -33,9 +33,10 @@ class Login(Resource):
     def post(self):
         account = reqparse.request.json["account"]
         pin = reqparse.request.json["pin"]
+        device_id = reqparse.request.json["device_id"]
         user_number = reqparse.request.json["user_number"]
 
-        user_obj = ApiUserController(account=account, pin=pin, user_number=user_number)
+        user_obj = ApiUserController(account=account, pin=pin, user_number=user_number, device=device_id)
         if user_obj.verify_account() and user_obj.verify_pin():
             customer = user_obj.customer_details()
             user = user_obj.user_details()
@@ -47,7 +48,9 @@ class Register(Resource):
     def post(self):
         account = reqparse.request.json["account"]
         pin = reqparse.request.json["pin"]
-        user_obj = ApiUserController(account=account, pin=pin)
+        device_id = reqparse.request.json["device_id"]
+
+        user_obj = ApiUserController(account=account, pin=pin, device=device_id)
         if user_obj.verify_account():
             if not user_obj.verify_registration():
                 user_obj.create_mobile_account()
@@ -61,9 +64,10 @@ class Services(Resource):
     def post(self):
         account = reqparse.request.json["account"]
         pin = reqparse.request.json["pin"]
+        device = reqparse.request.json["device_id"]
         user_number = reqparse.request.json["user_number"]
 
-        user_obj = ApiUserController(account=account, pin=pin, user_number=user_number)
+        user_obj = ApiUserController(account=account, pin=pin, user_number=user_number, device=device)
 
         if user_obj.verify_account() and user_obj.verify_pin():
             services = BankingServicesController(account).customer_banking_services()
@@ -76,30 +80,10 @@ class Services(Resource):
                     "card_number": "9334 0000 81",
                     "count": 5,
                     "services": services
-                        # [
-                        #     {
-                        #         "name": "Pay",
-                        #         "status": "active"
-                        #     },
-                        #     {
-                        #         "name": "Transfer",
-                        #         "status": "active"
-                        #     },
-                        #     {
-                        #         "name": "CashSend",
-                        #         "status": "active"
-                        #     },
-                        #     {
-                        #         "name": "Buy Airtime",
-                        #         "status": "active"
-                        #     },
-                        #     {
-                        #         "name": "Buy Electricity",
-                        #         "status": "active"
-                        #     }
-                        # ]
                 }
             })
+        else:
+            return jsonify({"response": "account does not exist"})
 
 
 api.add_resource(Login, '/api/v1/login/')
