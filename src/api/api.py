@@ -16,20 +16,25 @@
 
 
 """
-
+from flask_cors import CORS
 from flask import Blueprint, jsonify, request
 from flask_restful import Resource, Api, reqparse
+from flask_restful.utils import cors
 
 from src.controller.api_user import ApiUserController
 from src.controller.banking_services import BankingServicesController
 
 bank_api = Blueprint("bank_api", __name__)
 api = Api(bank_api)
-
+CORS(bank_api)
 parser = reqparse.RequestParser()
 
 
 class Login(Resource):
+    # decorators = [cors.make_response('Access-Control-Allow-Origin', '*')]
+
+    # headers.add('Access-Control-Allow-Origin', '*')
+
     def post(self):
         account = reqparse.request.json["account"]
         pin = reqparse.request.json["pin"]

@@ -1,0 +1,41 @@
+version: "3.1"
+services:
+  database:
+    image: mysql
+    ports:
+      - "33060:33060"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: bank_database
+
+  flask:
+    image: webapp-flask
+    build:
+      context: .
+      dockerfile: Dockerfile-flaskf.yml
+    volumes:
+      - "./:/app"
+    depends_on:
+      - database
+
+  nginx:
+    image: nginx
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx.yml
+    ports:
+      - "5000:80"
+    depends_on:
+      - flask
+
+#    volumes:
+#      - ./mysite.template:/etc/nginx/conf.d/mysite.template
+#    ports:
+#      - "8080:80"
+#    environment:
+#      - NGINX_HOST=foobar.com
+#      - NGINX_PORT=80
+

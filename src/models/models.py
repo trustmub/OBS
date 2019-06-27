@@ -6,8 +6,8 @@ import datetime
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+
 from src.models import create_engine
-from sqlalchemy.dialects import postgresql
 
 BASE = declarative_base()
 
