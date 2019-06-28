@@ -6,8 +6,11 @@ import datetime
 from sqlalchemy import Column, Integer, String, Float, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
+import pymysql
 
 from src.models import create_engine
+
+pymysql.install_as_MySQLdb()
 
 BASE = declarative_base()
 
@@ -360,7 +363,7 @@ class Till(BASE):
     o_balance = Column(Float(2))
     c_balance = Column(Float(2))
     till_account = Column(String(15))
-    currency = Column(String())
+    currency = Column(String(5))
     remark = Column(String(100))
     date = Column(String(30))
     create_date = Column(String(30))
@@ -578,5 +581,6 @@ class SysDate(BASE):
 # insert this at the end of the classes #######
 
 
-ENGINE = create_engine('sqlite:///bank_database.db')
+# ENGINE = create_engine('sqlite:///bank_database.db')
+ENGINE = create_engine("mysql+pymysql://root:password@database:3306/bank_database", encoding='latin1', echo=True)
 BASE.metadata.create_all(ENGINE)

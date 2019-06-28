@@ -150,5 +150,5 @@ def create_application_defaults():
     create_account_type()
 
 
-if __name__ == '__main__':
-    create_application_defaults()
+# if __name__ == '__main__':
+#     create_application_defaults()
