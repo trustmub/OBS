@@ -1,0 +1,36 @@
+{
+    "data": [
+        {
+            "title": "Steven Newman",
+            "description": "What time will yu be on site",
+            "date": "1616803033",
+            "projectName": "Project Name",
+            "reference": "12345",
+            "notificationType": "mention"
+        },
+        {
+            "title": "Quote Quoted",
+            "description": "why is so much cement needed for the project",
+            "date": "1616803033",
+            "projectName": "Project Name",
+            "reference": "12345",
+            "notificationType": "quote"
+        },
+        {
+            "title": "Project Name",
+            "description": "Not sure what notification to define here as i dont want everything for MVP",
+            "date": "1616803033",
+            "projectName": "Project Name",
+            "reference": "1234",
+            "notificationType": "project"
+        },
+        {
+            "title": "Order #665678",
+            "description": "Your order has been received by our warehouse",
+            "date": "1616803033",
+            "projectName": "Project Name",
+            "reference": "1234",
+            "notificationType": "order"
+        }
+    ]
+}
