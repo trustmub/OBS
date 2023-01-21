@@ -1,13 +1,14 @@
-from src.functions.genarators import Profile
-from src.models import session
-from src.models.models import TransactionCharge, Till
+from src import db
+from src.functions.user_profile import Profile
+from src.models.till_model import Till
+from src.models.transaction_charge_fee_model import TransactionChargeFee
 
 
 class Query:
     def __init__(self):
-        self.transaction_type = session.query(TransactionCharge).all()
-        self._available_teller_accounts = session.query(Till).filter_by(user_id='').all()
-        self.teller_list = session.query(Till).all()
+        self.transaction_type = db.session.query(TransactionChargeFee).all()
+        self._available_teller_accounts = db.session.query(Till).filter_by(user_id='').all()
+        self.teller_list = db.session.query(Till).all()
 
     def transaction_types(self):
         return self.transaction_type
@@ -27,6 +28,6 @@ class Query:
         _teller_id_list = [i.id for i in self.teller_list]
         _profile_id = Profile().user_details().uid
         if _profile_id in _teller_id_list:
-            return session.query(Till).filter_by(user_id=_profile_id).first()
+            return db.session.query(Till).filter_by(user_id=_profile_id).first()
         else:
             return []

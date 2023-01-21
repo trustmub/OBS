@@ -9,9 +9,12 @@
 """
 import datetime
 
-from src.functions.genarators import Auto
-from src.models import session
-from src.models.models import Customer
+from src import db
+# from src.models import session
+from src.models.customer_model import Customer
+
+
+# from src.models.models import Customer
 
 
 class CustomerController:
@@ -45,8 +48,8 @@ class CustomerController:
                               account_type=self.account_type,
                               create_date=datetime.datetime.now(),
                               inputter_id=self.inputter_id)
-        session.add(new_client)
-        session.commit()
+        db.session.add(new_client)
+        db.session.commit()
 
     def amend_customer(self):
         pass

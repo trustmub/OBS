@@ -1,5 +1,14 @@
-from flask import Blueprint, render_template, redirect, request, url_for
-from src.functions.genarators import *
+import datetime
+
+from flask import Blueprint, render_template, redirect, request, url_for, flash
+
+from src import db
+from src.functions.genarators import Getters, TransactionUpdate
+from src.functions.user_profile import Profile
+from src.models.account_type_model import AccountType
+from src.models.bank_table_model import Banks
+from src.models.branch_model import Branch
+from src.models.transaction_charge_fee_model import TransactionChargeFee
 
 settings = Blueprint('settings', __name__)
 
@@ -9,10 +18,10 @@ def add_tran_type():
     if request.method == 'POST':
         tran_type = str.upper(request.form['tran_type'])
         tran_charge = float(request.form['tran_charge'])
-        new = TransactionCharge(tran_type=tran_type,
-                                tran_charge=tran_charge)
-        session.add(new)
-        session.commit()
+        new = TransactionChargeFee(tran_type=tran_type,
+                                   tran_charge=tran_charge)
+        db.session.add(new)
+        db.session.commit()
         return redirect(url_for('settings.system_setting'))
     else:
         return render_template('settings/add_trans_type.html', user=Profile().user_details())
@@ -22,9 +31,9 @@ def add_tran_type():
 def del_tran_type(tid):
     trans_id = int(tid)
 
-    record = session.query(TransactionCharge).filter_by(id=trans_id).first()
-    session.delete(record)
-    session.commit()
+    record = db.session.query(TransactionChargeFee).filter_by(id=trans_id).first()
+    db.session.delete(record)
+    db.session.commit()
     flash('Transaction Type Record Deleted')
     return redirect(url_for('settings.system_setting'))
 
@@ -34,10 +43,10 @@ def add_acc_type():
     if request.method == 'POST':
         acc_type = str.capitalize(request.form['acc_type'])
         min_balance = int(request.form['min_balance'])
-        new = Account(acc_type=acc_type,
-                      minbalance=min_balance)
-        session.add(new)
-        session.commit()
+        new = AccountType(acc_type=acc_type,
+                          minbalance=min_balance)
+        db.session.add(new)
+        db.session.commit()
         return redirect(url_for('settings.system_setting'))
     else:
         return render_template('settings/add_acc_type.html', user=Profile().user_details())
@@ -46,9 +55,9 @@ def add_acc_type():
 @settings.route('/del_acc_type/<int:id>/')
 def del_acc_type(id):
     tid = id
-    record = session.query(Account).filter_by(id=tid).first()
-    session.delete(record)
-    session.commit()
+    record = db.session.query(AccountType).filter_by(id=tid).first()
+    db.session.delete(record)
+    db.session.commit()
     return redirect(url_for('settings.system_setting'))
 
 
@@ -60,8 +69,8 @@ def add_branch():
         date = datetime.datetime.now()
         new = Branch(code=code,
                      description=description,)
-        session.add(new)
-        session.commit()
+        db.session.add(new)
+        db.session.commit()
         return redirect(url_for('settings.system_setting'))
         pass
     else:
@@ -70,9 +79,9 @@ def add_branch():
 
 @settings.route('/del_branch/<int:id>/', methods=['POST', 'GET'])
 def del_branch(id):
-    record = session.query(Branch).filter_by(id=id).first()
-    session.delete(record)
-    session.commit()
+    record = db.session.query(Branch).filter_by(id=id).first()
+    db.session.delete(record)
+    db.session.commit()
     return redirect(url_for('settings.system_setting'))
 
 
@@ -83,8 +92,8 @@ def add_bank():
         swift_code = str.upper(request.form['swift_code'])
         new = Banks(name=name,
                     swift_code=swift_code)
-        session.add(new)
-        session.commit()
+        db.session.add(new)
+        db.session.commit()
         return redirect(url_for('settings.system_setting'))
     else:
         return render_template('settings/add_bank.html', user=Profile().user_details())
@@ -92,9 +101,9 @@ def add_bank():
 
 @settings.route('/delete_bank/<int:id>/', methods=['POST', 'GET'])
 def delete_bank(id):
-    record = session.query(Banks).filter_by(id=id).first()
-    session.delete(record)
-    session.commit()
+    record = db.session.query(Banks).filter_by(id=id).first()
+    db.session.delete(record)
+    db.session.commit()
     return redirect(url_for('settings.system_setting'))
 
 

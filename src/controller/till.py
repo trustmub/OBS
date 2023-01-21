@@ -1,11 +1,15 @@
+# from . import session
+# from src.models.models import Till
+import datetime
 import time
-from . import datetime
-from . import session
-from src.models.models import Till, Customer, TellerTransactions
+
+from src.functions.Enums import TransactionType
 from src.functions.genarators import Getters, TransactionUpdate
-from src.functions.transactions import CommitTransaction
-from src.functions.Enums import TransactionType, TransactionMethod
 from src.helpers.references import get_transaction_reference
+from .. import db
+from ..models.customer_model import Customer
+from ..models.teller_transaction_model import TellerTransaction
+from ..models.till_model import Till
 
 
 class TillController(object):
@@ -21,12 +25,11 @@ class TillController(object):
         self.user_id = user_id
         self.teller_id = teller_id
         self.c_balance = c_balance
-        self._suspense_account = session.query(Customer).filter_by(account_type='suspense').first()
-
+        self._suspense_account = db.session.query(Customer).filter_by(account_type='suspense').first()
 
     def open_till(self):
         # use teller_id to set the currency, till_account
-        teller_record = session.query(Till).filter_by(id=self.teller_id).first()
+        teller_record = db.session.query(Till).filter_by(id=self.teller_id).first()
 
         teller_record.branch_code = self.branch_code
         teller_record.o_balance = self.o_balance
@@ -38,22 +41,22 @@ class TillController(object):
         teller_record.create_date = datetime.now()
         teller_record.user_id = self.user_id
 
-        session.add(teller_record)
-        session.commit()
+        db.session.add(teller_record)
+        db.session.commit()
 
         # do a till transaction in crediting the till and affecting the volt Suspense account
 
-        teller_transaction = TellerTransactions(amount=self.o_balance,
-                                                date=time.strftime('%Y-%m-%d'),
-                                                remark='',
-                                                create_date=datetime.utcnow(),
-                                                teller_id=self.teller_id,
-                                                customer_id='',
-                                                user_id=self.user_id,
-                                                tran_type=TransactionType.CR_DR.value,
-                                                tranref=get_transaction_reference())
-        session.add(teller_transaction)
-        session.commit()
+        teller_transaction = TellerTransaction(amount=self.o_balance,
+                                               date=time.strftime('%Y-%m-%d'),
+                                               remark='',
+                                               create_date=datetime.utcnow(),
+                                               teller_id=self.teller_id,
+                                               customer_id='',
+                                               user_id=self.user_id,
+                                               tran_type=TransactionType.CR_DR.value,
+                                               tranref=get_transaction_reference())
+        db.session.add(teller_transaction)
+        db.session.commit()
 
         # TillController.ttUpdate(TransactionType.CR_DR, o_balance, time.strftime('%Y-%m-%d'), 'Teller Transfer',
         #                            suspense.acc_number)
@@ -66,21 +69,24 @@ class TillController(object):
         # ---------------------------------------------------
 
     def close_till(self):
+        till_detail = db.session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
 
-        TransactionUpdate.ttUpdate(TransactionType.CR_DR, sys_balance, time.strftime('%Y-%m-%d'),
+        TransactionUpdate.ttUpdate(TransactionType.CR_DR, till_detail.c_balance, time.strftime('%Y-%m-%d'),
                                    'Closing Balance',
                                    self._suspense_account.acc_number)
-        till_detail = session.query(Till).filter_by(
-            till_account=Getters.getTillDetails().till_account).first()
+        # Credit suspense account with the closing balanced figure
+        self._suspense_account.working_bal += till_detail.c_balance
+        # reset the till position
         till_detail.c_balance = 0
         till_detail.o_balance = 0
         till_detail.user_id = ''
-        session.add(till_detail)
-        session.commit()
-        # Credit suspense account with the closing balanced figure
-        suspense.working_bal += sys_balance
-        session.add(suspense)
-        session.commit()
+
+        # commit Till and suspense account to Database
+        db.session.add(till_detail)
+        db.session.commit()
+
+        db.session.add(self._suspense_account)
+        db.session.commit()
 
         pass
 

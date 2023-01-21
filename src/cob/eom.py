@@ -1,12 +1,16 @@
 # This is where all End of Month procedures are structured
+import datetime
+
 from sqlalchemy import extract
 
+from src import db
 from src.functions.Enums import TransactionType
-from src.functions.genarators import *
+from src.functions.genarators import TransactionUpdate, Getters
 from src.functions.transactions import ChargeTransaction
-from src.models import session
-
-from src.models.models import Interest
+from src.models.customer_model import Customer
+from src.models.interest_model import Interest
+from src.models.system_cob_date_model import CobDates
+from src.models.transaction_charge_fee_model import TransactionChargeFee
 
 
 class AccountsEom:
@@ -17,13 +21,13 @@ class AccountsEom:
         # update the transaction table appropriately
         sys_date = datetime.datetime.strptime(Getters.getSysDate().date, '%Y-%m-%d')
         mo = sys_date.strftime('%m')
-        all_accounts = session.query(Customer).all()
-        if session.query(CobDates).filter_by(date=sys_date).filter_by(process='ai').first():
+        all_accounts = db.session.query(Customer).all()
+        if db.session.query(CobDates).filter_by(date=sys_date).filter_by(process='ai').first():
             print("Account interest has already run")
         else:
             for i in all_accounts:
                 account = i.acc_number
-                selector = session.query(Interest).filter_by(account=account).filter(
+                selector = db.session.query(Interest).filter_by(account=account).filter(
                     extract('month', Interest.date) == mo).all()
                 total = 0
                 for x in selector:
@@ -31,31 +35,31 @@ class AccountsEom:
                 tot = round(total, 2)
                 i.working_bal += tot
                 print("Account {} working balance upadated".format(i.working_bal))
-                session.add(i)
-                session.commit()
+                db.session.add(i)
+                db.session.commit()
                 TransactionUpdate.accInterestUpdate(account, tot, i.working_bal, i.custid)
-                print("Account interest updated for Account {} Amount: ${} working balance now ${}".format(account, tot, i.working_bal))
+                print("Account interest updated for Account {} Amount: ${} working balance now ${}".format(account, tot,
+                                                                                                           i.working_bal))
             new = CobDates(date=sys_date,
                            process='ai',
-                           status=1,
-                           create_date=datetime.datetime.now())
+                           status=1)
             print("Cob Process for Account Interest done")
-            session.add(new)
-            session.commit()
+            db.session.add(new)
+            db.session.commit()
         pass
 
     @staticmethod
     def serviceFeesEom():
         if Getters.getCobDates(Getters.getSysDate().date):
-            if session.query(CobDates).filter_by(process='sf').filter_by(status=1):
+            if db.session.query(CobDates).filter_by(process='sf').filter_by(status=1):
                 print("service process skipped")
                 pass
             else:
                 print("Effect the process table")
                 pass
         else:
-            charge = session.query(TransactionCharge).filter_by(tran_type='SF').first()
-            all_accounts = session.query(Customer).all()
+            charge = db.session.query(TransactionChargeFee).filter_by(tran_type='SF').first()
+            all_accounts = db.session.query(Customer).all()
             for i in all_accounts:
                 if i.contact_number == '09100000' or i.account_type == 'Student':
                     print("account {} passed. Account Type is {}".format(i.acc_number, i.account_type))
@@ -64,15 +68,16 @@ class AccountsEom:
                     account = i.acc_number
                     # record = session.query(Customer).filter_by(acc_number=account).first()
                     # update an EOM transaction update
-                    TransactionUpdate.eomServfeeTransactionUpdate(account, Getters.getSysDate().date, charge.tran_charge)
-                    print("Transaction updated " + str(account) + " " + str(charge.tran_charge) + " " + str(Getters.getSysDate().date) + " record effected")
+                    TransactionUpdate.eomServfeeTransactionUpdate(account, Getters.getSysDate().date,
+                                                                  charge.tran_charge)
+                    print("Transaction updated " + str(account) + " " + str(charge.tran_charge) + " " + str(
+                        Getters.getSysDate().date) + " record effected")
                     # TransactionUpdate.accChargeUpdate('SF', account, Getters.getSysDate().date)
                     ChargeTransaction(Getters.getSysDate().date, account).charges(TransactionType.SERVICE_FEE)
                     print("Charge effected for account {}".format(account))
             new = CobDates(date=Getters.getSysDate().date,
                            process='sf',
-                           status=1,
-                           create_date=datetime.datetime.now())
-            session.add(new)
-            session.commit()
+                           status=1)
+            db.session.add(new)
+            db.session.commit()
             print("Process table updated")

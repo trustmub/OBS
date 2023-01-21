@@ -1,14 +1,17 @@
 import os
+import random
 # import secrets
 import string
-from flask import Blueprint, render_template, redirect, request, url_for, flash
+
 from PIL import Image
+from flask import Blueprint, render_template, redirect, url_for, flash, session
 
-from src.forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm, LockScreenForm
+from src import db
 from src.controller.user import UserController
-
-# from src.utilities.verifier import Verify
-from src.functions.genarators import *
+from src.forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm, LockScreenForm
+from src.functions.user_profile import Profile
+from src.models.system_user_model import SystemUser
+from .user_view_model import get_all_branches, get_user_details_by_email, update_user_login_session
 
 UPLOAD_FOLDER = os.path.abspath("src/static/img/user///")
 
@@ -24,9 +27,10 @@ def lockscreen():
 
     if form.validate_on_submit():
         password = form.password.data
-        email = login_session['username']
+        email = session['username']
 
-        user_account = session.query(User).filter_by(email=email).first()
+        # user_account = session.query(User).filter_by(email=email).first()
+        user_account = db.session.query(SystemUser).filter_by(email=email).first()
 
         user_instance = UserController(full_name=user_account.full_name,
                                        email=email,
@@ -34,18 +38,19 @@ def lockscreen():
 
         if user_instance.verify_password():
             user_account.lock = 1
-            session.add(user_account)
-            session.commit()
-            return redirect(url_for('home'))
+            db.session.add(user_account)
+            db.session.commit()
+            return redirect(url_for('dashboard_view.home'))
         else:
             flash("Wrong Password try again", "danger")
             return redirect(url_for('user_view.lockscreen'))
     else:
-        user_session = login_session['username']
-        user_account = session.query(User).filter_by(email=user_session).first()
+        user_session = session['username']
+        # user_account = session.query(User).filter_by(email=user_session).first()
+        user_account = db.session.query(SystemUser).filter_by(email=user_session).first()
         user_account.lock = 0
-        session.add(user_account)
-        session.commit()
+        db.session.add(user_account)
+        db.session.commit()
 
         return render_template('user/lockscreen.html', user=user_account, form=form)
 
@@ -65,19 +70,16 @@ def login():
 
         user_instance = UserController(email=email, password=password)
         if user_instance.verify_email():
-            user_account = session.query(User).filter_by(email=email).first()
+            # user_account = session.query(User).filter_by(email=email).first()
+            user_account = get_user_details_by_email(email)
 
             if user_account.lock == 1:  # Checker.userDbSession(email):
                 flash('User is locked, Contact Systems Administrator', 'danger')
                 return redirect(url_for('user_view.login'))
             else:
                 if user_instance.verify_password():
-                    login_session['username'] = email
-
-                    user_account.lock = 1
-                    session.add(user_account)
-                    session.commit()
-                    return redirect(url_for('home'))
+                    update_user_login_session(user_account, email)
+                    return redirect(url_for('dashboard_view.home'))
                 else:
                     flash('Password is Incorrect', 'danger')
                     return redirect(url_for('user_view.login'))
@@ -88,7 +90,7 @@ def login():
     return render_template('user/login.html', form=form)
 
 
-@user_view.route('/register/', methods=['POST', 'GET'])
+@user_view.route('/register', methods=['POST', 'GET'])
 def register():
     """
     this function handles the registration of a new user
@@ -111,13 +113,14 @@ def register():
 
 @user_view.route('/logout/')
 def logout():
-    if 'username' in login_session:
-        login_user = login_session['username']
-        user_account = session.query(User).filter_by(email=login_user).first()
+    if 'username' in session:
+        login_user = session['username']
+        # user_account = session.query(User).filter_by(email=login_user).first()
+        user_account = db.session.query(SystemUser).filter_by(email=login_user).first()
         user_account.lock = 0
-        session.add(user_account)
-        session.commit()
-        login_session.pop('username', None)
+        db.session.add(user_account)
+        db.session.commit()
+        session.pop('username', None)
         flash("Logged Out", "success")
         return redirect(url_for('user_view.login'))
     else:
@@ -160,7 +163,7 @@ def save_image(form_picture):
 @user_view.route('/edit_user/', methods=['POST', 'GET'])
 def edit_profile():
     form = UserProfileForm()
-    form.branch_code.choices = [(t.code, t.description) for t in Getters.getBranch()]
+    form.branch_code.choices = [(t.code, t.description) for t in get_all_branches()]
     if form.validate_on_submit():
         image_file = ''
         if form.image_string.data:
@@ -181,7 +184,7 @@ def edit_profile():
     print("reloaded")
     return render_template('user/edit_user.html',
                            user=Profile().user_details(),
-                           branch=Getters.getBranch(), form=form)
+                           branch=get_all_branches(), form=form)
 
 
 @user_view.route('/admin')

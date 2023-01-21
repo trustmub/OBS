@@ -1,13 +1,16 @@
 import time
-import datetime
 
 from flask import Blueprint, render_template, request, url_for, redirect, flash
 
-from src.functions.Enums import TransactionType
-from src.functions.genarators import *
-from src.functions.queries import Query
-from src.forms.till_forms import OpenTillForm
+from src import db
 from src.controller.till import TillController
+from src.forms.till_forms import OpenTillForm
+from src.functions.Enums import TransactionType
+from src.functions.genarators import Getters, TransactionUpdate
+from src.functions.queries import Query
+from src.functions.user_profile import Profile
+from src.models.customer_model import Customer
+from src.models.till_model import Till
 
 till = Blueprint('till', __name__)
 
@@ -62,21 +65,21 @@ def close_till():
                 if coh == sys_balance:  # opening balance - closing balance
                     # send cash back to suspense account
                     #  tt transaction
-                    suspense = session.query(Customer).filter_by(account_type='suspense').first()
+                    suspense = db.session.query(Customer).filter_by(account_type='suspense').first()
                     TransactionUpdate.ttUpdate(TransactionType.CR_DR, sys_balance, time.strftime('%Y-%m-%d'),
                                                'Closing Balance',
                                                suspense.acc_number)
-                    till_detail = session.query(Till).filter_by(
+                    till_detail = db.session.query(Till).filter_by(
                         till_account=Getters.getTillDetails().till_account).first()
                     till_detail.c_balance = 0
                     till_detail.o_balance = 0
                     till_detail.user_id = ''
-                    session.add(till_detail)
-                    session.commit()
+                    db.session.add(till_detail)
+                    db.session.commit()
                     # Credit suspense account with the closing balanced figure
                     suspense.working_bal += sys_balance
-                    session.add(suspense)
-                    session.commit()
+                    db.session.add(suspense)
+                    db.session.commit()
 
                     # move the cash in the teller opening balance to closing balance
                     #

@@ -1,9 +1,11 @@
 import random
+import time
 
-from src.models.models import Account
-from src.views.customer import *
-import threading
-from flask import session as login_session
+from src import db
+from src.functions.genarators import Auto
+from src.functions.transactions import AccountTransaction
+from src.models.account_type_model import AccountType
+from src.models.customer_model import Customer
 
 
 def create_random_users():
@@ -14,7 +16,7 @@ def create_random_users():
         name = "Customer" + bee
 
         acctrand = random.randint(1, 4)
-        acct = session.query(Account).filter_by(id=acctrand).first()
+        acct = db.session.query(AccountType).filter_by(id=acctrand).first()
         new_account = Auto().account_number_generator()
         rand_amount = random.randint(5, 10)
         record = Customer(first_name=name,
@@ -28,11 +30,10 @@ def create_random_users():
                           working_bal=rand_amount,
                           acc_number=new_account,
                           account_type=acct.acc_type,
-                          create_date=datetime.datetime.now(),
                           inputter_id=1)
-        session.add(record)
+        db.session.add(record)
 
-        session.commit()
+        db.session.commit()
         # login_session['username'] = 'systemuser@obs.com'
         result = AccountTransaction(time.strftime('%Y-%m-%d'), rand_amount, new_account).create_account()
         if result == 1:

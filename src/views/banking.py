@@ -3,14 +3,15 @@ import time
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from flask import session as login_session
 
+from src import db
+from src.functions.Enums import TransactionType
+from src.functions.genarators import Getters, TransactionUpdate, Auto
+from src.functions.transactions import AccountTransaction, ChargeTransaction
+from src.functions.user_profile import Profile
+from src.models.bank_table_model import Banks
+from src.models.customer_model import Customer
 from src.utilities.search import Search
 from src.utilities.verifier import Verify
-from src.functions.Enums import TransactionType
-from src.functions.genarators import Profile, Checker, Getters, TransactionUpdate, Auto
-from src.functions.transactions import AccountTransaction, ChargeTransaction
-from src.models.models import Customer, Banks
-
-from src.models import session
 
 banking = Blueprint('banking', __name__)
 
@@ -149,8 +150,8 @@ def transfer():
 def external_transfer_search():
     if request.method == 'POST':
         acc_num = int(request.form['from_account'])
-        if session.query(Customer).filter_by(acc_number=acc_num).first():
-            record = session.query(Customer).filter_by(acc_number=acc_num).first()
+        if db.session.query(Customer).filter_by(acc_number=acc_num).first():
+            record = db.session.query(Customer).filter_by(acc_number=acc_num).first()
             return render_template('banking/external_transfer.html', record=Getters.getCustomerAccountDetails(acc_num),
                                    user=Profile().user_details(),
                                    banks=Getters.getBanks(), fad=Getters.getCustomerAccountDetails(acc_num))
@@ -168,7 +169,7 @@ def external_transfer():
     if request.method == 'POST':
         from_acc = request.form['from_acc']
         to_bank = request.form['to_bank']
-        swift = session.query(Banks).filter_by(name=to_bank).first()
+        swift = db.session.query(Banks).filter_by(name=to_bank).first()
         swift_code = swift.swift_code
         to_ext_acc = request.form['to_ext_acc']
         remark = request.form['remark']

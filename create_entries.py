@@ -1,16 +1,24 @@
-import time
 import datetime
-from src.models import session
-from src.models.models import SysDate, Till, TransactionCharge, Account, Branch, Currency, Customer, BankingServices
+import time
+
+from src import db
 from src.functions.genarators import Auto
+from src.models.account_type_model import AccountType
+from src.models.banking_service_model import BankingServices
+from src.models.branch_model import Branch
+from src.models.currency_model import Currency
+from src.models.customer_model import Customer
+from src.models.system_date_model import SysDate
+from src.models.till_model import Till
+from src.models.transaction_charge_fee_model import TransactionChargeFee
 
 
 def create_system_date():
-    date_obj = session.query(SysDate).all()
+    date_obj = db.session.query(SysDate).all()
     if not date_obj:
-        sys_date = SysDate(date=time.strftime('%Y-%m-%d'), create_date=datetime.datetime.now())
-        session.add(sys_date)
-        session.commit()
+        sys_date = SysDate(date=time.strftime('%Y-%m-%d'))
+        db.session.add(sys_date)
+        db.session.commit()
     else:
         print("System Date Already Set To: {}".format(date_obj[0].date))
 
@@ -26,31 +34,31 @@ def create_system_accounts():
     contact_number_counter = 772000000
     for acc_type in account_types:
         account_type = acc_type.get("type")
-        if account_type not in [at.account_type for at in session.query(Customer).all()]:
+        if account_type not in [at.account_type for at in db.session.query(Customer).all()]:
             print("Account of type {} create.".format(account_type))
             contact_number = str(contact_number_counter).zfill(10)
             record = Customer(first_name='sys_user', last_name='sys_user', dob=time.strftime('%Y-%m-%d'),
                               address='Head Office', country='Zimbabwe', email='system@obs.com', gender='system',
                               contact_number=contact_number, working_bal=0,
                               acc_number=Auto().account_number_generator(),
-                              account_type=account_type, create_date=datetime.datetime.now(), inputter_id=1)
-            session.add(record)
-            session.commit()
+                              account_type=account_type, inputter_id=1)
+            db.session.add(record)
+            db.session.commit()
             contact_number_counter += 1
         else:
             continue
 
 
 def create_system_tellers():
-    record_till = session.query(Till).all()
+    record_till = db.session.query(Till).all()
     if len(record_till) <= 6:
         for _ in range(0, 6):
             print("Teller account created")
             new_teller = Till(branch_code='', o_balance=0, c_balance=0,
                               till_account=Auto().system_account_number_generator(),
-                              currency="USD", remark='', date='', create_date=datetime.datetime.now(), user_id='')
-            session.add(new_teller)
-            session.commit()
+                              currency="USD", remark='', date='', user_id=0)
+            db.session.add(new_teller)
+            db.session.commit()
 
 
 def create_system_currencies():
@@ -61,12 +69,14 @@ def create_system_currencies():
     for currency in currencies:
         code = currency.get("currency_code")
         description = currency.get("description")
-        if code not in [c.currency_code for c in session.query(Currency).all()]:
-            new_currency = Currency(currency_code=code, description=description, create_date=datetime.datetime.now())
-            session.add(new_currency)
-            session.commit()
+        if code not in [c.currency_code for c in db.session.query(Currency).all()]:
+            new_currency = Currency(currency_code=code, description=description,
+                                    create_date=str(datetime.datetime.now()))
+            db.session.add(new_currency)
         else:
             continue
+        print("System currencies created")
+        db.session.commit()
 
 
 def create_system_branches():
@@ -76,10 +86,10 @@ def create_system_branches():
     for branch in branches:
         branch_code = branch.get("code")
         description = branch.get("description")
-        if branch_code not in [b.code for b in session.query(Branch).all()]:
+        if branch_code not in [b.code for b in db.session.query(Branch).all()]:
             new_branch = Branch(code=branch_code, description=description)
-            session.add(new_branch)
-            session.commit()
+            db.session.add(new_branch)
+            db.session.commit()
         else:
             continue
 
@@ -94,10 +104,10 @@ def create_transaction_charge_type():
     for charge in charge_types:
         trans_type = charge.get("tran_type")
         trans_charge = charge.get("tran_charge")
-        if trans_type not in [chg.tran_type for chg in session.query(TransactionCharge).all()]:
-            new_charge = TransactionCharge(tran_type=trans_type, tran_charge=trans_charge)
-            session.add(new_charge)
-            session.commit()
+        if trans_type not in [chg.tran_type for chg in db.session.query(TransactionChargeFee).all()]:
+            new_charge = TransactionChargeFee(tran_type=trans_type, tran_charge=trans_charge)
+            db.session.add(new_charge)
+            db.session.commit()
             print("Charge Type created")
         else:
             continue
@@ -107,14 +117,14 @@ def create_account_type():
     account_types = [{"acc_type": "Savings", "minbalance": 0},
                      {"acc_type": "Current", "minbalance": 5},
                      {"acc_type": "Corporate", "minbalance": 100}]
-    for type in account_types:
-        type_name = type.get("acc_type")
-        min_balance = type.get("minbalance")
-        if type_name not in [t.acc_type for t in session.query(Account).filter_by(acc_type=type_name).all()]:
-            new_type = Account(acc_type=type_name, minbalance=min_balance)
+    for account_type in account_types:
+        type_name = account_type.get("acc_type")
+        min_balance = account_type.get("minbalance")
+        if type_name not in [t.acc_type for t in db.session.query(AccountType).filter_by(acc_type=type_name).all()]:
+            new_type = AccountType(acc_type=type_name, minbalance=min_balance)
             print("Account types created")
-            session.add(new_type)
-            session.commit()
+            db.session.add(new_type)
+            db.session.commit()
         else:
             continue
 
@@ -129,14 +139,15 @@ def create_banking_services():
         service_n = service.get("service_name")
         service_d = service.get("service_description")
 
-        if service_n not in [s.service_name for s in
-                             session.query(BankingServices).filter_by(service_name=service_n).all()]:
-            service_record = BankingServices(service_name=service_n, service_description=service_d)
+        existing_services = db.session.query(BankingServices).filter_by(service_name=service_n).all()
+
+        if service_n not in [s.service_name for s in existing_services]:
+            service_record: BankingServices = BankingServices(service_name=service_n, service_description=service_d)
             print("Banking service: {} create".format(service_n))
-            session.add(service_record)
-            session.commit()
+            db.session.add(service_record)
         else:
             continue
+        db.session.commit()
 
 
 def create_application_defaults():

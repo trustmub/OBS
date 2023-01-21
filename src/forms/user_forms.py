@@ -7,9 +7,14 @@
 """
 
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from src.forms import (FlaskForm, StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, FileField,  FileAllowed)
-from src.models import session
-from src.models.models import User
+
+from src import db
+from src.forms import (FlaskForm, StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField,
+                       FileField, FileAllowed)
+from src.models.system_user_model import SystemUser
+
+
+# from src.models.models import User
 
 
 class RegistrationsForm(FlaskForm):
@@ -30,7 +35,7 @@ class RegistrationsForm(FlaskForm):
         :param email:
         :return: ValidationError
         """
-        user = session.query(User).filter_by(email=email.data).first()
+        user = db.session.query(SystemUser).filter_by(email=email.data).first()
         if user:
             raise ValidationError("This email already exists. Please try a different one.")
 

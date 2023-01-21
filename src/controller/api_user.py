@@ -1,6 +1,9 @@
-from src import bcrypt
-from src.models.models import Customer, ApiUser
-from . import session
+from src import bcrypt, db
+from src.models.api_user_model import ApiUser
+from src.models.customer_model import Customer
+
+
+# from . import session
 
 
 class ApiUserController(object):
@@ -16,8 +19,8 @@ class ApiUserController(object):
                                   device=self.device,
                                   user_number=self.user_number)
 
-        session.add(new_mobile_user)
-        session.commit()
+        db.session.add(new_mobile_user)
+        db.session.commit()
 
     @property
     def encrypted_pin(self):
@@ -36,43 +39,43 @@ class ApiUserController(object):
         Method to verify pin
         :return:
 
-            True if self.pin correct and None/False if self.pin is wrong
+            True if pin is correct and None/False if pin is wrong
         """
-        user = session.query(ApiUser).filter_by(account_number=self.account).first()
+        user = db.session.query(ApiUser).filter_by(account_number=self.account).first()
 
         if user and bcrypt.check_password_hash(user.pin, str(self.pin)):
             return True
 
     def check_account_exists(self):
         """
-        This method check if the accout provided exists
+        This method check if the account provided exists
 
-        :return: True if account exists and False if it does not exists
+        :return: True if account exists and False if it does not exist
         """
-        if session.query(Customer).filter_by(acc_number=self.account).first():
+        if db.session.query(Customer).filter_by(acc_number=self.account).first():
             return True
         return False
 
     def customer_details(self) -> object:
         """
-        This method will return a Customer serialized Object from the serialised property
+        This method will return a Customer serialized Object from the serialized property
 
         :return:
 
             JSON object of Customer details
         """
-        customer = session.query(Customer).filter_by(acc_number=self.account).first()
+        customer = db.session.query(Customer).filter_by(acc_number=self.account).first()
         return customer.serialize
 
     def user_details(self) -> object:
         """
-        This method will return the ApiUser Object serialised according to the serialize property
+        This method will return the ApiUser Object serialised according to the serialise property
 
         :return:
 
             JSON object of ApiUser detail
         """
-        details = session.query(ApiUser).filter_by(account_number=self.account).first()
+        details = db.session.query(ApiUser).filter_by(account_number=self.account).first()
         return details.serialize
 
     def verify_account(self):
@@ -81,7 +84,7 @@ class ApiUserController(object):
         :return:
             True id self.email exists and None/False if self.email does not exist.
         """
-        if session.query(Customer).filter_by(acc_number=self.account).first():
+        if db.session.query(Customer).filter_by(acc_number=self.account).first():
             return True
         return False
 
@@ -93,5 +96,5 @@ class ApiUserController(object):
 
             True if record exists
         """
-        if session.query(ApiUser).filter_by(account_number=self.account).first():
+        if db.session.query(ApiUser).filter_by(account_number=self.account).first():
             return True

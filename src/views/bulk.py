@@ -4,8 +4,9 @@ from flask import Blueprint, render_template, redirect, request, url_for, flash
 from werkzeug.utils import secure_filename
 
 from src.functions.Enums import TransactionType
-from src.functions.genarators import TransactionUpdate, Getters, Profile
+from src.functions.genarators import TransactionUpdate, Getters
 from src.functions.transactions import ChargeTransaction
+from src.functions.user_profile import Profile
 
 bulk = Blueprint('bulk', __name__)
 
@@ -27,7 +28,7 @@ def bulk_salaries():
 
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            # Upload the file in the in the folder
+            # Upload the file in the folder
             file.save(os.path.join(UPLOAD_FOLDER, filename))
             location_and_name = os.path.join(UPLOAD_FOLDER, filename)
 

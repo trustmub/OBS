@@ -1,6 +1,7 @@
+from src import db
 from src.cob.log_module import SystemOBS
-from src.models import session
-from src.models.models import Customer, Transactions
+from src.models.customer_model import Customer
+from src.models.transaction_model import Transaction
 
 
 class Search:
@@ -19,7 +20,7 @@ class Search:
         # self.search_logging(str(account_number))
         Search._s_logging(str(account_number))
 
-        record = session.query(Customer).filter_by(acc_number=account_number).first()
+        record = db.session.query(Customer).filter_by(acc_number=account_number).first()
         return record
 
     @classmethod
@@ -33,9 +34,9 @@ class Search:
         print("Customer record object: {}".format(record))
 
         if record is not None:
-            statement = session.query(Transactions).filter(Transactions.custid == record.custid).filter(
-                Transactions.tran_date >= start_date).filter(Transactions.tran_date <= end_date).order_by(
-                Transactions.tranid).all()
+            statement = db.session.query(Transaction).filter(Transaction.custid == record.custid).filter(
+                Transaction.tran_date >= start_date).filter(Transaction.tran_date <= end_date).order_by(
+                Transaction.tranid).all()
             return record, statement
         else:
             return None, []

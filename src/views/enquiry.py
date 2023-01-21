@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, redirect, request, url_for, flash
+from flask import Blueprint, render_template
 
-from src.functions.genarators import Profile, Getters
+from src.functions.genarators import Getters
+from src.functions.user_profile import Profile
 
 enquiry = Blueprint('enquiry', __name__)
 

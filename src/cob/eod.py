@@ -1,11 +1,14 @@
 # This is where End  Of Day procedures are done
+import datetime
 import os
-import time
-from src.functions.genarators import *
-from src.models import session
-from src.cob.eom import AccountsEom
 
-from src.models.models import Interest
+from src import db
+from src.cob.eom import AccountsEom
+from src.functions.genarators import Getters, Checker
+from src.models.customer_model import Customer
+from src.models.interest_model import Interest
+from src.models.system_date_model import SysDate
+from src.models.transaction_model import Transaction
 
 
 class Accounts:
@@ -17,7 +20,7 @@ class Accounts:
         # Check all account opened today
         count = 0
         dt = Getters.getSysDate().date
-        acc_opened = session.query(Transactions).filter_by(remark='Account Creation').filter_by(tran_date=dt).all()
+        acc_opened = db.session.query(Transaction).filter_by(remark='Account Creation').filter_by(tran_date=dt).all()
         for i in acc_opened:
             count += float(i.amount)
         if acc_opened is not None:
@@ -30,10 +33,10 @@ class Accounts:
                             i.amount) + "," + str(i.custid) + "\n")
 
             # update the account opening accordingly
-        acc_opening_account = session.query(Customer).filter_by(account_type='acccreate').first()
+        acc_opening_account = db.session.query(Customer).filter_by(account_type='acccreate').first()
         acc_opening_account.working_bal += count
-        session.add(acc_opening_account)
-        session.commit()
+        db.session.add(acc_opening_account)
+        db.session.commit()
         # accumulate all opening balances for the new accounts
         # credit the ...acccreate.... account with the figure to zero it off
         # generate a report for all those account and the zeroing off process
@@ -44,7 +47,7 @@ class Accounts:
         print("Account Interest")
         interest_per_annam = 0.05
         debit_interest = 0.15
-        all_accounts = session.query(Customer).all()
+        all_accounts = db.session.query(Customer).all()
         for i in all_accounts:
             date = Getters.getSysDate().date  # time.strftime('%Y-%m-%d')
             print("Interest for date: " + date)
@@ -63,11 +66,11 @@ class Accounts:
                                     account=acc,
                                     eod_bal=round(eod_bal, 2),
                                     interest_earned=round(interest, 4))
-            session.add(table_update)
+            db.session.add(table_update)
             print("Record Account " + date + " || " + str(acc) + " || " + str(
                 eod_bal) + " ==== daily interest ----" + str(interest) + " Updated on date : ----" + date)
 
-        session.commit()
+        db.session.commit()
         print("Account interest Calculation complete")
 
         # check the closing balance for each account
@@ -85,7 +88,7 @@ class Reporting:
 
     def account_closing_balances_report(self):
         # a report of all accounts and there closing balance for the day
-        acc_list = session.query(Customer).all()
+        acc_list = db.session.query(Customer).all()
         with open(self._account_closing_balances, mode="w", encoding="utf-8") as myfile:
             for i in acc_list:
                 myfile.write(str(i.acc_number) + " : " + str(i.working_bal) + "\n")
@@ -101,10 +104,9 @@ class Reporting:
                     str(i.id) + " : " + str(i.tran_type) + " : " + str(i.amount) + " : " + str(i.date) + " : " + str(
                         i.teller_id) + " : " + str(i.customer.acc_number) + " : " + str(i.user_id) + "\n")
 
-
     def credit_transactions_report(self):
         # all deposits done for the day
-        record = session.query(Transactions).filter_by(tran_date=Getters.getSysDate().date).filter_by(
+        record = db.session.query(Transaction).filter_by(tran_date=Getters.getSysDate().date).filter_by(
             trantype='CR').all()
         if record is not None:
             print("The number of records are " + str(len(record)))
@@ -120,7 +122,7 @@ class Reporting:
                 #                 33613681,
                 #                 33407739]
                 skip_account = [acc.acc_number for acc in
-                                session.query(Customer).filter_by(email="system@obs.com").all()]
+                                db.session.query(Customer).filter_by(email="system@obs.com").all()]
                 for i in record:
                     print("The record giving problems is" + str(i.cr_acc_number))
                     if i.cr_acc_number not in skip_account:
@@ -131,18 +133,18 @@ class Reporting:
 
     @staticmethod
     def rollover_system_date():
-        date_change = session.query(SysDate).first()
+        date_change = db.session.query(SysDate).first()
         mydate = datetime.datetime.strptime(Getters.getSysDate().date, '%Y-%m-%d')
         add_day = datetime.timedelta(days=1)
         new_date = mydate + add_day
         date_change.date = new_date.strftime('%Y-%m-%d')
-        session.add(date_change)
-        session.commit()
+        db.session.add(date_change)
+        db.session.commit()
 
     @staticmethod
     def debitTransactions():
         # all withdrawals done for the day on customer account
-        record = session.query(Transactions).filter_by(tran_date=Getters.getSysDate().date).filter_by(
+        record = db.session.query(Transaction).filter_by(tran_date=Getters.getSysDate().date).filter_by(
             trantype='DR').all()
         with open("src/reports/DebitTransactions" + Getters.getSysDate().date + ".csv", mode="w",
                   encoding="utf-8") as myFile:

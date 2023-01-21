@@ -4,14 +4,17 @@
 
 
 import json
-import glob2
+import random
 import shutil
 import time
-import random
 
-from functions.Enums import TransactionType
-from functions.genarators import *
-from functions.transactions import ChargeTransaction
+import glob2
+
+from src import db
+from src.functions.Enums import TransactionType
+from src.functions.genarators import TransactionUpdate, Getters
+from src.functions.transactions import ChargeTransaction
+from src.models.customer_model import Customer
 
 
 class Process:
@@ -65,7 +68,6 @@ class Receive:
                         json_data = json.load(json_file)
                         if json_data['response'] == 200:
                             print("Transaction Successful! -- Response side")
-                            # print("{} {} {} ---".format(json_data['name'], json_data['account'], json_data['balance']))
                             try:
                                 if json_data['request'] == 100:  # Balance Enquiry
                                     ac_num = json_data['account']
@@ -104,8 +106,8 @@ class Enquiries:
         # takes in account number
         acc_number = int(ac_number)
         variable = random.randint(1111, 9999)
-        if session.query(Customer).filter_by(acc_number=acc_number).first():
-            bal = session.query(Customer).filter_by(acc_number=acc_number).first()
+        if db.session.query(Customer).filter_by(acc_number=acc_number).first():
+            bal = db.session.query(Customer).filter_by(acc_number=acc_number).first()
             # json file with the account balance
             full_name = bal.first_name + " " + bal.last_name
             details = {'response': 210, 'name': full_name, 'account': bal.acc_number, 'balance': bal.working_bal}

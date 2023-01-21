@@ -9,8 +9,10 @@
 """
 
 from src import bcrypt
-from src.models.models import User
-from . import session
+# from src.models.models import User
+# from . import session
+from src import db
+from src.models.system_user_model import SystemUser
 
 
 class UserController(object):
@@ -47,19 +49,20 @@ class UserController(object):
         """
         Method to add new user record into the database
         """
-        new_record = User(full_name=self.full_name,
-                          job_title=self.job_title,
-                          image_string=self.image_string,
-                          department=self.department,
-                          branch_code=self.branch_code,
-                          access_level=self.access_level,
-                          till_o_balance=self.till_o_balance,
-                          till_c_balance=self.till_c_balance,
-                          email=self.email,
-                          password=self.encrypted_password,
-                          lock=self.lock)
-        session.add(new_record)
-        session.commit()
+        # new_record = User(full_name=self.full_name,
+        new_record = SystemUser(full_name=self.full_name,
+                                job_title=self.job_title,
+                                image_string=self.image_string,
+                                department=self.department,
+                                branch_code=self.branch_code,
+                                access_level=self.access_level,
+                                till_o_balance=self.till_o_balance,
+                                till_c_balance=self.till_c_balance,
+                                email=self.email,
+                                password=self.encrypted_password,
+                                lock=self.lock)
+        db.session.add(new_record)
+        db.session.commit()
 
     @property
     def encrypted_password(self):
@@ -71,13 +74,13 @@ class UserController(object):
         password = bcrypt.generate_password_hash(self.password, 12)
         return password
 
-    def verify_email(self):
+    def verify_email(self) -> bool:
         """
         Method to check if email exists
         :return:
             True id self.email exists and None/False if self.email does not exist.
         """
-        if session.query(User).filter_by(email=self.email).first():
+        if db.session.query(SystemUser).filter_by(email=self.email).first():
             return True
 
     def verify_password(self):
@@ -87,7 +90,7 @@ class UserController(object):
 
             True if self.password correct and None/False if self.password is wrong
         """
-        user = session.query(User).filter_by(email=self.email).first()
+        user = db.session.query(SystemUser).filter_by(email=self.email).first()
         if bcrypt.check_password_hash(user.password, self.password):
             return True
 
@@ -105,7 +108,7 @@ class UserController(object):
             - image_string
         """
 
-        user = session.query(User).filter_by(email=self.email).first()
+        user: SystemUser = db.session.query(SystemUser).filter_by(email=self.email).first()
 
         user.full_name = self.full_name
         user.job_title = self.job_title
@@ -115,5 +118,5 @@ class UserController(object):
         if self.image_string != '':
             user.image_string = self.image_string
 
-        session.add(user)
-        session.commit()
+        db.session.add(user)
+        db.session.commit()

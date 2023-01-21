@@ -1,15 +1,14 @@
 import time
-import datetime
 
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 
-from src.utilities.verifier import Verify
-from src.functions.genarators import Auto, Getters, Profile, Checker
-from src.functions.transactions import AccountTransaction
-from src.models.models import Customer
+from src import db
 from src.controller.customer import CustomerController
-
-from src.models import session
+from src.functions.genarators import Auto, Getters
+from src.functions.transactions import AccountTransaction
+from src.functions.user_profile import Profile
+from src.models.customer_model import Customer
+from src.utilities.verifier import Verify
 
 customer = Blueprint('customer', __name__)
 
@@ -68,8 +67,8 @@ def add_cus():
 def id_search():
     if request.method == 'POST':
         id_num = int(request.form['customer_id'])
-        if session.query(Customer).filter_by(custid=id_num).first():
-            record = session.query(Customer).filter_by(custid=id_num).first()
+        if db.session.query(Customer).filter_by(custid=id_num).first():
+            record = db.session.query(Customer).filter_by(custid=id_num).first()
             return render_template('customer/amend_cus.html', record=record, user=Profile().user_details(),
                                    account=Getters.getAccountType())
         else:
@@ -85,8 +84,8 @@ def id_search():
 def account_search():
     if request.method == 'POST':
         acc_num = int(request.form['account_number'])
-        if session.query(Customer).filter_by(acc_number=acc_num).first():
-            record = session.query(Customer).filter_by(acc_number=acc_num).first()
+        if db.session.query(Customer).filter_by(acc_number=acc_num).first():
+            record = db.session.query(Customer).filter_by(acc_number=acc_num).first()
             return render_template('customer/amend_cus.html', record=record, user=Profile().user_details(),
                                    account=Getters.getAccountType())
         else:
@@ -104,7 +103,7 @@ def amend_cus():
         acc_num = int(request.form['acc_number'])
         if Verify.account_exists(acc_num):
 
-            a_record = session.query(Customer).filter_by(acc_number=acc_num).one()
+            a_record = db.session.query(Customer).filter_by(acc_number=acc_num).one()
             if request.form['first_name'] == a_record.first_name:
                 pass
             else:
@@ -143,8 +142,8 @@ def amend_cus():
                 a_record.account_type = request.form['account_type']
             a_record.create_date = a_record.create_date
 
-            session.add(a_record)
-            session.commit()
+            db.session.add(a_record)
+            db.session.commit()
             return redirect(url_for('customer.my_cus', user=Profile().user_details()))
         else:
             flash('Account Cannot be modified, Search Again')
@@ -162,5 +161,5 @@ def authorise_cus():
 
 @customer.route('/my_cus/')
 def my_cus():
-    all_customer = session.query(Customer).all()
+    all_customer = db.session.query(Customer).all()
     return render_template('customer/my_cus.html', customer=all_customer, user=Profile().user_details())
