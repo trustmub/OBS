@@ -11,7 +11,8 @@ from src.controller.user import UserController
 from src.forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm, LockScreenForm
 from src.functions.user_profile import Profile
 from src.models.system_user_model import SystemUser
-from .user_view_model import get_all_branches, get_user_details_by_email, update_user_login_session
+from .user_view_model import get_all_branches, get_user_details_by_email, update_user_login_session, process_login, \
+    LoginState, process_logout
 
 UPLOAD_FOLDER = os.path.abspath("src/static/img/user///")
 
@@ -64,30 +65,20 @@ def login():
     """
     form = LoginForm()
 
-    if form.validate_on_submit():
-        email = form.email.data
-        password = form.password.data
-
-        user_instance = UserController(email=email, password=password)
-        if user_instance.verify_email():
-            # user_account = session.query(User).filter_by(email=email).first()
-            user_account = get_user_details_by_email(email)
-
-            if user_account.lock == 1:  # Checker.userDbSession(email):
-                flash('User is locked, Contact Systems Administrator', 'danger')
-                return redirect(url_for('user_view.login'))
-            else:
-                if user_instance.verify_password():
-                    update_user_login_session(user_account, email)
-                    return redirect(url_for('dashboard_view.home'))
-                else:
-                    flash('Password is Incorrect', 'danger')
-                    return redirect(url_for('user_view.login'))
-        else:
-            flash('Email does not exist', 'warning')
-            return redirect(url_for('user_view.login'))
-
-    return render_template('user/login.html', form=form)
+    state = process_login(form)
+    if state == LoginState.SHOW_LOGIN:
+        return render_template('user/login.html', form=form)
+    elif state == LoginState.SHOW_LOGIN_LOCKED:
+        flash('User is locked, Contact Systems Administrator', 'danger')
+        return redirect(url_for('user_view.login'))
+    elif state == LoginState.SHOW_LOGIN_INCORRECT_PASSWORD:
+        flash('Password is Incorrect', 'danger')
+        return redirect(url_for('user_view.login'))
+    elif state == LoginState.SHOW_LOGIN_EMAIL_NOT_EXIST:
+        flash('Email does not exist', 'warning')
+        return redirect(url_for('user_view.login'))
+    elif state == LoginState.SHOW_DASHBOARD:
+        return redirect(url_for('dashboard_view.home'))
 
 
 @user_view.route('/register', methods=['POST', 'GET'])
@@ -113,14 +104,8 @@ def register():
 
 @user_view.route('/logout/')
 def logout():
-    if 'username' in session:
-        login_user = session['username']
-        # user_account = session.query(User).filter_by(email=login_user).first()
-        user_account = db.session.query(SystemUser).filter_by(email=login_user).first()
-        user_account.lock = 0
-        db.session.add(user_account)
-        db.session.commit()
-        session.pop('username', None)
+    state = process_logout()
+    if state == LoginState.SHOW_LOGOUT:
         flash("Logged Out", "success")
         return redirect(url_for('user_view.login'))
     else:

@@ -25,7 +25,6 @@ class SystemUser(db.Model):
     password: str = Column(String(100))
     lock: int = Column(Integer)
 
-
 # class SystemUserSchema(ma.Schema):
 #     class Meta:
 #         fields = ('uid',

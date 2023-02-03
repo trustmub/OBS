@@ -31,7 +31,6 @@ class Transaction(db.Model):
 
     create_date = Column(String(30))
 
-
 # class TransactionSchema(ma.Schema):
 #     class Meta:
 #         fields = ('tranid', 'trantype', 'tranref', 'tranmethod', 'acc_number')

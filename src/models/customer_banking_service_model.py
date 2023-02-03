@@ -5,7 +5,7 @@ from sqlalchemy import Column, Integer, ForeignKey, String
 from sqlalchemy.orm import relationship
 
 from src import db
-from src.models.banking_service_model import BankingServices
+from src.models.banking_service_model import BankServices
 
 
 @dataclass
@@ -15,6 +15,6 @@ class CustomerBankingService(db.Model):
     # api_user_id: int = Column(Integer, ForeignKey('api_user.user_id'))
     # api_user = relationship(ApiUser)
     service_id: int = Column(Integer, ForeignKey('banking_services.id'))
-    service: int = relationship(BankingServices)
+    service: int = relationship(BankServices)
     status: str = Column(String(10))
     created_date: str = Column(String(30), default=datetime.datetime.now())

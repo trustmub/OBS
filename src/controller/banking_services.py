@@ -2,7 +2,7 @@ from sqlalchemy.exc import ArgumentError
 
 from src import db
 from src.models.api_user_model import ApiUser
-from src.models.banking_service_model import BankingServices
+from src.models.banking_service_model import BankServices
 from src.models.customer_banking_service_model import CustomerBankingService
 
 
@@ -13,13 +13,13 @@ class BankingServicesController(object):
 
     @staticmethod
     def add_banking_service(service_name, description):
-        service = BankingServices(service_name=service_name, service_description=description)
+        service = BankServices(service_name=service_name, service_description=description)
         db.session.add(service)
         db.session.commit()
 
     def link_banking_service(self, service_id):
         api_user = db.session.query(ApiUser).filter_by(account_number=self.account_number).first()
-        service = db.session.query(BankingServices).filter_by(id=int(service_id))
+        service = db.session.query(BankServices).filter_by(id=int(service_id))
 
         record = CustomerBankingService(api_user_id=api_user.user_id,
                                         service_id=service_id,

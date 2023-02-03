@@ -21,7 +21,6 @@ class Card(db.Model):
     card_type: str = Column(String(100))
     created_date: str = Column(String(30), default=datetime.datetime.now())
 
-
 # class CardSchema:
 #     class Meta:
 #         fields = ('id', 'card_number', 'account_number', 'card_type', 'create_cate')

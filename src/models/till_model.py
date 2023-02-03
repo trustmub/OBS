@@ -29,7 +29,6 @@ class Till(db.Model):
     user_id: int = Column(Integer, ForeignKey('user.uid'), nullable=True)
     user = relationship(SystemUser)
 
-
 # class TillSchema(ma.Schema):
 #     class Meta:
 #         fields = ('id', 'branch_code', 'till_account', 'currency', 'remark')

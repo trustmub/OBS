@@ -17,7 +17,6 @@ class SysDate(db.Model):
     date: str = Column(String(30))
     create_date: str = Column(String(30), default=datetime.datetime.now())
 
-
 # class SysDateSchema(ma.Schema):
 #     class Meta:
 #         fields = ('id', 'date', 'create_date')

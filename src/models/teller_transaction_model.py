@@ -33,4 +33,3 @@ class TellerTransaction(db.Model):
 
     user_id = Column(Integer, ForeignKey('user.uid'))
     user = relationship(SystemUser)
-

@@ -4,7 +4,7 @@ import time
 from src import db
 from src.functions.genarators import Auto
 from src.models.account_type_model import AccountType
-from src.models.banking_service_model import BankingServices
+from src.models.banking_service_model import BankServices
 from src.models.branch_model import Branch
 from src.models.currency_model import Currency
 from src.models.customer_model import Customer
@@ -139,10 +139,10 @@ def create_banking_services():
         service_n = service.get("service_name")
         service_d = service.get("service_description")
 
-        existing_services = db.session.query(BankingServices).filter_by(service_name=service_n).all()
+        existing_services = db.session.query(BankServices).filter_by(service_name=service_n).all()
 
         if service_n not in [s.service_name for s in existing_services]:
-            service_record: BankingServices = BankingServices(service_name=service_n, service_description=service_d)
+            service_record: BankServices = BankServices(service_name=service_n, service_description=service_d)
             print("Banking service: {} create".format(service_n))
             db.session.add(service_record)
         else:

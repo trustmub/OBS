@@ -38,7 +38,7 @@ class TillController(object):
         teller_record.currency = teller_record.currency
         teller_record.remark = self.remark
         teller_record.date = time.strftime('%Y-%m-%d')
-        teller_record.create_date = datetime.now()
+        # teller_record.create_date = datetime.datetime.now()
         teller_record.user_id = self.user_id
 
         db.session.add(teller_record)
@@ -49,7 +49,7 @@ class TillController(object):
         teller_transaction = TellerTransaction(amount=self.o_balance,
                                                date=time.strftime('%Y-%m-%d'),
                                                remark='',
-                                               create_date=datetime.utcnow(),
+                                               create_date=datetime.datetime.utcnow(),
                                                teller_id=self.teller_id,
                                                customer_id='',
                                                user_id=self.user_id,
@@ -79,7 +79,7 @@ class TillController(object):
         # reset the till position
         till_detail.c_balance = 0
         till_detail.o_balance = 0
-        till_detail.user_id = ''
+        till_detail.user_id = 0
 
         # commit Till and suspense account to Database
         db.session.add(till_detail)

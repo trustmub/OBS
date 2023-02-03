@@ -31,6 +31,8 @@ from .views.settings import settings
 from .views.recon import reconciliation
 from .views.enquiry import enquiry
 from .views.bulk import bulk
+from .views.end_of_day import eod_view
+
 # from .api.api import bank_api
 
 APP.register_blueprint(user_view)
@@ -43,4 +45,5 @@ APP.register_blueprint(reconciliation)
 APP.register_blueprint(enquiry)
 APP.register_blueprint(bulk)
 APP.register_blueprint(settings)
+APP.register_blueprint(eod_view)
 # APP.register_blueprint(bank_api)

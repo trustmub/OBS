@@ -1,6 +1,7 @@
 # This is where End  Of Day procedures are done
 import datetime
 import os
+from typing import TextIO, Any
 
 from src import db
 from src.cob.eom import AccountsEom
@@ -11,9 +12,18 @@ from src.models.system_date_model import SysDate
 from src.models.transaction_model import Transaction
 
 
+def _write_to_file(account: Any, file: TextIO):
+    for i in account:
+        file.write(
+            str(i.trantype) + "," + i.tranref + "," + i.tranmethod + "," + str(i.tran_date) + "," + str(
+                i.cheque_num) + "," + str(i.acc_number) + "," + str(i.cr_acc_number) + "," + str(
+                i.amount) + "," + str(i.custid) + "\n")
+
+
 class Accounts:
     def __init__(self):
-        self.account_opening = os.path.abspath("src//reports//AccountsOpened" + Getters.getSysDate().date + ".csv")
+        self.account_opening = os.path.abspath(
+            "../../src//reports//AccountsOpened" + Getters.getSysDate().date + ".csv")
 
     def accOpeningBalancing(self):
         print("Account Opening balancing")
@@ -24,15 +34,10 @@ class Accounts:
         for i in acc_opened:
             count += float(i.amount)
         if acc_opened is not None:
-            with open(self.account_opening, mode="w",
-                      encoding="utf-8") as myFile:
-                for i in acc_opened:
-                    myFile.write(
-                        str(i.trantype) + "," + i.tranref + "," + i.tranmethod + "," + str(i.tran_date) + "," + str(
-                            i.cheque_num) + "," + str(i.acc_number) + "," + str(i.cr_acc_number) + "," + str(
-                            i.amount) + "," + str(i.custid) + "\n")
+            with open(self.account_opening, mode="w", encoding="utf-8") as myFile:
+                _write_to_file(acc_opened, myFile)
 
-            # update the account opening accordingly
+        # update the account opening accordingly
         acc_opening_account = db.session.query(Customer).filter_by(account_type='acccreate').first()
         acc_opening_account.working_bal += count
         db.session.add(acc_opening_account)
@@ -82,9 +87,9 @@ class Reporting:
 
     def __init__(self):
         self.credit_transactions = os.path.abspath(
-            "src//reports//CreditTransactions" + Getters.getSysDate().date + ".csv")
+            "../../src//reports//CreditTransactions" + Getters.getSysDate().date + ".csv")
         self._account_closing_balances = os.path.abspath(
-            "src/reports/AccountClosingBalances" + Getters.getSysDate().date + ".txt")
+            "../../src/reports/AccountClosingBalances" + Getters.getSysDate().date + ".txt")
 
     def account_closing_balances_report(self):
         # a report of all accounts and there closing balance for the day
@@ -94,11 +99,11 @@ class Reporting:
                 myfile.write(str(i.acc_number) + " : " + str(i.working_bal) + "\n")
 
     @staticmethod
-    def tellerTransactionReport():
+    def teller_transaction_report():
         # report of all transactions done by each teller
         dt = Getters.getSysDate().date
         tt = Getters.getAllTts()
-        with open("src/reports/TellerTransactions" + str(dt) + ".txt", mode="w", encoding="utf-8") as myfile:
+        with open("../../src/reports/TellerTransactions" + str(dt) + ".txt", mode="w", encoding="utf-8") as myfile:
             for i in tt:
                 myfile.write(
                     str(i.id) + " : " + str(i.tran_type) + " : " + str(i.amount) + " : " + str(i.date) + " : " + str(
@@ -111,16 +116,6 @@ class Reporting:
         if record is not None:
             print("The number of records are " + str(len(record)))
             with open(self.credit_transactions, mode="w", encoding="utf-8") as myFile:
-                # skip_account = [33139793,
-                #                 33139793,
-                #                 33145826,
-                #                 33145826,
-                #                 33145826,
-                #                 33145826,
-                #                 33722073,
-                #                 33202507,
-                #                 33613681,
-                #                 33407739]
                 skip_account = [acc.acc_number for acc in
                                 db.session.query(Customer).filter_by(email="system@obs.com").all()]
                 for i in record:
@@ -146,13 +141,9 @@ class Reporting:
         # all withdrawals done for the day on customer account
         record = db.session.query(Transaction).filter_by(tran_date=Getters.getSysDate().date).filter_by(
             trantype='DR').all()
-        with open("src/reports/DebitTransactions" + Getters.getSysDate().date + ".csv", mode="w",
+        with open("../../src/reports/DebitTransactions" + Getters.getSysDate().date + ".csv", mode="w",
                   encoding="utf-8") as myFile:
-            for i in record:
-                myFile.write(
-                    str(i.trantype) + "," + i.tranref + "," + i.tranmethod + "," + str(i.tran_date) + "," + str(
-                        i.cheque_num) + "," + str(i.acc_number) + "," + str(i.cr_acc_number) + "," + str(
-                        i.amount) + "," + str(i.custid) + "\n")
+            _write_to_file(record, myFile)
 
         pass
 
@@ -163,7 +154,7 @@ class Reporting:
 
 
 def eod_process():
-    print("Accouts : Accounts Opening Balancing")
+    print("Accounts : Accounts Opening Balancing")
     Accounts().accOpeningBalancing()
     print("Account : Account Interest End Of Day")
     Accounts.accountInterestEod()
@@ -174,7 +165,7 @@ def eod_process():
     print("Reports : Account Closing Balance")
     Reporting().account_closing_balances_report()
     print("Reporting : Teller Transaction Reports")
-    Reporting.tellerTransactionReport()
+    Reporting.teller_transaction_report()
 
 
 def eom_process():
@@ -187,7 +178,7 @@ def eom_process():
     print("Reporting : Debit Transaction Reports")
     Reporting.debitTransactions()
     print("Reports : Account Closing Balance")
-    Reporting.account_closing_balances_report()
+    Reporting().account_closing_balances_report()
 
 
 def main():
