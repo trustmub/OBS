@@ -2,15 +2,13 @@
     controller.user
     ---------------
 
-    A user controller that provide functionalities for the user resgistration login and amendments
+    A user controller that provide functionalities for the user registration login and amendments
     of user record.
 
     this controller interacts with the user views.user module
 """
 
 from src import bcrypt
-# from src.models.models import User
-# from . import session
 from src import db
 from src.models.system_user_model import SystemUser
 
