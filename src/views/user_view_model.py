@@ -7,7 +7,7 @@ from typing import List, Tuple, Any
 from flask import session
 from PIL import Image
 
-from src import db
+from src.controller.base_repository import BaseRepository
 from src.controller.user_controller import UserController
 from src.forms.user_forms import LoginForm, LockScreenForm, RegistrationsForm, UserProfileForm
 from src.models.branch_model import Branch
@@ -17,6 +17,7 @@ from src.views.user_repository import UserRepository
 UPLOAD_FOLDER = os.path.abspath("src/static/img/user///")
 
 user_repository = UserRepository()
+base_repository = BaseRepository()
 
 
 class LoginState(Enum):
@@ -35,26 +36,25 @@ class LoginState(Enum):
 
 
 def get_profile_user_details() -> SystemUser:
-    return user_repository.query_current_system_user()
+    return user_repository.query_system_user()
 
 
 def get_all_branches() -> List[Branch]:
-    return db.session.execute(db.select(Branch)).scalars()
+    return base_repository.get_branches()
 
 
 def _get_user_details_by_email(email: str) -> SystemUser:
-    return user_repository.query_system_user_by_email(email)
+    return user_repository.query_system_user(email)
 
 
 def _get_current_system_user() -> SystemUser:
-    return user_repository.query_current_system_user()
+    return user_repository.query_system_user()
 
 
 def update_user_login_session(user: SystemUser, username: str) -> None:
     session['username'] = username
     user.lock = 1
-    db.session.add(user)
-    db.session.commit()
+    user_repository.query_update_user(user)
 
 
 def _generate_random_key(length):
@@ -92,7 +92,7 @@ def process_edit_profile(form: UserProfileForm):
         if form.image_string.data:
             image_file = save_image(form.image_string.data)
 
-        user = user_repository.query_current_system_user()
+        user = user_repository.query_system_user()
         user_controller = UserController(user.email, 'blank',
                                          form.full_name.data,
                                          form.job_title.data,
@@ -107,12 +107,11 @@ def process_edit_profile(form: UserProfileForm):
 
 def _set_user_lock_state(lock: bool, user: SystemUser) -> None:
     user.lock = 1 if lock else 0
-    db.session.add(user)
-    db.session.commit()
+    user_repository.query_update_user(user)
 
 
 def process_lock_screen(form: LockScreenForm) -> tuple[LoginState, Any]:
-    user_account: SystemUser = user_repository.query_current_system_user()
+    user_account: SystemUser = user_repository.query_system_user()
 
     if form.validate_on_submit():
         password = form.password.data
@@ -154,7 +153,7 @@ def process_login(form: LoginForm) -> LoginState:
 
 def process_logout() -> LoginState:
     if 'username' in session:
-        user_account = user_repository.query_current_system_user()
+        user_account = user_repository.query_system_user()
         _set_user_lock_state(False, user_account)
         session.pop('username', None)
         return LoginState.SHOW_LOGOUT

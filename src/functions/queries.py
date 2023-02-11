@@ -7,7 +7,7 @@ from src.models.transaction_charge_fee_model import TransactionChargeFee
 class Query:
     def __init__(self):
         self.transaction_type = db.session.query(TransactionChargeFee).all()
-        self._available_teller_accounts = db.session.execute(db.select(Till).filter_by(user_id=0).all())
+        self._available_teller_accounts = db.session.execute(db.select(Till).filter_by(user_id=0)).scalars()
         self.teller_list = db.session.query(Till).all()
 
     def transaction_types(self):
