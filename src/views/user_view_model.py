@@ -93,13 +93,14 @@ def process_edit_profile(form: UserProfileForm):
             image_file = save_image(form.image_string.data)
 
         user = user_repository.query_system_user()
-        user_controller = UserController(user.email, 'blank',
-                                         form.full_name.data,
-                                         form.job_title.data,
-                                         image_file,
-                                         form.department.data,
-                                         form.branch_code.data,
-                                         form.access_level.data)
+        user_controller = UserController(email=user.email,
+                                         password='blank',
+                                         full_name=form.full_name.data,
+                                         job_title=form.job_title.data,
+                                         image_string=image_file,
+                                         department=form.department.data,
+                                         branch_code=form.branch_code.data,
+                                         access_level=form.access_level.data)
         user_controller.update_user()
         return LoginState.SHOW_USER_PROFILE
     return LoginState.SHOW_USER_EDIT_PROFILE

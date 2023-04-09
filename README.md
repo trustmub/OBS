@@ -1,6 +1,8 @@
 # OBS
 Open Banking system
 
+This is an open source banking system, developed using Flask  python framework
+
 Create The database
 
     python3 build_database.py
