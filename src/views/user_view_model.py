@@ -14,7 +14,8 @@ from src.models.branch_model import Branch
 from src.models.system_user_model import SystemUser
 from src.views.user_repository import UserRepository
 
-UPLOAD_FOLDER = os.path.abspath("src/static/img/user///")
+# UPLOAD_FOLDER = os.path.abspath("src/static/img/user///")
+UPLOAD_FOLDER = os.path.abspath("/Users/trustmubaiwa/PycharmProjects/OBS/src/static/img/user///")
 
 user_repository = UserRepository()
 base_repository = BaseRepository()
