@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
 
 from src.forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm, LockScreenForm
-from .user_view_model import get_all_branches, process_login, \
+from src.viewmodels.user_view_model import get_all_branches, login_handler, \
     LoginState, process_logout, process_lock_screen, process_register, process_edit_profile, get_profile_user_details
 
 user_view = Blueprint('user_view', __name__)
@@ -33,7 +33,7 @@ def login():
     """
     form = LoginForm()
 
-    state = process_login(form)
+    state = login_handler(form)
     if state == LoginState.SHOW_LOGIN:
         return render_template('user/login.html', form=form)
     elif state == LoginState.SHOW_LOGIN_LOCKED:

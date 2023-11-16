@@ -3,7 +3,7 @@ import unittest
 
 from src.models.system_user_model import SystemUser
 from src.views.user_repository import UserRepository
-from src.views.user_view_model import get_profile_user_details, update_user_login_session, session
+from src.viewmodels.user_view_model import get_profile_user_details, update_user_login_session
 
 
 # from my_module import update_user_login_session, session, UserRepository, SystemUser

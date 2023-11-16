@@ -1,6 +1,8 @@
 import datetime
 import random
 
+from sqlalchemy.exc import NoResultFound
+
 from src import db
 from src.functions.Enums import AccountTypes
 from src.functions.user_profile import Profile
@@ -22,15 +24,15 @@ from src.models.transaction_model import Transaction
 
 class Getters:
     @staticmethod
-    def getTransactionType():
+    def get_transaction_type():
         return db.session.query(TransactionChargeFee).all()
 
     @staticmethod
-    def getAllUsers():
+    def get_all_users():
         pass
 
     @staticmethod
-    def getAvailableTellers():
+    def get_available_tellers():
         return db.session.query(Till).filter_by(user_id='').all()
 
     @staticmethod
@@ -38,16 +40,29 @@ class Getters:
         return db.session.query(Till).all()
 
     @staticmethod
-    def getTillDetails():
-        till_ids = [i.id for i in Getters.getAllTellers()]
+    # def get_till_details():
+    #     till_ids = [i.id for i in Getters.getAllTellers()]
+    #     tellers = Getters.getAllTellers()
+    #     user_id = Profile().user_details().uid
+    #     print("Till IDs: {}".format(till_ids))
+    #     print("Profile details id: {}".format(Profile().user_details().uid))
+    #     for teller in tellers:
+    #         if teller.user is not None:
+    #             if user_id == teller.user.uid:
+    #                 return db.session.query(Till).filter_by(user_id=user_id).first()
+    #
+    def get_till_details():
         tellers = Getters.getAllTellers()
         user_id = Profile().user_details().uid
+        till_ids = [teller.id for teller in tellers if teller.user is not None and user_id == teller.user.uid]
+
         print("Till IDs: {}".format(till_ids))
-        print("Profile details id: {}".format(Profile().user_details().uid))
-        for teller in tellers:
-            if teller.user is not None:
-                if user_id == teller.user.uid:
-                    return db.session.query(Till).filter_by(user_id=user_id).first()
+        print("Profile details id: {}".format(user_id))
+
+        try:
+            return db.session.query(Till).filter_by(user_id=user_id).one()
+        except NoResultFound:
+            return None
 
     @staticmethod
     def getTellerStatus():
@@ -60,10 +75,10 @@ class Getters:
         today = Getters.getSysDate().date
         # Get all transactions by current teller for today with credits
         total = 0
-        if Getters.getTillDetails() is not None:
-            print("This is the till details: {}".format(Getters.getTillDetails()))
+        if Getters.get_till_details() is not None:
+            print("This is the till details: {}".format(Getters.get_till_details()))
             my_till_trans = db.session.query(TellerTransaction) \
-                .filter_by(teller_id=Getters.getTillDetails().id) \
+                .filter_by(teller_id=Getters.get_till_details().id) \
                 .filter_by(date=today) \
                 .filter_by(tran_type='CR') \
                 .filter(TellerTransaction.remark != 'Teller Transfer') \
@@ -81,9 +96,9 @@ class Getters:
         today = Getters.getSysDate().date
         # Get all transactions by current teller for today with debits
         total = 0
-        if Getters.getTillDetails() is not None:
+        if Getters.get_till_details() is not None:
             my_till_trans = db.session.query(TellerTransaction).filter_by(
-                teller_id=Getters.getTillDetails().id).filter_by(date=today).filter_by(tran_type='DR').all()
+                teller_id=Getters.get_till_details().id).filter_by(date=today).filter_by(tran_type='DR').all()
             total = 0
             for i in my_till_trans:
                 total += i.amount
@@ -94,7 +109,7 @@ class Getters:
     @staticmethod
     def getTellerTransactions():
         date = Getters.getSysDate().date  # time.strftime('%Y-%m-%d')
-        if Getters.getTillDetails() is None:
+        if Getters.get_till_details() is None:
             return []
         else:
             all_records = db.session.query(TellerTransaction).filter_by(
@@ -162,7 +177,7 @@ class TransactionPersist:
         self.amount = amount
         self._suspence_account_type = suspence_account_type
         self._suspence_account = db.session.query(Customer).filter_by(
-            account_type=self.suspence_account_type.value).first()
+            account_type=self._suspence_account_type.value).first()
         self._customer_account = db.session.query(Customer).filter_by(acc_number=self.acc_number).one()
 
     def deposit(self):
@@ -224,7 +239,7 @@ class TransactionUpdate:
         customer = db.session.query(Customer).filter_by(acc_number=acc_number).one()
         current_balance = float(amount) + float(customer.working_bal)
 
-        till_detail = db.session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
+        till_detail = db.session.query(Till).filter_by(till_account=Getters.get_till_details().till_account).first()
         trans = Transaction(trantype='CR',
                             tranref=Auto.reference_string_generator(),
                             tranmethod='Cash',
@@ -255,7 +270,7 @@ class TransactionUpdate:
     def withdrawalTransactionUpdate(tran_date, acc_number, amount, tranref):
         #   1. withdrawal detail between customer and till
         customer = db.session.query(Customer).filter_by(acc_number=acc_number).one()
-        till_detail = db.session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
+        till_detail = db.session.query(Till).filter_by(till_account=Getters.get_till_details().till_account).first()
         cb = float(customer.working_bal) - float(amount)
         trans = Transaction(trantype='DR',
                             tranref=tranref,
@@ -539,8 +554,8 @@ class TransactionUpdate:
         :return:
         """
         customer = db.session.query(Customer).filter_by(acc_number=acc_num).first()
-        print("Till Details: {}".format(Getters.getTillDetails()))
-        till_detail = db.session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
+        print("Till Details: {}".format(Getters.get_till_details()))
+        till_detail = db.session.query(Till).filter_by(till_account=Getters.get_till_details().till_account).first()
 
         tt = TellerTransaction(tran_type=t_type.value,  # CR or DR
                                tranref=Auto.reference_string_generator(),

@@ -20,6 +20,36 @@ def my_till():
     return render_template('till/my_till.html', user=Profile().user_details())
 
 
+# @till.route('/open_till/', methods=['POST', 'GET'])
+# def open_till():
+#     form = OpenTillForm()
+#     form.teller_num.choices = [(str(t.id), t.id) for t in Query().available_tellers()]
+#     form.branch.choices = [(b.code, b.description) for b in Getters.getBranch()]
+#
+#     if form.validate_on_submit():
+#         print("branch code: {}".format(form.branch.data))
+#         print("opening balance: {}".format(form.o_balance.data))
+#         print("user ID: {}".format(form.user_id.data))
+#         print("till number: {}".format(form.teller_num.data))
+#
+#         till_controller = TillController(branch_code=form.branch.data,
+#                                          o_balance=form.o_balance.data,
+#                                          user_id=form.user_id.data,
+#                                          teller_id=form.teller_num.data)
+#         till_controller.open_till()
+#
+#         return redirect(url_for('till.open_till'))
+#
+#     else:
+#         if current user_view has a till linked, display the till detail
+#         else display the general till opening
+#         if form.errors:
+#             print(form.errors)
+#         return render_template('till/open_till.html', user=Profile().user_details(),
+#                                branch=Getters.getBranch(),
+#                                teller2=Getters.getAllTellers(),
+#                                teller_linked=Query().teller_status(),
+#                                form=form)
 @till.route('/open_till/', methods=['POST', 'GET'])
 def open_till():
     form = OpenTillForm()
@@ -27,28 +57,38 @@ def open_till():
     form.branch.choices = [(b.code, b.description) for b in Getters.getBranch()]
 
     if form.validate_on_submit():
-        print("branch code: {}".format(form.branch.data))
-        print("opening balance: {}".format(form.o_balance.data))
-        print("user ID: {}".format(form.user_id.data))
-        print("till number: {}".format(form.teller_num.data))
+        branch_code = form.branch.data
+        o_balance = form.o_balance.data
+        user_id = form.user_id.data
+        teller_num = form.teller_num.data
 
-        till_controller = TillController(branch_code=form.branch.data,
-                                         o_balance=form.o_balance.data,
-                                         user_id=form.user_id.data,
-                                         teller_id=form.teller_num.data)
+        till_controller = TillController(branch_code=branch_code,
+                                         o_balance=o_balance,
+                                         user_id=user_id,
+                                         teller_id=teller_num)
         till_controller.open_till()
+
+        print("branch code: {}".format(branch_code))
+        print("opening balance: {}".format(o_balance))
+        print("user ID: {}".format(user_id))
+        print("till number: {}".format(teller_num))
 
         return redirect(url_for('till.open_till'))
 
     else:
-        # if current user_view has a till linked, display the till detail
-        # else display the general till opening
-        if form.errors:
-            print(form.errors)
-        return render_template('till/open_till.html', user=Profile().user_details(),
-                               branch=Getters.getBranch(),
-                               teller2=Getters.getAllTellers(),
-                               teller_linked=Query().teller_status(),
+        form_errors = form.errors or {}
+        print(form_errors)
+
+        user_details = Profile().user_details()
+        branches = Getters.getBranch()
+        tellers = Getters.getAllTellers()
+        teller_linked = Query().teller_status()
+
+        return render_template('till/open_till.html',
+                               user=user_details,
+                               branch=branches,
+                               teller2=tellers,
+                               teller_linked=teller_linked,
                                form=form)
 
 
@@ -60,7 +100,7 @@ def close_till():
         coh = float(request.form['coh'])
         if total_deposits == Getters.getTellerDeposits():
             if total_withdrawals == Getters.getTellerWithdrawal():
-                gtd = Getters.getTillDetails()
+                gtd = Getters.get_till_details()
                 sys_balance = gtd.o_balance - gtd.c_balance
                 if coh == sys_balance:  # opening balance - closing balance
                     # send cash back to suspense account
@@ -70,7 +110,7 @@ def close_till():
                                                'Closing Balance',
                                                suspense.acc_number)
                     till_detail = db.session.query(Till).filter_by(
-                        till_account=Getters.getTillDetails().till_account).first()
+                        till_account=Getters.get_till_details().till_account).first()
                     till_detail.c_balance = 0
                     till_detail.o_balance = 0
                     till_detail.user_id = ''
@@ -96,5 +136,5 @@ def close_till():
             return redirect(url_for('till.close_till'))
         pass
     else:
-        return render_template('till/close_till.html', user=Profile().user_details(), my_till=Getters.getTillDetails(),
+        return render_template('till/close_till.html', user=Profile().user_details(), my_till=Getters.get_till_details(),
                                my_tt=Getters.getTellerTransactions(), teller_linked=Getters.getTellerStatus())

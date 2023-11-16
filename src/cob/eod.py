@@ -48,7 +48,7 @@ class Accounts:
         # create a list for all th entries being done
 
     @staticmethod
-    def accountInterestEod():
+    def account_interest_eod():
         print("Account Interest")
         interest_per_annam = 0.05
         debit_interest = 0.15
@@ -137,7 +137,7 @@ class Reporting:
         db.session.commit()
 
     @staticmethod
-    def debitTransactions():
+    def debit_transactions():
         # all withdrawals done for the day on customer account
         record = db.session.query(Transaction).filter_by(tran_date=Getters.getSysDate().date).filter_by(
             trantype='DR').all()
@@ -157,11 +157,11 @@ def eod_process():
     print("Accounts : Accounts Opening Balancing")
     Accounts().accOpeningBalancing()
     print("Account : Account Interest End Of Day")
-    Accounts.accountInterestEod()
+    Accounts.account_interest_eod()
     print("Reporting : Creadit Transaction Report")
     Reporting().credit_transactions_report()
     print("Reporting : Debit Transaction Reports")
-    Reporting.debitTransactions()
+    Reporting().debit_transactions()
     print("Reports : Account Closing Balance")
     Reporting().account_closing_balances_report()
     print("Reporting : Teller Transaction Reports")
@@ -176,7 +176,7 @@ def eom_process():
     AccountsEom.serviceFeesEom()
     Reporting().credit_transactions_report()
     print("Reporting : Debit Transaction Reports")
-    Reporting.debitTransactions()
+    Reporting.debit_transactions()
     print("Reports : Account Closing Balance")
     Reporting().account_closing_balances_report()
 

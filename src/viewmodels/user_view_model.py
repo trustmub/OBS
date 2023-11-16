@@ -15,7 +15,7 @@ from src.models.system_user_model import SystemUser
 from src.views.user_repository import UserRepository
 
 # UPLOAD_FOLDER = os.path.abspath("src/static/img/user///")
-UPLOAD_FOLDER = os.path.abspath("/Users/trustmubaiwa/PycharmProjects/OBS/src/static/img/user///")
+UPLOAD_FOLDER = os.path.abspath("/src/static/img/user///")
 
 user_repository = UserRepository()
 base_repository = BaseRepository()
@@ -130,7 +130,7 @@ def process_lock_screen(form: LockScreenForm) -> tuple[LoginState, Any]:
         return LoginState.SHOW_LOCKSCREEN, user_account
 
 
-def process_login(form: LoginForm) -> LoginState:
+def login_handler(form: LoginForm) -> LoginState:
     if form.validate_on_submit():
         email = form.email.data
         password = form.password.data

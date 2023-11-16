@@ -20,7 +20,7 @@ def home():
     return render_template('dashboard.html',
                            usr=usr,
                            user=Profile().user_details(),
-                           teller=Getters.getTillDetails(),
+                           teller=Getters.get_till_details(),
                            withd=Getters.getTellerWithdrawal(),
                            deposits=Getters.getTellerDeposits(),
                            sys_date=sys_date.strftime('%d %B %Y'))

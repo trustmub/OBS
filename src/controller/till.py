@@ -69,7 +69,7 @@ class TillController(object):
         # ---------------------------------------------------
 
     def close_till(self):
-        till_detail = db.session.query(Till).filter_by(till_account=Getters.getTillDetails().till_account).first()
+        till_detail = db.session.query(Till).filter_by(till_account=Getters.get_till_details().till_account).first()
 
         TransactionUpdate.ttUpdate(TransactionType.CR_DR, till_detail.c_balance, time.strftime('%Y-%m-%d'),
                                    'Closing Balance',

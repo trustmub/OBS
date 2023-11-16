@@ -109,9 +109,9 @@ class AccountTransaction(Transaction):
         TransactionBase.__init__(self, date, amount, cr_account)
         self.suspense_account_new_account = db.session.query(Customer).filter_by(
             account_type=AccountTypes.ACCOUNT_CREATION.value).first()
-        if Getters.getTillDetails() is not None:
+        if Getters.get_till_details() is not None:
             self.suspense_account_teller = db.session.query(Till).filter_by(
-                till_account=Getters.getTillDetails().till_account).first()
+                till_account=Getters.get_till_details().till_account).first()
         else:
             # SystemOBS.start_logging("there are no till details")
             "None"
