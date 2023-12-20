@@ -3,13 +3,16 @@
 import datetime
 import time
 
-from src.functions.Enums import TransactionType
-from src.functions.genarators import Getters, TransactionUpdate
+from flask import session
+
+from src.utils.Enums import TransactionType
+from src.utils.genarators import Getters, TransactionUpdate
 from src.helpers.references import get_transaction_reference
 from .. import db
 from ..models.customer_model import Customer
 from ..models.teller_transaction_model import TellerTransaction
 from ..models.till_model import Till
+from ..views.till_repository import TillRepository
 
 
 class TillController(object):
@@ -69,7 +72,7 @@ class TillController(object):
         # ---------------------------------------------------
 
     def close_till(self):
-        till_detail = db.session.query(Till).filter_by(till_account=Getters.get_till_details().till_account).first()
+        till_detail = db.session.query(Till).filter_by(till_account=TillRepository.get_till_details_by_session(session["username"]).till_account).first()
 
         TransactionUpdate.ttUpdate(TransactionType.CR_DR, till_detail.c_balance, time.strftime('%Y-%m-%d'),
                                    'Closing Balance',

@@ -5,7 +5,7 @@ from typing import TextIO, Any
 
 from src import db
 from src.cob.eom import AccountsEom
-from src.functions.genarators import Getters, Checker
+from src.utils.genarators import Getters, Checker
 from src.models.customer_model import Customer
 from src.models.interest_model import Interest
 from src.models.system_date_model import SysDate

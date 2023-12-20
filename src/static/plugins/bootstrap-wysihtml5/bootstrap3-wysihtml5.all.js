@@ -107,7 +107,7 @@ var wysihtml5 = {
 
     /*----------------------------------------------------------------------------------------------------------------*/
 
-    // Trio of functions taken from Peter Michaux's article:
+    // Trio of utils taken from Peter Michaux's article:
     // http://peter.michaux.ca/articles/feature-detection-state-of-the-art-browser-scripting
     function isHostMethod(o, p) {
         var t = typeof o[p];
@@ -122,7 +122,7 @@ var wysihtml5 = {
         return typeof o[p] != UNDEFINED;
     }
 
-    // Creates a convenience function to save verbose repeated calls to tests functions
+    // Creates a convenience function to save verbose repeated calls to tests utils
     function createMultiplePropertyTest(testFunc) {
         return function(o, props) {
             var i = props.length;
@@ -135,7 +135,7 @@ var wysihtml5 = {
         };
     }
 
-    // Next trio of functions are a convenience to save verbose repeated calls to previous two functions
+    // Next trio of utils are a convenience to save verbose repeated calls to previous two utils
     var areHostMethods = createMultiplePropertyTest(isHostMethod);
     var areHostObjects = createMultiplePropertyTest(isHostObject);
     var areHostProperties = createMultiplePropertyTest(isHostProperty);
@@ -1001,7 +1001,7 @@ var wysihtml5 = {
 
         /*----------------------------------------------------------------------------------------------------------------*/
 
-        // Utility functions
+        // Utility utils
 
         function isNonTextPartiallySelected(node, range) {
             return (node.nodeType != 3) &&

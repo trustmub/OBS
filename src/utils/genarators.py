@@ -4,8 +4,9 @@ import random
 from sqlalchemy.exc import NoResultFound
 
 from src import db
-from src.functions.Enums import AccountTypes
-from src.functions.user_profile import Profile
+from src.utils.Enums import AccountTypes
+from src.utils.system import deprecated
+from src.utils.user_profile import Profile
 from src.models.account_type_model import AccountType
 from src.models.bank_table_model import Banks
 from src.models.branch_model import Branch
@@ -23,13 +24,6 @@ from src.models.transaction_model import Transaction
 
 
 class Getters:
-    @staticmethod
-    def get_transaction_type():
-        return db.session.query(TransactionChargeFee).all()
-
-    @staticmethod
-    def get_all_users():
-        pass
 
     @staticmethod
     def get_available_tellers():
@@ -52,12 +46,12 @@ class Getters:
     #                 return db.session.query(Till).filter_by(user_id=user_id).first()
     #
     def get_till_details():
-        tellers = Getters.getAllTellers()
+        # tellers = Getters.getAllTellers()
         user_id = Profile().user_details().uid
-        till_ids = [teller.id for teller in tellers if teller.user is not None and user_id == teller.user.uid]
+        # till_ids = [teller.id for teller in tellers if teller.user is not None and user_id == teller.user.uid]
 
-        print("Till IDs: {}".format(till_ids))
-        print("Profile details id: {}".format(user_id))
+        # print("Till IDs: {}".format(till_ids))
+        # print("Profile details id: {}".format(user_id))
 
         try:
             return db.session.query(Till).filter_by(user_id=user_id).one()
@@ -131,17 +125,6 @@ class Getters:
     def getCustomerAccountDetails(acc_number):
         return db.session.query(Customer).filter_by(acc_number=acc_number).first()
 
-    @staticmethod
-    def getBranch():
-        return db.session.query(Branch).all()
-
-    @staticmethod
-    def getCurrency():
-        return db.session.query(Currency).all()
-
-    @staticmethod
-    def getBanks():
-        return db.session.query(Banks).all()
 
     # End of business getters
     @staticmethod
@@ -154,14 +137,11 @@ class Getters:
             return True
 
     @staticmethod
+    @deprecated
     def getSysDate():
         record = db.session.query(SysDate).first()
         return record
 
-    @staticmethod
-    def getEodProcess(process):
-        cob_process = db.session.query(CobDates).all()
-        return cob_process
 
     @staticmethod
     def getTransactionDetails(ref):

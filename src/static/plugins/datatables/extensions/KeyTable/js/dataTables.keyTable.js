@@ -304,7 +304,7 @@ KeyTable = function ( oInit )
 		};
 	}
 
-	/* Use the template functions to add the event API functions */
+	/* Use the template utils to add the event API utils */
 	for ( var sKey in _oaoEvents )
 	{
 		if ( sKey )
@@ -406,7 +406,7 @@ KeyTable = function ( oInit )
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Focus functions
+	 * Focus utils
 	 */
 
 	/*
@@ -852,7 +852,7 @@ KeyTable = function ( oInit )
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Support functions
+	 * Support utils
 	 */
 
 	/*

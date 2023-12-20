@@ -619,7 +619,7 @@ Licensed under the MIT license.
         },
         plot = this;
 
-        // public functions
+        // public utils
         plot.setData = setData;
         plot.setupGrid = setupGrid;
         plot.draw = draw;
@@ -1334,7 +1334,7 @@ Licensed under the MIT license.
         }
 
         function setTransformationHelpers(axis) {
-            // set helper functions on the axis, assumes plot area
+            // set helper utils on the axis, assumes plot area
             // has been computed already
 
             function identity(x) { return x; }

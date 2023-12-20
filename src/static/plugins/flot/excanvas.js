@@ -37,7 +37,7 @@ if (!document.createElement('canvas').getContext) {
 
 (function() {
 
-  // alias some functions to make (compiled) code shorter
+  // alias some utils to make (compiled) code shorter
   var m = Math;
   var mr = m.round;
   var ms = m.sin;

@@ -15,7 +15,7 @@ from src.models.system_user_model import SystemUser
 
 class UserController(object):
     """
-    Handles all Create, Update and Delete functions for persisting user details to database
+    Handles all Create, Update and Delete utils for persisting user details to database
     """
 
     def __init__(self,

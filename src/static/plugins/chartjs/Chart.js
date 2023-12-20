@@ -538,7 +538,7 @@
 			return labelsArray;
 		},
 		//--Animation methods
-		//Easing functions adapted from Robert Penner's easing equations
+		//Easing utils adapted from Robert Penner's easing equations
 		//http://www.robertpenner.com/easing/
 		easingEffects = helpers.easingEffects = {
 			linear: function (t) {

@@ -1404,7 +1404,7 @@ TableTools.prototype = {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Button collection functions
+	 * Button collection utils
 	 */
 
 	/**
@@ -1529,7 +1529,7 @@ TableTools.prototype = {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Row selection functions
+	 * Row selection utils
 	 */
 
 	/**
@@ -1824,7 +1824,7 @@ TableTools.prototype = {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Text button functions
+	 * Text button utils
 	 */
 
 	/**
@@ -1889,7 +1889,7 @@ TableTools.prototype = {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Flash button functions
+	 * Flash button utils
 	 */
 	
 	/**
@@ -2053,7 +2053,7 @@ TableTools.prototype = {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Data retrieval functions
+	 * Data retrieval utils
 	 */
 
 	/**
@@ -2387,7 +2387,7 @@ TableTools.prototype = {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Printing functions
+	 * Printing utils
 	 */
 
 	/**
@@ -2689,7 +2689,7 @@ TableTools._aInstances = [];
 
 
 /**
- * Store of all listeners and their callback functions
+ * Store of all listeners and their callback utils
  *  @property _aListeners
  *  @type	 Array
  *  @default  []

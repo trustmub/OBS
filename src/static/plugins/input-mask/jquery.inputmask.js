@@ -8,7 +8,7 @@
 
 (function ($) {
     if ($.fn.inputmask === undefined) {
-        //helper functions    
+        //helper utils
         function isInputEventSupported(eventName) {
             var el = document.createElement('input'),
             eventName = 'on' + eventName,
@@ -676,7 +676,7 @@
             }
 
 
-            //private functions
+            //private utils
             function installEventRuler(npt) {
                 var events = $._data(npt).events;
 

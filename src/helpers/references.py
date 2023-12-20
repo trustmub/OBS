@@ -1,7 +1,7 @@
 import datetime
 import random
 
-from src.functions.genarators import Getters
+from src.utils.genarators import Getters
 from .. import db
 from ..models.transaction_model import Transaction
 

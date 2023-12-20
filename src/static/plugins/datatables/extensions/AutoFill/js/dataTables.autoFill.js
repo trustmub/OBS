@@ -250,7 +250,7 @@ AutoFill.prototype = {
 			}
 		);
 
-		// For columns which don't have read, write, step functions defined,
+		// For columns which don't have read, write, step utils defined,
 		// use the default ones
 		for ( i=0, ien=dt.aoColumns.length ; i<ien ; i++ ) {
 			var column = this.s.columns[i];

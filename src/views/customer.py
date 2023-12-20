@@ -4,9 +4,9 @@ from flask import Blueprint, render_template, redirect, request, url_for, flash
 
 from src import db
 from src.controller.customer import CustomerController
-from src.functions.genarators import Auto, Getters
-from src.functions.transactions import AccountTransaction
-from src.functions.user_profile import Profile
+from src.utils.genarators import Auto, Getters
+from src.utils.transactions import AccountTransaction
+from src.utils.user_profile import Profile
 from src.models.customer_model import Customer
 from src.utilities.verifier import Verify
 

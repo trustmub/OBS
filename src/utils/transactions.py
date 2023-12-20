@@ -8,8 +8,8 @@ import time
 from src import db
 from src.helpers.references import References
 # from ..cob.log_module import SystemOBS
-from ..functions.Enums import TransactionType, TransactionMethod, AccountTypes
-from ..functions.genarators import Auto, Getters
+from ..utils.Enums import TransactionType, TransactionMethod, AccountTypes
+from ..utils.genarators import Auto, Getters
 from ..models.customer_model import Customer
 from ..models.till_model import Till
 from ..models.transaction_base_model import TransactionBase

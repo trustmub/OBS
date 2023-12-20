@@ -192,7 +192,7 @@ $.fn.dataTableExt.oApi.fnColReorder = function ( oSettings, iFrom, iTo )
 		} );
 	}
 
-	/* Update the Get and Set functions for each column */
+	/* Update the Get and Set utils for each column */
 	for ( i=0, iLen=iCols ; i<iLen ; i++ )
 	{
 		oCol = oSettings.aoColumns[i];
@@ -200,7 +200,7 @@ $.fn.dataTableExt.oApi.fnColReorder = function ( oSettings, iFrom, iTo )
 		if ( typeof oCol.mData == 'number' ) {
 			oCol.mData = aiInvertMapping[ oCol.mData ];
 
-			// regenerate the get / set functions
+			// regenerate the get / set utils
 			oSettings.oApi._fnColumnOptions( oSettings, i, {} );
 		}
 		else if ( $.isPlainObject( oCol.mData ) ) {
@@ -210,7 +210,7 @@ $.fn.dataTableExt.oApi.fnColReorder = function ( oSettings, iFrom, iTo )
 			attrMap( oCol.mData, 'sort',   aiInvertMapping );
 			attrMap( oCol.mData, 'type',   aiInvertMapping );
 
-			// regenerate the get / set functions
+			// regenerate the get / set utils
 			oSettings.oApi._fnColumnOptions( oSettings, i, {} );
 		}
 	}

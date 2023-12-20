@@ -1,6 +1,6 @@
 from src import db
 from src.cob.log_module import SystemOBS
-from src.functions.genarators import Getters
+from src.utils.genarators import Getters
 from src.models.customer_model import Customer
 from src.models.system_user_model import SystemUser
 

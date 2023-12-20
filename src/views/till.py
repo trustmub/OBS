@@ -1,16 +1,18 @@
 import time
 
-from flask import Blueprint, render_template, request, url_for, redirect, flash
+from flask import Blueprint, render_template, request, url_for, redirect, flash, session
 
-from src import db
+# from src import db
 from src.controller.till import TillController
 from src.forms.till_forms import OpenTillForm
-from src.functions.Enums import TransactionType
-from src.functions.genarators import Getters, TransactionUpdate
-from src.functions.queries import Query
-from src.functions.user_profile import Profile
+from src.utils.Enums import TransactionType
+from src.utils.genarators import Getters, TransactionUpdate
+from src.utils.queries import Query
+from src.utils.system import SystemUtil
+from src.utils.user_profile import Profile
 from src.models.customer_model import Customer
 from src.models.till_model import Till
+from src.views.till_repository import TillRepository
 
 till = Blueprint('till', __name__)
 
@@ -54,7 +56,7 @@ def my_till():
 def open_till():
     form = OpenTillForm()
     form.teller_num.choices = [(str(t.id), t.id) for t in Query().available_tellers()]
-    form.branch.choices = [(b.code, b.description) for b in Getters.getBranch()]
+    form.branch.choices = [(b.code, b.description) for b in SystemUtil.get_system_branches()]
 
     if form.validate_on_submit():
         branch_code = form.branch.data
@@ -68,11 +70,6 @@ def open_till():
                                          teller_id=teller_num)
         till_controller.open_till()
 
-        print("branch code: {}".format(branch_code))
-        print("opening balance: {}".format(o_balance))
-        print("user ID: {}".format(user_id))
-        print("till number: {}".format(teller_num))
-
         return redirect(url_for('till.open_till'))
 
     else:
@@ -80,7 +77,7 @@ def open_till():
         print(form_errors)
 
         user_details = Profile().user_details()
-        branches = Getters.getBranch()
+        branches = SystemUtil.get_system_branches()
         tellers = Getters.getAllTellers()
         teller_linked = Query().teller_status()
 
@@ -97,36 +94,17 @@ def close_till():
     if request.method == 'POST':
         total_deposits = float(request.form['total_deposits'])
         total_withdrawals = float(request.form['total_withdrawals'])
-        coh = float(request.form['coh'])
+        cash_on_hand = float(request.form['coh'])
         if total_deposits == Getters.getTellerDeposits():
             if total_withdrawals == Getters.getTellerWithdrawal():
-                gtd = Getters.get_till_details()
-                sys_balance = gtd.o_balance - gtd.c_balance
-                if coh == sys_balance:  # opening balance - closing balance
-                    # send cash back to suspense account
-                    #  tt transaction
-                    suspense = db.session.query(Customer).filter_by(account_type='suspense').first()
-                    TransactionUpdate.ttUpdate(TransactionType.CR_DR, sys_balance, time.strftime('%Y-%m-%d'),
-                                               'Closing Balance',
-                                               suspense.acc_number)
-                    till_detail = db.session.query(Till).filter_by(
-                        till_account=Getters.get_till_details().till_account).first()
-                    till_detail.c_balance = 0
-                    till_detail.o_balance = 0
-                    till_detail.user_id = ''
-                    db.session.add(till_detail)
-                    db.session.commit()
-                    # Credit suspense account with the closing balanced figure
-                    suspense.working_bal += sys_balance
-                    db.session.add(suspense)
-                    db.session.commit()
-
-                    # move the cash in the teller opening balance to closing balance
-                    #
+                till_details = TillRepository.get_till_details_by_session(session["username"])  # Getters.get_till_details()
+                sys_balance = till_details.o_balance - till_details.c_balance
+                if cash_on_hand == sys_balance:
+                    TillRepository.close_till(sys_balance)
                     flash('Till Closed Successfully')
                     return redirect(url_for('till.close_till'))
                 else:
-                    flash('C.O.H DOES NOT Tally With The System')
+                    flash('Cash.On.Hand DOES NOT Tally With The System')
                     return redirect(url_for('till.close_till'))
             else:
                 flash('Withdrawals DO NOT Tally With The System')
@@ -136,5 +114,5 @@ def close_till():
             return redirect(url_for('till.close_till'))
         pass
     else:
-        return render_template('till/close_till.html', user=Profile().user_details(), my_till=Getters.get_till_details(),
+        return render_template('till/close_till.html', user=Profile().user_details(), my_till=TillRepository.get_till_details_by_session(session["username"]),
                                my_tt=Getters.getTellerTransactions(), teller_linked=Getters.getTellerStatus())

@@ -2,8 +2,8 @@ import random
 import time
 
 from src import db
-from src.functions.genarators import Auto
-from src.functions.transactions import AccountTransaction
+from src.utils.genarators import Auto
+from src.utils.transactions import AccountTransaction
 from src.models.account_type_model import AccountType
 from src.models.customer_model import Customer
 

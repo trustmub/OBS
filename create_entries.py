@@ -2,7 +2,7 @@ import datetime
 import time
 
 from src import db
-from src.functions.genarators import Auto
+from src.utils.genarators import Auto
 from src.models.account_type_model import AccountType
 from src.models.banking_service_model import BankServices
 from src.models.branch_model import Branch

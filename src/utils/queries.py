@@ -1,5 +1,5 @@
 from src import db
-from src.functions.user_profile import Profile
+from src.utils.user_profile import Profile
 from src.models.till_model import Till
 from src.models.transaction_charge_fee_model import TransactionChargeFee
 

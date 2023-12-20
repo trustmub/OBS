@@ -3,10 +3,10 @@ import os
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 from werkzeug.utils import secure_filename
 
-from src.functions.Enums import TransactionType
-from src.functions.genarators import TransactionUpdate, Getters
-from src.functions.transactions import ChargeTransaction
-from src.functions.user_profile import Profile
+from src.utils.Enums import TransactionType
+from src.utils.genarators import TransactionUpdate, Getters
+from src.utils.transactions import ChargeTransaction
+from src.utils.user_profile import Profile
 
 bulk = Blueprint('bulk', __name__)
 

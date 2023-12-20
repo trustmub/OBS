@@ -4,10 +4,11 @@ from flask import Blueprint, render_template, redirect, request, url_for, flash
 from flask import session as login_session
 
 from src import db
-from src.functions.Enums import TransactionType
-from src.functions.genarators import Getters, TransactionUpdate, Auto
-from src.functions.transactions import AccountTransaction, ChargeTransaction
-from src.functions.user_profile import Profile
+from src.utils.Enums import TransactionType
+from src.utils.genarators import Getters, TransactionUpdate, Auto
+from src.utils.system import SystemUtil
+from src.utils.transactions import AccountTransaction, ChargeTransaction
+from src.utils.user_profile import Profile
 from src.models.bank_table_model import Banks
 from src.models.customer_model import Customer
 from src.utilities.search import Search
@@ -154,12 +155,12 @@ def external_transfer_search():
             record = db.session.query(Customer).filter_by(acc_number=acc_num).first()
             return render_template('banking/external_transfer.html', record=Getters.getCustomerAccountDetails(acc_num),
                                    user=Profile().user_details(),
-                                   banks=Getters.getBanks(), fad=Getters.getCustomerAccountDetails(acc_num))
+                                   banks=SystemUtil.get_registered_banks(), fad=Getters.getCustomerAccountDetails(acc_num))
         else:
             flash('The Account Number Provided Is NOT In The System')
             record = None
             return render_template('banking/deposits.html', record=record, user=Profile().user_details(),
-                                   banks=Getters.getBanks())
+                                   banks= SystemUtil.get_registered_banks())
     else:
         return redirect(url_for('banking.deposits'))
 
@@ -193,7 +194,7 @@ def external_transfer():
         fad = None
         tad = None
         return render_template('banking/external_transfer.html', fad=fad, tad=tad, record=record,
-                               user=Profile().user_details(), banks=Getters.getBanks())
+                               user=Profile().user_details(), banks=SystemUtil.get_registered_banks())
 
 
 @banking.route('/with_account_search/', methods=['post', 'get'])

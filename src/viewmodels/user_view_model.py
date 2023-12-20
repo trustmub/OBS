@@ -55,7 +55,7 @@ def _get_current_system_user() -> SystemUser:
 def update_user_login_session(user: SystemUser, username: str) -> None:
     session['username'] = username
     user.lock = 1
-    user_repository.query_update_user(user)
+    user_repository.update_system_user(user)
 
 
 def _generate_random_key(length):
@@ -109,7 +109,7 @@ def process_edit_profile(form: UserProfileForm):
 
 def _set_user_lock_state(lock: bool, user: SystemUser) -> None:
     user.lock = 1 if lock else 0
-    user_repository.query_update_user(user)
+    user_repository.update_system_user(user)
 
 
 def process_lock_screen(form: LockScreenForm) -> tuple[LoginState, Any]:

@@ -3,8 +3,9 @@ import datetime
 from flask import Blueprint, render_template, redirect, request, url_for, flash
 
 from src import db
-from src.functions.genarators import Getters, TransactionUpdate
-from src.functions.user_profile import Profile
+from src.utils.genarators import Getters, TransactionUpdate
+from src.utils.system import SystemUtil
+from src.utils.user_profile import Profile
 from src.models.account_type_model import AccountType
 from src.models.bank_table_model import Banks
 from src.models.branch_model import Branch
@@ -111,7 +112,7 @@ def delete_bank(id):
 def system_setting():
     return render_template('settings/system_settings.html', user=Profile().user_details(),
                            tran=TransactionUpdate.getTransationTypeCharge(), acct=Getters.getAccountType(),
-                           branch=Getters.getBranch(), banks=Getters.getBanks(), currency=Getters.getCurrency())
+                           branch=SystemUtil.get_system_branches(), banks=SystemUtil.get_registered_banks(), currency=SystemUtil.get_system_currencies())
 
 
 @settings.route('/user_setting/')

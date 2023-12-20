@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 
-from src.functions.genarators import Getters
-from src.functions.user_profile import Profile
+from src.utils.genarators import Getters
+from src.utils.user_profile import Profile
 
 enquiry = Blueprint('enquiry', __name__)
 

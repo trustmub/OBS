@@ -9496,7 +9496,7 @@ $.effects = {
 	// colors = jQuery.Color.names
 	colors,
 
-	// local aliases of functions called often
+	// local aliases of utils called often
 	each = jQuery.each;
 
 // determine rgba support immediately
@@ -10563,7 +10563,7 @@ $.fn.extend({
 		};
 	})( $.fn.toggle ),
 
-	// helper functions
+	// helper utils
 	cssUnit: function(key) {
 		var style = this.css( key ),
 			val = [];
@@ -14018,7 +14018,7 @@ var sortable = $.widget("ui.sortable", $.ui.mouse, {
 
 	},
 
-	/* Be careful with the following core functions */
+	/* Be careful with the following core utils */
 	_intersectsWith: function(item) {
 
 		var x1 = this.positionAbs.left,

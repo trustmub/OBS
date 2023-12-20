@@ -237,7 +237,7 @@ FixedHeader.prototype = {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Support functions
+	 * Support utils
 	 */
 
 	/*
@@ -448,7 +448,7 @@ FixedHeader.prototype = {
 
 	/*
 	 * Function: _fnUpdateClones
-	 * Purpose:  Loop over the fixed elements for this table and call their cloning functions
+	 * Purpose:  Loop over the fixed elements for this table and call their cloning utils
 	 * Returns:  -
 	 * Inputs:   -
 	 */
@@ -475,7 +475,7 @@ FixedHeader.prototype = {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Scrolling functions
+	 * Scrolling utils
 	 */
 
 	/*
@@ -683,7 +683,7 @@ FixedHeader.prototype = {
 
 
 	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	 * Cloning functions
+	 * Cloning utils
 	 */
 
 	/*
@@ -951,7 +951,7 @@ FixedHeader.oDoc = {
 
 /*
  * Variable: afnScroll
- * Purpose:  Array of functions that are to be used for the scrolling components
+ * Purpose:  Array of utils that are to be used for the scrolling components
  * Scope:    FixedHeader
  */
 FixedHeader.afnScroll = [];

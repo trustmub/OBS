@@ -2540,7 +2540,7 @@ var RowRenderer = Class.extend({
 	// Returns an HTML-rendering function given a specific `rendererName` (like cell, intro, or outro) and a specific
 	// `rowType` (like day, eventSkeleton, helperSkeleton), which is optional.
 	// If a renderer for the specific rowType doesn't exist, it will fall back to a generic renderer.
-	// We will query the View object first for any custom rendering functions, then the methods of the subclass.
+	// We will query the View object first for any custom rendering utils, then the methods of the subclass.
 	getHtmlRenderer: function(rendererName, rowType) {
 		var view = this.view;
 		var generalName; // like "cellHtml"
