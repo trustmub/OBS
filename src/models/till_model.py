@@ -21,7 +21,7 @@ class Till(db.Model):
     o_balance: float = Column(Float(2))
     c_balance: float = Column(Float(2))
     till_account: str = Column(String(15))
-    currency: str = Column(String())
+    currency: str = Column(String(4))
     remark: str = Column(String(100))
     date: str = Column(String(30))
     create_date: str = Column(String(30), default=datetime.datetime.now())

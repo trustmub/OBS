@@ -9,8 +9,15 @@ from flask_sqlalchemy import SQLAlchemy
 APP = Flask(__name__)
 APP.secret_key = 'asdkerhg8927qr9w0rhgwe70gw9eprg7w0e9r7g'
 
-basedir = os.path.abspath(os.path.dirname(__file__))
-APP.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'bankbase.db')
+# basedir = os.path.abspath(os.path.dirname(__file__))
+# APP.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'bankbase.db')
+# APP.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@mysql/bankbase'
+
+"""user the config below to connect to mysql docker instance from local run"""
+# APP.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@0.0.0.0:3306/bank_database?charset=utf8mb4'
+
+"""user the config below to connect to mysql docker instance when running the project from docker compose"""
+APP.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@mysql-db:3306/bank_database?charset=utf8mb4'
 
 bcrypt = Bcrypt(APP)
 db = SQLAlchemy(APP)

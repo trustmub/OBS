@@ -1,7 +1,11 @@
 import datetime
+import string
 import time
+import random
 
 from src import db
+from src.models.card_model import Card
+from src.models.system_user_model import SystemUser
 from src.utils.genarators import Auto
 from src.models.account_type_model import AccountType
 from src.models.banking_service_model import BankServices
@@ -23,30 +27,72 @@ def create_system_date():
         print("System Date Already Set To: {}".format(date_obj[0].date))
 
 
+def create_system_user():
+    user = SystemUser(
+        full_name="System User",
+        job_title="System User",
+        department="System User",
+        branch_code="Default",
+        email="systemuser@obs.com",
+        password="systemuser",
+        access_level=0,
+        lock=1,
+    )
+
+    db.session.add(user)
+    db.session.commit()
+
+    return user.uid
+
+
+system_user_id = create_system_user()
+
+
+def create_system_card(accountNo):
+    card_no = random.choices(string.digits, k=15)
+    print("card number generated: {}".format(''.join(card_no)))
+    card = Card(
+        card_number=str(''.join(card_no)),
+        account_number=accountNo,
+        card_type="Default"
+    )
+    db.session.add(card)
+    db.session.commit()
+    return card.id
+
+
 def create_system_accounts():
-    account_types = [{"type": "rtgs"},
-                     {"type": "charges"},
-                     {"type": "suspense"},
-                     {"type": "servfee"},
-                     {"type": "acccreate"},
-                     {"type": "interest"}
-                     ]
+    account_types = ["rtgs", "charges", "suspense", "servfee", "acccreate", "interest"]
     contact_number_counter = 772000000
-    for acc_type in account_types:
-        account_type = acc_type.get("type")
-        if account_type not in [at.account_type for at in db.session.query(Customer).all()]:
-            print("Account of type {} create.".format(account_type))
+
+    existing_account_types = {at.account_type for at in Customer.query.all()}
+
+    for account_type in account_types:
+        account_number = Auto().account_number_generator()
+        card_id = create_system_card(account_number)
+
+        if account_type not in existing_account_types:
+            print(f"Creating account of type {account_type}.")
             contact_number = str(contact_number_counter).zfill(10)
-            record = Customer(first_name='sys_user', last_name='sys_user', dob=time.strftime('%Y-%m-%d'),
-                              address='Head Office', country='Zimbabwe', email='system@obs.com', gender='system',
-                              contact_number=contact_number, working_bal=0,
-                              acc_number=Auto().account_number_generator(),
-                              account_type=account_type, inputter_id=1)
+            record = Customer(
+                first_name='sys_user',
+                last_name='sys_user',
+                dob=time.strftime('%Y-%m-%d'),
+                address='Head Office',
+                country='Zimbabwe',
+                email='system@obs.com',
+                gender='system',
+                contact_number=contact_number,
+                working_bal=0,
+                acc_number=account_number,
+                account_type=account_type,
+                inputter_id=system_user_id,
+                card_id=card_id,
+
+            )
             db.session.add(record)
             db.session.commit()
             contact_number_counter += 1
-        else:
-            continue
 
 
 def create_system_tellers():
@@ -54,9 +100,15 @@ def create_system_tellers():
     if len(record_till) <= 6:
         for _ in range(0, 6):
             print("Teller account created")
-            new_teller = Till(branch_code='', o_balance=0, c_balance=0,
-                              till_account=Auto().system_account_number_generator(),
-                              currency="USD", remark='', date='', user_id=0)
+            new_teller = Till(
+                branch_code='',
+                o_balance=0,
+                c_balance=0,
+                till_account=Auto().system_account_number_generator(),
+                currency="USD",
+                remark='',
+                date='',
+                user_id=system_user_id)
             db.session.add(new_teller)
             db.session.commit()
 

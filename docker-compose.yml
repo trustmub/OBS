@@ -1,8 +1,48 @@
 version: "3"
+
 services:
-  web_obs:
+  flask-app:
     build: .
+#    scale: 3
     ports:
-      - "8080:8080"
+      - "8080"
     volumes:
       - .:/app
+    depends_on:
+      - mysql-db
+    networks:
+      - mysql-flask-app-network
+
+  mysql-db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - mysql-flask-app-volume:/var/lib/mysql
+      - mysql-flask-app-volume-config:/etc/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql-flask-app-network
+
+
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - flask-app
+    networks:
+      - mysql-flask-app-network
+
+networks:
+  mysql-flask-app-network:
+
+volumes:
+  mysql-flask-app-volume:
+  mysql-flask-app-volume-config:
