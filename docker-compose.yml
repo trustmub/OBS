@@ -3,7 +3,7 @@ version: "3"
 services:
   flask-app:
     build: .
-#    scale: 3
+    scale: 3
     ports:
       - "8080"
     volumes:
@@ -17,7 +17,7 @@ services:
     image: mysql:latest
     restart: always
     environment:
-      MYSQL_USER: root
+      MYSQL_USER: admin
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: root
     volumes:
