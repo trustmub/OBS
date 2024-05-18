@@ -137,7 +137,7 @@ class Getters:
             return True
 
     @staticmethod
-    @deprecated
+    # @deprecated
     def getSysDate():
         record = db.session.query(SysDate).first()
         return record

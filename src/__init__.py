@@ -17,7 +17,7 @@ APP.secret_key = 'asdkerhg8927qr9w0rhgwe70gw9eprg7w0e9r7g'
 # APP.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@0.0.0.0:3306/bank_database?charset=utf8mb4'
 
 """user the config below to connect to mysql docker instance when running the project from docker compose"""
-APP.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@mysql-db:3306/bank_database?charset=utf8mb4'
+APP.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@mysql-db:3306/bank_base?charset=utf8mb4'
 
 bcrypt = Bcrypt(APP)
 db = SQLAlchemy(APP)
