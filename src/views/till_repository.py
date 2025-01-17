@@ -22,8 +22,8 @@ class TillRepository:
 
         till_detail = db.session.query(Till).filter_by(till_account=Getters.get_till_details().till_account).first()
 
-        till_detail.c_balance = 0
-        till_detail.o_balance = 0
+        till_detail.closing_balance = 0
+        till_detail.opening_balance = 0
         till_detail.user_id = ''
         db.session.add(till_detail)
         db.session.commit()

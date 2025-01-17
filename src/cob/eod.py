@@ -3,6 +3,8 @@ import datetime
 import os
 from typing import TextIO, Any
 
+from click import open_file
+
 from src import db
 from src.cob.eom import AccountsEom
 from src.utils.genarators import Getters, Checker
@@ -14,10 +16,7 @@ from src.models.transaction_model import Transaction
 
 def _write_to_file(account: Any, file: TextIO):
     for i in account:
-        file.write(
-            str(i.trantype) + "," + i.tranref + "," + i.tranmethod + "," + str(i.tran_date) + "," + str(
-                i.cheque_num) + "," + str(i.acc_number) + "," + str(i.cr_acc_number) + "," + str(
-                i.amount) + "," + str(i.custid) + "\n")
+        file.write(f"{i.trantype},{i.tranref},{i.tranmethod},{i.tran_date},{i.cheque_num},{i.acc_number},{i.cr_acc_number},{i.amount},{i.custid}\n")
 
 
 class Accounts:
@@ -96,7 +95,7 @@ class Reporting:
         acc_list = db.session.query(Customer).all()
         with open(self._account_closing_balances, mode="w", encoding="utf-8") as myfile:
             for i in acc_list:
-                myfile.write(str(i.acc_number) + " : " + str(i.working_bal) + "\n")
+                myfile.write(f"{i.acc_number} : {i.working_bal} \n")
 
     @staticmethod
     def teller_transaction_report():
@@ -105,9 +104,8 @@ class Reporting:
         tt = Getters.getAllTts()
         with open("../../src/reports/TellerTransactions" + str(dt) + ".txt", mode="w", encoding="utf-8") as myfile:
             for i in tt:
-                myfile.write(
-                    str(i.id) + " : " + str(i.tran_type) + " : " + str(i.amount) + " : " + str(i.date) + " : " + str(
-                        i.teller_id) + " : " + str(i.customer.acc_number) + " : " + str(i.user_id) + "\n")
+                line = f"{i.id} : {i.tran_type} : {i.amount} : {i.date} : {i.teller_id} : {i.customer.acc_number} : {i.user_id}\n"
+                myfile.write(line)
 
     def credit_transactions_report(self):
         # all deposits done for the day
@@ -121,10 +119,9 @@ class Reporting:
                 for i in record:
                     print("The record giving problems is" + str(i.cr_acc_number))
                     if i.cr_acc_number not in skip_account:
-                        myFile.write(
-                            str(i.trantype) + "," + i.tranref + "," + i.tranmethod + "," + str(i.tran_date) + "," + str(
-                                i.cheque_num) + "," + str(i.acc_number) + "," + str(i.cr_acc_number) + "," + str(
-                                i.amount) + "," + str(i.custid) + "\n")
+                        line = f"{str(i.trantype)},{i.tranref},{i.tranmethod},{str(i.tran_date)},{str(i.cheque_num)},{str(i.acc_number)},{str(i.cr_acc_number)},{str(i.amount)},{str(i.custid)}\n"
+                        myFile.write(line)
+
 
     @staticmethod
     def rollover_system_date():
@@ -141,8 +138,8 @@ class Reporting:
         # all withdrawals done for the day on customer account
         record = db.session.query(Transaction).filter_by(tran_date=Getters.getSysDate().date).filter_by(
             trantype='DR').all()
-        with open("../../src/reports/DebitTransactions" + Getters.getSysDate().date + ".csv", mode="w",
-                  encoding="utf-8") as myFile:
+        filename = f"../../src/reports/DebitTransactions{Getters.getSysDate().date}.csv"
+        with open(filename, mode="w", encoding="utf-8") as myFile:
             _write_to_file(record, myFile)
 
         pass

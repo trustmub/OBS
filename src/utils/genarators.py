@@ -240,7 +240,7 @@ class TransactionUpdate:
         # -------------------------------
 
         # Update Till Opening/Closing   Balance
-        till_detail.c_balance -= round(float(amount), 2)
+        till_detail.closing_balance -= round(float(amount), 2)
         db.session.add(till_detail)
         db.session.commit()
         # ---------------------------
@@ -271,7 +271,7 @@ class TransactionUpdate:
         db.session.commit()
         # -------------------------------
         # Update Till Opening/Closing balance
-        till_detail.c_balance += round(amount, 2)
+        till_detail.closing_balance += round(amount, 2)
         db.session.add(till_detail)
         db.session.commit()
         # -------------------------------

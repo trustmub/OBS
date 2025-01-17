@@ -13,6 +13,7 @@ from src.models.system_cob_date_model import CobDates
 from src.models.transaction_charge_fee_model import TransactionChargeFee
 
 
+SERVICE_FEE_TYPE = "SF"
 class AccountsEom:
     @staticmethod
     def accountInterestEom():
@@ -51,14 +52,14 @@ class AccountsEom:
     @staticmethod
     def serviceFeesEom():
         if Getters.getCobDates(Getters.getSysDate().date):
-            if db.session.query(CobDates).filter_by(process='sf').filter_by(status=1):
+            if db.session.query(CobDates).filter_by(process=SERVICE_FEE_TYPE).filter_by(status=1):
                 print("service process skipped")
                 pass
             else:
                 print("Effect the process table")
                 pass
         else:
-            charge = db.session.query(TransactionChargeFee).filter_by(tran_type='SF').first()
+            charge = db.session.query(TransactionChargeFee).filter_by(tran_type=SERVICE_FEE_TYPE).first()
             all_accounts = db.session.query(Customer).all()
             for i in all_accounts:
                 if i.contact_number == '09100000' or i.account_type == 'Student':

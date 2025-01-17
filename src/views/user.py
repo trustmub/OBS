@@ -3,7 +3,6 @@ from flask import Blueprint, render_template, redirect, url_for, flash
 from src.forms.user_forms import RegistrationsForm, LoginForm, UserProfileForm, LockScreenForm
 from src.viewmodels.user_view_model import get_all_branches, login_handler, \
     LoginState, process_logout, process_lock_screen, process_register, process_edit_profile, get_profile_user_details
-import socket
 
 user_view = Blueprint('user_view', __name__)
 
@@ -32,7 +31,6 @@ def login():
     input parameters
     :return: template and form
     """
-    flash(f"Container ID: {socket.gethostname()}")
     form = LoginForm()
 
     state = login_handler(form)

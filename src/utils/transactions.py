@@ -185,7 +185,7 @@ class AccountTransaction(Transaction):
         # -------------------------------
 
         # Update Till Opening/Closing   Balance
-        self.suspense_account_teller.c_balance -= round(float(self.amount), 2)
+        self.suspense_account_teller.closing_balance -= round(float(self.amount), 2)
         db.session.add(self.suspense_account_teller)
         db.session.commit()
 
@@ -220,7 +220,7 @@ class AccountTransaction(Transaction):
         db.session.commit()
         # -------------------------------
         # Update Till Opening/Closing balance
-        self.suspense_account_teller.c_balance += round(self.amount, 2)
+        self.suspense_account_teller.closing_balance += round(self.amount, 2)
         db.session.add(self.suspense_account_teller)
         db.session.commit()
         # -------------------------------

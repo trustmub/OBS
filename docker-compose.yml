@@ -3,26 +3,26 @@ version: "3"
 services:
   flask-app:
     build: .
-    scale: 3
+    scale: 1
     ports:
       - "8080"
     volumes:
       - .:/app
     depends_on:
-      - mysql-db
+      - db
     networks:
       - mysql-flask-app-network
 
-  mysql-db:
-    image: mysql:latest
+  db:
+    build: mysql/.
     restart: always
     environment:
       MYSQL_USER: admin
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - mysql-flask-app-volume:/var/lib/mysql
-      - mysql-flask-app-volume-config:/etc/mysql
+#    volumes:
+#      - mysql-flask-app-volume:/var/lib/mysql
+#      - mysql-flask-app-volume-config:/etc/mysql
     ports:
       - "3306:3306"
     networks:
@@ -43,6 +43,6 @@ services:
 networks:
   mysql-flask-app-network:
 
-volumes:
-  mysql-flask-app-volume:
-  mysql-flask-app-volume-config:
+#volumes:
+#  mysql-flask-app-volume:
+#  mysql-flask-app-volume-config:

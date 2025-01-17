@@ -65,7 +65,7 @@ def open_till():
         teller_num = form.teller_num.data
 
         till_controller = TillController(branch_code=branch_code,
-                                         o_balance=o_balance,
+                                         opening_balance=o_balance,
                                          user_id=user_id,
                                          teller_id=teller_num)
         till_controller.open_till()
@@ -98,7 +98,7 @@ def close_till():
         if total_deposits == Getters.getTellerDeposits():
             if total_withdrawals == Getters.getTellerWithdrawal():
                 till_details = TillRepository.get_till_details_by_session(session["username"])  # Getters.get_till_details()
-                sys_balance = till_details.o_balance - till_details.c_balance
+                sys_balance = till_details.opening_balance - till_details.closing_balance
                 if cash_on_hand == sys_balance:
                     TillRepository.close_till(sys_balance)
                     flash('Till Closed Successfully')

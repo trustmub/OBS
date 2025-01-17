@@ -6,4 +6,3 @@ COPY . /app
 CMD python build_database.py
 CMD python create_entries.py
 CMD gunicorn --bind 0.0.0.0:8080 obs_app:app
-
