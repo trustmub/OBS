@@ -1,0 +1,2 @@
+CREATE DATABASE IF NOT EXISTS bank_base;
+USE bank_base;

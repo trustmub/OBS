@@ -3,15 +3,16 @@ version: "3"
 services:
   flask-app:
     build: .
-    scale: 1
     ports:
       - "8080"
     volumes:
       - .:/app
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     networks:
       - mysql-flask-app-network
+    entrypoint: ["sh", "./entrypoint.sh"]
 
   db:
     build: mysql/.
@@ -20,13 +21,19 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: root
-#    volumes:
+    volumes:
+      - ./mysql/init:/docker-entrypoint-initdb.d
 #      - mysql-flask-app-volume:/var/lib/mysql
 #      - mysql-flask-app-volume-config:/etc/mysql
     ports:
       - "3306:3306"
     networks:
       - mysql-flask-app-network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$$MYSQL_ROOT_PASSWORD" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 
   nginx:
